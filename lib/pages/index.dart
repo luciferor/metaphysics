@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
 
-class Homie extends StatelessWidget {
+class Homie extends StatefulWidget {
+  const Homie({Key? key}) : super(key: key);
+
+  @override
+  // ignore: library_private_types_in_public_api
+  HomieState createState() => HomieState();
+}
+
+class HomieState extends State<Homie> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(99, 0, 0, 0),
+      backgroundColor: Colors.blue[50],
       body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -14,11 +22,16 @@ class Homie extends StatelessWidget {
               height: 150,
               width: 150,
             ),
-            Center(
+            const SizedBox(
+              height: 10,
+            ),
+            const Center(
               child: Text('缔造亚洲智能软件',
                   style: TextStyle(
                     fontSize: 30,
-                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'cs',
+                    color: Colors.black,
                   )),
             ),
           ]),
