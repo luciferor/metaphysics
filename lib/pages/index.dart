@@ -1,5 +1,7 @@
 import 'dart:ui';
+import 'package:first_flutter_app/pages/detail.dart';
 import 'package:flutter/material.dart';
+import 'package:animations/animations.dart';
 // import 'package:first_flutter_app/classes/https.dart';
 // import 'package:first_flutter_app/classes/res.dart';
 
@@ -73,6 +75,25 @@ class _HomieState extends State<Homie> {
                 color: Colors.transparent,
                 child: Column(
                   children: [
+                    Container(
+                      width: 500.0,
+                      height: 200.0,
+                      padding: EdgeInsets.all(50),
+                      child: _TransitionListTile(
+                        title: 'Fade',
+                        subtitle: 'FadeScaleTransition',
+                        onTap: () {
+                          print('sldjfsaldjf;salkdjfasd');
+                          Navigator.of(context).push(
+                            MaterialPageRoute<void>(
+                              builder: (BuildContext context) {
+                                return const Detail();
+                              },
+                            ),
+                          );
+                        },
+                      ),
+                    ),
                     Container(
                       width: MediaQuery.of(context).size.width,
                       height: MediaQuery.of(context).size.width,
@@ -599,10 +620,48 @@ class _HomieState extends State<Homie> {
                               )),
                             ),
                           ]),
-                    )
+                    ),
                   ],
-                ))
+                )),
           ],
         ));
+  }
+}
+
+class _TransitionListTile extends StatelessWidget {
+  const _TransitionListTile({
+    this.onTap,
+    required this.title,
+    required this.subtitle,
+  });
+
+  final GestureTapCallback? onTap;
+  final String title;
+  final String subtitle;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      contentPadding: const EdgeInsets.symmetric(
+        horizontal: 15.0,
+      ),
+      leading: Container(
+        width: 40.0,
+        height: 40.0,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20.0),
+          border: Border.all(
+            color: Colors.black54,
+          ),
+        ),
+        child: const Icon(
+          Icons.play_arrow,
+          size: 35,
+        ),
+      ),
+      onTap: onTap,
+      title: Text(title),
+      subtitle: Text(subtitle),
+    );
   }
 }
