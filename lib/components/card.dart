@@ -1,5 +1,5 @@
 import 'dart:ui';
-
+import 'dart:math';
 import 'package:flutter/material.dart';
 
 class CardCus extends StatelessWidget {
@@ -20,21 +20,26 @@ class CardCus extends StatelessWidget {
         decoration: BoxDecoration(
             color: Colors.transparent,
             borderRadius: BorderRadius.circular(80 * rpx)),
-        child: ClipRect(
+        child: ClipRRect(
+            borderRadius: BorderRadius.circular(80 * rpx),
             child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 50 * rpx, sigmaY: 50 * rpx),
-          child: Opacity(
-            opacity: 0.5,
-            child: Container(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height,
-              decoration: BoxDecoration(
-                color: Colors.blue.withAlpha(80),
-                borderRadius: BorderRadius.circular(80 * rpx),
+              filter: ImageFilter.blur(sigmaX: 50 * rpx, sigmaY: 50 * rpx),
+              child: Opacity(
+                opacity: 0.5,
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height,
+                  decoration: BoxDecoration(
+                    color: Color.fromRGBO(
+                        Random().nextInt(256),
+                        Random().nextInt(256),
+                        Random().nextInt(256),
+                        0.5), //color: Colors.blue.withAlpha(80),
+                    borderRadius: BorderRadius.circular(80 * rpx),
+                  ),
+                ),
               ),
-            ),
-          ),
-        )),
+            )),
       ),
     );
   }
