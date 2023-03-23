@@ -1,3 +1,4 @@
+import 'dart:ffi';
 import 'dart:ui';
 import 'package:first_flutter_app/pages/detail.dart';
 import 'package:flutter/material.dart';
@@ -31,12 +32,14 @@ class _HomieState extends State<Homie> {
     double tp = MediaQuery.of(context).padding.top;
     double bp = MediaQuery.of(context).padding.bottom;
 
+    // ignore: no_leading_underscores_for_local_identifiers
     List<Widget> _initCardCus() {
       var tempList = arr.map((e) {
         return CardCus(
+          tag: e,
           onTap: () {
-            print('object $e');
-            Navigator.pushNamed(context, '/detail');
+            Navigator.pushNamed(context, '/detail',
+                arguments: <String, int>{'index': e});
           },
         );
       });
@@ -70,17 +73,18 @@ class _HomieState extends State<Homie> {
             //   ),
             // )),
             Container(
-                color: Colors.transparent,
+                padding: const EdgeInsets.all(0),
                 child: Column(
                   children: [
                     Container(
                       width: MediaQuery.of(context).size.width,
                       height:
-                          tp + 250 * rpx, //MediaQuery.of(context).size.width,
+                          tp + (120 * rpx), //MediaQuery.of(context).size.width,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.only(
-                            bottomRight: Radius.circular(80 * rpx),
-                            bottomLeft: Radius.circular(80 * rpx)),
+                          bottomRight: Radius.circular(80 * rpx),
+                          bottomLeft: Radius.circular(80 * rpx),
+                        ),
                       ),
                       child: ClipRect(
                           child: BackdropFilter(
@@ -96,105 +100,99 @@ class _HomieState extends State<Homie> {
                               ),
                               child: Padding(
                                 padding: EdgeInsets.fromLTRB(
-                                    50 * rpx, tp, 50 * rpx, bp),
+                                    30 * rpx, tp, 30 * rpx, 0),
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
-                                    Padding(
-                                      padding: EdgeInsets.fromLTRB(
-                                          0, 50 * rpx, 0, 50 * rpx),
-                                      child: Flex(
-                                        direction: Axis.horizontal,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        mainAxisSize: MainAxisSize.max,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                          Container(
-                                            width: 60 * rpx,
-                                            height: 60 * rpx,
-                                            padding: const EdgeInsets.all(0.0),
-                                            color: Colors.transparent,
-                                            child: IconButton(
-                                              icon: const Icon(
-                                                Icons.reorder,
-                                              ),
-                                              iconSize: 40 * rpx,
-                                              padding: EdgeInsets.zero,
-                                              color: Colors.grey,
-                                              alignment: Alignment.centerLeft,
-                                              onPressed: () {
-                                                print('object');
-                                              },
+                                    Flex(
+                                      direction: Axis.horizontal,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      mainAxisSize: MainAxisSize.max,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        Container(
+                                          width: 60 * rpx,
+                                          height: 60 * rpx,
+                                          padding: const EdgeInsets.all(0.0),
+                                          color: Colors.transparent,
+                                          child: IconButton(
+                                            icon: const Icon(
+                                              Icons.reorder,
                                             ),
+                                            iconSize: 40 * rpx,
+                                            padding: EdgeInsets.zero,
+                                            color: Colors.grey,
+                                            alignment: Alignment.centerLeft,
+                                            onPressed: () {
+                                              print('object');
+                                            },
                                           ),
-                                          Expanded(
-                                            flex: 1,
-                                            child: Container(
-                                              height: 80 * rpx,
-                                              margin: EdgeInsets.fromLTRB(
-                                                  20 * rpx, 0, 20 * rpx, 0),
-                                              decoration: BoxDecoration(
-                                                color: Colors.white60,
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(60 * rpx)),
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                    color: Colors.black
-                                                        .withOpacity(0.1),
-                                                    offset: const Offset(0, 2),
-                                                    blurRadius: 60 * rpx,
-                                                    spreadRadius: 0,
-                                                  )
-                                                ],
-                                              ),
-                                              child: Padding(
-                                                padding: EdgeInsets.fromLTRB(
-                                                    20 * rpx, 0, 20 * rpx, 0),
-                                                child: TextField(
-                                                  decoration: InputDecoration(
-                                                      icon: Icon(
-                                                        Icons.search,
-                                                        size: 30 * rpx,
-                                                      ),
-                                                      iconColor: Colors.black,
-                                                      hintText: '搜索关键字',
-                                                      border: InputBorder.none,
-                                                      filled: false),
-                                                  autofillHints:
-                                                      const Iterable.empty(),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                          Container(
-                                            width: 60 * rpx,
-                                            height: 60 * rpx,
+                                        ),
+                                        Expanded(
+                                          flex: 1,
+                                          child: Container(
+                                            height: 80 * rpx,
+                                            margin: EdgeInsets.fromLTRB(
+                                                20 * rpx, 0, 20 * rpx, 0),
                                             decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(
-                                                      60 * rpx),
+                                              color: Colors.white60,
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(60 * rpx)),
                                               boxShadow: [
                                                 BoxShadow(
                                                   color: Colors.black
-                                                      .withOpacity(0.2),
+                                                      .withOpacity(0.1),
                                                   offset: const Offset(0, 2),
-                                                  blurRadius: 60 * rpx,
+                                                  blurRadius: 30 * rpx,
                                                   spreadRadius: 0,
                                                 )
                                               ],
                                             ),
-                                            child: const CircleAvatar(
-                                              backgroundColor:
-                                                  Colors.transparent,
-                                              backgroundImage: NetworkImage(
-                                                  'https://img2.baidu.com/it/u=2421090168,324781765&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500'),
+                                            child: Padding(
+                                              padding: EdgeInsets.fromLTRB(
+                                                  20 * rpx, 0, 20 * rpx, 0),
+                                              child: TextField(
+                                                decoration: InputDecoration(
+                                                    icon: Icon(
+                                                      Icons.search,
+                                                      size: 30 * rpx,
+                                                    ),
+                                                    iconColor: Colors.black,
+                                                    hintText: '搜索关键字',
+                                                    border: InputBorder.none,
+                                                    filled: false),
+                                                autofillHints:
+                                                    const Iterable.empty(),
+                                              ),
                                             ),
-                                          )
-                                        ],
-                                      ),
+                                          ),
+                                        ),
+                                        Container(
+                                          width: 60 * rpx,
+                                          height: 60 * rpx,
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(60 * rpx),
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: Colors.black
+                                                    .withOpacity(0.2),
+                                                offset: const Offset(0, 2),
+                                                blurRadius: 60 * rpx,
+                                                spreadRadius: 0,
+                                              )
+                                            ],
+                                          ),
+                                          child: const CircleAvatar(
+                                            backgroundColor: Colors.transparent,
+                                            backgroundImage: NetworkImage(
+                                                'https://img2.baidu.com/it/u=2421090168,324781765&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500'),
+                                          ),
+                                        )
+                                      ],
                                     ),
                                     // Text(
                                     //   '玄门正宗',
@@ -221,10 +219,17 @@ class _HomieState extends State<Homie> {
                         ),
                       )),
                     ),
-                    SizedBox(
+                    Container(
+                        width: MediaQuery.of(context).size.width,
+                        height: 250 * rpx,
+                        child: ListView(
+                            scrollDirection: Axis.horizontal,
+                            children: _initCardCus())),
+                    Container(
+                      // color: Colors.red,
                       width: MediaQuery.of(context).size.width,
                       height:
-                          MediaQuery.of(context).size.height - tp - (250 * rpx),
+                          MediaQuery.of(context).size.height - tp - (370 * rpx),
                       child: ListWheelScrollView(
                           itemExtent: 400 * rpx,
                           diameterRatio: 1,
