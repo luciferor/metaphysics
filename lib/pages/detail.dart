@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:first_flutter_app/components/card.dart';
 import 'package:flutter/material.dart';
 import 'package:animations/animations.dart';
@@ -14,6 +16,7 @@ class _DetailState extends State<Detail> {
   late int tags;
   @override
   Widget build(BuildContext context) {
+    double rpx = MediaQuery.of(context).size.width / 750;
     dynamic params = ModalRoute.of(context)?.settings.arguments;
     tags = params['index'];
     return Container(
@@ -22,21 +25,32 @@ class _DetailState extends State<Detail> {
         child: Column(children: [
           const Text('hlhlhhhh'),
           Container(
-            margin: const EdgeInsets.all(40),
-            child: Hero(
-              tag: 'm$tags',
-              child: GestureDetector(
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                  child: Container(width: 100, height: 100, color: Colors.red)),
-            ),
-          ),
+              margin: const EdgeInsets.all(40),
+              child: Hero(
+                tag: 'm$tags',
+                child: Container(
+                  width: 50,
+                  height: 50,
+                  decoration: BoxDecoration(
+                    color: Color.fromRGBO(Random().nextInt(256),
+                        Random().nextInt(256), Random().nextInt(256), 0.5),
+                    borderRadius: BorderRadius.all(Radius.circular(35 * rpx)),
+                  ),
+                  child: Center(
+                    child: Text('乾',
+                        style: TextStyle(
+                          fontSize: 48 * rpx,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        )),
+                  ),
+                ),
+              )),
           FloatingActionButton(
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: Icon(
+              child: const Icon(
                 Icons.abc,
               )),
           LoadingAnimationWidget.fourRotatingDots(

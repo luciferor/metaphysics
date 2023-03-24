@@ -37,6 +37,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   loading_animation_widget: ^1.2.0+4
   animations: ^2.0.7
+  card_swiper: ^2.0.4
 
 dev_dependencies:
   flutter_test:

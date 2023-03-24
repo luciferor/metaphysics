@@ -1,4 +1,3 @@
-import 'dart:ffi';
 import 'dart:ui';
 import 'package:first_flutter_app/pages/detail.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +6,7 @@ import 'package:first_flutter_app/components/card.dart';
 // import 'package:first_flutter_app/classes/https.dart';
 // import 'package:first_flutter_app/classes/res.dart';
 import 'package:first_flutter_app/pages/test.dart';
+import 'package:card_swiper/card_swiper.dart';
 
 class Homie extends StatefulWidget {
   const Homie({Key? key}) : super(key: key);
@@ -15,14 +15,21 @@ class Homie extends StatefulWidget {
   _HomieState createState() => _HomieState();
 }
 
-class _HomieState extends State<Homie> {
-  bool _slowAnimations = false;
+class _HomieState extends State<Homie> with SingleTickerProviderStateMixin {
+  //logo旋转动画控制器
+  late AnimationController _logoRotateController;
 
   @override
   void initState() {
     super.initState();
     // Https https = Https('https://xapi.dsnbc.com/test', {});
     // https.responseData();
+
+    //初始化logo旋转控制器
+    _logoRotateController = AnimationController(
+      duration: const Duration(seconds: 5),
+      vsync: this,
+    )..repeat();
   }
 
   @override
@@ -31,6 +38,13 @@ class _HomieState extends State<Homie> {
     double rpx = MediaQuery.of(context).size.width / 750;
     double tp = MediaQuery.of(context).padding.top;
     double bp = MediaQuery.of(context).padding.bottom;
+
+    List<String> imgs = [
+      'http://oss.dsnbc.com/images/20220214/11913bc902150f143b1c70378370a0ca.png',
+      'http://oss.dsnbc.com/images/20220610/2562abbde6fd28188277d513adb15af3.png',
+      'http://oss.dsnbc.com/images/20211215/656bcd5fbf7d63265f8768580ef9a6f5.jpeg',
+      'http://oss.dsnbc.com/images/20211126/b6b959667346a5b070bbce45f355f08b.jpeg'
+    ];
 
     // ignore: no_leading_underscores_for_local_identifiers
     List<Widget> _initCardCus() {
@@ -52,26 +66,44 @@ class _HomieState extends State<Homie> {
           fit: StackFit.expand,
           children: <Widget>[
             Image(
-              image: const AssetImage(
-                  'assets/images/9c4ed027180fa668626b7aa0aea7f141.jpeg'),
+              // image: const AssetImage('assets/images/9c4ed027180fa668626b7aa0aea7f141.jpeg'),
+              image: const NetworkImage(
+                  'https://gd-hbimg.huaban.com/c5292f6de95aef6403360b73e2aa1435162d316b13beb-IWdi0N_fw1200webp'),
               fit: BoxFit.cover,
               width: MediaQuery.of(context).size.width, //整个屏幕的宽度
               height: MediaQuery.of(context).size.height, //整个屏幕的高度
             ),
-            // ClipRect(
-            //     child: BackdropFilter(
-            //   filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
-            //   child: Opacity(
-            //     opacity: 0.5,
-            //     child: Container(
-            //       width: MediaQuery.of(context).size.width,
-            //       height: MediaQuery.of(context).size.height,
-            //       decoration: BoxDecoration(
-            //         color: Colors.grey.shade300,
-            //       ),
-            //     ),
-            //   ),
-            // )),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Container(
+                    padding: EdgeInsets.fromLTRB(0, tp + (90 * rpx), 0, 0),
+                    width: MediaQuery.of(context).size.width,
+                    height: MediaQuery.of(context).size.width,
+                    color: Colors.transparent,
+                    child: Center(
+                      child: RotationTransition(
+                          turns: _logoRotateController,
+                          child: const Image(
+                              fit: BoxFit.fitHeight,
+                              image: AssetImage('assets/images/logo.png'))),
+                    )),
+              ],
+            ),
+            ClipRect(
+                child: BackdropFilter(
+              filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+              child: Opacity(
+                opacity: 0.8,
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height,
+                  decoration: const BoxDecoration(
+                    color: Color.fromARGB(240, 0, 0, 0),
+                  ),
+                ),
+              ),
+            )),
             Container(
                 padding: const EdgeInsets.all(0),
                 child: Column(
@@ -122,9 +154,9 @@ class _HomieState extends State<Homie> {
                                             icon: const Icon(
                                               Icons.reorder,
                                             ),
-                                            iconSize: 40 * rpx,
+                                            iconSize: 50 * rpx,
                                             padding: EdgeInsets.zero,
-                                            color: Colors.grey,
+                                            color: Colors.white30,
                                             alignment: Alignment.centerLeft,
                                             onPressed: () {
                                               print('object');
@@ -138,7 +170,7 @@ class _HomieState extends State<Homie> {
                                             margin: EdgeInsets.fromLTRB(
                                                 20 * rpx, 0, 20 * rpx, 0),
                                             decoration: BoxDecoration(
-                                              color: Colors.white60,
+                                              color: Colors.white10,
                                               borderRadius: BorderRadius.all(
                                                   Radius.circular(60 * rpx)),
                                               boxShadow: [
@@ -158,10 +190,12 @@ class _HomieState extends State<Homie> {
                                                 decoration: InputDecoration(
                                                     icon: Icon(
                                                       Icons.search,
-                                                      size: 30 * rpx,
+                                                      size: 40 * rpx,
                                                     ),
-                                                    iconColor: Colors.black,
+                                                    iconColor: Colors.white30,
                                                     hintText: '搜索关键字',
+                                                    hintStyle: const TextStyle(
+                                                        color: Colors.white38),
                                                     border: InputBorder.none,
                                                     filled: false),
                                                 autofillHints:
@@ -171,74 +205,74 @@ class _HomieState extends State<Homie> {
                                           ),
                                         ),
                                         Container(
-                                          width: 60 * rpx,
-                                          height: 60 * rpx,
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(60 * rpx),
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: Colors.black
-                                                    .withOpacity(0.2),
-                                                offset: const Offset(0, 2),
-                                                blurRadius: 60 * rpx,
-                                                spreadRadius: 0,
-                                              )
-                                            ],
-                                          ),
-                                          child: const CircleAvatar(
-                                            backgroundColor: Colors.transparent,
-                                            backgroundImage: NetworkImage(
-                                                'https://img2.baidu.com/it/u=2421090168,324781765&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500'),
-                                          ),
-                                        )
+                                            width: 70 * rpx,
+                                            height: 70 * rpx,
+                                            decoration: BoxDecoration(
+                                              border: Border.all(
+                                                  color: Colors.white30,
+                                                  width: 5 * rpx),
+                                              borderRadius:
+                                                  BorderRadius.circular(
+                                                      80 * rpx),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.green
+                                                      .withOpacity(0.2),
+                                                  offset: const Offset(0, 2),
+                                                  blurRadius: 30 * rpx,
+                                                  spreadRadius: 0,
+                                                )
+                                              ],
+                                            ),
+                                            child: Hero(
+                                              tag: 'avatar',
+                                              child: GestureDetector(
+                                                onTap: () {
+                                                  Navigator.pushNamed(
+                                                      context, '/mine');
+                                                },
+                                                child: const CircleAvatar(
+                                                  backgroundColor:
+                                                      Colors.transparent,
+                                                  backgroundImage: NetworkImage(
+                                                      'https://img0.baidu.com/it/u=2699322616,853950993&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500'),
+                                                ),
+                                              ),
+                                            ))
                                       ],
                                     ),
-                                    // Text(
-                                    //   '玄门正宗',
-                                    //   style: TextStyle(
-                                    //       fontSize: 48 * rpx,
-                                    //       fontWeight: FontWeight.bold),
-                                    // ),
-                                    // FloatingActionButton(
-                                    //   onPressed: () {
-                                    //     // Navigator.pushNamed(context, '/detail');
-                                    //     Navigator.of(context).push(
-                                    //       MaterialPageRoute<void>(
-                                    //         builder: (BuildContext context) {
-                                    //           return const OpenContainerTransformDemo();
-                                    //         },
-                                    //       ),
-                                    //     );
-                                    //   },
-                                    //   child: const Text('跳转'),
-                                    // )
                                   ],
                                 ),
                               )),
                         ),
                       )),
                     ),
-                    Container(
-                        width: MediaQuery.of(context).size.width,
-                        height: 250 * rpx,
-                        child: ListView(
-                            scrollDirection: Axis.horizontal,
-                            children: _initCardCus())),
+                    // Container(
+                    //     color: Colors.red,
+                    //     width: MediaQuery.of(context).size.width,
+                    //     height: MediaQuery.of(context).size.height -
+                    //         tp -
+                    //         (370 * rpx),
+                    //     child: ListView(
+                    //         scrollDirection: Axis.vertical,
+                    //         children: _initCardCus())),
                     Container(
                       // color: Colors.red,
                       width: MediaQuery.of(context).size.width,
-                      height:
-                          MediaQuery.of(context).size.height - tp - (370 * rpx),
-                      child: ListWheelScrollView(
-                          itemExtent: 400 * rpx,
-                          diameterRatio: 1,
-                          perspective: 0.003,
-                          offAxisFraction: 0,
-                          useMagnifier: false,
-                          magnification: 10,
-                          squeeze: 1.5,
-                          children: _initCardCus()),
+                      height: MediaQuery.of(context).size.height -
+                          // MediaQuery.of(context).size.width -
+                          tp -
+                          (120 * rpx),
+                      child: ListView(children: [Text('列表')]),
+                      // child: ListWheelScrollView(
+                      //     itemExtent: 400 * rpx,
+                      //     diameterRatio: 1,
+                      //     perspective: 0.003,
+                      //     offAxisFraction: 0,
+                      //     useMagnifier: false,
+                      //     magnification: 10,
+                      //     squeeze: 1.5,
+                      //     children: _initCardCus()),
                     ),
                   ],
                 )),
