@@ -3,7 +3,8 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 
 class Base extends StatefulWidget {
-  const Base({Key? key, Column? childs}) : super(key: key);
+  const Base({Key? key, this.childs}) : super(key: key);
+  final Column? childs;
   @override
   // ignore: library_private_types_in_public_api
   _BaseState createState() => _BaseState();
@@ -23,6 +24,12 @@ class _BaseState extends State<Base> with SingleTickerProviderStateMixin {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+    _logoRotateController.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     double rpx = MediaQuery.of(context).size.width / 750;
     double tp = MediaQuery.of(context).padding.top;
@@ -33,8 +40,7 @@ class _BaseState extends State<Base> with SingleTickerProviderStateMixin {
       children: <Widget>[
         Image(
           // image: const AssetImage('assets/images/9c4ed027180fa668626b7aa0aea7f141.jpeg'),
-          image: const NetworkImage(
-              'https://gd-hbimg.huaban.com/c5292f6de95aef6403360b73e2aa1435162d316b13beb-IWdi0N_fw1200webp'),
+          image: const AssetImage('assets/images/495595.jpg'),
           fit: BoxFit.cover,
           width: MediaQuery.of(context).size.width, //整个屏幕的宽度
           height: MediaQuery.of(context).size.height, //整个屏幕的高度
@@ -48,6 +54,7 @@ class _BaseState extends State<Base> with SingleTickerProviderStateMixin {
                 height: MediaQuery.of(context).size.width,
                 color: Colors.transparent,
                 child: Center(
+                  //暂时注释logo旋转图标
                   child: RotationTransition(
                       turns: _logoRotateController,
                       child: const Image(
@@ -56,24 +63,24 @@ class _BaseState extends State<Base> with SingleTickerProviderStateMixin {
                 )),
           ],
         ),
+        //模糊动画，暂时注释，损耗虚拟机资源
         ClipRect(
             child: BackdropFilter(
           filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
           child: Opacity(
-            opacity: 0.8,
+            opacity: 0.1,
             child: Container(
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height,
               decoration: const BoxDecoration(
-                color: Color.fromARGB(240, 0, 0, 0),
+                color: Color.fromARGB(200, 0, 0, 0),
               ),
             ),
           ),
         )),
         Container(
           padding: const EdgeInsets.all(0),
-          child: widget
-              .childs, //这里取不到传过来的参数，妈的************************************************
+          child: widget.childs,
         ),
       ],
     ));
