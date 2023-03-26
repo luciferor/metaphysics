@@ -9,7 +9,7 @@ import 'package:first_flutter_app/components/card.dart';
 // import 'package:first_flutter_app/classes/res.dart';
 import 'package:first_flutter_app/components/base.dart';
 import 'package:first_flutter_app/components/apps.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+// import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
 class Homie extends StatefulWidget {

@@ -230,7 +230,7 @@ class _OpenContainerTransformDemoState
               closedBuilder: (BuildContext _, VoidCallback openContainer) {
                 return ListTile(
                   leading: Image.asset(
-                    'assets/avatar_logo.png',
+                    'assets/images/logo.png',
                     width: 40,
                   ),
                   onTap: openContainer,
@@ -316,7 +316,7 @@ class _ExampleCard extends StatelessWidget {
               color: Colors.black38,
               child: Center(
                 child: Image.asset(
-                  'assets/placeholder_image.png',
+                  'assets/images/logo.png',
                   width: 100,
                 ),
               ),
@@ -369,7 +369,7 @@ class _SmallerCard extends StatelessWidget {
             height: 150,
             child: Center(
               child: Image.asset(
-                'assets/placeholder_image.png',
+                'assets/images/logo.png',
                 width: 80,
               ),
             ),
@@ -420,7 +420,7 @@ class _ExampleSingleTile extends StatelessWidget {
             width: height,
             child: Center(
               child: Image.asset(
-                'assets/placeholder_image.png',
+                'assets/images/logo.png',
                 width: 60,
               ),
             ),
@@ -500,7 +500,7 @@ class _DetailsPage extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(70.0),
               child: Image.asset(
-                'assets/placeholder_image.png',
+                'assets/images/logo.png',
               ),
             ),
           ),

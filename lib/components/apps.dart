@@ -1,10 +1,10 @@
-import 'dart:math';
 import 'dart:ui';
 
 import 'package:first_flutter_app/pages/mine.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:first_flutter_app/pages/test.dart';
 
 class Apps extends StatelessWidget {
   const Apps({Key? key}) : super(key: key);
@@ -36,8 +36,15 @@ class Apps extends StatelessWidget {
                     child: Center(
                       child: GestureDetector(
                         onTap: () {
-                          Navigator.of(context).push(CupertinoPageRoute(
-                              builder: (BuildContext context) => const Mine()));
+                          // Navigator.of(context).push(CupertinoPageRoute(
+                          //     builder: (BuildContext context) => const Mine()));
+                          Navigator.of(context).push(
+                            MaterialPageRoute<void>(
+                              builder: (BuildContext context) {
+                                return const OpenContainerTransformDemo();
+                              },
+                            ),
+                          );
                         },
                         child: Stack(
                           children: [

@@ -9,10 +9,12 @@ class Https {
   Https(this._url, this._params);
 
   responseData() async {
-    var url = Uri.https('xapi.dsnbc.com', '/test', {'q': '{https}'});
-    var response = await http.get(url);
-    print('=========================');
-    print(response);
-    print('=========================');
+    var url = Uri.https('https://xapi.dsnbc.com/test', 'whatsit/create');
+    var response =
+        await http.post(url, body: {'name': 'doodle', 'color': 'blue'});
+    print('Response status: ${response.statusCode}');
+    print('Response body: ${response.body}');
+
+    print(await http.read(Uri.https('example.com', 'foobar.txt')));
   }
 }
