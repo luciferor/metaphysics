@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:first_flutter_app/pages/test.dart';
+import 'package:animations/animations.dart';
 
 class Apps extends StatelessWidget {
   const Apps({Key? key}) : super(key: key);
@@ -38,12 +39,28 @@ class Apps extends StatelessWidget {
                         onTap: () {
                           // Navigator.of(context).push(CupertinoPageRoute(
                           //     builder: (BuildContext context) => const Mine()));
-                          Navigator.of(context).push(
-                            MaterialPageRoute<void>(
-                              builder: (BuildContext context) {
-                                return const OpenContainerTransformDemo();
-                              },
-                            ),
+                          // Navigator.of(context).push(
+                          //   MaterialPageRoute<void>(
+                          //     builder: (BuildContext context) {
+                          //       return const OpenContainerTransformDemo();
+                          //     },
+                          //   ),
+                          // );
+                          OpenContainer(
+                            transitionType: ContainerTransitionType.fade,
+                            openBuilder:
+                                (BuildContext context, VoidCallback _) {
+                              return const OpenContainerTransformDemo();
+                            }, // 打开的页面
+                            // onClosed: onClosed, // 关闭动作
+                            // tappable: false, // 动画打断
+                            closedBuilder:
+                                (BuildContext _, VoidCallback openContainer) {
+                              return InkWell(
+                                onTap: openContainer,
+                                child: const FlutterLogo(size: 100),
+                              );
+                            }, // 关闭时的样子，需要一手势事件包裹
                           );
                         },
                         child: Stack(

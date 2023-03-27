@@ -242,93 +242,112 @@ class _HomieState extends State<Homie> with SingleTickerProviderStateMixin {
             child: const Apps(),
           ),
           Container(
+            width: MediaQuery.of(context).size.width,
+            height: 300 * rpx,
+            padding: EdgeInsets.fromLTRB(30 * rpx, 0, 30 * rpx, 50 * rpx),
+            child: Container(
+              constraints: const BoxConstraints.expand(),
+              decoration: BoxDecoration(
+                  color: Colors.red,
+                  borderRadius: BorderRadius.circular(40 * rpx)),
+            ),
+          ),
+          Container(
+            padding: EdgeInsets.fromLTRB(30 * rpx, 0, 30 * rpx, 0),
             color: Colors.transparent,
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height -
                 // MediaQuery.of(context).size.width -
                 tp -
+                bp -
                 (((MediaQuery.of(context).size.width - 150 * rpx) / 4) * 2 +
                     32) -
-                (120 * rpx),
-            child: AnimationLimiter(
-              child: GridView.builder(
-                padding: EdgeInsets.fromLTRB(30 * rpx, 0, 30 * rpx, 0),
-                itemCount: imgs.length,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    //横轴元素个数
-                    crossAxisCount: 3,
-                    //纵轴间距
-                    mainAxisSpacing: 30 * rpx,
-                    //横轴间距
-                    crossAxisSpacing: 30 * rpx,
-                    //子组件宽高长度比例
-                    childAspectRatio: 1.0),
-                itemBuilder: (context, index) {
-                  return AnimationConfiguration.staggeredGrid(
-                    columnCount: imgs.length,
-                    position: index,
-                    duration: const Duration(milliseconds: 2375),
-                    child: SlideAnimation(
-                      verticalOffset: 50.0,
-                      child: ScaleAnimation(
-                        child: Stack(
-                          children: [
-                            Container(
-                              constraints: const BoxConstraints.expand(),
-                              decoration: BoxDecoration(
-                                color: Colors.transparent,
-                                borderRadius: BorderRadius.circular(30 * rpx),
-                              ),
-                              child: renderRRect(context, rpx),
-                            ),
-                            Container(
-                              padding: const EdgeInsets.all(0),
-                              child: Center(
-                                child: GestureDetector(
-                                  onTap: () {
-                                    Navigator.of(context).push(
-                                        CupertinoPageRoute(
-                                            builder: (BuildContext context) =>
-                                                const Mine()));
-                                  },
-                                  child: Stack(
-                                    children: [
-                                      Container(
-                                        constraints:
-                                            const BoxConstraints.expand(),
-                                        child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(40 * rpx),
-                                          child: Image(
-                                            image: NetworkImage(imgs[index]),
-                                            fit: BoxFit.cover,
-                                          ),
-                                        ),
-                                      ),
-                                      Positioned(
-                                        top: 10 * rpx,
-                                        right: 10 * rpx,
-                                        width: 60 * rpx,
-                                        height: 60 * rpx,
-                                        child: const Image(
-                                          image: AssetImage(
-                                              'assets/images/others/binding.png'),
-                                          fit: BoxFit.fill,
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  );
-                },
+                (530 * rpx),
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.green,
+                borderRadius: BorderRadius.circular(100 * rpx),
               ),
             ),
+            // child: AnimationLimiter(
+            //   child: GridView.builder(
+            //     padding: EdgeInsets.fromLTRB(30 * rpx, 0, 30 * rpx, 0),
+            //     itemCount: imgs.length,
+            //     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            //         //横轴元素个数
+            //         crossAxisCount: 3,
+            //         //纵轴间距
+            //         mainAxisSpacing: 30 * rpx,
+            //         //横轴间距
+            //         crossAxisSpacing: 30 * rpx,
+            //         //子组件宽高长度比例
+            //         childAspectRatio: 1.0),
+            //     itemBuilder: (context, index) {
+            //       return AnimationConfiguration.staggeredGrid(
+            //         columnCount: imgs.length,
+            //         position: index,
+            //         duration: const Duration(milliseconds: 2375),
+            //         child: SlideAnimation(
+            //           verticalOffset: 50.0,
+            //           child: ScaleAnimation(
+            //             child: Stack(
+            //               children: [
+            //                 Container(
+            //                   constraints: const BoxConstraints.expand(),
+            //                   decoration: BoxDecoration(
+            //                     color: Colors.transparent,
+            //                     borderRadius: BorderRadius.circular(30 * rpx),
+            //                   ),
+            //                   child: renderRRect(context, rpx),
+            //                 ),
+            //                 Container(
+            //                   padding: const EdgeInsets.all(0),
+            //                   child: Center(
+            //                     child: GestureDetector(
+            //                       onTap: () {
+            //                         Navigator.of(context).push(
+            //                             CupertinoPageRoute(
+            //                                 builder: (BuildContext context) =>
+            //                                     const Mine()));
+            //                       },
+            //                       child: Stack(
+            //                         children: [
+            //                           Container(
+            //                             constraints:
+            //                                 const BoxConstraints.expand(),
+            //                             child: ClipRRect(
+            //                               borderRadius:
+            //                                   BorderRadius.circular(40 * rpx),
+            //                               child: Image(
+            //                                 image: NetworkImage(imgs[index]),
+            //                                 fit: BoxFit.cover,
+            //                               ),
+            //                             ),
+            //                           ),
+            //                           Positioned(
+            //                             top: 10 * rpx,
+            //                             right: 10 * rpx,
+            //                             width: 60 * rpx,
+            //                             height: 60 * rpx,
+            //                             child: const Image(
+            //                               image: AssetImage(
+            //                                   'assets/images/others/binding.png'),
+            //                               fit: BoxFit.fill,
+            //                             ),
+            //                           )
+            //                         ],
+            //                       ),
+            //                     ),
+            //                   ),
+            //                 ),
+            //               ],
+            //             ),
+            //           ),
+            //         ),
+            //       );
+            //     },
+            //   ),
+            // ),
             // child: SingleChildScrollView(
             //   padding: EdgeInsets.fromLTRB(15 * rpx, 0, 15 * rpx, 15 * rpx),
             //   child: Container(
@@ -360,6 +379,7 @@ class _HomieState extends State<Homie> with SingleTickerProviderStateMixin {
             //此处是动画
             // child: AnimationLimiter(
             //   child: ListView.builder(
+            //     padding: EdgeInsets.fromLTRB(15 * rpx, 0, 15 * rpx, 0),
             //     itemCount: imgs.length,
             //     itemBuilder: (context, index) {
             //       return AnimationConfiguration.staggeredList(
@@ -367,13 +387,15 @@ class _HomieState extends State<Homie> with SingleTickerProviderStateMixin {
             //         duration: const Duration(milliseconds: 1975),
             //         child: SlideAnimation(
             //           //滑动动画
-            //           verticalOffset: 100.0,
+            //           verticalOffset: 200.0,
             //           child: ScaleAnimation(
             //             //渐隐渐现动画
             //             child: Container(
-            //               margin: const EdgeInsets.all(5),
-            //               color: Theme.of(context).primaryColor,
-            //               height: 100,
+            //               margin: EdgeInsets.all(15 * rpx),
+            //               height: 200,
+            //               decoration: BoxDecoration(
+            //                   color: Theme.of(context).primaryColor,
+            //                   borderRadius: BorderRadius.circular(80 * rpx)),
             //             ),
             //           ),
             //         ),
