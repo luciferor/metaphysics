@@ -39,13 +39,13 @@ class Apps extends StatelessWidget {
                         onTap: () {
                           // Navigator.of(context).push(CupertinoPageRoute(
                           //     builder: (BuildContext context) => const Mine()));
-                          // Navigator.of(context).push(
-                          //   MaterialPageRoute<void>(
-                          //     builder: (BuildContext context) {
-                          //       return const OpenContainerTransformDemo();
-                          //     },
-                          //   ),
-                          // );
+                          Navigator.of(context).push(
+                            MaterialPageRoute<void>(
+                              builder: (BuildContext context) {
+                                return const OpenContainerTransformDemo();
+                              },
+                            ),
+                          );
                           OpenContainer(
                             transitionType: ContainerTransitionType.fade,
                             openBuilder:
@@ -70,7 +70,7 @@ class Apps extends StatelessWidget {
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(40 * rpx),
                                 child: const Image(
-                                  image: AssetImage('assets/images/495595.jpg'),
+                                  image: AssetImage('assets/images/860876.jpg'),
                                   fit: BoxFit.cover,
                                 ),
                               ),
@@ -156,7 +156,7 @@ class Apps extends StatelessWidget {
                                       child: Text(
                                         '每日签到',
                                         style: TextStyle(
-                                          fontSize: 48 * rpx,
+                                          fontSize: 40 * rpx,
                                           fontWeight: FontWeight.bold,
                                           color: Colors.white70,
                                         ),

@@ -1,16 +1,11 @@
+import 'dart:math';
 import 'dart:ui';
-import 'package:first_flutter_app/pages/detail.dart';
-import 'package:first_flutter_app/pages/mine.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:animations/animations.dart';
-import 'package:first_flutter_app/components/card.dart';
 // import 'package:first_flutter_app/classes/https.dart';
 // import 'package:first_flutter_app/classes/res.dart';
 import 'package:first_flutter_app/components/base.dart';
 import 'package:first_flutter_app/components/apps.dart';
 // import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
 class Homie extends StatefulWidget {
   const Homie({Key? key}) : super(key: key);
@@ -42,43 +37,6 @@ class _HomieState extends State<Homie> with SingleTickerProviderStateMixin {
     double rpx = MediaQuery.of(context).size.width / 750;
     double tp = MediaQuery.of(context).padding.top;
     double bp = MediaQuery.of(context).padding.bottom;
-
-    List<String> imgs = [
-      'http://oss.dsnbc.com/images/20220214/11913bc902150f143b1c70378370a0ca.png',
-      'http://oss.dsnbc.com/images/20220610/2562abbde6fd28188277d513adb15af3.png',
-      'http://oss.dsnbc.com/images/20211215/656bcd5fbf7d63265f8768580ef9a6f5.jpeg',
-      'http://oss.dsnbc.com/images/20211126/b6b959667346a5b070bbce45f355f08b.jpeg',
-      'http://oss.dsnbc.com/images/20220214/11913bc902150f143b1c70378370a0ca.png',
-      'http://oss.dsnbc.com/images/20220610/2562abbde6fd28188277d513adb15af3.png',
-      'http://oss.dsnbc.com/images/20211215/656bcd5fbf7d63265f8768580ef9a6f5.jpeg',
-      'http://oss.dsnbc.com/images/20211126/b6b959667346a5b070bbce45f355f08b.jpeg',
-      'http://oss.dsnbc.com/images/20220214/11913bc902150f143b1c70378370a0ca.png',
-      'http://oss.dsnbc.com/images/20220610/2562abbde6fd28188277d513adb15af3.png',
-      'http://oss.dsnbc.com/images/20211215/656bcd5fbf7d63265f8768580ef9a6f5.jpeg',
-      'http://oss.dsnbc.com/images/20211126/b6b959667346a5b070bbce45f355f08b.jpeg',
-      'http://oss.dsnbc.com/images/20220214/11913bc902150f143b1c70378370a0ca.png',
-      'http://oss.dsnbc.com/images/20220610/2562abbde6fd28188277d513adb15af3.png',
-      'http://oss.dsnbc.com/images/20211215/656bcd5fbf7d63265f8768580ef9a6f5.jpeg',
-      'http://oss.dsnbc.com/images/20211126/b6b959667346a5b070bbce45f355f08b.jpeg',
-      'http://oss.dsnbc.com/images/20220214/11913bc902150f143b1c70378370a0ca.png',
-      'http://oss.dsnbc.com/images/20220610/2562abbde6fd28188277d513adb15af3.png',
-      'http://oss.dsnbc.com/images/20211215/656bcd5fbf7d63265f8768580ef9a6f5.jpeg',
-      'http://oss.dsnbc.com/images/20211126/b6b959667346a5b070bbce45f355f08b.jpeg',
-    ];
-
-    // ignore: no_leading_underscores_for_local_identifiers
-    List<Widget> _initCardCus() {
-      var tempList = arr.map((e) {
-        return CardCus(
-          tag: e,
-          onTap: () {
-            Navigator.pushNamed(context, '/detail',
-                arguments: <String, int>{'index': e});
-          },
-        );
-      });
-      return tempList.toList();
-    }
 
     return Base(
       childs: Column(
@@ -127,9 +85,7 @@ class _HomieState extends State<Homie> with SingleTickerProviderStateMixin {
                                   padding: EdgeInsets.zero,
                                   color: Colors.white30,
                                   alignment: Alignment.centerLeft,
-                                  onPressed: () {
-                                    print('object');
-                                  },
+                                  onPressed: () {},
                                 ),
                               ),
                               Expanded(
@@ -151,29 +107,43 @@ class _HomieState extends State<Homie> with SingleTickerProviderStateMixin {
                                       )
                                     ],
                                   ),
-                                  child: Container(
-                                    padding: EdgeInsets.fromLTRB(
-                                        20 * rpx, 0, 20 * rpx, 0),
-                                    child: TextField(
-                                      style: const TextStyle(
-                                        color: Colors.white60,
-                                      ),
-                                      decoration: InputDecoration(
-                                        icon: Icon(
-                                          Icons.search,
-                                          size: 40 * rpx,
+                                  child: Stack(
+                                    children: [
+                                      Container(
+                                        constraints:
+                                            const BoxConstraints.expand(),
+                                        decoration: BoxDecoration(
+                                          color: Colors.transparent,
+                                          borderRadius:
+                                              BorderRadius.circular(30 * rpx),
                                         ),
-                                        iconColor: Colors.white30,
-                                        hintText: '搜索关键字',
-                                        hintStyle: const TextStyle(
-                                            color: Colors.white38),
-                                        border: InputBorder.none,
-                                        counterText: '',
+                                        child: renderRRect(context, rpx),
                                       ),
-                                      autofillHints: const Iterable.empty(),
-                                      maxLength: 30,
-                                      cursorColor: Colors.green,
-                                    ),
+                                      Container(
+                                        padding: EdgeInsets.fromLTRB(
+                                            20 * rpx, 0, 20 * rpx, 0),
+                                        child: TextField(
+                                          style: const TextStyle(
+                                            color: Colors.white60,
+                                          ),
+                                          decoration: InputDecoration(
+                                            icon: Icon(
+                                              Icons.search,
+                                              size: 40 * rpx,
+                                            ),
+                                            iconColor: Colors.white30,
+                                            hintText: '搜索关键字',
+                                            hintStyle: const TextStyle(
+                                                color: Colors.white38),
+                                            border: InputBorder.none,
+                                            counterText: '',
+                                          ),
+                                          autofillHints: const Iterable.empty(),
+                                          maxLength: 30,
+                                          cursorColor: Colors.white,
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ),
                               ),
@@ -216,24 +186,6 @@ class _HomieState extends State<Homie> with SingleTickerProviderStateMixin {
               ),
             )),
           ),
-          // Container(
-          //     color: Colors.red,
-          //     width: MediaQuery.of(context).size.width,
-          //     height: MediaQuery.of(context).size.height -
-          //         tp -
-          //         (370 * rpx),
-          //     child: ListView(
-          //         scrollDirection: Axis.vertical,
-          //         children: _initCardCus())),
-          // Container(
-          //   color: Colors.blue,
-          //   constraints: const BoxConstraints.expand(),
-          //   child: GridView(
-          //     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          //         crossAxisCount: 3),
-          //     children: _initMenus().toList(),
-          //   ),
-          // ),
           Container(
             width: MediaQuery.of(context).size.width,
             height:
@@ -262,156 +214,13 @@ class _HomieState extends State<Homie> with SingleTickerProviderStateMixin {
                 bp -
                 (((MediaQuery.of(context).size.width - 150 * rpx) / 4) * 2 +
                     32) -
-                (530 * rpx),
+                (550 * rpx),
             child: Container(
               decoration: BoxDecoration(
                 color: Colors.green,
-                borderRadius: BorderRadius.circular(100 * rpx),
+                borderRadius: BorderRadius.circular(40 * rpx),
               ),
             ),
-            // child: AnimationLimiter(
-            //   child: GridView.builder(
-            //     padding: EdgeInsets.fromLTRB(30 * rpx, 0, 30 * rpx, 0),
-            //     itemCount: imgs.length,
-            //     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            //         //横轴元素个数
-            //         crossAxisCount: 3,
-            //         //纵轴间距
-            //         mainAxisSpacing: 30 * rpx,
-            //         //横轴间距
-            //         crossAxisSpacing: 30 * rpx,
-            //         //子组件宽高长度比例
-            //         childAspectRatio: 1.0),
-            //     itemBuilder: (context, index) {
-            //       return AnimationConfiguration.staggeredGrid(
-            //         columnCount: imgs.length,
-            //         position: index,
-            //         duration: const Duration(milliseconds: 2375),
-            //         child: SlideAnimation(
-            //           verticalOffset: 50.0,
-            //           child: ScaleAnimation(
-            //             child: Stack(
-            //               children: [
-            //                 Container(
-            //                   constraints: const BoxConstraints.expand(),
-            //                   decoration: BoxDecoration(
-            //                     color: Colors.transparent,
-            //                     borderRadius: BorderRadius.circular(30 * rpx),
-            //                   ),
-            //                   child: renderRRect(context, rpx),
-            //                 ),
-            //                 Container(
-            //                   padding: const EdgeInsets.all(0),
-            //                   child: Center(
-            //                     child: GestureDetector(
-            //                       onTap: () {
-            //                         Navigator.of(context).push(
-            //                             CupertinoPageRoute(
-            //                                 builder: (BuildContext context) =>
-            //                                     const Mine()));
-            //                       },
-            //                       child: Stack(
-            //                         children: [
-            //                           Container(
-            //                             constraints:
-            //                                 const BoxConstraints.expand(),
-            //                             child: ClipRRect(
-            //                               borderRadius:
-            //                                   BorderRadius.circular(40 * rpx),
-            //                               child: Image(
-            //                                 image: NetworkImage(imgs[index]),
-            //                                 fit: BoxFit.cover,
-            //                               ),
-            //                             ),
-            //                           ),
-            //                           Positioned(
-            //                             top: 10 * rpx,
-            //                             right: 10 * rpx,
-            //                             width: 60 * rpx,
-            //                             height: 60 * rpx,
-            //                             child: const Image(
-            //                               image: AssetImage(
-            //                                   'assets/images/others/binding.png'),
-            //                               fit: BoxFit.fill,
-            //                             ),
-            //                           )
-            //                         ],
-            //                       ),
-            //                     ),
-            //                   ),
-            //                 ),
-            //               ],
-            //             ),
-            //           ),
-            //         ),
-            //       );
-            //     },
-            //   ),
-            // ),
-            // child: SingleChildScrollView(
-            //   padding: EdgeInsets.fromLTRB(15 * rpx, 0, 15 * rpx, 15 * rpx),
-            //   child: Container(
-            //     padding: EdgeInsets.all(30 * rpx),
-            //     child: MasonryGridView.count(
-            //       // 展示几列
-            //       crossAxisCount: 2,
-            //       // 元素总个数
-            //       itemCount: imgs.length,
-            //       // 单个子元素
-            //       itemBuilder: (BuildContext context, int index) {
-            //         return Container(
-            //           child: Image(
-            //             image: NetworkImage(imgs[index]),
-            //             fit: BoxFit.fitHeight,
-            //           ),
-            //         );
-            //       },
-            //       // 纵向元素间距
-            //       mainAxisSpacing: 30 * rpx,
-            //       // 横向元素间距
-            //       crossAxisSpacing: 30 * rpx,
-            //       //本身不滚动，让外面的singlescrollview来滚动
-            //       physics: const NeverScrollableScrollPhysics(),
-            //       shrinkWrap: true, //收缩，让元素宽度自适应
-            //     ),
-            //   ),
-            // ),
-            //此处是动画
-            // child: AnimationLimiter(
-            //   child: ListView.builder(
-            //     padding: EdgeInsets.fromLTRB(15 * rpx, 0, 15 * rpx, 0),
-            //     itemCount: imgs.length,
-            //     itemBuilder: (context, index) {
-            //       return AnimationConfiguration.staggeredList(
-            //         position: index,
-            //         duration: const Duration(milliseconds: 1975),
-            //         child: SlideAnimation(
-            //           //滑动动画
-            //           verticalOffset: 200.0,
-            //           child: ScaleAnimation(
-            //             //渐隐渐现动画
-            //             child: Container(
-            //               margin: EdgeInsets.all(15 * rpx),
-            //               height: 200,
-            //               decoration: BoxDecoration(
-            //                   color: Theme.of(context).primaryColor,
-            //                   borderRadius: BorderRadius.circular(80 * rpx)),
-            //             ),
-            //           ),
-            //         ),
-            //       );
-            //     },
-            //   ),
-            // ),
-            // child: ListWheelScrollView(
-            //     itemExtent: 400 * rpx,
-            //     diameterRatio: 1,
-            //     perspective: 0.003,
-            //     offAxisFraction: 0,
-            //     useMagnifier: false,
-            //     magnification: 10,
-            //     squeeze: 1.5,
-            //     children: _initCardCus()),
           ),
         ],
       ),
@@ -429,12 +238,12 @@ class _HomieState extends State<Homie> with SingleTickerProviderStateMixin {
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height,
               decoration: BoxDecoration(
-                color: Colors.white.withAlpha(80),
-                // color: Color.fromRGBO(
-                //     Random().nextInt(256),
-                //     Random().nextInt(256),
-                //     Random().nextInt(256),
-                //     0.8), //color: Colors.blue.withAlpha(80),
+                // color: Colors.white.withAlpha(80),
+                color: Color.fromRGBO(
+                    Random().nextInt(256),
+                    Random().nextInt(256),
+                    Random().nextInt(256),
+                    0.8), //color: Colors.blue.withAlpha(80),
                 borderRadius: BorderRadius.circular(40 * rpx),
               ),
             ),

@@ -17,17 +17,6 @@ class _BaseState extends State<Base> with SingleTickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    //初始化logo旋转控制器
-    // _logoRotateController = AnimationController(
-    //   duration: const Duration(seconds: 5),
-    //   vsync: this,
-    // )..repeat(); //一直循环
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    // _logoRotateController.dispose();
   }
 
   @override
@@ -41,33 +30,15 @@ class _BaseState extends State<Base> with SingleTickerProviderStateMixin {
       children: <Widget>[
         Image(
           // image: const AssetImage('assets/images/9c4ed027180fa668626b7aa0aea7f141.jpeg'),
-          image: const AssetImage('assets/images/860875.jpg'),
+          image: const AssetImage('assets/images/860876.jpg'),
           fit: BoxFit.cover,
           width: MediaQuery.of(context).size.width, //整个屏幕的宽度
           height: MediaQuery.of(context).size.height, //整个屏幕的高度
         ),
-        // Column(
-        //   mainAxisAlignment: MainAxisAlignment.start,
-        //   children: [
-        //     Container(
-        //         padding: EdgeInsets.fromLTRB(0, tp + (90 * rpx), 0, 0),
-        //         width: MediaQuery.of(context).size.width,
-        //         height: MediaQuery.of(context).size.width,
-        //         color: Colors.transparent,
-        //         child: Center(
-        //           //暂时注释logo旋转图标
-        //           child: RotationTransition(
-        //               turns: _logoRotateController,
-        //               child: const Image(
-        //                   fit: BoxFit.fitHeight,
-        //                   image: AssetImage('assets/images/logo.png'))),
-        //         )),
-        //   ],
-        // ),
         //模糊动画，暂时注释，损耗虚拟机资源
         ClipRect(
             child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+          filter: ImageFilter.blur(sigmaX: 0.0, sigmaY: 0.0),
           child: Opacity(
             opacity: 0.1,
             child: Container(
@@ -89,7 +60,7 @@ class _BaseState extends State<Base> with SingleTickerProviderStateMixin {
           child: Container(
             padding: EdgeInsets.fromLTRB(0, 40 * rpx, 0, 0),
             width: MediaQuery.of(context).size.width,
-            height: bp + 100 * rpx,
+            height: bp + 120 * rpx,
             child: const Navi(),
           ),
         )

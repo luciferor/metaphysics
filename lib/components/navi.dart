@@ -81,8 +81,8 @@ class _NaviState extends State<Navi> {
         child: Column(
           children: [
             Container(
-              width: 60 * rpx,
-              height: 60 * rpx,
+              width: 80 * rpx,
+              height: 80 * rpx,
               padding: EdgeInsets.zero,
               child: Image(
                 image: AssetImage(icon),
