@@ -197,11 +197,20 @@ class _HomieState extends State<Homie> with SingleTickerProviderStateMixin {
             width: MediaQuery.of(context).size.width,
             height: 300 * rpx,
             padding: EdgeInsets.fromLTRB(30 * rpx, 0, 30 * rpx, 50 * rpx),
-            child: Container(
-              constraints: const BoxConstraints.expand(),
-              decoration: BoxDecoration(
-                  color: Colors.red,
-                  borderRadius: BorderRadius.circular(40 * rpx)),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                  child: Container(
+                    color: Colors.red,
+                  ),
+                ),
+                Expanded(
+                  child: Container(
+                    color: Colors.greenAccent,
+                  ),
+                ),
+              ],
             ),
           ),
           Container(
