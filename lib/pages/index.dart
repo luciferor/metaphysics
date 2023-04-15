@@ -201,13 +201,35 @@ class _HomieState extends State<Homie> with SingleTickerProviderStateMixin {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Expanded(
-                  child: Container(
-                    color: Colors.red,
+                  child: Padding(
+                    padding: EdgeInsets.fromLTRB(0, 0, 15 * rpx, 0),
+                    child: Stack(
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
+                            color: Colors.transparent,
+                            borderRadius: BorderRadius.circular(20 * rpx),
+                          ),
+                          child: renderRRect(context, rpx),
+                        )
+                      ],
+                    ),
                   ),
                 ),
                 Expanded(
-                  child: Container(
-                    color: Colors.greenAccent,
+                  child: Padding(
+                    padding: EdgeInsets.fromLTRB(15 * rpx, 0, 0, 0),
+                    child: Stack(
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
+                            color: Colors.transparent,
+                            borderRadius: BorderRadius.circular(20 * rpx),
+                          ),
+                          child: renderRRect(context, rpx),
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ],
@@ -226,9 +248,10 @@ class _HomieState extends State<Homie> with SingleTickerProviderStateMixin {
                 (550 * rpx),
             child: Container(
               decoration: BoxDecoration(
-                color: Colors.green,
+                color: Colors.transparent,
                 borderRadius: BorderRadius.circular(40 * rpx),
               ),
+              child: renderRRect(context, rpx),
             ),
           ),
         ],
