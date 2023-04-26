@@ -39,7 +39,7 @@ class Apps extends StatelessWidget {
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(40 * rpx),
                             child: const Image(
-                              image: AssetImage('assets/images/860878.jpg'),
+                              image: AssetImage('assets/images/860876.jpg'),
                               fit: BoxFit.cover,
                             ),
                           ),

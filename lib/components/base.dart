@@ -28,7 +28,7 @@ class _BaseState extends State<Base> with SingleTickerProviderStateMixin {
       fit: StackFit.expand,
       children: <Widget>[
         Image(
-          image: const AssetImage('assets/images/860878.jpg'),
+          image: const AssetImage('assets/images/860876.jpg'),
           fit: BoxFit.cover,
           width: MediaQuery.of(context).size.width, //整个屏幕的宽度
           height: MediaQuery.of(context).size.height, //整个屏幕的高度
@@ -36,7 +36,7 @@ class _BaseState extends State<Base> with SingleTickerProviderStateMixin {
         //模糊动画，暂时注释，损耗虚拟机资源
         ClipRect(
             child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 15.0, sigmaY: 15.0),
+          filter: ImageFilter.blur(sigmaX: 0.0, sigmaY: 0.0),
           child: Opacity(
             opacity: 0.1,
             child: Container(
