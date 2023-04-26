@@ -110,12 +110,9 @@ class _HomieState extends State<Homie> with SingleTickerProviderStateMixin {
                                   child: Stack(
                                     children: [
                                       Container(
-                                        constraints:
-                                            const BoxConstraints.expand(),
+                                        constraints:const BoxConstraints.expand(),
                                         decoration: BoxDecoration(
-                                          color: Colors.transparent,
-                                          borderRadius:
-                                              BorderRadius.circular(30 * rpx),
+                                          borderRadius:BorderRadius.circular(50 * rpx),
                                         ),
                                         child: renderRRect(context, rpx),
                                       ),
@@ -123,7 +120,7 @@ class _HomieState extends State<Homie> with SingleTickerProviderStateMixin {
                                         padding: EdgeInsets.fromLTRB(
                                             20 * rpx, 0, 20 * rpx, 0),
                                         child: TextField(
-                                          style: const TextStyle(
+                                          style:const TextStyle(
                                             color: Colors.white60,
                                           ),
                                           decoration: InputDecoration(
@@ -133,12 +130,13 @@ class _HomieState extends State<Homie> with SingleTickerProviderStateMixin {
                                             ),
                                             iconColor: Colors.white30,
                                             hintText: '搜索关键字',
-                                            hintStyle: const TextStyle(
-                                                color: Colors.white38),
+                                            hintStyle:const TextStyle(
+                                              color: Colors.white38,),
                                             border: InputBorder.none,
                                             counterText: '',
+                                            fillColor: Colors.red
                                           ),
-                                          autofillHints: const Iterable.empty(),
+                                          autofillHints: Iterable.empty(),
                                           maxLength: 30,
                                           cursorColor: Colors.white,
                                         ),
