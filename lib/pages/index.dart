@@ -1,5 +1,7 @@
 import 'dart:math';
 import 'dart:ui';
+import 'package:first_flutter_app/components/ani.dart';
+import 'package:first_flutter_app/pages/mine.dart';
 import 'package:flutter/material.dart';
 // import 'package:first_flutter_app/classes/https.dart';
 // import 'package:first_flutter_app/classes/res.dart';
@@ -145,34 +147,28 @@ class _HomieState extends State<Homie> with SingleTickerProviderStateMixin {
                                   ),
                                 ),
                               ),
-                              Hero(
-                                tag: 'avatar',
-                                child: Container(
-                                  width: 70 * rpx,
-                                  height: 70 * rpx,
-                                  decoration: BoxDecoration(
-                                    border: Border.all(
-                                        color: Colors.white30, width: 5 * rpx),
-                                    borderRadius:
-                                        BorderRadius.circular(80 * rpx),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.green.withOpacity(0.2),
-                                        offset: const Offset(0, 2),
-                                        blurRadius: 30 * rpx,
-                                        spreadRadius: 0,
-                                      )
-                                    ],
-                                  ),
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      Navigator.pushNamed(context, '/mine');
-                                    },
-                                    child: const CircleAvatar(
-                                      backgroundColor: Colors.transparent,
-                                      backgroundImage: NetworkImage(
-                                          'https://img0.baidu.com/it/u=2699322616,853950993&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500'),
-                                    ),
+                              Container(
+                                width: 70 * rpx,
+                                height: 70 * rpx,
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                      color: Colors.white30, width: 5 * rpx),
+                                  borderRadius:
+                                      BorderRadius.circular(80 * rpx),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.green.withOpacity(0.2),
+                                      offset: const Offset(0, 2),
+                                      blurRadius: 30 * rpx,
+                                      spreadRadius: 0,
+                                    )
+                                  ],
+                                ),
+                                child: const Ani(
+                                  pages:Mine(),
+                                  child:CircleAvatar(
+                                    backgroundColor: Colors.transparent,
+                                    backgroundImage: NetworkImage('https://img0.baidu.com/it/u=2699322616,853950993&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500'),
                                   ),
                                 ),
                               ),
@@ -191,67 +187,67 @@ class _HomieState extends State<Homie> with SingleTickerProviderStateMixin {
             padding: EdgeInsets.fromLTRB(15 * rpx, 0, 15 * rpx, 0),
             child: const Apps(),
           ),
-          Container(
-            width: MediaQuery.of(context).size.width,
-            height: 300 * rpx,
-            padding: EdgeInsets.fromLTRB(30 * rpx, 0, 30 * rpx, 50 * rpx),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Expanded(
-                  child: Padding(
-                    padding: EdgeInsets.fromLTRB(0, 0, 15 * rpx, 0),
-                    child: Stack(
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(
-                            color: Colors.transparent,
-                            borderRadius: BorderRadius.circular(20 * rpx),
-                          ),
-                          child: renderRRect(context, rpx),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: Padding(
-                    padding: EdgeInsets.fromLTRB(15 * rpx, 0, 0, 0),
-                    child: Stack(
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(
-                            color: Colors.transparent,
-                            borderRadius: BorderRadius.circular(20 * rpx),
-                          ),
-                          child: renderRRect(context, rpx),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Container(
-            padding: EdgeInsets.fromLTRB(30 * rpx, 0, 30 * rpx, 0),
-            color: Colors.transparent,
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height -
-                // MediaQuery.of(context).size.width -
-                tp -
-                bp -
-                (((MediaQuery.of(context).size.width - 150 * rpx) / 4) * 2 +
-                    32) -
-                (550 * rpx),
-            child: Container(
-              decoration: BoxDecoration(
-                color: Colors.transparent,
-                borderRadius: BorderRadius.circular(40 * rpx),
-              ),
-              child: renderRRect(context, rpx),
-            ),
-          ),
+          // Container(
+          //   width: MediaQuery.of(context).size.width,
+          //   height: 300 * rpx,
+          //   padding: EdgeInsets.fromLTRB(30 * rpx, 0, 30 * rpx, 50 * rpx),
+          //   child: Row(
+          //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //     children: [
+          //       Expanded(
+          //         child: Padding(
+          //           padding: EdgeInsets.fromLTRB(0, 0, 15 * rpx, 0),
+          //           child: Stack(
+          //             children: [
+          //               Container(
+          //                 decoration: BoxDecoration(
+          //                   color: Colors.transparent,
+          //                   borderRadius: BorderRadius.circular(20 * rpx),
+          //                 ),
+          //                 child: renderRRect(context, rpx),
+          //               )
+          //             ],
+          //           ),
+          //         ),
+          //       ),
+          //       Expanded(
+          //         child: Padding(
+          //           padding: EdgeInsets.fromLTRB(15 * rpx, 0, 0, 0),
+          //           child: Stack(
+          //             children: [
+          //               Container(
+          //                 decoration: BoxDecoration(
+          //                   color: Colors.transparent,
+          //                   borderRadius: BorderRadius.circular(20 * rpx),
+          //                 ),
+          //                 child: renderRRect(context, rpx),
+          //               )
+          //             ],
+          //           ),
+          //         ),
+          //       ),
+          //     ],
+          //   ),
+          // ),
+          // Container(
+          //   padding: EdgeInsets.fromLTRB(30 * rpx, 0, 30 * rpx, 0),
+          //   color: Colors.transparent,
+          //   width: MediaQuery.of(context).size.width,
+          //   height: MediaQuery.of(context).size.height -
+          //       // MediaQuery.of(context).size.width -
+          //       tp -
+          //       bp -
+          //       (((MediaQuery.of(context).size.width - 150 * rpx) / 4) * 2 +
+          //           32) -
+          //       (550 * rpx),
+          //   child: Container(
+          //     decoration: BoxDecoration(
+          //       color: Colors.transparent,
+          //       borderRadius: BorderRadius.circular(40 * rpx),
+          //     ),
+          //     child: renderRRect(context, rpx),
+          //   ),
+          // ),
         ],
       ),
     );

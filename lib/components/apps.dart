@@ -4,8 +4,6 @@ import 'package:first_flutter_app/pages/mine.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
-import 'package:animations/animations.dart';
-
 import 'ani.dart';
 
 class Apps extends StatelessWidget {
@@ -41,7 +39,7 @@ class Apps extends StatelessWidget {
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(40 * rpx),
                             child: const Image(
-                              image: AssetImage('assets/images/860876.jpg'),
+                              image: AssetImage('assets/images/860878.jpg'),
                               fit: BoxFit.cover,
                             ),
                           ),
@@ -80,58 +78,20 @@ class Apps extends StatelessWidget {
                             decoration: BoxDecoration(
                               color: Colors.transparent,
                               borderRadius: BorderRadius.circular(30 * rpx),
-                              // boxShadow: const [
-                              //   BoxShadow(
-                              //       color: Colors.deepOrange,
-                              //       offset: Offset(0, 0),
-                              //       blurRadius: 10)
-                              // ],
                             ),
                             child: renderRRect(context, rpx),
                           ),
-                          Container(
-                            padding: EdgeInsets.all(20 * rpx),
-                            child: Center(
-                              child: GestureDetector(
-                                onTap: () {
-                                  Navigator.of(context).push(CupertinoPageRoute(
-                                      builder: (BuildContext context) =>
-                                          const Mine()));
-                                },
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Container(
-                                      width: 80 * rpx,
-                                      height: 80 * rpx,
-                                      decoration: BoxDecoration(
-                                        color: const Color.fromARGB(
-                                            70, 76, 54, 244),
-                                        borderRadius: BorderRadius.circular(
-                                          20 * rpx,
-                                        ),
-                                      ),
-                                      child: const Image(
-                                        image: AssetImage(
-                                            'assets/images/others/birthday.png'),
-                                        fit: BoxFit.fill,
-                                      ),
-                                    ),
-                                    Shimmer.fromColors(
-                                      baseColor: Colors.white70,
-                                      highlightColor: Colors.white,
-                                      child: Text(
-                                        '每日签到',
-                                        style: TextStyle(
-                                          fontSize: 40 * rpx,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.white70,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
+                          Ani(
+                            pages: const Mine(),
+                            child: Shimmer.fromColors(
+                              baseColor: Colors.white70,
+                              highlightColor: Colors.white,
+                              child: Text(
+                                '每日签到',
+                                style: TextStyle(
+                                  fontSize: 40 * rpx,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white70,
                                 ),
                               ),
                             ),
@@ -145,41 +105,23 @@ class Apps extends StatelessWidget {
                     children: [
                       Expanded(
                         child: Padding(
-                          padding:
-                              EdgeInsets.fromLTRB(0, 15 * rpx, 15 * rpx, 0),
+                          padding:EdgeInsets.fromLTRB(0, 15 * rpx, 15 * rpx, 0),
                           child: Stack(
                             children: [
                               Container(
                                 decoration: BoxDecoration(
                                   color: Colors.transparent,
                                   borderRadius: BorderRadius.circular(30 * rpx),
-                                  // boxShadow: const [
-                                  //   BoxShadow(
-                                  //       color: Colors.white54,
-                                  //       offset: Offset(0, 0),
-                                  //       blurRadius: 10)
-                                  // ],
                                 ),
                                 child: renderRRect(context, rpx),
                               ),
-                              Container(
-                                padding: EdgeInsets.all(20 * rpx),
-                                child: Center(
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      Navigator.of(context).push(
-                                          CupertinoPageRoute(
-                                              builder: (BuildContext context) =>
-                                                  const Mine()));
-                                    },
-                                    child: const Image(
-                                      image: AssetImage(
-                                          'assets/images/themes/logs.png'),
-                                      fit: BoxFit.fill,
-                                    ),
+                              const Ani(
+                                pages: Mine(),
+                                child: Image(
+                                    image: AssetImage('assets/images/themes/logs.png'),
+                                    fit: BoxFit.fill,
                                   ),
-                                ),
-                              )
+                                )
                             ],
                           ),
                         ),
@@ -194,35 +136,21 @@ class Apps extends StatelessWidget {
                                 decoration: BoxDecoration(
                                   color: Colors.transparent,
                                   borderRadius: BorderRadius.circular(30 * rpx),
-                                  // boxShadow: const [
-                                  //   BoxShadow(
-                                  //       color: Colors.white60,
-                                  //       offset: Offset(0, 0),
-                                  //       blurRadius: 10)
-                                  // ],
                                 ),
                                 child: renderRRect(context, rpx),
                               ),
-                              Container(
-                                padding: EdgeInsets.all(20 * rpx),
+                              const Ani(
+                                pages: Mine(),
                                 child: Center(
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      Navigator.of(context).push(
-                                          CupertinoPageRoute(
-                                              builder: (BuildContext context) =>
-                                                  const Mine()));
-                                    },
-                                    child: const Image(
-                                      image: AssetImage(
-                                          'assets/images/others/aplay.png'),
-                                      fit: BoxFit.fill,
-                                    ),
+                                  child: Image(
+                                    image: AssetImage(
+                                        'assets/images/others/aplay.png'),
+                                    fit: BoxFit.fill,
                                   ),
-                                ),
                               ),
-                            ],
-                          ),
+                            )
+                          ],
+                        ),
                         ),
                       )
                     ],
