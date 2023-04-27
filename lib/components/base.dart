@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class Base extends StatefulWidget {
   const Base({Key? key, this.childs}) : super(key: key);
-  final Column? childs;
+  final Widget? childs;
   @override
   // ignore: library_private_types_in_public_api
   _BaseState createState() => _BaseState();
@@ -49,6 +49,7 @@ class _BaseState extends State<Base> with SingleTickerProviderStateMixin {
           ),
         )),
         Container(
+          constraints:const BoxConstraints.expand(),
           padding: const EdgeInsets.all(0),
           child: widget.childs,
         ),
