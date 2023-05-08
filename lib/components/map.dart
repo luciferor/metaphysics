@@ -11,6 +11,9 @@ class Map extends StatefulWidget {
 class _MapState extends State<Map> {
   @override
   Widget build(BuildContext context) {
-    return Container(color: Colors.deepOrangeAccent);
+    return Container(
+      color: Colors.black,
+      child: Image.asset('../../assets/images/logo.png'),
+    );
   }
 }
