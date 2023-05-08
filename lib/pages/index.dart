@@ -16,7 +16,6 @@ class Homie extends StatefulWidget {
 }
 
 class _HomieState extends State<Homie> with SingleTickerProviderStateMixin {
-
   @override
   void initState() {
     super.initState();
@@ -29,11 +28,11 @@ class _HomieState extends State<Homie> with SingleTickerProviderStateMixin {
     double bp = MediaQuery.of(context).padding.bottom;
 
     return Base(
-      childs: Container(
-        
-        constraints: const BoxConstraints.expand(),
-        child: const Map(),
-      )
+      childs: Stack(
+        children: const <Widget>[
+          Map(),
+        ],
+      ),
     );
   }
 
