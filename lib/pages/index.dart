@@ -38,20 +38,21 @@ class _HomieState extends State<Homie> with SingleTickerProviderStateMixin {
 
   Widget renderRRect(BuildContext context, double rpx) {
     return ClipRRect(
-        borderRadius: BorderRadius.circular(40 * rpx),
-        child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 50 * rpx, sigmaY: 50 * rpx),
-          child: Opacity(
-            opacity: 0.5,
-            child: Container(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height,
-              decoration: BoxDecoration(
-                color: Colors.blue.withAlpha(80),
-                borderRadius: BorderRadius.circular(40 * rpx),
-              ),
+      borderRadius: BorderRadius.circular(40 * rpx),
+      child: BackdropFilter(
+        filter: ImageFilter.blur(sigmaX: 50 * rpx, sigmaY: 50 * rpx),
+        child: Opacity(
+          opacity: 0.5,
+          child: Container(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+            decoration: BoxDecoration(
+              color: Colors.blue.withAlpha(80),
+              borderRadius: BorderRadius.circular(40 * rpx),
             ),
           ),
-        ));
+        ),
+      ),
+    );
   }
 }

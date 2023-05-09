@@ -13,7 +13,7 @@ class _MapState extends State<Map> {
   Widget build(BuildContext context) {
     return Container(
       color: Colors.black,
-      child: Image.asset('../../assets/images/logo.png'),
+      // child: Image.asset('../../assets/images/logo.png'),
     );
   }
 }
