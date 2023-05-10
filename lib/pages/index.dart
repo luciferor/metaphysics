@@ -1,7 +1,7 @@
-import 'dart:math';
 import 'dart:ui';
 import 'package:first_flutter_app/components/ani.dart';
 import 'package:first_flutter_app/pages/mine.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 // import 'package:first_flutter_app/classes/https.dart';
 // import 'package:first_flutter_app/classes/res.dart';
@@ -16,6 +16,8 @@ class Homie extends StatefulWidget {
 }
 
 class _HomieState extends State<Homie> with SingleTickerProviderStateMixin {
+  double pos = 0;
+  int speed = 500;
   @override
   void initState() {
     super.initState();
@@ -27,12 +29,43 @@ class _HomieState extends State<Homie> with SingleTickerProviderStateMixin {
     double tp = MediaQuery.of(context).padding.top;
     double bp = MediaQuery.of(context).padding.bottom;
 
-    return Base(
-      childs: Stack(
-        children: const <Widget>[
-          Map(),
-        ],
-      ),
+    // return Base(
+    //   childs: Stack(
+    //     children: const <Widget>[
+    //       Map(),
+    //     ],
+    //   ),
+    // );
+
+    return Stack(
+      children: [
+        AnimatedPositioned(
+          left: pos,
+          top: pos,
+          bottom: pos,
+          duration: Duration(milliseconds: speed),
+          curve: Curves.linear,
+          child: Container(
+            width: 100,
+            height: 100,
+            color: Colors.red,
+            child: FloatingActionButton(
+              onPressed: () {
+                if (pos == 100) {
+                  setState(() {
+                    pos = 0;
+                  });
+                } else {
+                  setState(() {
+                    pos = 100;
+                  });
+                }
+              },
+              child: const Text('aa'),
+            ),
+          ),
+        ),
+      ],
     );
   }
 
