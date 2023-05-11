@@ -16,8 +16,8 @@ class Homie extends StatefulWidget {
 }
 
 class _HomieState extends State<Homie> with SingleTickerProviderStateMixin {
-  double pos = 0;
-  int speed = 500;
+  int speed = 300;
+  bool isDrawer = false;
   @override
   void initState() {
     super.initState();
@@ -39,29 +39,40 @@ class _HomieState extends State<Homie> with SingleTickerProviderStateMixin {
 
     return Stack(
       children: [
+        Container(
+          color: Colors.blue,
+        ),
         AnimatedPositioned(
-          left: pos,
-          top: pos,
-          bottom: pos,
+          left: isDrawer ? MediaQuery.of(context).size.width - 300 * rpx : 0,
+          right: isDrawer ? -MediaQuery.of(context).size.width - 300 * rpx : 0,
+          top: isDrawer ? MediaQuery.of(context).size.height / 7 : 0,
+          bottom: isDrawer ? MediaQuery.of(context).size.height / 7 : 0,
           duration: Duration(milliseconds: speed),
           curve: Curves.linear,
-          child: Container(
-            width: 100,
-            height: 100,
-            color: Colors.red,
-            child: FloatingActionButton(
-              onPressed: () {
-                if (pos == 100) {
-                  setState(() {
-                    pos = 0;
-                  });
-                } else {
-                  setState(() {
-                    pos = 100;
-                  });
-                }
-              },
-              child: const Text('aa'),
+          child: SizedBox(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+            child: SizedBox(
+              child: GestureDetector(
+                onTap: () {
+                  if (isDrawer) {
+                    setState(() {
+                      isDrawer = false;
+                    });
+                  } else {
+                    setState(() {
+                      isDrawer = true;
+                    });
+                  }
+                },
+                child: Base(
+                  childs: Stack(
+                    children: const <Widget>[
+                      Map(),
+                    ],
+                  ),
+                ),
+              ),
             ),
           ),
         ),
@@ -69,9 +80,9 @@ class _HomieState extends State<Homie> with SingleTickerProviderStateMixin {
     );
   }
 
-  Widget renderRRect(BuildContext context, double rpx) {
+  Widget renderRRect(BuildContext context, double rpx, bool idw) {
     return ClipRRect(
-      borderRadius: BorderRadius.circular(40 * rpx),
+      borderRadius: BorderRadius.circular(idw ? 40 * rpx : 0),
       child: BackdropFilter(
         filter: ImageFilter.blur(sigmaX: 50 * rpx, sigmaY: 50 * rpx),
         child: Opacity(
@@ -80,8 +91,7 @@ class _HomieState extends State<Homie> with SingleTickerProviderStateMixin {
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
             decoration: BoxDecoration(
-              color: Colors.blue.withAlpha(80),
-              borderRadius: BorderRadius.circular(40 * rpx),
+              borderRadius: BorderRadius.circular(idw ? 40 * rpx : 0),
             ),
           ),
         ),
