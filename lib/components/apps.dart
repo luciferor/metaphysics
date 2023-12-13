@@ -105,7 +105,8 @@ class Apps extends StatelessWidget {
                     children: [
                       Expanded(
                         child: Padding(
-                          padding:EdgeInsets.fromLTRB(0, 15 * rpx, 15 * rpx, 0),
+                          padding:
+                              EdgeInsets.fromLTRB(0, 15 * rpx, 15 * rpx, 0),
                           child: Stack(
                             children: [
                               Container(
@@ -118,10 +119,11 @@ class Apps extends StatelessWidget {
                               const Ani(
                                 pages: Mine(),
                                 child: Image(
-                                    image: AssetImage('assets/images/themes/logs.png'),
-                                    fit: BoxFit.fill,
-                                  ),
-                                )
+                                  image: AssetImage(
+                                      'assets/images/themes/logs.png'),
+                                  fit: BoxFit.fill,
+                                ),
+                              )
                             ],
                           ),
                         ),
@@ -147,10 +149,10 @@ class Apps extends StatelessWidget {
                                         'assets/images/others/aplay.png'),
                                     fit: BoxFit.fill,
                                   ),
-                              ),
-                            )
-                          ],
-                        ),
+                                ),
+                              )
+                            ],
+                          ),
                         ),
                       )
                     ],

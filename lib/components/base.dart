@@ -28,7 +28,7 @@ class _BaseState extends State<Base> with SingleTickerProviderStateMixin {
       fit: StackFit.expand,
       children: <Widget>[
         Image(
-          image: const AssetImage('assets/images/860876.jpg'),
+          image: const AssetImage('assets/images/860879.jpg'),
           fit: BoxFit.cover,
           width: MediaQuery.of(context).size.width, //整个屏幕的宽度
           height: MediaQuery.of(context).size.height, //整个屏幕的高度
@@ -49,7 +49,7 @@ class _BaseState extends State<Base> with SingleTickerProviderStateMixin {
           ),
         )),
         Container(
-          constraints:const BoxConstraints.expand(),
+          constraints: const BoxConstraints.expand(),
           padding: const EdgeInsets.all(0),
           child: widget.childs,
         ),
