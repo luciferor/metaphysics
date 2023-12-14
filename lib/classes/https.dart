@@ -1,20 +1,44 @@
 import 'package:http/http.dart' as http;
-import 'dart:convert' as convert;
-import 'package:loading_animation_widget/loading_animation_widget.dart';
-import 'package:first_flutter_app/classes/res.dart';
 
 class Https {
-  String _url = '';
-  Object _params = {};
-  Https(this._url, this._params);
+  final String baseUrl;
 
-  responseData() async {
-    var url = Uri.https('https://xapi.dsnbc.com/test', 'whatsit/create');
-    var response =
-        await http.post(url, body: {'name': 'doodle', 'color': 'blue'});
-    print('Response status: ${response.statusCode}');
-    print('Response body: ${response.body}');
+  Https({required this.baseUrl});
 
-    print(await http.read(Uri.https('example.com', 'foobar.txt')));
+  Future<http.Response> get(String path, {Map<String, String>? headers}) async {
+    final response = await http.get(
+      Uri.parse('$baseUrl$path'),
+      headers: headers,
+    );
+    return response;
+  }
+
+  Future<http.Response> post(String path,
+      {Map<String, String>? headers, dynamic body}) async {
+    final response = await http.post(
+      Uri.parse('$baseUrl$path'),
+      headers: headers,
+      body: body,
+    );
+    return response;
+  }
+
+  Future<http.Response> put(String path,
+      {Map<String, String>? headers, dynamic body}) async {
+    final response = await http.put(
+      Uri.parse('$baseUrl$path'),
+      headers: headers,
+      body: body,
+    );
+    return response;
+  }
+
+  Future<http.Response> delete(String path,
+      {Map<String, String>? headers}) async {
+    final response = await http.delete(
+      Uri.parse('$baseUrl$path'),
+      headers: headers,
+    );
+    return response;
   }
 }
