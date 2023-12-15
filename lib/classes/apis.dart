@@ -1,3 +1,3 @@
 class Apis {
-  static const String openaiapi = 'getsessionapi';
+  static const String openaiapi = 'openaiapi';
 }
