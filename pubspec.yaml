@@ -43,6 +43,10 @@ dependencies:
   shimmer: ^2.0.0
   curved_navigation_bar: ^1.0.3
   flutter_svg: ^2.0.9
+  dio: ^5.4.0
+  crypto: ^3.0.3
+  shared_preferences: ^2.2.2
+  hex: ^0.2.0
 
 dev_dependencies:
   flutter_test:
