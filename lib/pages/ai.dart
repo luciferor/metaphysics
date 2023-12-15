@@ -5,6 +5,7 @@ import 'package:first_flutter_app/classes/res.dart';
 import 'package:first_flutter_app/components/base.dart';
 import 'package:first_flutter_app/components/blur.dart';
 import 'package:first_flutter_app/components/empty.dart';
+import 'package:first_flutter_app/components/msgs.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:dio/dio.dart';
@@ -18,15 +19,16 @@ class Ai extends StatefulWidget {
 
 class _AiState extends State<Ai> {
   final TextEditingController _textController = TextEditingController();
+  final dio = Dio();
   String? msg;
   String? sent;
   String? total;
-  List<String>? data;
-  final dio = Dio();
+  Map<String,dynamic>? data;
+  bool showEmpty = false;
   @override
   void initState() {
     super.initState();
-    httpTest();
+    // httpTest();
   }
 
   @override
@@ -42,7 +44,7 @@ class _AiState extends State<Ai> {
                 Expanded(
                     child: Container(
                   color: Colors.transparent,
-                  child: const Empty(),
+                  child: showEmpty?const Empty():const Msgs(),
                 )),
                 SizedBox(
                   height: 120 * rpx,
