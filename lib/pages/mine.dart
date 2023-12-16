@@ -47,7 +47,7 @@ class _MineState extends State<Mine> {
                       Navigator.pop(context);
                     },
                     child: const CircleAvatar(
-                      backgroundColor: Colors.transparent,
+                      // backgroundColor: Colors.transparent,
                       backgroundImage: NetworkImage(
                           'https://img0.baidu.com/it/u=2699322616,853950993&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500'),
                     ),

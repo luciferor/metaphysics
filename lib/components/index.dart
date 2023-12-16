@@ -53,7 +53,7 @@ class _IndexState extends State<Index> {
                   baseColor: Colors.white70,
                   highlightColor: Colors.white,
                   child: Text(
-                    '荧惑',
+                    '荧惑之星',
                     textAlign: TextAlign.start,
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
@@ -70,7 +70,10 @@ class _IndexState extends State<Index> {
                 child: Container(
                     width: 100 * rpx,
                     height: 100 * rpx,
-                    color: Colors.transparent,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(100 * rpx),
+                      border: Border.all(color: Colors.white30, width: 5 * rpx),
+                    ),
                     child: const CircleAvatar(
                       backgroundColor: Colors.transparent,
                       backgroundImage: NetworkImage(
