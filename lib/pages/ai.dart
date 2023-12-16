@@ -158,6 +158,7 @@ class _AiState extends State<Ai> {
         });
       });
       _textController.text = ''; //成功后清空输入框
+      print(msgdata);
     }
   }
 }
