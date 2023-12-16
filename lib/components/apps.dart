@@ -1,7 +1,6 @@
 import 'dart:ui';
-
+import 'package:first_flutter_app/pages/ai.dart';
 import 'package:first_flutter_app/pages/mine.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 import 'ani.dart';
@@ -31,7 +30,7 @@ class Apps extends StatelessWidget {
                     child: renderRRect(context, rpx),
                   ),
                   Ani(
-                    pages: const Mine(),
+                    pages: const Ai(),
                     child: Stack(
                       children: [
                         Container(
@@ -39,22 +38,22 @@ class Apps extends StatelessWidget {
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(40 * rpx),
                             child: const Image(
-                              image: AssetImage('assets/images/860876.jpg'),
+                              image: AssetImage('assets/images/8e3a09875693fb.png'),
                               fit: BoxFit.cover,
                             ),
                           ),
                         ),
-                        Positioned(
-                          top: 10 * rpx,
-                          right: 10 * rpx,
-                          width: 60 * rpx,
-                          height: 60 * rpx,
-                          child: const Image(
-                            image:
-                                AssetImage('assets/images/others/binding.png'),
-                            fit: BoxFit.fill,
-                          ),
-                        )
+                        // Positioned(
+                        //   top: 10 * rpx,
+                        //   right: 10 * rpx,
+                        //   width: 60 * rpx,
+                        //   height: 60 * rpx,
+                        //   child: const Image(
+                        //     image:
+                        //         AssetImage('assets/images/others/binding.png'),
+                        //     fit: BoxFit.fill,
+                        //   ),
+                        // )
                       ],
                     ),
                   ),
@@ -120,7 +119,7 @@ class Apps extends StatelessWidget {
                                 pages: Mine(),
                                 child: Image(
                                   image: AssetImage(
-                                      'assets/images/themes/logs.png'),
+                                      'assets/images/8e3a09875693fb.png'),
                                   fit: BoxFit.fill,
                                 ),
                               )
@@ -146,7 +145,7 @@ class Apps extends StatelessWidget {
                                 child: Center(
                                   child: Image(
                                     image: AssetImage(
-                                        'assets/images/others/aplay.png'),
+                                        'assets/images/8e3a09875693fb.png'),
                                     fit: BoxFit.fill,
                                   ),
                                 ),

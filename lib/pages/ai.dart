@@ -1,14 +1,18 @@
 import 'dart:convert';
+import 'dart:js_interop';
+import 'dart:ui';
 import 'package:first_flutter_app/classes/apis.dart';
 import 'package:first_flutter_app/classes/https.dart';
 import 'package:first_flutter_app/classes/aimsgres.dart';
 import 'package:first_flutter_app/components/base.dart';
 import 'package:first_flutter_app/components/blur.dart';
 import 'package:first_flutter_app/components/empty.dart';
-import 'package:first_flutter_app/components/msgs.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_highlight/themes/github.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:dio/dio.dart';
+import 'package:shimmer/shimmer.dart';
+import 'package:flutter_highlight/flutter_highlight.dart';
 
 class Ai extends StatefulWidget {
   const Ai({Key? key}) : super(key: key);
@@ -23,16 +27,7 @@ class _AiState extends State<Ai> {
   String? msg;
   String? sent;
   String? total;
-  List<Map<String, dynamic>> msgdata = [
-    {
-      'content': '我',
-      'role': 'user',
-    },
-    {
-      'content': '对不起，我不知道你在说什么。你需要帮助吗？',
-      'role': 'assistant',
-    },
-  ];
+  List<Map<String, dynamic>> msgdata = [];
   bool showEmpty = false;
   @override
   void initState() {
@@ -52,7 +47,15 @@ class _AiState extends State<Ai> {
                 Expanded(
                     child: Container(
                   color: Colors.transparent,
-                  // child: showEmpty ? const Empty() : Msgs(msgdata),
+                  child: msgdata.isEmpty ? const Empty() : Container(
+                    alignment: Alignment.topLeft,
+                    child: ListView(
+                      children:msgdata.map((msg) {
+                        // 在此处处理数据
+                        return msg['role']=='user'?rendereRightMsg(rpx,msg['content']):rendereLeftMsg(rpx,msg['content']);
+                      }).toList()
+                    ),
+                  ),
                 )),
                 SizedBox(
                   height: 120 * rpx,
@@ -124,13 +127,15 @@ class _AiState extends State<Ai> {
                                 height: 40 * rpx,
                               ),
                               onPressed: () {
-                                setState(() {
-                                  msgdata.add({
-                                    'content': _textController.text,
-                                    'role': 'user',
+                                if(_textController.text.isNotEmpty){
+                                  setState(() {
+                                    msgdata.add({
+                                      'content': _textController.text,
+                                      'role': 'user',
+                                    });
                                   });
-                                });
-                                httpTest(_textController.text);
+                                  httpTest(_textController.text);
+                                }
                               },
                             ),
                           ],
@@ -158,7 +163,131 @@ class _AiState extends State<Ai> {
         });
       });
       _textController.text = ''; //成功后清空输入框
-      print(msgdata);
     }
+  }
+
+  Widget rendereLeftMsg(double rpx,String msg) {
+    return Padding(
+      padding: EdgeInsets.fromLTRB(0, 20 * rpx, 0, 20 * rpx),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Container(
+            width: 100 * rpx,
+            height: 100 * rpx,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(100 * rpx),
+              border: Border.all(color: Colors.white30, width: 5 * rpx),
+            ),
+            child: GestureDetector(
+              onTap: () {},
+              child: const CircleAvatar(
+                backgroundColor: Colors.white,
+                backgroundImage:AssetImage('assets/images/8e3a09875693fb.png'),
+              ),
+            ),
+          ),
+          Expanded(
+            child: Padding(
+              padding: EdgeInsets.fromLTRB(20 * rpx, 0, 120 * rpx, 0),
+              child: Stack(
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(30 * rpx),
+                      bottomLeft: Radius.circular(30 * rpx),
+                      bottomRight: Radius.circular(30 * rpx),
+                    ),
+                    child: Stack(
+                      alignment:Alignment.topLeft,
+                      children: [
+                        Container(
+                          color: const Color.fromARGB(117, 0, 25, 253),
+                          child: Padding(
+                            padding: EdgeInsets.all(20 * rpx),
+                            child: Shimmer.fromColors(
+                              baseColor: Colors.white70,
+                              highlightColor: Colors.white,
+                              child: Text(
+                                msg,
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 28 * rpx,
+                                ),
+                              ),
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget rendereRightMsg(double rpx,String msg) {
+    return Padding(
+      padding: EdgeInsets.fromLTRB(0, 20 * rpx, 0, 20 * rpx),
+      child: Row(
+        mainAxisSize:MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Expanded(
+            flex:0,
+            child: Padding(
+              padding: EdgeInsets.fromLTRB(120 * rpx, 0, 20 * rpx, 0),
+              child: Stack(
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(30 * rpx),
+                      bottomLeft: Radius.circular(30 * rpx),
+                      bottomRight: Radius.circular(30 * rpx),
+                    ),
+                    child: Container(
+                      alignment: Alignment.centerRight,
+                      color: const Color.fromARGB(123, 24, 74, 240),
+                      child: Padding(
+                        padding: EdgeInsets.all(20 * rpx),
+                        child: Text(
+                          msg,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 28 * rpx,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Container(
+            width: 100 * rpx,
+            height: 100 * rpx,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(100 * rpx),
+              border: Border.all(color: Colors.white30, width: 5 * rpx),
+            ),
+            child: GestureDetector(
+              onTap: () {},
+              child: const CircleAvatar(
+                backgroundColor: Colors.transparent,
+                backgroundImage: NetworkImage(
+                    'https://img0.baidu.com/it/u=2699322616,853950993&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500'),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

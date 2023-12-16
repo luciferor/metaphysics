@@ -10,8 +10,8 @@ class Https {
   Https() {
     _dio = Dio(BaseOptions(
       baseUrl: 'https://api.dsnbc.com/',
-      connectTimeout: const Duration(seconds: 5),
-      receiveTimeout: const Duration(seconds: 3),
+      connectTimeout: const Duration(seconds: 60),
+      receiveTimeout: const Duration(seconds: 60),
       // headers: {
       //   "Authorzation-Code:": getStorage('access'),
       //   "Encrypted-Code": encryptedCode(params, timestamp),
