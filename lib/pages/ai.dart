@@ -47,15 +47,18 @@ class _AiState extends State<Ai> {
                 Expanded(
                     child: Container(
                   color: Colors.transparent,
-                  child: msgdata.isEmpty ? const Empty() : Container(
-                    alignment: Alignment.topLeft,
-                    child: ListView(
-                      children:msgdata.map((msg) {
-                        // 在此处处理数据
-                        return msg['role']=='user'?rendereRightMsg(rpx,msg['content']):rendereLeftMsg(rpx,msg['content']);
-                      }).toList()
-                    ),
-                  ),
+                  child: msgdata.isEmpty
+                      ? const Empty()
+                      : Container(
+                          alignment: Alignment.topLeft,
+                          child: ListView(
+                              children: msgdata.map((msg) {
+                            // 在此处处理数据
+                            return msg['role'] == 'user'
+                                ? rendereRightMsg(rpx, msg['content'])
+                                : rendereLeftMsg(rpx, msg['content']);
+                          }).toList()),
+                        ),
                 )),
                 SizedBox(
                   height: 120 * rpx,
@@ -127,7 +130,7 @@ class _AiState extends State<Ai> {
                                 height: 40 * rpx,
                               ),
                               onPressed: () {
-                                if(_textController.text.isNotEmpty){
+                                if (_textController.text.isNotEmpty) {
                                   setState(() {
                                     msgdata.add({
                                       'content': _textController.text,
@@ -166,7 +169,7 @@ class _AiState extends State<Ai> {
     }
   }
 
-  Widget rendereLeftMsg(double rpx,String msg) {
+  Widget rendereLeftMsg(double rpx, String msg) {
     return Padding(
       padding: EdgeInsets.fromLTRB(0, 20 * rpx, 0, 20 * rpx),
       child: Row(
@@ -177,6 +180,7 @@ class _AiState extends State<Ai> {
             width: 100 * rpx,
             height: 100 * rpx,
             decoration: BoxDecoration(
+              color: Colors.transparent,
               borderRadius: BorderRadius.circular(100 * rpx),
               border: Border.all(color: Colors.white30, width: 5 * rpx),
             ),
@@ -184,7 +188,7 @@ class _AiState extends State<Ai> {
               onTap: () {},
               child: const CircleAvatar(
                 backgroundColor: Colors.white,
-                backgroundImage:AssetImage('assets/images/8e3a09875693fb.png'),
+                backgroundImage: AssetImage('assets/images/8e3a09875693fb.png'),
               ),
             ),
           ),
@@ -200,7 +204,7 @@ class _AiState extends State<Ai> {
                       bottomRight: Radius.circular(30 * rpx),
                     ),
                     child: Stack(
-                      alignment:Alignment.topLeft,
+                      alignment: Alignment.topLeft,
                       children: [
                         Container(
                           color: const Color.fromARGB(117, 0, 25, 253),
@@ -231,16 +235,16 @@ class _AiState extends State<Ai> {
     );
   }
 
-  Widget rendereRightMsg(double rpx,String msg) {
+  Widget rendereRightMsg(double rpx, String msg) {
     return Padding(
       padding: EdgeInsets.fromLTRB(0, 20 * rpx, 0, 20 * rpx),
       child: Row(
-        mainAxisSize:MainAxisSize.min,
+        mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.end,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Expanded(
-            flex:0,
+            flex: 0,
             child: Padding(
               padding: EdgeInsets.fromLTRB(120 * rpx, 0, 20 * rpx, 0),
               child: Stack(
@@ -274,6 +278,7 @@ class _AiState extends State<Ai> {
             width: 100 * rpx,
             height: 100 * rpx,
             decoration: BoxDecoration(
+              color: Colors.transparent,
               borderRadius: BorderRadius.circular(100 * rpx),
               border: Border.all(color: Colors.white30, width: 5 * rpx),
             ),

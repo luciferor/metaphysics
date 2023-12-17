@@ -29,6 +29,7 @@ Widget renderRRect(BuildContext context, double rpx, double radius) {
       child: Opacity(
         opacity: 0.8,
         child: Container(
+          color:Colors.black,
           // width: MediaQuery.of(context).size.width,
           // height: MediaQuery.of(context).size.height,
           decoration: BoxDecoration(
