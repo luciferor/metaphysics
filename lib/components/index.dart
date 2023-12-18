@@ -1,11 +1,8 @@
-import 'dart:ui';
 import 'package:first_flutter_app/components/ani.dart';
 import 'package:first_flutter_app/components/apps.dart';
-import 'package:first_flutter_app/components/blur.dart';
 import 'package:first_flutter_app/pages/ai.dart';
 import 'package:first_flutter_app/pages/mine.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shimmer/shimmer.dart';
 
 class Index extends StatefulWidget {
@@ -33,16 +30,17 @@ class _IndexState extends State<Index> {
                   width: 120 * rpx,
                   height: 120 * rpx,
                   child: Center(
-                      child: Ani(
-                    pages: const Ai(),
-                    child: Container(
-                      color: Colors.transparent,
-                      width: 80 * rpx,
-                      height: 80 * rpx,
-                      alignment: Alignment.center,
-                      child: Image.asset('assets/images/8e3a09875693fb.png'),
+                    child: Ani(
+                      pages: const Ai(),
+                      child: Container(
+                        color: Colors.transparent,
+                        width: 80 * rpx,
+                        height: 80 * rpx,
+                        alignment: Alignment.center,
+                        child: Image.asset('assets/images/8e3a09875693fb.png'),
+                      ),
                     ),
-                  )),
+                  ),
                 ),
               ),
               Expanded(
@@ -74,7 +72,8 @@ class _IndexState extends State<Index> {
                       height: 100 * rpx,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(100 * rpx),
-                        border: Border.all(color: Colors.white30, width: 5 * rpx),
+                        border:
+                            Border.all(color: Colors.white30, width: 5 * rpx),
                       ),
                       child: const CircleAvatar(
                         backgroundColor: Colors.transparent,
@@ -86,9 +85,9 @@ class _IndexState extends State<Index> {
             ],
           ),
           Container(
-            color:Colors.transparent,
-            height:400*rpx,
-            child:const Apps(),
+            color: Colors.transparent,
+            height: 400 * rpx,
+            child: const Apps(),
           ),
         ],
       ),

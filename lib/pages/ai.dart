@@ -1,6 +1,4 @@
 import 'dart:convert';
-import 'dart:js_interop';
-import 'dart:ui';
 import 'package:first_flutter_app/classes/apis.dart';
 import 'package:first_flutter_app/classes/https.dart';
 import 'package:first_flutter_app/classes/aimsgres.dart';
@@ -8,11 +6,9 @@ import 'package:first_flutter_app/components/base.dart';
 import 'package:first_flutter_app/components/blur.dart';
 import 'package:first_flutter_app/components/empty.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_highlight/themes/github.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:dio/dio.dart';
 import 'package:shimmer/shimmer.dart';
-import 'package:flutter_highlight/flutter_highlight.dart';
 
 class Ai extends StatefulWidget {
   const Ai({Key? key}) : super(key: key);
@@ -39,13 +35,13 @@ class _AiState extends State<Ai> {
     double rpx = MediaQuery.of(context).size.width / 750;
     return Base(
       childs: Hero(
-          tag: 'ai',
-          child: Padding(
-            padding: EdgeInsets.all(30 * rpx),
-            child: Column(
-              children: [
-                Expanded(
-                    child: Container(
+        tag: 'ai',
+        child: Padding(
+          padding: EdgeInsets.all(30 * rpx),
+          child: Column(
+            children: [
+              Expanded(
+                child: Container(
                   color: Colors.transparent,
                   child: msgdata.isEmpty
                       ? const Empty()
@@ -59,97 +55,99 @@ class _AiState extends State<Ai> {
                                 : rendereLeftMsg(rpx, msg['content']);
                           }).toList()),
                         ),
-                )),
-                SizedBox(
-                  height: 120 * rpx,
-                  child: Padding(
-                    padding: EdgeInsets.fromLTRB(0, 20 * rpx, 0, 0),
-                    child: Blur(
-                      rpx: rpx,
-                      radius: 100,
-                      widget: Padding(
-                        padding: EdgeInsets.all(10 * rpx),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          verticalDirection: VerticalDirection.down,
-                          children: <Widget>[
-                            SizedBox(
-                              width: 80 * rpx,
-                              height: 80 * rpx,
-                              child: GestureDetector(
-                                onTap: () {
-                                  Navigator.pop(context);
-                                },
-                                child: const CircleAvatar(
-                                  backgroundColor: Colors.transparent,
-                                  backgroundImage: NetworkImage(
-                                      'https://img0.baidu.com/it/u=2699322616,853950993&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500'),
-                                ),
+                ),
+              ),
+              SizedBox(
+                height: 120 * rpx,
+                child: Padding(
+                  padding: EdgeInsets.fromLTRB(0, 20 * rpx, 0, 0),
+                  child: Blur(
+                    rpx: rpx,
+                    radius: 100,
+                    widget: Padding(
+                      padding: EdgeInsets.all(10 * rpx),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        verticalDirection: VerticalDirection.down,
+                        children: <Widget>[
+                          SizedBox(
+                            width: 80 * rpx,
+                            height: 80 * rpx,
+                            child: GestureDetector(
+                              onTap: () {
+                                Navigator.pop(context);
+                              },
+                              child: const CircleAvatar(
+                                backgroundColor: Colors.transparent,
+                                backgroundImage: NetworkImage(
+                                    'https://img0.baidu.com/it/u=2699322616,853950993&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500'),
                               ),
                             ),
-                            Expanded(
-                              child: Padding(
-                                padding: EdgeInsets.fromLTRB(
-                                    10 * rpx, 0, 10 * rpx, 0),
-                                child: TextField(
-                                  controller: _textController,
-                                  textInputAction: TextInputAction.go,
-                                  textAlign: TextAlign.start,
-                                  autofocus: true,
-                                  expands: false,
-                                  enabled: true,
-                                  cursorRadius: Radius.circular(10 * rpx),
-                                  decoration: InputDecoration(
-                                    focusedBorder: InputBorder.none,
-                                    enabledBorder: InputBorder.none,
-                                    labelText: '请输入信息',
-                                    labelStyle: TextStyle(
-                                      color: Colors.white54,
-                                      fontSize: 32 * rpx,
-                                    ),
-                                  ),
-                                  style: TextStyle(
-                                    color: Colors.white,
+                          ),
+                          Expanded(
+                            child: Padding(
+                              padding:
+                                  EdgeInsets.fromLTRB(10 * rpx, 0, 10 * rpx, 0),
+                              child: TextField(
+                                controller: _textController,
+                                textInputAction: TextInputAction.go,
+                                textAlign: TextAlign.start,
+                                autofocus: true,
+                                expands: false,
+                                enabled: true,
+                                cursorRadius: Radius.circular(10 * rpx),
+                                decoration: InputDecoration(
+                                  focusedBorder: InputBorder.none,
+                                  enabledBorder: InputBorder.none,
+                                  labelText: '请输入信息',
+                                  labelStyle: TextStyle(
+                                    color: Colors.white54,
                                     fontSize: 32 * rpx,
                                   ),
-                                  onChanged: (value) {
-                                    setState(() {
-                                      msg = value;
-                                    });
-                                  },
                                 ),
-                              ),
-                            ),
-                            IconButton(
-                              alignment: Alignment.center,
-                              color: Colors.blue,
-                              icon: SvgPicture.asset(
-                                'assets/images/icons/send.svg',
-                                width: 40 * rpx,
-                                height: 40 * rpx,
-                              ),
-                              onPressed: () {
-                                if (_textController.text.isNotEmpty) {
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 32 * rpx,
+                                ),
+                                onChanged: (value) {
                                   setState(() {
-                                    msgdata.add({
-                                      'content': _textController.text,
-                                      'role': 'user',
-                                    });
+                                    msg = value;
                                   });
-                                  httpTest(_textController.text);
-                                }
-                              },
+                                },
+                              ),
                             ),
-                          ],
-                        ),
+                          ),
+                          IconButton(
+                            alignment: Alignment.center,
+                            color: Colors.blue,
+                            icon: SvgPicture.asset(
+                              'assets/images/icons/send.svg',
+                              width: 40 * rpx,
+                              height: 40 * rpx,
+                            ),
+                            onPressed: () {
+                              if (_textController.text.isNotEmpty) {
+                                setState(() {
+                                  msgdata.add({
+                                    'content': _textController.text,
+                                    'role': 'user',
+                                  });
+                                });
+                                httpTest(_textController.text);
+                              }
+                            },
+                          ),
+                        ],
                       ),
                     ),
                   ),
-                )
-              ],
-            ),
-          )),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 

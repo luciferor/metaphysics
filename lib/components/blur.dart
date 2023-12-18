@@ -15,7 +15,7 @@ class Blur extends StatelessWidget {
         ),
         Container(
           child: widget,
-        )
+        ),
       ],
     );
   }
@@ -29,13 +29,12 @@ Widget renderRRect(BuildContext context, double rpx, double radius) {
       child: Opacity(
         opacity: 0.8,
         child: Container(
-          color:Colors.black,
-          // width: MediaQuery.of(context).size.width,
-          // height: MediaQuery.of(context).size.height,
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(radius * rpx),
-              border: Border.all(
-                  color:  const Color.fromARGB(255, 255, 255, 255), width: 2*rpx)),
+            borderRadius: BorderRadius.circular(radius * rpx),
+            border: Border.all(
+                color: const Color.fromARGB(255, 255, 255, 255),
+                width: 2 * rpx),
+          ),
         ),
       ),
     ),
