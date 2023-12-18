@@ -30,6 +30,7 @@ class Apps extends StatelessWidget {
                     child: renderRRect(context, rpx),
                   ),
                   Ani(
+                    radius:40,
                     pages: const Ai(),
                     child: Stack(
                       children: [
@@ -38,7 +39,7 @@ class Apps extends StatelessWidget {
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(40 * rpx),
                             child: const Image(
-                              image: AssetImage('assets/images/8e3a09875693fb.png'),
+                              image: AssetImage('assets/images/b69a5aa.jpeg'),
                               fit: BoxFit.cover,
                             ),
                           ),
@@ -80,19 +81,13 @@ class Apps extends StatelessWidget {
                             ),
                             child: renderRRect(context, rpx),
                           ),
-                          Ani(
-                            pages: const Mine(),
-                            child: Shimmer.fromColors(
-                              baseColor: Colors.white70,
-                              highlightColor: Colors.white,
-                              child: Text(
-                                '每日签到',
-                                style: TextStyle(
-                                  fontSize: 40 * rpx,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white70,
-                                ),
-                              ),
+                          const Ani(
+                            radius:30,
+                            pages: Mine(),
+                            child: Image(
+                              image: AssetImage(
+                                  'assets/images/b7f282e8fe.jpeg'),
+                              fit: BoxFit.fill,
                             ),
                           ),
                         ],
@@ -116,13 +111,14 @@ class Apps extends StatelessWidget {
                                 child: renderRRect(context, rpx),
                               ),
                               const Ani(
+                                radius:30,
                                 pages: Mine(),
                                 child: Image(
                                   image: AssetImage(
-                                      'assets/images/8e3a09875693fb.png'),
+                                      'assets/images/b7f282e8fe.jpeg'),
                                   fit: BoxFit.fill,
                                 ),
-                              )
+                              ),
                             ],
                           ),
                         ),
@@ -141,15 +137,16 @@ class Apps extends StatelessWidget {
                                 child: renderRRect(context, rpx),
                               ),
                               const Ani(
+                                radius:30,
                                 pages: Mine(),
                                 child: Center(
                                   child: Image(
                                     image: AssetImage(
-                                        'assets/images/8e3a09875693fb.png'),
+                                        'assets/images/9f305612b.jpeg'),
                                     fit: BoxFit.fill,
                                   ),
                                 ),
-                              )
+                              ),
                             ],
                           ),
                         ),
