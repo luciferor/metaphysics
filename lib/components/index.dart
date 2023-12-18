@@ -21,67 +21,77 @@ class _IndexState extends State<Index> {
     double rpx = MediaQuery.of(context).size.width / 750;
     return Padding(
       padding: EdgeInsets.all(30 * rpx),
-      child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Padding(
-              padding: EdgeInsets.fromLTRB(15 * rpx, 0, 0, 0),
-              child: SizedBox(
-                width: 120 * rpx,
-                height: 120 * rpx,
-                child: Center(
-                    child: Ani(
-                  pages: const Ai(),
-                  child: Container(
-                    color: Colors.transparent,
-                    width: 80 * rpx,
-                    height: 80 * rpx,
-                    alignment: Alignment.center,
-                    child: Image.asset('assets/images/8e3a09875693fb.png'),
-                  ),
-                )),
-              ),
-            ),
-            Expanded(
-                child: Padding(
-              padding: EdgeInsets.fromLTRB(15 * rpx, 0, 15 * rpx, 0),
-              child: Container(
-                alignment: Alignment.centerLeft,
-                height: 120 * rpx,
-                child: Shimmer.fromColors(
-                  baseColor: Colors.white70,
-                  highlightColor: Colors.white,
-                  child: Text(
-                    '荧惑之星',
-                    textAlign: TextAlign.start,
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 38 * rpx,
-                        color: Colors.white),
-                  ),
+      child: ListView(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Padding(
+                padding: EdgeInsets.fromLTRB(15 * rpx, 0, 0, 0),
+                child: SizedBox(
+                  width: 120 * rpx,
+                  height: 120 * rpx,
+                  child: Center(
+                      child: Ani(
+                    pages: const Ai(),
+                    child: Container(
+                      color: Colors.transparent,
+                      width: 80 * rpx,
+                      height: 80 * rpx,
+                      alignment: Alignment.center,
+                      child: Image.asset('assets/images/8e3a09875693fb.png'),
+                    ),
+                  )),
                 ),
               ),
-            )),
-            Padding(
-              padding: EdgeInsets.fromLTRB(0, 0, 15 * rpx, 0),
-              child: Ani(
-                pages: const Mine(),
+              Expanded(
+                  child: Padding(
+                padding: EdgeInsets.fromLTRB(15 * rpx, 0, 15 * rpx, 0),
                 child: Container(
-                    width: 100 * rpx,
-                    height: 100 * rpx,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(100 * rpx),
-                      border: Border.all(color: Colors.white30, width: 5 * rpx),
+                  alignment: Alignment.centerLeft,
+                  height: 120 * rpx,
+                  child: Shimmer.fromColors(
+                    baseColor: Colors.white70,
+                    highlightColor: Colors.white,
+                    child: Text(
+                      '荧惑之星',
+                      textAlign: TextAlign.start,
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 38 * rpx,
+                          color: Colors.white),
                     ),
-                    child: const CircleAvatar(
-                      backgroundColor: Colors.transparent,
-                      backgroundImage: NetworkImage(
-                          'https://img0.baidu.com/it/u=2699322616,853950993&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500'),
-                    )),
+                  ),
+                ),
+              )),
+              Padding(
+                padding: EdgeInsets.fromLTRB(0, 0, 15 * rpx, 0),
+                child: Ani(
+                  pages: const Mine(),
+                  child: Container(
+                      width: 100 * rpx,
+                      height: 100 * rpx,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(100 * rpx),
+                        border: Border.all(color: Colors.white30, width: 5 * rpx),
+                      ),
+                      child: const CircleAvatar(
+                        backgroundColor: Colors.transparent,
+                        backgroundImage: NetworkImage(
+                            'https://img0.baidu.com/it/u=2699322616,853950993&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500'),
+                      )),
+                ),
               ),
-            ),
-          ]),
+            ],
+          ),
+          Container(
+            color:Colors.transparent,
+            height:400*rpx,
+            child:const Apps(),
+          ),
+        ],
+      ),
     );
   }
 }
