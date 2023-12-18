@@ -23,16 +23,7 @@ class _AiState extends State<Ai> {
   String? msg;
   String? sent;
   String? total;
-  List<Map<String, dynamic>> msgdata = [
-    {
-      'content': '我',
-      'role': 'user',
-    },
-    {
-      'content': '对不起，我不知道你在说什么。你需要帮助吗？',
-      'role': 'assistant',
-    },
-  ];
+  List<Map<String, dynamic>> msgdata = [];
   bool showEmpty = false;
   @override
   void initState() {
