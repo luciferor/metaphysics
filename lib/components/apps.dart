@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:first_flutter_app/components/blur.dart';
 import 'package:first_flutter_app/pages/ai.dart';
 import 'package:first_flutter_app/pages/mine.dart';
 import 'package:flutter/material.dart';
@@ -23,37 +24,15 @@ class Apps extends StatelessWidget {
                   Container(
                     constraints: const BoxConstraints.expand(),
                     decoration: BoxDecoration(
-                      color: Colors.transparent,
+                      color: Colors.white,
                       borderRadius: BorderRadius.circular(30 * rpx),
-                    ),
-                    child: renderRRect(context, rpx),
-                  ),
-                  Ani(
-                    radius: 40,
-                    pages: const Ai(),
-                    child: Stack(
-                      children: [
-                        Container(
-                          constraints: const BoxConstraints.expand(),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(40 * rpx),
-                            child: const Image(
-                              image: AssetImage('assets/images/b69a5aa.jpeg'),
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                        // Positioned(
-                        //   top: 10 * rpx,
-                        //   right: 10 * rpx,
-                        //   width: 60 * rpx,
-                        //   height: 60 * rpx,
-                        //   child: const Image(
-                        //     image:
-                        //         AssetImage('assets/images/others/binding.png'),
-                        //     fit: BoxFit.fill,
-                        //   ),
-                        // )
+                      boxShadow: [
+                        BoxShadow(
+                          offset: const Offset(0.0, 0.0),
+                          blurRadius: 15 * rpx,
+                          spreadRadius: 10 * rpx,
+                          color: Colors.blue.withOpacity(0.2),
+                        )
                       ],
                     ),
                   ),
@@ -75,18 +54,16 @@ class Apps extends StatelessWidget {
                         children: [
                           Container(
                             decoration: BoxDecoration(
-                              color: Colors.transparent,
+                              color: Colors.white,
                               borderRadius: BorderRadius.circular(30 * rpx),
-                            ),
-                            child: renderRRect(context, rpx),
-                          ),
-                          const Ani(
-                            radius: 30,
-                            pages: Mine(),
-                            child: Image(
-                              image:
-                                  AssetImage('assets/images/b7f282e8fe.jpeg'),
-                              fit: BoxFit.fill,
+                              boxShadow: [
+                                BoxShadow(
+                                  offset: const Offset(0.0, 0.0),
+                                  blurRadius: 15 * rpx,
+                                  spreadRadius: 10 * rpx,
+                                  color: Colors.lightGreen.withOpacity(0.2),
+                                )
+                              ],
                             ),
                           ),
                         ],
@@ -104,18 +81,16 @@ class Apps extends StatelessWidget {
                             children: [
                               Container(
                                 decoration: BoxDecoration(
-                                  color: Colors.transparent,
+                                  color: Colors.white,
                                   borderRadius: BorderRadius.circular(30 * rpx),
-                                ),
-                                child: renderRRect(context, rpx),
-                              ),
-                              const Ani(
-                                radius: 30,
-                                pages: Mine(),
-                                child: Image(
-                                  image: AssetImage(
-                                      'assets/images/b7f282e8fe.jpeg'),
-                                  fit: BoxFit.fill,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      offset: const Offset(0.0, 0.0),
+                                      blurRadius: 15 * rpx,
+                                      spreadRadius: 10 * rpx,
+                                      color: Colors.cyan.withOpacity(0.2),
+                                    )
+                                  ],
                                 ),
                               ),
                             ],
@@ -130,20 +105,16 @@ class Apps extends StatelessWidget {
                             children: [
                               Container(
                                 decoration: BoxDecoration(
-                                  color: Colors.transparent,
+                                  color: Colors.white,
                                   borderRadius: BorderRadius.circular(30 * rpx),
-                                ),
-                                child: renderRRect(context, rpx),
-                              ),
-                              const Ani(
-                                radius: 30,
-                                pages: Mine(),
-                                child: Center(
-                                  child: Image(
-                                    image: AssetImage(
-                                        'assets/images/9f305612b.jpeg'),
-                                    fit: BoxFit.fill,
-                                  ),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      offset: const Offset(0.0, 0.0),
+                                      blurRadius: 15 * rpx,
+                                      spreadRadius: 10 * rpx,
+                                      color: Colors.redAccent.withOpacity(0.2),
+                                    )
+                                  ],
                                 ),
                               ),
                             ],

@@ -93,22 +93,17 @@ class _AiState extends State<Ai> {
                               controller: _textController,
                               textInputAction: TextInputAction.go,
                               textAlign: TextAlign.start,
-                              autofocus: false,
+                              autofocus: true,
                               expands: false,
                               enabled: true,
                               cursorRadius: Radius.circular(10 * rpx),
                               keyboardType: TextInputType.none,
-                              decoration: InputDecoration(
+                              decoration: const InputDecoration(
                                 focusedBorder: InputBorder.none,
                                 enabledBorder: InputBorder.none,
-                                // labelText: '请输入信息',
-                                labelStyle: TextStyle(
-                                  color: Colors.white54,
-                                  fontSize: 32 * rpx,
-                                ),
                               ),
                               style: TextStyle(
-                                color: Colors.white,
+                                color: Colors.black,
                                 fontSize: 32 * rpx,
                               ),
                               onChanged: (value) {

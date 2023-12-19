@@ -29,7 +29,7 @@ class _IndexState extends State<Index> {
               Padding(
                 padding: EdgeInsets.fromLTRB(15 * rpx, 0, 0, 0),
                 child: SizedBox(
-                  width: 120 * rpx,
+                  width: 60 * rpx,
                   height: 120 * rpx,
                   child: Center(
                     child: Ani(
@@ -37,8 +37,8 @@ class _IndexState extends State<Index> {
                       pages: const Ai(),
                       child: Container(
                         color: Colors.transparent,
-                        width: 80 * rpx,
-                        height: 80 * rpx,
+                        width: 60 * rpx,
+                        height: 60 * rpx,
                         alignment: Alignment.center,
                         child: Image.asset('assets/images/8e3a09875693fb.png'),
                       ),
@@ -53,15 +53,16 @@ class _IndexState extends State<Index> {
                   alignment: Alignment.centerLeft,
                   height: 120 * rpx,
                   child: Shimmer.fromColors(
-                    baseColor: Colors.white70,
+                    baseColor: Colors.black87,
                     highlightColor: Colors.white,
                     child: Text(
-                      '荧惑之星',
+                      '荧惑Todo',
                       textAlign: TextAlign.start,
                       style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 38 * rpx,
-                          color: Colors.white),
+                        fontWeight: FontWeight.bold,
+                        fontSize: 38 * rpx,
+                        color: Colors.black,
+                      ),
                     ),
                   ),
                 ),

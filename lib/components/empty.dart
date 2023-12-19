@@ -20,13 +20,14 @@ class Empty extends StatelessWidget {
           Container(
             alignment: Alignment.center,
             child: Shimmer.fromColors(
-              baseColor: Colors.white70,
+              baseColor: Colors.black87,
               highlightColor: Colors.white,
               child: Text(
                 'ChatGPT!',
                 style: TextStyle(
                   fontSize: 72 * rpx,
                   fontWeight: FontWeight.bold,
+                  color: Colors.black,
                 ),
               ),
             ),
