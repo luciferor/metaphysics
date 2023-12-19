@@ -2,7 +2,8 @@ import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 
 class Ani extends StatelessWidget {
-  const Ani({Key? key, this.child, required this.pages,required this.radius}) : super(key: key);
+  const Ani({Key? key, this.child, required this.pages, required this.radius})
+      : super(key: key);
   final Widget? child;
   final StatefulWidget pages;
   final double? radius;
@@ -19,12 +20,12 @@ class Ani extends StatelessWidget {
       closedShape: RoundedRectangleBorder(
         side: BorderSide.none,
         borderRadius: BorderRadius.all(
-          Radius.circular(radius!*rpx),
+          Radius.circular(radius! * rpx),
         ),
       ),
       closedColor: Colors.transparent,
       openColor: Colors.transparent,
-      middleColor: Colors.transparent,
+      middleColor: Colors.red,
       closedBuilder: (BuildContext context, VoidCallback openContainer) {
         return child as Widget;
       },

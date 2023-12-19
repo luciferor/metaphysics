@@ -20,7 +20,8 @@ class _IndexState extends State<Index> {
     return ListView(
       children: [
         Padding(
-          padding: EdgeInsets.fromLTRB(20*rpx,MediaQuery.of(context).padding.top,20*rpx,0),
+          padding: EdgeInsets.fromLTRB(
+              20 * rpx, MediaQuery.of(context).padding.top, 20 * rpx, 0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -32,7 +33,7 @@ class _IndexState extends State<Index> {
                   height: 120 * rpx,
                   child: Center(
                     child: Ani(
-                      radius:30,
+                      radius: 30,
                       pages: const Ai(),
                       child: Container(
                         color: Colors.transparent,
@@ -68,7 +69,7 @@ class _IndexState extends State<Index> {
               Padding(
                 padding: EdgeInsets.fromLTRB(0, 0, 15 * rpx, 0),
                 child: Ani(
-                  radius:100,
+                  radius: 100,
                   pages: const Mine(),
                   child: Container(
                       width: 100 * rpx,
@@ -89,27 +90,33 @@ class _IndexState extends State<Index> {
           ),
         ),
         Padding(
-          padding: EdgeInsets.fromLTRB(0,0,0,30*rpx),
-          child:Swiper(
-            itemCount: 10,
-            itemBuilder: (context, index) {
-              return GestureDetector(
-                child:ClipRRect(
-                  borderRadius: BorderRadius.circular(30 * rpx),
-                  child: Container(
-                    color:Colors.amber,
-                    child: const Image(
-                      image:AssetImage('assets/images/4ce8324fe.jpeg') ,
-                    ),  
-                  )
-                ),
-              );
-            },
-            itemWidth: 800*rpx,
-            itemHeight: 400*rpx,
-            layout: SwiperLayout.TINDER,
-          ),
-        ),
+            padding: EdgeInsets.fromLTRB(0, 30 * rpx, 0, 30 * rpx),
+            child: Container(
+              alignment: Alignment.centerRight,
+              height: 300 * rpx,
+              child: Swiper(
+                itemCount: 10,
+                itemBuilder: (context, index) {
+                  return ClipRRect(
+                    borderRadius: BorderRadius.circular(30 * rpx),
+                    child: Container(
+                        alignment: Alignment.centerRight,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(30 * rpx),
+                          child: const Ani(
+                            radius: 30,
+                            pages: Mine(),
+                            child: Image(
+                              image: AssetImage('assets/images/4ce8324fe.jpeg'),
+                            ),
+                          ),
+                        )),
+                  );
+                },
+                itemWidth: MediaQuery.of(context).size.width - 80 * rpx,
+                layout: SwiperLayout.STACK,
+              ),
+            )),
         Container(
           color: Colors.transparent,
           height: 400 * rpx,

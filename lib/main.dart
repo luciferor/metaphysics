@@ -5,6 +5,7 @@ import 'package:first_flutter_app/pages/mine.dart';
 
 void main() => runApp(
       MaterialApp(
+        debugShowCheckedModeBanner: false, //去掉右上角debug标识
         //设置全局转场动画 Theme
         theme: ThemeData.from(colorScheme: const ColorScheme.light()).copyWith(
           pageTransitionsTheme: const PageTransitionsTheme(

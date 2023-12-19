@@ -2,7 +2,6 @@ import 'dart:ui';
 import 'package:first_flutter_app/pages/ai.dart';
 import 'package:first_flutter_app/pages/mine.dart';
 import 'package:flutter/material.dart';
-import 'package:shimmer/shimmer.dart';
 import 'ani.dart';
 
 class Apps extends StatelessWidget {
@@ -11,7 +10,7 @@ class Apps extends StatelessWidget {
   Widget build(BuildContext context) {
     double rpx = MediaQuery.of(context).size.width / 750;
     return Padding(
-      padding: EdgeInsets.fromLTRB(15 * rpx, 0, 15 * rpx, 30 * rpx),
+      padding: EdgeInsets.fromLTRB(40 * rpx, 0, 40 * rpx, 40 * rpx),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -30,7 +29,7 @@ class Apps extends StatelessWidget {
                     child: renderRRect(context, rpx),
                   ),
                   Ani(
-                    radius:40,
+                    radius: 40,
                     pages: const Ai(),
                     child: Stack(
                       children: [
@@ -82,11 +81,11 @@ class Apps extends StatelessWidget {
                             child: renderRRect(context, rpx),
                           ),
                           const Ani(
-                            radius:30,
+                            radius: 30,
                             pages: Mine(),
                             child: Image(
-                              image: AssetImage(
-                                  'assets/images/b7f282e8fe.jpeg'),
+                              image:
+                                  AssetImage('assets/images/b7f282e8fe.jpeg'),
                               fit: BoxFit.fill,
                             ),
                           ),
@@ -111,7 +110,7 @@ class Apps extends StatelessWidget {
                                 child: renderRRect(context, rpx),
                               ),
                               const Ani(
-                                radius:30,
+                                radius: 30,
                                 pages: Mine(),
                                 child: Image(
                                   image: AssetImage(
@@ -137,7 +136,7 @@ class Apps extends StatelessWidget {
                                 child: renderRRect(context, rpx),
                               ),
                               const Ani(
-                                radius:30,
+                                radius: 30,
                                 pages: Mine(),
                                 child: Center(
                                   child: Image(
