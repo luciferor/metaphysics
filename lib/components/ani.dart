@@ -15,7 +15,7 @@ class Ani extends StatelessWidget {
       openBuilder: (BuildContext context, VoidCallback _) {
         return pages;
       },
-      closedElevation: 6.0,
+      closedElevation: 0.0,
       openElevation: 4.0,
       closedShape: RoundedRectangleBorder(
         side: BorderSide.none,
@@ -25,7 +25,7 @@ class Ani extends StatelessWidget {
       ),
       closedColor: Colors.transparent,
       openColor: Colors.transparent,
-      middleColor: Colors.red,
+      middleColor: Colors.transparent,
       closedBuilder: (BuildContext context, VoidCallback openContainer) {
         return child as Widget;
       },

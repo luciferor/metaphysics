@@ -1,9 +1,5 @@
 import 'dart:ui';
-import 'package:first_flutter_app/components/blur.dart';
-import 'package:first_flutter_app/pages/ai.dart';
-import 'package:first_flutter_app/pages/mine.dart';
 import 'package:flutter/material.dart';
-import 'ani.dart';
 
 class Apps extends StatelessWidget {
   const Apps({Key? key}) : super(key: key);
@@ -25,7 +21,7 @@ class Apps extends StatelessWidget {
                     constraints: const BoxConstraints.expand(),
                     decoration: BoxDecoration(
                       color: Colors.white,
-                      borderRadius: BorderRadius.circular(30 * rpx),
+                      borderRadius: BorderRadius.circular(50 * rpx),
                       boxShadow: [
                         BoxShadow(
                           offset: const Offset(0.0, 0.0),
@@ -55,7 +51,7 @@ class Apps extends StatelessWidget {
                           Container(
                             decoration: BoxDecoration(
                               color: Colors.white,
-                              borderRadius: BorderRadius.circular(30 * rpx),
+                              borderRadius: BorderRadius.circular(40 * rpx),
                               boxShadow: [
                                 BoxShadow(
                                   offset: const Offset(0.0, 0.0),
@@ -82,7 +78,7 @@ class Apps extends StatelessWidget {
                               Container(
                                 decoration: BoxDecoration(
                                   color: Colors.white,
-                                  borderRadius: BorderRadius.circular(30 * rpx),
+                                  borderRadius: BorderRadius.circular(40 * rpx),
                                   boxShadow: [
                                     BoxShadow(
                                       offset: const Offset(0.0, 0.0),
@@ -106,7 +102,7 @@ class Apps extends StatelessWidget {
                               Container(
                                 decoration: BoxDecoration(
                                   color: Colors.white,
-                                  borderRadius: BorderRadius.circular(30 * rpx),
+                                  borderRadius: BorderRadius.circular(40 * rpx),
                                   boxShadow: [
                                     BoxShadow(
                                       offset: const Offset(0.0, 0.0),

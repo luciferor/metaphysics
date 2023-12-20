@@ -20,34 +20,34 @@ class _BaseState extends State<Base> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    double rpx = MediaQuery.of(context).size.width / 750;
-    double tp = MediaQuery.of(context).padding.top;
-    double bp = MediaQuery.of(context).padding.bottom;
+    // double rpx = MediaQuery.of(context).size.width / 750;
+    // double tp = MediaQuery.of(context).padding.top;
+    // double bp = MediaQuery.of(context).padding.bottom;
     return Scaffold(
         body: Stack(
       fit: StackFit.expand,
       children: <Widget>[
-        Image(
-          image: const AssetImage('assets/images/1f16122fb.jpeg'),
-          fit: BoxFit.cover,
-          width: MediaQuery.of(context).size.width, //整个屏幕的宽度
-          height: MediaQuery.of(context).size.height, //整个屏幕的高度
-        ),
+        // Image(
+        //   image: const AssetImage('assets/images/860879.jpg'),
+        //   fit: BoxFit.cover,
+        //   width: MediaQuery.of(context).size.width, //整个屏幕的宽度
+        //   height: MediaQuery.of(context).size.height, //整个屏幕的高度
+        // ),
         //模糊动画，暂时注释，损耗虚拟机资源
-        ClipRect(
-            child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 0.0, sigmaY: 0.0),
-          child: Opacity(
-            opacity: 0.1,
-            child: Container(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height,
-              decoration: const BoxDecoration(
-                color: Color.fromARGB(255, 255, 255, 255),
-              ),
-            ),
-          ),
-        )),
+        // ClipRect(
+        //     child: BackdropFilter(
+        //   filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+        //   child: Opacity(
+        //     opacity: 0.1,
+        //     child: Container(
+        //       width: MediaQuery.of(context).size.width,
+        //       height: MediaQuery.of(context).size.height,
+        //       decoration: const BoxDecoration(
+        //         color: Color.fromARGB(255, 255, 255, 255),
+        //       ),
+        //     ),
+        //   ),
+        // )),
         Container(
           constraints: const BoxConstraints.expand(),
           padding: const EdgeInsets.all(0),
