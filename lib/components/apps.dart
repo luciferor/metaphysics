@@ -27,9 +27,17 @@ class Apps extends StatelessWidget {
                           offset: const Offset(0.0, 0.0),
                           blurRadius: 15 * rpx,
                           spreadRadius: 10 * rpx,
-                          color: Colors.blue.withOpacity(0.2),
+                          color: const Color.fromARGB(50, 177, 106, 255),
                         )
                       ],
+                      gradient: const LinearGradient(
+                        begin: Alignment.bottomLeft,
+                        end: Alignment.topRight,
+                        colors: [
+                          Color.fromARGB(255, 134, 49, 255),
+                          Color.fromARGB(255, 177, 106, 255),
+                        ],
+                      ),
                     ),
                   ),
                 ],
@@ -57,9 +65,17 @@ class Apps extends StatelessWidget {
                                   offset: const Offset(0.0, 0.0),
                                   blurRadius: 15 * rpx,
                                   spreadRadius: 10 * rpx,
-                                  color: Colors.lightGreen.withOpacity(0.2),
+                                  color: const Color.fromARGB(50, 255, 94, 214),
                                 )
                               ],
+                              gradient: const LinearGradient(
+                                begin: Alignment.bottomLeft,
+                                end: Alignment.topRight,
+                                colors: [
+                                  Color.fromARGB(255, 255, 55, 156),
+                                  Color.fromARGB(255, 255, 94, 214),
+                                ],
+                              ),
                             ),
                           ),
                         ],
@@ -77,16 +93,24 @@ class Apps extends StatelessWidget {
                             children: [
                               Container(
                                 decoration: BoxDecoration(
-                                  color: Colors.white,
                                   borderRadius: BorderRadius.circular(40 * rpx),
                                   boxShadow: [
                                     BoxShadow(
                                       offset: const Offset(0.0, 0.0),
                                       blurRadius: 15 * rpx,
                                       spreadRadius: 10 * rpx,
-                                      color: Colors.cyan.withOpacity(0.2),
+                                      color: const Color.fromARGB(
+                                          50, 77, 206, 255),
                                     )
                                   ],
+                                  gradient: const LinearGradient(
+                                    begin: Alignment.bottomLeft,
+                                    end: Alignment.topRight,
+                                    colors: [
+                                      Color.fromARGB(255, 49, 133, 255),
+                                      Color.fromARGB(255, 77, 206, 255),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ],
@@ -101,16 +125,24 @@ class Apps extends StatelessWidget {
                             children: [
                               Container(
                                 decoration: BoxDecoration(
-                                  color: Colors.white,
                                   borderRadius: BorderRadius.circular(40 * rpx),
                                   boxShadow: [
                                     BoxShadow(
                                       offset: const Offset(0.0, 0.0),
                                       blurRadius: 15 * rpx,
                                       spreadRadius: 10 * rpx,
-                                      color: Colors.redAccent.withOpacity(0.2),
+                                      color: const Color.fromARGB(
+                                          50, 244, 253, 221),
                                     )
                                   ],
+                                  gradient: const LinearGradient(
+                                    begin: Alignment.bottomLeft,
+                                    end: Alignment.topRight,
+                                    colors: [
+                                      Color.fromARGB(255, 154, 251, 254),
+                                      Color.fromARGB(255, 244, 253, 221),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ],
@@ -139,13 +171,26 @@ class Apps extends StatelessWidget {
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
             decoration: BoxDecoration(
-              color: Colors.white.withAlpha(80),
               // color: Color.fromRGBO(
               //     Random().nextInt(256),
               //     Random().nextInt(256),
               //     Random().nextInt(256),
               //     0.8), //color: Colors.blue.withAlpha(80),
               borderRadius: BorderRadius.circular(40 * rpx),
+              boxShadow: [
+                BoxShadow(
+                  offset: const Offset(0.0, 0.0),
+                  blurRadius: 15 * rpx,
+                  spreadRadius: 10 * rpx,
+                  color: const Color.fromARGB(50, 77, 206, 255),
+                )
+              ],
+              gradient: const LinearGradient(
+                colors: [
+                  Color.fromARGB(255, 49, 133, 255),
+                  Color.fromARGB(255, 77, 206, 255),
+                ],
+              ),
             ),
           ),
         ),
