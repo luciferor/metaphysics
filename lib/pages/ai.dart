@@ -66,82 +66,84 @@ class _AiState extends State<Ai> {
                     color: const Color.fromARGB(255, 220, 220, 220),
                     borderRadius: BorderRadius.circular(100 * rpx),
                   ),
-                  child: Blur(
-                    rpx: rpx,
-                    radius: 100,
-                    widget: Padding(
-                      padding: EdgeInsets.all(10 * rpx),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        verticalDirection: VerticalDirection.down,
-                        children: <Widget>[
-                          SizedBox(
-                            width: 80 * rpx,
-                            height: 80 * rpx,
-                            child: GestureDetector(
-                              onTap: () {
-                                Navigator.pop(context);
-                              },
-                              child: const CircleAvatar(
-                                backgroundColor: Colors.transparent,
-                                backgroundImage: NetworkImage(
-                                    'https://img0.baidu.com/it/u=2699322616,853950993&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500'),
-                              ),
-                            ),
-                          ),
-                          Expanded(
-                            child: Padding(
-                              padding:
-                                  EdgeInsets.fromLTRB(10 * rpx, 0, 10 * rpx, 0),
-                              child: TextField(
-                                controller: _textController,
-                                textInputAction: TextInputAction.unspecified,
-                                textAlign: TextAlign.start,
-                                textAlignVertical: TextAlignVertical.center,
-                                enabled: true,
-                                cursorRadius: Radius.circular(10 * rpx),
-                                keyboardType: TextInputType.none,
-                                decoration: const InputDecoration(
-                                  focusedBorder: InputBorder.none,
-                                  enabledBorder: InputBorder.none,
-                                ),
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 32 * rpx,
-                                ),
-                                onChanged: (value) {
-                                  setState(() {
-                                    msg = value;
-                                  });
-                                },
-                              ),
-                            ),
-                          ),
-                          IconButton(
-                            alignment: Alignment.center,
-                            color: Colors.blue,
-                            icon: SvgPicture.asset(
-                              'assets/images/icons/send.svg',
-                              width: 40 * rpx,
-                              height: 40 * rpx,
-                            ),
-                            onPressed: () {
-                              if (_textController.text.isNotEmpty) {
-                                setState(() {
-                                  msgdata.add({
-                                    'content': _textController.text,
-                                    'role': 'user',
-                                  });
-                                });
-                                httpTest(_textController.text);
-                              }
+                  child:
+                      // Blur(
+                      //   rpx: rpx,
+                      //   radius: 100,
+                      //   widget:
+                      Padding(
+                    padding: EdgeInsets.all(10 * rpx),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      verticalDirection: VerticalDirection.down,
+                      children: <Widget>[
+                        SizedBox(
+                          width: 80 * rpx,
+                          height: 80 * rpx,
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.pop(context);
                             },
+                            child: const CircleAvatar(
+                              backgroundColor: Colors.transparent,
+                              backgroundImage: NetworkImage(
+                                  'https://img0.baidu.com/it/u=2699322616,853950993&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500'),
+                            ),
                           ),
-                        ],
-                      ),
+                        ),
+                        Expanded(
+                          child: Padding(
+                            padding:
+                                EdgeInsets.fromLTRB(10 * rpx, 0, 10 * rpx, 0),
+                            child: TextField(
+                              controller: _textController,
+                              textInputAction: TextInputAction.unspecified,
+                              textAlign: TextAlign.start,
+                              textAlignVertical: TextAlignVertical.center,
+                              enabled: true,
+                              cursorRadius: Radius.circular(10 * rpx),
+                              keyboardType: TextInputType.none,
+                              decoration: const InputDecoration(
+                                focusedBorder: InputBorder.none,
+                                enabledBorder: InputBorder.none,
+                              ),
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 32 * rpx,
+                              ),
+                              onChanged: (value) {
+                                setState(() {
+                                  msg = value;
+                                });
+                              },
+                            ),
+                          ),
+                        ),
+                        IconButton(
+                          alignment: Alignment.center,
+                          color: Colors.blue,
+                          icon: SvgPicture.asset(
+                            'assets/images/icons/send.svg',
+                            width: 40 * rpx,
+                            height: 40 * rpx,
+                          ),
+                          onPressed: () {
+                            if (_textController.text.isNotEmpty) {
+                              setState(() {
+                                msgdata.add({
+                                  'content': _textController.text,
+                                  'role': 'user',
+                                });
+                              });
+                              httpTest(_textController.text);
+                            }
+                          },
+                        ),
+                      ],
                     ),
                   ),
+                  // ),
                 ),
               ),
             ),
