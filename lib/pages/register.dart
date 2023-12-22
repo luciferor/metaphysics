@@ -36,32 +36,28 @@ class _RegisterState extends State<Register> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              CustomPaint(
-                painter: GradientBoundPainter(
-                  colors: [
-                    const Color.fromARGB(255, 112, 250, 158),
-                    const Color.fromARGB(255, 63, 152, 254),
-                    const Color.fromARGB(255, 232, 0, 232),
-                  ],
-                  width: 200 * rpx,
-                  height: 200 * rpx,
-                  strokeWidth: 8 * rpx,
-                  radius: 200 * rpx,
+              Container(
+                width: 290 * rpx,
+                height: 290 * rpx,
+                padding: EdgeInsets.all(30 * rpx),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(190 * rpx),
                 ),
-                child: Container(
-                  width: 190 * rpx,
-                  height: 190 * rpx,
-                  padding: EdgeInsets.all(30 * rpx),
-                  decoration: BoxDecoration(
-                    color: const Color.fromARGB(111, 255, 255, 255),
-                    borderRadius: BorderRadius.circular(190 * rpx),
-                  ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(
-                      200 * rpx,
-                    ),
-                    child: const Image(
-                      image: AssetImage('assets/images/8e3a09875693fb.png'),
+                child: Blur(
+                  rpx: rpx,
+                  radius: 290 * rpx,
+                  widget: Container(
+                    padding: EdgeInsets.all(30 * rpx),
+                    constraints: const BoxConstraints.expand(),
+                    width: 290 * rpx,
+                    height: 290 * rpx,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(
+                        290 * rpx,
+                      ),
+                      child: const Image(
+                        image: AssetImage('assets/images/8e3a09875693fb.png'),
+                      ),
                     ),
                   ),
                 ),
@@ -70,8 +66,8 @@ class _RegisterState extends State<Register> {
                 padding: EdgeInsets.fromLTRB(0, 60 * rpx, 0, 10 * rpx),
                 alignment: Alignment.center,
                 child: Shimmer.fromColors(
-                  baseColor: const Color.fromARGB(255, 63, 152, 254),
-                  highlightColor: const Color.fromARGB(255, 232, 0, 232),
+                  baseColor: const Color.fromARGB(255, 0, 72, 255),
+                  highlightColor: Color.fromARGB(255, 43, 255, 0),
                   child: Text(
                     '荧惑 Todo.',
                     style: TextStyle(
@@ -98,12 +94,12 @@ class _RegisterState extends State<Register> {
                 height: 95 * rpx,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(
-                    120 * rpx,
+                    30 * rpx,
                   ),
                 ),
                 child: Blur(
                   rpx: rpx,
-                  radius: 120,
+                  radius: 30,
                   widget: Padding(
                     padding: EdgeInsets.all(10 * rpx),
                     child: Row(
@@ -118,7 +114,7 @@ class _RegisterState extends State<Register> {
                           decoration: BoxDecoration(
                             color: const Color.fromARGB(168, 236, 242, 248),
                             borderRadius: BorderRadius.circular(
-                              95 * rpx,
+                              25 * rpx,
                             ),
                           ),
                           child: SvgPicture.asset(
@@ -169,12 +165,12 @@ class _RegisterState extends State<Register> {
                 height: 95 * rpx,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(
-                    120 * rpx,
+                    30 * rpx,
                   ),
                 ),
                 child: Blur(
                   rpx: rpx,
-                  radius: 120,
+                  radius: 30,
                   widget: Padding(
                     padding: EdgeInsets.all(10 * rpx),
                     child: Row(
@@ -189,7 +185,7 @@ class _RegisterState extends State<Register> {
                           decoration: BoxDecoration(
                             color: const Color.fromARGB(168, 236, 242, 248),
                             borderRadius: BorderRadius.circular(
-                              95 * rpx,
+                              25 * rpx,
                             ),
                           ),
                           child: SvgPicture.asset(
@@ -233,10 +229,10 @@ class _RegisterState extends State<Register> {
                           decoration: BoxDecoration(
                             color: Colors.white.withOpacity(0.2),
                             borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(30 * rpx),
-                              topRight: Radius.circular(100 * rpx),
-                              bottomRight: Radius.circular(100 * rpx),
-                              bottomLeft: Radius.circular(30 * rpx),
+                              topLeft: Radius.circular(25 * rpx),
+                              topRight: Radius.circular(25 * rpx),
+                              bottomRight: Radius.circular(25 * rpx),
+                              bottomLeft: Radius.circular(25 * rpx),
                             ),
                           ),
                           padding:
@@ -245,7 +241,7 @@ class _RegisterState extends State<Register> {
                             '获取验证码',
                             style: TextStyle(
                               fontSize: 26 * rpx,
-                              color: Colors.blue,
+                              color: Color.fromARGB(255, 170, 174, 255),
                             ),
                           ),
                         ),
@@ -263,12 +259,12 @@ class _RegisterState extends State<Register> {
                 height: 95 * rpx,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(
-                    120 * rpx,
+                    30 * rpx,
                   ),
                 ),
                 child: Blur(
                   rpx: rpx,
-                  radius: 120,
+                  radius: 30,
                   widget: Padding(
                     padding: EdgeInsets.all(10 * rpx),
                     child: Row(
@@ -283,7 +279,7 @@ class _RegisterState extends State<Register> {
                           decoration: BoxDecoration(
                             color: const Color.fromARGB(168, 236, 242, 248),
                             borderRadius: BorderRadius.circular(
-                              95 * rpx,
+                              25 * rpx,
                             ),
                           ),
                           child: SvgPicture.asset(
@@ -335,12 +331,12 @@ class _RegisterState extends State<Register> {
                 height: 95 * rpx,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(
-                    120 * rpx,
+                    30 * rpx,
                   ),
                 ),
                 child: Blur(
                   rpx: rpx,
-                  radius: 120,
+                  radius: 30,
                   widget: Padding(
                     padding: EdgeInsets.all(10 * rpx),
                     child: Row(
@@ -355,7 +351,7 @@ class _RegisterState extends State<Register> {
                           decoration: BoxDecoration(
                             color: const Color.fromARGB(168, 236, 242, 248),
                             borderRadius: BorderRadius.circular(
-                              95 * rpx,
+                              25 * rpx,
                             ),
                           ),
                           child: SvgPicture.asset(
@@ -402,36 +398,28 @@ class _RegisterState extends State<Register> {
                 margin: EdgeInsets.fromLTRB(0, 100 * rpx, 0, 0),
                 height: 200 * rpx,
                 alignment: Alignment.center,
-                child: CustomPaint(
-                  painter: GradientBoundPainter(
-                    colors: [
-                      const Color.fromARGB(255, 112, 250, 158),
-                      const Color.fromARGB(255, 63, 152, 254),
-                      const Color.fromARGB(255, 232, 0, 232),
-                    ],
-                    width: 300 * rpx,
-                    height: 100 * rpx,
-                    strokeWidth: 3 * rpx,
-                    radius: 200 * rpx,
+                child: Container(
+                  width: 300 * rpx,
+                  height: 100 * rpx,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(30 * rpx),
                   ),
-                  child: Container(
-                    width: 300 * rpx,
-                    height: 100 * rpx,
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      color: const Color.fromARGB(125, 204, 213, 255),
-                      borderRadius: BorderRadius.circular(50 * rpx),
-                    ),
-                    child: Shimmer.fromColors(
-                      baseColor: const Color.fromARGB(255, 230, 230, 230),
-                      highlightColor: const Color.fromARGB(255, 255, 255, 255),
-                      child: Text(
-                        '立即注册',
-                        style: TextStyle(
-                          fontSize: 32 * rpx,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                          letterSpacing: 10 * rpx,
+                  child: Blur(
+                    rpx: rpx,
+                    radius: 30,
+                    widget: Container(
+                      alignment: Alignment.center,
+                      child: GestureDetector(
+                        onTap: () {},
+                        child: Text(
+                          '立即注册',
+                          style: TextStyle(
+                            fontSize: 38 * rpx,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white54,
+                            letterSpacing: 10 * rpx,
+                          ),
                         ),
                       ),
                     ),
@@ -444,15 +432,11 @@ class _RegisterState extends State<Register> {
                   onTap: () {
                     Navigator.pop(context);
                   },
-                  child: Shimmer.fromColors(
-                    baseColor: const Color.fromARGB(255, 211, 211, 211),
-                    highlightColor: const Color.fromARGB(255, 255, 255, 255),
-                    child: Text(
-                      '已有账号，去登录',
-                      style: TextStyle(
-                        color: Colors.white.withOpacity(0.8),
-                        fontSize: 26 * rpx,
-                      ),
+                  child: Text(
+                    '已有账号，去登录',
+                    style: TextStyle(
+                      color: const Color.fromARGB(255, 45, 85, 245),
+                      fontSize: 26 * rpx,
                     ),
                   ),
                 ),

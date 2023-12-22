@@ -1,3 +1,4 @@
+import 'package:first_flutter_app/components/base.dart';
 import 'package:flutter/material.dart';
 
 class Setting extends StatefulWidget {
@@ -10,6 +11,6 @@ class Setting extends StatefulWidget {
 class _SettingState extends State<Setting> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Base();
   }
 }

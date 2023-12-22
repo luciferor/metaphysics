@@ -4,7 +4,6 @@ import 'package:first_flutter_app/components/apps.dart';
 import 'package:first_flutter_app/pages/ai.dart';
 import 'package:first_flutter_app/pages/mine.dart';
 import 'package:flutter/material.dart';
-import 'package:shimmer/shimmer.dart';
 
 class Index extends StatefulWidget {
   const Index({Key? key}) : super(key: key);
@@ -52,17 +51,13 @@ class _IndexState extends State<Index> {
                 child: Container(
                   alignment: Alignment.centerLeft,
                   height: 120 * rpx,
-                  child: Shimmer.fromColors(
-                    baseColor: Colors.black87,
-                    highlightColor: Colors.white,
-                    child: Text(
-                      '荧惑Todo',
-                      textAlign: TextAlign.start,
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 38 * rpx,
-                        color: Colors.black,
-                      ),
+                  child: Text(
+                    '荧惑Todo',
+                    textAlign: TextAlign.start,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 38 * rpx,
+                      color: Colors.white,
                     ),
                   ),
                 ),
@@ -70,21 +65,23 @@ class _IndexState extends State<Index> {
               Padding(
                 padding: EdgeInsets.fromLTRB(0, 0, 15 * rpx, 0),
                 child: Ani(
-                  radius: 100,
+                  radius: 30,
                   pages: const Mine(),
                   child: Container(
-                      width: 100 * rpx,
-                      height: 100 * rpx,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(100 * rpx),
-                        border:
-                            Border.all(color: Colors.white30, width: 5 * rpx),
-                      ),
-                      child: const CircleAvatar(
-                        backgroundColor: Colors.transparent,
-                        backgroundImage: NetworkImage(
+                    width: 100 * rpx,
+                    height: 100 * rpx,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(30 * rpx),
+                      border: Border.all(color: Colors.white30, width: 5 * rpx),
+                    ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(25 * rpx),
+                      child: const Image(
+                        image: NetworkImage(
                             'https://img0.baidu.com/it/u=2699322616,853950993&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500'),
-                      )),
+                      ),
+                    ),
+                  ),
                 ),
               ),
             ],

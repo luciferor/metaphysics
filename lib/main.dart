@@ -17,7 +17,7 @@ void main() => runApp(
             },
           ),
         ),
-        initialRoute: '/login',
+        initialRoute: '/mine',
         routes: {
           '/': (context) => const Homie(),
           '/detail': (context) => const Detail(),

@@ -35,42 +35,51 @@ class _LoginState extends State<Login> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              CustomPaint(
-                painter: GradientBoundPainter(
-                  colors: [
-                    const Color.fromARGB(255, 112, 250, 158),
-                    const Color.fromARGB(255, 63, 152, 254),
-                    const Color.fromARGB(255, 232, 0, 232),
-                  ],
-                  width: 200 * rpx,
-                  height: 200 * rpx,
-                  strokeWidth: 8 * rpx,
-                  radius: 200 * rpx,
+              Container(
+                width: 290 * rpx,
+                height: 290 * rpx,
+                padding: EdgeInsets.all(30 * rpx),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(190 * rpx),
                 ),
-                child: Container(
-                  width: 190 * rpx,
-                  height: 190 * rpx,
-                  padding: EdgeInsets.all(30 * rpx),
-                  decoration: BoxDecoration(
-                    color: const Color.fromARGB(111, 255, 255, 255),
-                    borderRadius: BorderRadius.circular(190 * rpx),
-                  ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(
-                      200 * rpx,
-                    ),
-                    child: const Image(
-                      image: AssetImage('assets/images/8e3a09875693fb.png'),
+                child: Blur(
+                  rpx: rpx,
+                  radius: 290 * rpx,
+                  widget: Container(
+                    padding: EdgeInsets.all(30 * rpx),
+                    constraints: const BoxConstraints.expand(),
+                    width: 290 * rpx,
+                    height: 290 * rpx,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(
+                        290 * rpx,
+                      ),
+                      child: const Image(
+                        image: AssetImage('assets/images/8e3a09875693fb.png'),
+                      ),
                     ),
                   ),
                 ),
               ),
+              // CustomPaint(
+              //   painter: GradientBoundPainter(
+              //     colors: [
+              //       const Color.fromARGB(255, 119, 3, 130),
+              //       const Color.fromARGB(255, 6, 15, 174),
+              //     ],
+              //     width: 200 * rpx,
+              //     height: 200 * rpx,
+              //     strokeWidth: 8 * rpx,
+              //     radius: 200 * rpx,
+              //   ),
+              //   child:
+              // ),
               Container(
                 padding: EdgeInsets.fromLTRB(0, 60 * rpx, 0, 10 * rpx),
                 alignment: Alignment.center,
                 child: Shimmer.fromColors(
-                  baseColor: const Color.fromARGB(255, 63, 152, 254),
-                  highlightColor: const Color.fromARGB(255, 232, 0, 232),
+                  baseColor: const Color.fromARGB(255, 0, 72, 255),
+                  highlightColor: Color.fromARGB(255, 43, 255, 0),
                   child: Text(
                     '荧惑 Todo.',
                     style: TextStyle(
@@ -97,12 +106,12 @@ class _LoginState extends State<Login> {
                 height: 95 * rpx,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(
-                    120 * rpx,
+                    30 * rpx,
                   ),
                 ),
                 child: Blur(
                   rpx: rpx,
-                  radius: 120,
+                  radius: 30,
                   widget: Padding(
                     padding: EdgeInsets.all(10 * rpx),
                     child: Row(
@@ -117,7 +126,7 @@ class _LoginState extends State<Login> {
                           decoration: BoxDecoration(
                             color: const Color.fromARGB(168, 236, 242, 248),
                             borderRadius: BorderRadius.circular(
-                              95 * rpx,
+                              25 * rpx,
                             ),
                           ),
                           child: SvgPicture.asset(
@@ -144,7 +153,7 @@ class _LoginState extends State<Login> {
                               ),
                             ),
                             style: TextStyle(
-                              color: const Color.fromARGB(255, 0, 0, 0),
+                              color: const Color.fromARGB(255, 99, 109, 244),
                               fontSize: 32 * rpx,
                             ),
                             onChanged: (value) {
@@ -168,12 +177,12 @@ class _LoginState extends State<Login> {
                 height: 95 * rpx,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(
-                    120 * rpx,
+                    30 * rpx,
                   ),
                 ),
                 child: Blur(
                   rpx: rpx,
-                  radius: 120,
+                  radius: 30,
                   widget: Padding(
                     padding: EdgeInsets.all(10 * rpx),
                     child: Row(
@@ -188,7 +197,7 @@ class _LoginState extends State<Login> {
                           decoration: BoxDecoration(
                             color: const Color.fromARGB(168, 236, 242, 248),
                             borderRadius: BorderRadius.circular(
-                              95 * rpx,
+                              25 * rpx,
                             ),
                           ),
                           child: SvgPicture.asset(
@@ -216,7 +225,7 @@ class _LoginState extends State<Login> {
                               ),
                             ),
                             style: TextStyle(
-                              color: const Color.fromARGB(255, 0, 0, 0),
+                              color: const Color.fromARGB(255, 235, 16, 16),
                               fontSize: 32 * rpx,
                             ),
                             onChanged: (value) {
@@ -235,45 +244,33 @@ class _LoginState extends State<Login> {
                 margin: EdgeInsets.fromLTRB(0, 100 * rpx, 0, 0),
                 height: 200 * rpx,
                 alignment: Alignment.center,
-                child: CustomPaint(
-                  painter: GradientBoundPainter(
-                    colors: [
-                      const Color.fromARGB(255, 112, 250, 158),
-                      const Color.fromARGB(255, 63, 152, 254),
-                      const Color.fromARGB(255, 232, 0, 232),
-                    ],
-                    width: 300 * rpx,
-                    height: 100 * rpx,
-                    strokeWidth: 3 * rpx,
-                    radius: 200 * rpx,
+                child: Container(
+                  width: 300 * rpx,
+                  height: 100 * rpx,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(30 * rpx),
                   ),
-                  child: Container(
-                    width: 300 * rpx,
-                    height: 100 * rpx,
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      color: const Color.fromARGB(125, 204, 213, 255),
-                      borderRadius: BorderRadius.circular(50 * rpx),
-                    ),
-                    child: GestureDetector(
-                      onTap: () {
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const Homie(),
-                          ),
-                        );
-                      },
-                      child: Shimmer.fromColors(
-                        baseColor: const Color.fromARGB(255, 0, 0, 0),
-                        highlightColor:
-                            const Color.fromARGB(255, 255, 255, 255),
+                  child: Blur(
+                    rpx: rpx,
+                    radius: 30,
+                    widget: Container(
+                      alignment: Alignment.center,
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const Homie(),
+                            ),
+                          );
+                        },
                         child: Text(
                           '登录',
                           style: TextStyle(
                             fontSize: 38 * rpx,
                             fontWeight: FontWeight.bold,
-                            color: Colors.black,
+                            color: Colors.white54,
                             letterSpacing: 10 * rpx,
                           ),
                         ),
@@ -290,7 +287,7 @@ class _LoginState extends State<Login> {
                   child: Text(
                     '没有账号,去注册',
                     style: TextStyle(
-                      color: Color.fromARGB(255, 151, 151, 151),
+                      color: const Color.fromARGB(255, 45, 85, 245),
                       fontSize: 26 * rpx,
                     ),
                   ),

@@ -44,83 +44,150 @@ class _MineState extends State<Mine> {
               children: [
                 Container(
                   alignment: Alignment.bottomCenter,
-                  padding:
-                      EdgeInsets.fromLTRB(40 * rpx, tp, 40 * rpx, 40 * rpx),
-                  height: (400 * rpx) + tp,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                  padding: EdgeInsets.fromLTRB(
+                      40 * rpx, tp + (200 * rpx), 40 * rpx, 40 * rpx),
+                  height: (500 * rpx) + tp,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
                         width: 150 * rpx,
                         height: 150 * rpx,
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(150 * rpx),
+                          borderRadius: BorderRadius.circular(40 * rpx),
                           border: Border.all(
                             color: const Color.fromARGB(200, 247, 249, 255),
-                            width: 10 * rpx,
+                            width: 2 * rpx,
                           ),
                         ),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(150 * rpx),
-                          child: const Image(
-                            fit: BoxFit.cover,
-                            image: NetworkImage(
-                                'https://img0.baidu.com/it/u=2699322616,853950993&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500'),
+                        child: Ani(
+                          pages: const Setting(),
+                          radius: 30 * rpx,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(40 * rpx),
+                            child: const Image(
+                              fit: BoxFit.cover,
+                              image: NetworkImage(
+                                  'https://img0.baidu.com/it/u=2699322616,853950993&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500'),
+                            ),
                           ),
                         ),
                       ),
-                      Container(
-                        alignment: Alignment.center,
-                        padding: EdgeInsets.fromLTRB(0, 30 * rpx, 0, 30 * rpx),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Container(
-                              padding: EdgeInsets.fromLTRB(0, 0, 20 * rpx, 0),
-                              child: Shimmer.fromColors(
-                                baseColor: Colors.black54,
-                                highlightColor: Colors.white,
+                      Expanded(
+                        child: Container(
+                          padding: EdgeInsets.fromLTRB(20 * rpx, 0, 0, 0),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Expanded(
+                                      child: Container(
+                                        alignment: Alignment.centerLeft,
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            Text(
+                                              '宁顾客',
+                                              style: TextStyle(
+                                                fontSize: 32 * rpx,
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                            Container(
+                                              padding: EdgeInsets.fromLTRB(
+                                                  10 * rpx, 0, 0, 0),
+                                              child: Text(
+                                                'Lv25',
+                                                style: TextStyle(
+                                                  fontSize: 28 * rpx,
+                                                  color: Colors.yellow,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                    Container(
+                                      width: 80 * rpx,
+                                      height: 80 * rpx,
+                                      padding: EdgeInsets.all(10 * rpx),
+                                      child: Blur(
+                                        rpx: rpx,
+                                        radius: 40 * rpx,
+                                        widget: Ani(
+                                          pages: const Setting(),
+                                          radius: 40,
+                                          child: SvgPicture.asset(
+                                            'assets/images/icons/edit.svg',
+                                            width: 40 * rpx,
+                                            height: 40 * rpx,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              SizedBox(
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Container(
+                                      width: 60 * rpx,
+                                      height: 60 * rpx,
+                                      alignment: Alignment.topCenter,
+                                      padding: EdgeInsets.all(15 * rpx),
+                                      child: SvgPicture.asset(
+                                        'assets/images/icons/m.svg',
+                                        width: 30 * rpx,
+                                        height: 30 * rpx,
+                                      ),
+                                    ),
+                                    Text(
+                                      '18岁',
+                                      style: TextStyle(
+                                        color: Colors.blue,
+                                        fontSize: 28 * rpx,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              SizedBox(
                                 child: Text(
-                                  '凝固壳',
+                                  '为天地立心，为生民立命，为往圣继绝学，为万世开太平。',
                                   style: TextStyle(
-                                      fontSize: 36 * rpx,
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.bold),
+                                    color: Colors.white60,
+                                    fontSize: 24 * rpx,
+                                  ),
                                 ),
                               ),
-                            ),
-                            Ani(
-                              radius: 0,
-                              pages: const Setting(),
-                              child: Container(
-                                width: 50 * rpx,
-                                height: 50 * rpx,
-                                padding: EdgeInsets.all(5 * rpx),
-                                decoration: BoxDecoration(
-                                  color: const Color.fromARGB(255, 57, 76, 247),
-                                  borderRadius: BorderRadius.circular(20 * rpx),
-                                ),
-                                child: SvgPicture.asset(
-                                  'assets/images/icons/editmine.svg',
-                                  width: 40 * rpx,
-                                  height: 40 * rpx,
-                                ),
-                              ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                     ],
                   ),
                 ),
                 Container(
-                  height: 400 * rpx,
+                  height: 360 * rpx,
                   color: Colors.transparent,
                   child: Padding(
                     padding:
-                        EdgeInsets.fromLTRB(40 * rpx, 0, 40 * rpx, 20 * rpx),
+                        EdgeInsets.fromLTRB(40 * rpx, 0, 40 * rpx, 15 * rpx),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -139,29 +206,34 @@ class _MineState extends State<Mine> {
                                         EdgeInsets.fromLTRB(0, 0, 0, 15 * rpx),
                                     child: Stack(
                                       children: [
-                                        Container(
-                                          decoration: BoxDecoration(
-                                            color: Colors.white,
-                                            borderRadius:
-                                                BorderRadius.circular(40 * rpx),
-                                            boxShadow: [
-                                              BoxShadow(
-                                                offset: const Offset(0.0, 0.0),
-                                                blurRadius: 15 * rpx,
-                                                spreadRadius: 10 * rpx,
-                                                color: const Color.fromARGB(
-                                                    50, 177, 106, 255),
-                                              )
-                                            ],
-                                            gradient: const LinearGradient(
-                                              begin: Alignment.bottomRight,
-                                              end: Alignment.topLeft,
-                                              colors: [
-                                                Color.fromARGB(
-                                                    255, 134, 49, 255),
-                                                Color.fromARGB(
-                                                    255, 177, 106, 255),
+                                        Blur(
+                                          rpx: rpx,
+                                          radius: 30,
+                                          widget: Container(
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(
+                                                      30 * rpx),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  offset:
+                                                      const Offset(0.0, 0.0),
+                                                  blurRadius: 15 * rpx,
+                                                  spreadRadius: 10 * rpx,
+                                                  color: const Color.fromARGB(
+                                                      50, 177, 106, 255),
+                                                )
                                               ],
+                                              gradient: const LinearGradient(
+                                                begin: Alignment.bottomRight,
+                                                end: Alignment.topLeft,
+                                                colors: [
+                                                  Color.fromARGB(
+                                                      10, 135, 49, 255),
+                                                  Color.fromARGB(
+                                                      10, 177, 106, 255),
+                                                ],
+                                              ),
                                             ),
                                           ),
                                         ),
@@ -178,30 +250,37 @@ class _MineState extends State<Mine> {
                                             0, 15 * rpx, 15 * rpx, 0),
                                         child: Stack(
                                           children: [
-                                            Container(
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                        40 * rpx),
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                    offset:
-                                                        const Offset(0.0, 0.0),
-                                                    blurRadius: 15 * rpx,
-                                                    spreadRadius: 10 * rpx,
-                                                    color: const Color.fromARGB(
-                                                        50, 77, 206, 255),
-                                                  )
-                                                ],
-                                                gradient: const LinearGradient(
-                                                  begin: Alignment.bottomRight,
-                                                  end: Alignment.topLeft,
-                                                  colors: [
-                                                    Color.fromARGB(
-                                                        255, 49, 133, 255),
-                                                    Color.fromARGB(
-                                                        255, 77, 206, 255),
+                                            Blur(
+                                              rpx: rpx,
+                                              radius: 30,
+                                              widget: Container(
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          30 * rpx),
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                      offset: const Offset(
+                                                          0.0, 0.0),
+                                                      blurRadius: 15 * rpx,
+                                                      spreadRadius: 10 * rpx,
+                                                      color:
+                                                          const Color.fromARGB(
+                                                              50, 77, 206, 255),
+                                                    )
                                                   ],
+                                                  gradient:
+                                                      const LinearGradient(
+                                                    begin:
+                                                        Alignment.bottomRight,
+                                                    end: Alignment.topLeft,
+                                                    colors: [
+                                                      Color.fromARGB(
+                                                          10, 49, 133, 255),
+                                                      Color.fromARGB(
+                                                          10, 77, 206, 255),
+                                                    ],
+                                                  ),
                                                 ),
                                               ),
                                             ),
@@ -215,30 +294,40 @@ class _MineState extends State<Mine> {
                                             15 * rpx, 15 * rpx, 0, 0),
                                         child: Stack(
                                           children: [
-                                            Container(
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                        40 * rpx),
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                    offset:
-                                                        const Offset(0.0, 0.0),
-                                                    blurRadius: 15 * rpx,
-                                                    spreadRadius: 10 * rpx,
-                                                    color: const Color.fromARGB(
-                                                        50, 207, 255, 193),
-                                                  )
-                                                ],
-                                                gradient: const LinearGradient(
-                                                  begin: Alignment.bottomRight,
-                                                  end: Alignment.topLeft,
-                                                  colors: [
-                                                    Color.fromARGB(
-                                                        255, 51, 255, 28),
-                                                    Color.fromARGB(
-                                                        255, 207, 255, 193),
+                                            Blur(
+                                              rpx: rpx,
+                                              radius: 30,
+                                              widget: Container(
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          30 * rpx),
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                      offset: const Offset(
+                                                          0.0, 0.0),
+                                                      blurRadius: 15 * rpx,
+                                                      spreadRadius: 10 * rpx,
+                                                      color:
+                                                          const Color.fromARGB(
+                                                              50,
+                                                              207,
+                                                              255,
+                                                              193),
+                                                    )
                                                   ],
+                                                  gradient:
+                                                      const LinearGradient(
+                                                    begin:
+                                                        Alignment.bottomRight,
+                                                    end: Alignment.topLeft,
+                                                    colors: [
+                                                      Color.fromARGB(
+                                                          10, 51, 255, 28),
+                                                      Color.fromARGB(
+                                                          10, 207, 255, 193),
+                                                    ],
+                                                  ),
                                                 ),
                                               ),
                                             ),
@@ -270,33 +359,38 @@ class _MineState extends State<Mine> {
                                                 0, 0, 15 * rpx, 15 * rpx),
                                             child: Stack(
                                               children: [
-                                                Container(
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            40 * rpx),
-                                                    boxShadow: [
-                                                      BoxShadow(
-                                                        offset: const Offset(
-                                                            0.0, 0.0),
-                                                        blurRadius: 15 * rpx,
-                                                        spreadRadius: 10 * rpx,
-                                                        color: const Color
-                                                            .fromARGB(
-                                                            50, 255, 154, 154),
-                                                      )
-                                                    ],
-                                                    gradient:
-                                                        const LinearGradient(
-                                                      begin:
-                                                          Alignment.bottomRight,
-                                                      end: Alignment.topLeft,
-                                                      colors: [
-                                                        Color.fromARGB(
-                                                            255, 255, 55, 55),
-                                                        Color.fromARGB(
-                                                            255, 255, 154, 154),
+                                                Blur(
+                                                  rpx: rpx,
+                                                  radius: 30,
+                                                  widget: Container(
+                                                    decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              30 * rpx),
+                                                      boxShadow: [
+                                                        BoxShadow(
+                                                          offset: const Offset(
+                                                              0.0, 0.0),
+                                                          blurRadius: 15 * rpx,
+                                                          spreadRadius:
+                                                              10 * rpx,
+                                                          color: const Color
+                                                              .fromARGB(50, 255,
+                                                              154, 154),
+                                                        )
                                                       ],
+                                                      gradient:
+                                                          const LinearGradient(
+                                                        begin: Alignment
+                                                            .bottomRight,
+                                                        end: Alignment.topLeft,
+                                                        colors: [
+                                                          Color.fromARGB(
+                                                              10, 255, 55, 55),
+                                                          Color.fromARGB(
+                                                              255, 0, 154, 154),
+                                                        ],
+                                                      ),
                                                     ),
                                                   ),
                                                 ),
@@ -310,33 +404,38 @@ class _MineState extends State<Mine> {
                                                 15 * rpx, 0, 0, 15 * rpx),
                                             child: Stack(
                                               children: [
-                                                Container(
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            40 * rpx),
-                                                    boxShadow: [
-                                                      BoxShadow(
-                                                        offset: const Offset(
-                                                            0.0, 0.0),
-                                                        blurRadius: 15 * rpx,
-                                                        spreadRadius: 10 * rpx,
-                                                        color: const Color
-                                                            .fromARGB(
-                                                            50, 255, 243, 198),
-                                                      )
-                                                    ],
-                                                    gradient:
-                                                        const LinearGradient(
-                                                      begin:
-                                                          Alignment.bottomRight,
-                                                      end: Alignment.topLeft,
-                                                      colors: [
-                                                        Color.fromARGB(
-                                                            255, 231, 212, 5),
-                                                        Color.fromARGB(
-                                                            255, 255, 243, 198),
+                                                Blur(
+                                                  rpx: rpx,
+                                                  radius: 30,
+                                                  widget: Container(
+                                                    decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              30 * rpx),
+                                                      boxShadow: [
+                                                        BoxShadow(
+                                                          offset: const Offset(
+                                                              0.0, 0.0),
+                                                          blurRadius: 15 * rpx,
+                                                          spreadRadius:
+                                                              10 * rpx,
+                                                          color: const Color
+                                                              .fromARGB(50, 255,
+                                                              243, 198),
+                                                        )
                                                       ],
+                                                      gradient:
+                                                          const LinearGradient(
+                                                        begin: Alignment
+                                                            .bottomRight,
+                                                        end: Alignment.topLeft,
+                                                        colors: [
+                                                          Color.fromARGB(
+                                                              0, 231, 212, 5),
+                                                          Color.fromARGB(255,
+                                                              10, 243, 198),
+                                                        ],
+                                                      ),
                                                     ),
                                                   ),
                                                 ),
@@ -353,31 +452,35 @@ class _MineState extends State<Mine> {
                                           0, 15 * rpx, 0, 0),
                                       child: Stack(
                                         children: [
-                                          Container(
-                                            decoration: BoxDecoration(
-                                              color: Colors.white,
-                                              borderRadius:
-                                                  BorderRadius.circular(
-                                                      40 * rpx),
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  offset:
-                                                      const Offset(0.0, 0.0),
-                                                  blurRadius: 15 * rpx,
-                                                  spreadRadius: 10 * rpx,
-                                                  color: const Color.fromARGB(
-                                                      50, 255, 139, 226),
-                                                )
-                                              ],
-                                              gradient: const LinearGradient(
-                                                begin: Alignment.bottomRight,
-                                                end: Alignment.topLeft,
-                                                colors: [
-                                                  Color.fromARGB(
-                                                      255, 255, 55, 156),
-                                                  Color.fromARGB(
-                                                      255, 255, 139, 226),
+                                          Blur(
+                                            rpx: rpx,
+                                            radius: 30,
+                                            widget: Container(
+                                              decoration: BoxDecoration(
+                                                color: Colors.white,
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                        30 * rpx),
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    offset:
+                                                        const Offset(0.0, 0.0),
+                                                    blurRadius: 15 * rpx,
+                                                    spreadRadius: 10 * rpx,
+                                                    color: const Color.fromARGB(
+                                                        50, 255, 139, 226),
+                                                  )
                                                 ],
+                                                gradient: const LinearGradient(
+                                                  begin: Alignment.bottomRight,
+                                                  end: Alignment.topLeft,
+                                                  colors: [
+                                                    Color.fromARGB(
+                                                        10, 255, 55, 156),
+                                                    Color.fromARGB(
+                                                        10, 255, 139, 226),
+                                                  ],
+                                                ),
                                               ),
                                             ),
                                           ),
@@ -395,11 +498,10 @@ class _MineState extends State<Mine> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.fromLTRB(40 * rpx, 0, 40 * rpx, 40 * rpx),
+                  padding: EdgeInsets.fromLTRB(40 * rpx, 0, 40 * rpx, 0 * rpx),
                   child: Container(
                     height: 150 * rpx,
                     decoration: BoxDecoration(
-                      color: Colors.white,
                       borderRadius: BorderRadius.circular(40 * rpx),
                       boxShadow: [
                         BoxShadow(
@@ -410,12 +512,10 @@ class _MineState extends State<Mine> {
                         )
                       ],
                     ),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(40 * rpx),
-                      child: const Image(
-                        fit: BoxFit.cover,
-                        image: AssetImage('assets/images/20231221.png'),
-                      ),
+                    child: Blur(
+                      rpx: rpx,
+                      radius: 30,
+                      widget: Container(),
                     ),
                   ),
                 ),
@@ -430,8 +530,7 @@ class _MineState extends State<Mine> {
                         margin: EdgeInsets.fromLTRB(0, 0, 0, 30 * rpx),
                         height: 100 * rpx,
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(25 * rpx),
-                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(30 * rpx),
                           boxShadow: [
                             BoxShadow(
                               offset: const Offset(0.0, 0.0),
@@ -441,49 +540,57 @@ class _MineState extends State<Mine> {
                             )
                           ],
                         ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Container(
-                              width: 100 * rpx,
-                              height: 100 * rpx,
-                              padding: EdgeInsets.all(20 * rpx),
-                              alignment: Alignment.center,
-                              child: SvgPicture.asset(
-                                'assets/images/icons/grade.svg',
-                                width: 60 * rpx,
-                                height: 60 * rpx,
+                        child: Blur(
+                          rpx: rpx,
+                          radius: 30,
+                          widget: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Container(
+                                width: 100 * rpx,
+                                height: 100 * rpx,
+                                padding: EdgeInsets.all(10 * rpx),
+                                alignment: Alignment.center,
+                                child: SvgPicture.asset(
+                                  'assets/images/icons/grade.svg',
+                                  width: 80 * rpx,
+                                  height: 80 * rpx,
+                                ),
                               ),
-                            ),
-                            Expanded(
-                              child: Container(
-                                alignment: Alignment.centerLeft,
-                                child: Text(
-                                  '会员中心',
-                                  style: TextStyle(
-                                    fontSize: 30 * rpx,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.black87,
+                              Expanded(
+                                child: Container(
+                                  alignment: Alignment.centerLeft,
+                                  child: Text(
+                                    '会员中心',
+                                    style: TextStyle(
+                                      fontSize: 30 * rpx,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white70,
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                            Container(
-                              width: 100 * rpx,
-                              height: 100 * rpx,
-                              padding: EdgeInsets.all(10 * rpx),
-                              alignment: Alignment.center,
-                            ),
-                          ],
+                              Container(
+                                width: 100 * rpx,
+                                height: 100 * rpx,
+                                padding: EdgeInsets.all(10 * rpx),
+                                alignment: Alignment.centerRight,
+                                child: SvgPicture.asset(
+                                  'assets/images/icons/arrow.svg',
+                                  width: 30 * rpx,
+                                  height: 30 * rpx,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                       Container(
                         margin: EdgeInsets.fromLTRB(0, 0, 0, 30 * rpx),
                         height: 100 * rpx,
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(25 * rpx),
-                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(30 * rpx),
                           boxShadow: [
                             BoxShadow(
                               offset: const Offset(0.0, 0.0),
@@ -493,49 +600,57 @@ class _MineState extends State<Mine> {
                             )
                           ],
                         ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Container(
-                              width: 100 * rpx,
-                              height: 100 * rpx,
-                              padding: EdgeInsets.all(20 * rpx),
-                              alignment: Alignment.center,
-                              child: SvgPicture.asset(
-                                'assets/images/icons/collect.svg',
-                                width: 60 * rpx,
-                                height: 60 * rpx,
+                        child: Blur(
+                          rpx: rpx,
+                          radius: 30,
+                          widget: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Container(
+                                width: 100 * rpx,
+                                height: 100 * rpx,
+                                padding: EdgeInsets.all(10 * rpx),
+                                alignment: Alignment.center,
+                                child: SvgPicture.asset(
+                                  'assets/images/icons/collect.svg',
+                                  width: 80 * rpx,
+                                  height: 80 * rpx,
+                                ),
                               ),
-                            ),
-                            Expanded(
-                              child: Container(
-                                alignment: Alignment.centerLeft,
-                                child: Text(
-                                  '收藏夹',
-                                  style: TextStyle(
-                                    fontSize: 30 * rpx,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.black87,
+                              Expanded(
+                                child: Container(
+                                  alignment: Alignment.centerLeft,
+                                  child: Text(
+                                    '权益',
+                                    style: TextStyle(
+                                      fontSize: 30 * rpx,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white70,
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                            Container(
-                              width: 100 * rpx,
-                              height: 100 * rpx,
-                              padding: EdgeInsets.all(10 * rpx),
-                              alignment: Alignment.center,
-                            ),
-                          ],
+                              Container(
+                                width: 100 * rpx,
+                                height: 100 * rpx,
+                                padding: EdgeInsets.all(10 * rpx),
+                                alignment: Alignment.centerRight,
+                                child: SvgPicture.asset(
+                                  'assets/images/icons/arrow.svg',
+                                  width: 30 * rpx,
+                                  height: 30 * rpx,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                       Container(
                         margin: EdgeInsets.fromLTRB(0, 0, 0, 30 * rpx),
                         height: 100 * rpx,
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(25 * rpx),
-                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(30 * rpx),
                           boxShadow: [
                             BoxShadow(
                               offset: const Offset(0.0, 0.0),
@@ -545,49 +660,57 @@ class _MineState extends State<Mine> {
                             )
                           ],
                         ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Container(
-                              width: 100 * rpx,
-                              height: 100 * rpx,
-                              padding: EdgeInsets.all(20 * rpx),
-                              alignment: Alignment.center,
-                              child: SvgPicture.asset(
-                                'assets/images/icons/card.svg',
-                                width: 60 * rpx,
-                                height: 60 * rpx,
+                        child: Blur(
+                          rpx: rpx,
+                          radius: 30,
+                          widget: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Container(
+                                width: 100 * rpx,
+                                height: 100 * rpx,
+                                padding: EdgeInsets.all(10 * rpx),
+                                alignment: Alignment.center,
+                                child: SvgPicture.asset(
+                                  'assets/images/icons/clould.svg',
+                                  width: 80 * rpx,
+                                  height: 80 * rpx,
+                                ),
                               ),
-                            ),
-                            Expanded(
-                              child: Container(
-                                alignment: Alignment.centerLeft,
-                                child: Text(
-                                  '排行榜',
-                                  style: TextStyle(
-                                    fontSize: 30 * rpx,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.black87,
+                              Expanded(
+                                child: Container(
+                                  alignment: Alignment.centerLeft,
+                                  child: Text(
+                                    '云盘',
+                                    style: TextStyle(
+                                      fontSize: 30 * rpx,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white70,
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                            Container(
-                              width: 100 * rpx,
-                              height: 100 * rpx,
-                              padding: EdgeInsets.all(10 * rpx),
-                              alignment: Alignment.center,
-                            ),
-                          ],
+                              Container(
+                                width: 100 * rpx,
+                                height: 100 * rpx,
+                                padding: EdgeInsets.all(10 * rpx),
+                                alignment: Alignment.centerRight,
+                                child: SvgPicture.asset(
+                                  'assets/images/icons/arrow.svg',
+                                  width: 30 * rpx,
+                                  height: 30 * rpx,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                       Container(
                         margin: EdgeInsets.fromLTRB(0, 0, 0, 30 * rpx),
                         height: 100 * rpx,
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(25 * rpx),
-                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(30 * rpx),
                           boxShadow: [
                             BoxShadow(
                               offset: const Offset(0.0, 0.0),
@@ -597,49 +720,57 @@ class _MineState extends State<Mine> {
                             )
                           ],
                         ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Container(
-                              width: 100 * rpx,
-                              height: 100 * rpx,
-                              padding: EdgeInsets.all(20 * rpx),
-                              alignment: Alignment.center,
-                              child: SvgPicture.asset(
-                                'assets/images/icons/notice.svg',
-                                width: 60 * rpx,
-                                height: 60 * rpx,
+                        child: Blur(
+                          rpx: rpx,
+                          radius: 30,
+                          widget: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Container(
+                                width: 100 * rpx,
+                                height: 100 * rpx,
+                                padding: EdgeInsets.all(10 * rpx),
+                                alignment: Alignment.center,
+                                child: SvgPicture.asset(
+                                  'assets/images/icons/notice.svg',
+                                  width: 80 * rpx,
+                                  height: 80 * rpx,
+                                ),
                               ),
-                            ),
-                            Expanded(
-                              child: Container(
-                                alignment: Alignment.centerLeft,
-                                child: Text(
-                                  '消息',
-                                  style: TextStyle(
-                                    fontSize: 30 * rpx,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.black87,
+                              Expanded(
+                                child: Container(
+                                  alignment: Alignment.centerLeft,
+                                  child: Text(
+                                    '消息',
+                                    style: TextStyle(
+                                      fontSize: 30 * rpx,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white70,
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                            Container(
-                              width: 100 * rpx,
-                              height: 100 * rpx,
-                              padding: EdgeInsets.all(10 * rpx),
-                              alignment: Alignment.center,
-                            ),
-                          ],
+                              Container(
+                                width: 100 * rpx,
+                                height: 100 * rpx,
+                                padding: EdgeInsets.all(10 * rpx),
+                                alignment: Alignment.centerRight,
+                                child: SvgPicture.asset(
+                                  'assets/images/icons/arrow.svg',
+                                  width: 30 * rpx,
+                                  height: 30 * rpx,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                       Container(
                         margin: EdgeInsets.fromLTRB(0, 0, 0, 30 * rpx),
                         height: 100 * rpx,
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(25 * rpx),
-                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(30 * rpx),
                           boxShadow: [
                             BoxShadow(
                               offset: const Offset(0.0, 0.0),
@@ -649,41 +780,50 @@ class _MineState extends State<Mine> {
                             )
                           ],
                         ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Container(
-                              width: 100 * rpx,
-                              height: 100 * rpx,
-                              padding: EdgeInsets.all(20 * rpx),
-                              alignment: Alignment.center,
-                              child: SvgPicture.asset(
-                                'assets/images/icons/setting.svg',
-                                width: 60 * rpx,
-                                height: 60 * rpx,
+                        child: Blur(
+                          rpx: rpx,
+                          radius: 30,
+                          widget: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Container(
+                                width: 100 * rpx,
+                                height: 100 * rpx,
+                                padding: EdgeInsets.all(10 * rpx),
+                                alignment: Alignment.center,
+                                child: SvgPicture.asset(
+                                  'assets/images/icons/setting.svg',
+                                  width: 80 * rpx,
+                                  height: 80 * rpx,
+                                ),
                               ),
-                            ),
-                            Expanded(
-                              child: Container(
-                                alignment: Alignment.centerLeft,
-                                child: Text(
-                                  '设置',
-                                  style: TextStyle(
-                                    fontSize: 30 * rpx,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.black87,
+                              Expanded(
+                                child: Container(
+                                  alignment: Alignment.centerLeft,
+                                  child: Text(
+                                    '设置',
+                                    style: TextStyle(
+                                      fontSize: 30 * rpx,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white70,
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                            Container(
-                              width: 100 * rpx,
-                              height: 100 * rpx,
-                              padding: EdgeInsets.all(10 * rpx),
-                              alignment: Alignment.center,
-                            ),
-                          ],
+                              Container(
+                                width: 100 * rpx,
+                                height: 100 * rpx,
+                                padding: EdgeInsets.all(10 * rpx),
+                                alignment: Alignment.centerRight,
+                                child: SvgPicture.asset(
+                                  'assets/images/icons/arrow.svg',
+                                  width: 30 * rpx,
+                                  height: 30 * rpx,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                       Container(
@@ -693,7 +833,7 @@ class _MineState extends State<Mine> {
                           '荧惑科技集团',
                           style: TextStyle(
                             fontSize: 20 * rpx,
-                            color: Colors.black12,
+                            color: Colors.white30,
                           ),
                         ),
                       ),

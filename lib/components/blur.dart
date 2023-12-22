@@ -12,6 +12,7 @@ class Blur extends StatelessWidget {
       fit: StackFit.expand,
       children: [
         Container(
+          constraints: const BoxConstraints.expand(),
           child: renderRRect(context, rpx!, radius!),
         ),
         Container(
