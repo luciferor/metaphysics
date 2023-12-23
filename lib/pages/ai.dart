@@ -97,12 +97,12 @@ class _AiState extends State<Ai> {
                                   EdgeInsets.fromLTRB(10 * rpx, 0, 10 * rpx, 0),
                               child: TextField(
                                 controller: _textController,
-                                textInputAction: TextInputAction.unspecified,
-                                textAlign: TextAlign.start,
-                                textAlignVertical: TextAlignVertical.center,
-                                enabled: true,
-                                cursorRadius: Radius.circular(10 * rpx),
-                                keyboardType: TextInputType.none,
+                                // textInputAction: TextInputAction.unspecified,
+                                // textAlign: TextAlign.start,
+                                // textAlignVertical: TextAlignVertical.center,
+                                // enabled: true,
+                                // cursorRadius: Radius.circular(10 * rpx),
+                                // keyboardType: TextInputType.none,
                                 decoration: const InputDecoration(
                                   focusedBorder: InputBorder.none,
                                   enabledBorder: InputBorder.none,
