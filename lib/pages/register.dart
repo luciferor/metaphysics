@@ -63,11 +63,11 @@ class _RegisterState extends State<Register> {
                 ),
               ),
               Container(
-                padding: EdgeInsets.fromLTRB(0, 60 * rpx, 0, 10 * rpx),
+                padding: EdgeInsets.fromLTRB(0, 20 * rpx, 0, 10 * rpx),
                 alignment: Alignment.center,
                 child: Shimmer.fromColors(
                   baseColor: const Color.fromARGB(255, 0, 72, 255),
-                  highlightColor: Color.fromARGB(255, 43, 255, 0),
+                  highlightColor: const Color.fromARGB(255, 0, 255, 255),
                   child: Text(
                     '荧惑 Todo.',
                     style: TextStyle(
@@ -93,66 +93,63 @@ class _RegisterState extends State<Register> {
                     (10 * rpx),
                 height: 95 * rpx,
                 decoration: BoxDecoration(
+                  color: const Color.fromARGB(255, 236, 236, 236),
                   borderRadius: BorderRadius.circular(
                     30 * rpx,
                   ),
                 ),
-                child: Blur(
-                  rpx: rpx,
-                  radius: 30,
-                  widget: Padding(
-                    padding: EdgeInsets.all(10 * rpx),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Container(
-                          width: 75 * rpx,
-                          height: 75 * rpx,
-                          margin: EdgeInsets.fromLTRB(0, 0, 20 * rpx, 0),
-                          padding: EdgeInsets.all(15 * rpx),
-                          decoration: BoxDecoration(
-                            color: const Color.fromARGB(168, 236, 242, 248),
-                            borderRadius: BorderRadius.circular(
-                              25 * rpx,
-                            ),
-                          ),
-                          child: SvgPicture.asset(
-                            'assets/images/icons/u.svg',
-                            width: 30 * rpx,
-                            height: 30 * rpx,
+                child: Padding(
+                  padding: EdgeInsets.all(10 * rpx),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Container(
+                        width: 75 * rpx,
+                        height: 75 * rpx,
+                        margin: EdgeInsets.fromLTRB(0, 0, 20 * rpx, 0),
+                        padding: EdgeInsets.all(15 * rpx),
+                        decoration: BoxDecoration(
+                          color: const Color.fromARGB(168, 236, 242, 248),
+                          borderRadius: BorderRadius.circular(
+                            25 * rpx,
                           ),
                         ),
-                        Expanded(
-                          child: TextField(
-                            controller: _emailController,
-                            textInputAction: TextInputAction.unspecified,
-                            textAlignVertical: TextAlignVertical.center,
-                            enabled: true,
-                            cursorRadius: Radius.circular(10 * rpx),
-                            keyboardType: TextInputType.emailAddress,
-                            decoration: const InputDecoration(
-                              focusedBorder: InputBorder.none,
-                              enabledBorder: InputBorder.none,
-                              hintText: '输入邮箱',
-                              hintStyle: TextStyle(color: Colors.grey),
-                              border: OutlineInputBorder(
-                                borderSide: BorderSide.none,
-                              ),
+                        child: SvgPicture.asset(
+                          'assets/images/icons/u.svg',
+                          width: 30 * rpx,
+                          height: 30 * rpx,
+                        ),
+                      ),
+                      Expanded(
+                        child: TextField(
+                          controller: _emailController,
+                          textInputAction: TextInputAction.unspecified,
+                          textAlignVertical: TextAlignVertical.center,
+                          enabled: true,
+                          cursorRadius: Radius.circular(10 * rpx),
+                          keyboardType: TextInputType.emailAddress,
+                          decoration: const InputDecoration(
+                            focusedBorder: InputBorder.none,
+                            enabledBorder: InputBorder.none,
+                            hintText: '输入邮箱',
+                            hintStyle: TextStyle(color: Colors.grey),
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide.none,
                             ),
-                            style: TextStyle(
-                              color: const Color.fromARGB(255, 255, 255, 255),
-                              fontSize: 32 * rpx,
-                            ),
-                            onChanged: (value) {
-                              setState(() {
-                                email = value;
-                              });
-                            },
                           ),
-                        )
-                      ],
-                    ),
+                          style: TextStyle(
+                            color: const Color.fromARGB(255, 255, 255, 255),
+                            fontSize: 32 * rpx,
+                          ),
+                          onChanged: (value) {
+                            setState(() {
+                              email = value;
+                            });
+                          },
+                        ),
+                      )
+                    ],
                   ),
                 ),
               ),
@@ -164,89 +161,85 @@ class _RegisterState extends State<Register> {
                     (10 * rpx),
                 height: 95 * rpx,
                 decoration: BoxDecoration(
+                  color: const Color.fromARGB(255, 236, 236, 236),
                   borderRadius: BorderRadius.circular(
                     30 * rpx,
                   ),
                 ),
-                child: Blur(
-                  rpx: rpx,
-                  radius: 30,
-                  widget: Padding(
-                    padding: EdgeInsets.all(10 * rpx),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Container(
-                          width: 75 * rpx,
-                          height: 75 * rpx,
-                          margin: EdgeInsets.fromLTRB(0, 0, 20 * rpx, 0),
-                          padding: EdgeInsets.all(15 * rpx),
-                          decoration: BoxDecoration(
-                            color: const Color.fromARGB(168, 236, 242, 248),
-                            borderRadius: BorderRadius.circular(
-                              25 * rpx,
-                            ),
-                          ),
-                          child: SvgPicture.asset(
-                            'assets/images/icons/c.svg',
-                            width: 30 * rpx,
-                            height: 30 * rpx,
+                child: Padding(
+                  padding: EdgeInsets.all(10 * rpx),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Container(
+                        width: 75 * rpx,
+                        height: 75 * rpx,
+                        margin: EdgeInsets.fromLTRB(0, 0, 20 * rpx, 0),
+                        padding: EdgeInsets.all(15 * rpx),
+                        decoration: BoxDecoration(
+                          color: const Color.fromARGB(168, 236, 242, 248),
+                          borderRadius: BorderRadius.circular(
+                            25 * rpx,
                           ),
                         ),
-                        Expanded(
-                          child: TextField(
-                            controller: _pwdController,
-                            obscureText: true,
-                            textInputAction: TextInputAction.unspecified,
-                            textAlignVertical: TextAlignVertical.center,
-                            enabled: true,
-                            cursorRadius: Radius.circular(10 * rpx),
-                            keyboardType: TextInputType.emailAddress,
-                            decoration: const InputDecoration(
-                              focusedBorder: InputBorder.none,
-                              enabledBorder: InputBorder.none,
-                              hintText: '输入验证码',
-                              hintStyle: TextStyle(color: Colors.grey),
-                              border: OutlineInputBorder(
-                                borderSide: BorderSide.none,
-                              ),
+                        child: SvgPicture.asset(
+                          'assets/images/icons/c.svg',
+                          width: 30 * rpx,
+                          height: 30 * rpx,
+                        ),
+                      ),
+                      Expanded(
+                        child: TextField(
+                          controller: _pwdController,
+                          obscureText: true,
+                          textInputAction: TextInputAction.unspecified,
+                          textAlignVertical: TextAlignVertical.center,
+                          enabled: true,
+                          cursorRadius: Radius.circular(10 * rpx),
+                          keyboardType: TextInputType.emailAddress,
+                          decoration: const InputDecoration(
+                            focusedBorder: InputBorder.none,
+                            enabledBorder: InputBorder.none,
+                            hintText: '输入验证码',
+                            hintStyle: TextStyle(color: Colors.grey),
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide.none,
                             ),
-                            style: TextStyle(
-                              color: const Color.fromARGB(255, 255, 255, 255),
-                              fontSize: 32 * rpx,
-                            ),
-                            onChanged: (value) {
-                              setState(() {
-                                pwd = value;
-                              });
-                            },
+                          ),
+                          style: TextStyle(
+                            color: const Color.fromARGB(255, 255, 255, 255),
+                            fontSize: 32 * rpx,
+                          ),
+                          onChanged: (value) {
+                            setState(() {
+                              pwd = value;
+                            });
+                          },
+                        ),
+                      ),
+                      Container(
+                        height: 95 * rpx,
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                          color: const Color.fromARGB(255, 255, 255, 255),
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(25 * rpx),
+                            topRight: Radius.circular(25 * rpx),
+                            bottomRight: Radius.circular(25 * rpx),
+                            bottomLeft: Radius.circular(25 * rpx),
                           ),
                         ),
-                        Container(
-                          height: 95 * rpx,
-                          alignment: Alignment.center,
-                          decoration: BoxDecoration(
-                            color: Colors.white.withOpacity(0.2),
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(25 * rpx),
-                              topRight: Radius.circular(25 * rpx),
-                              bottomRight: Radius.circular(25 * rpx),
-                              bottomLeft: Radius.circular(25 * rpx),
-                            ),
-                          ),
-                          padding:
-                              EdgeInsets.fromLTRB(20 * rpx, 0, 20 * rpx, 0),
-                          child: Text(
-                            '获取验证码',
-                            style: TextStyle(
-                              fontSize: 26 * rpx,
-                              color: Color.fromARGB(255, 170, 174, 255),
-                            ),
+                        padding: EdgeInsets.fromLTRB(20 * rpx, 0, 20 * rpx, 0),
+                        child: Text(
+                          '获取验证码',
+                          style: TextStyle(
+                            fontSize: 26 * rpx,
+                            color: Color.fromARGB(255, 48, 39, 229),
                           ),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
               ),
@@ -258,67 +251,64 @@ class _RegisterState extends State<Register> {
                     (10 * rpx),
                 height: 95 * rpx,
                 decoration: BoxDecoration(
+                  color: const Color.fromARGB(255, 236, 236, 236),
                   borderRadius: BorderRadius.circular(
                     30 * rpx,
                   ),
                 ),
-                child: Blur(
-                  rpx: rpx,
-                  radius: 30,
-                  widget: Padding(
-                    padding: EdgeInsets.all(10 * rpx),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Container(
-                          width: 75 * rpx,
-                          height: 75 * rpx,
-                          margin: EdgeInsets.fromLTRB(0, 0, 20 * rpx, 0),
-                          padding: EdgeInsets.all(15 * rpx),
-                          decoration: BoxDecoration(
-                            color: const Color.fromARGB(168, 236, 242, 248),
-                            borderRadius: BorderRadius.circular(
-                              25 * rpx,
-                            ),
-                          ),
-                          child: SvgPicture.asset(
-                            'assets/images/icons/p.svg',
-                            width: 30 * rpx,
-                            height: 30 * rpx,
+                child: Padding(
+                  padding: EdgeInsets.all(10 * rpx),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Container(
+                        width: 75 * rpx,
+                        height: 75 * rpx,
+                        margin: EdgeInsets.fromLTRB(0, 0, 20 * rpx, 0),
+                        padding: EdgeInsets.all(15 * rpx),
+                        decoration: BoxDecoration(
+                          color: const Color.fromARGB(168, 236, 242, 248),
+                          borderRadius: BorderRadius.circular(
+                            25 * rpx,
                           ),
                         ),
-                        Expanded(
-                          child: TextField(
-                            controller: _pwdController,
-                            obscureText: true,
-                            textInputAction: TextInputAction.unspecified,
-                            textAlignVertical: TextAlignVertical.center,
-                            enabled: true,
-                            cursorRadius: Radius.circular(10 * rpx),
-                            keyboardType: TextInputType.emailAddress,
-                            decoration: const InputDecoration(
-                              focusedBorder: InputBorder.none,
-                              enabledBorder: InputBorder.none,
-                              hintText: '输入密码',
-                              hintStyle: TextStyle(color: Colors.grey),
-                              border: OutlineInputBorder(
-                                borderSide: BorderSide.none,
-                              ),
+                        child: SvgPicture.asset(
+                          'assets/images/icons/p.svg',
+                          width: 30 * rpx,
+                          height: 30 * rpx,
+                        ),
+                      ),
+                      Expanded(
+                        child: TextField(
+                          controller: _pwdController,
+                          obscureText: true,
+                          textInputAction: TextInputAction.unspecified,
+                          textAlignVertical: TextAlignVertical.center,
+                          enabled: true,
+                          cursorRadius: Radius.circular(10 * rpx),
+                          keyboardType: TextInputType.emailAddress,
+                          decoration: const InputDecoration(
+                            focusedBorder: InputBorder.none,
+                            enabledBorder: InputBorder.none,
+                            hintText: '输入密码',
+                            hintStyle: TextStyle(color: Colors.grey),
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide.none,
                             ),
-                            style: TextStyle(
-                              color: const Color.fromARGB(255, 255, 255, 255),
-                              fontSize: 32 * rpx,
-                            ),
-                            onChanged: (value) {
-                              setState(() {
-                                pwd = value;
-                              });
-                            },
                           ),
-                        )
-                      ],
-                    ),
+                          style: TextStyle(
+                            color: const Color.fromARGB(255, 255, 255, 255),
+                            fontSize: 32 * rpx,
+                          ),
+                          onChanged: (value) {
+                            setState(() {
+                              pwd = value;
+                            });
+                          },
+                        ),
+                      )
+                    ],
                   ),
                 ),
               ),
@@ -330,67 +320,64 @@ class _RegisterState extends State<Register> {
                     (10 * rpx),
                 height: 95 * rpx,
                 decoration: BoxDecoration(
+                  color: const Color.fromARGB(255, 236, 236, 236),
                   borderRadius: BorderRadius.circular(
                     30 * rpx,
                   ),
                 ),
-                child: Blur(
-                  rpx: rpx,
-                  radius: 30,
-                  widget: Padding(
-                    padding: EdgeInsets.all(10 * rpx),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Container(
-                          width: 75 * rpx,
-                          height: 75 * rpx,
-                          margin: EdgeInsets.fromLTRB(0, 0, 20 * rpx, 0),
-                          padding: EdgeInsets.all(15 * rpx),
-                          decoration: BoxDecoration(
-                            color: const Color.fromARGB(168, 236, 242, 248),
-                            borderRadius: BorderRadius.circular(
-                              25 * rpx,
-                            ),
-                          ),
-                          child: SvgPicture.asset(
-                            'assets/images/icons/r.svg',
-                            width: 30 * rpx,
-                            height: 30 * rpx,
+                child: Padding(
+                  padding: EdgeInsets.all(10 * rpx),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Container(
+                        width: 75 * rpx,
+                        height: 75 * rpx,
+                        margin: EdgeInsets.fromLTRB(0, 0, 20 * rpx, 0),
+                        padding: EdgeInsets.all(15 * rpx),
+                        decoration: BoxDecoration(
+                          color: const Color.fromARGB(168, 236, 242, 248),
+                          borderRadius: BorderRadius.circular(
+                            25 * rpx,
                           ),
                         ),
-                        Expanded(
-                          child: TextField(
-                            controller: _pwdController,
-                            obscureText: true,
-                            textInputAction: TextInputAction.unspecified,
-                            textAlignVertical: TextAlignVertical.center,
-                            enabled: true,
-                            cursorRadius: Radius.circular(10 * rpx),
-                            keyboardType: TextInputType.emailAddress,
-                            decoration: const InputDecoration(
-                              focusedBorder: InputBorder.none,
-                              enabledBorder: InputBorder.none,
-                              hintText: '重复密码',
-                              hintStyle: TextStyle(color: Colors.grey),
-                              border: OutlineInputBorder(
-                                borderSide: BorderSide.none,
-                              ),
+                        child: SvgPicture.asset(
+                          'assets/images/icons/r.svg',
+                          width: 30 * rpx,
+                          height: 30 * rpx,
+                        ),
+                      ),
+                      Expanded(
+                        child: TextField(
+                          controller: _pwdController,
+                          obscureText: true,
+                          textInputAction: TextInputAction.unspecified,
+                          textAlignVertical: TextAlignVertical.center,
+                          enabled: true,
+                          cursorRadius: Radius.circular(10 * rpx),
+                          keyboardType: TextInputType.emailAddress,
+                          decoration: const InputDecoration(
+                            focusedBorder: InputBorder.none,
+                            enabledBorder: InputBorder.none,
+                            hintText: '重复密码',
+                            hintStyle: TextStyle(color: Colors.grey),
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide.none,
                             ),
-                            style: TextStyle(
-                              color: const Color.fromARGB(255, 255, 255, 255),
-                              fontSize: 32 * rpx,
-                            ),
-                            onChanged: (value) {
-                              setState(() {
-                                pwd = value;
-                              });
-                            },
                           ),
-                        )
-                      ],
-                    ),
+                          style: TextStyle(
+                            color: const Color.fromARGB(255, 255, 255, 255),
+                            fontSize: 32 * rpx,
+                          ),
+                          onChanged: (value) {
+                            setState(() {
+                              pwd = value;
+                            });
+                          },
+                        ),
+                      )
+                    ],
                   ),
                 ),
               ),
@@ -403,23 +390,21 @@ class _RegisterState extends State<Register> {
                   height: 100 * rpx,
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
+                    // color: const Color.fromARGB(255, 236, 236, 236),
+                    color: const Color.fromARGB(255, 0, 72, 255),
                     borderRadius: BorderRadius.circular(30 * rpx),
                   ),
-                  child: Blur(
-                    rpx: rpx,
-                    radius: 30,
-                    widget: Container(
-                      alignment: Alignment.center,
-                      child: GestureDetector(
-                        onTap: () {},
-                        child: Text(
-                          '立即注册',
-                          style: TextStyle(
-                            fontSize: 38 * rpx,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white54,
-                            letterSpacing: 10 * rpx,
-                          ),
+                  child: Container(
+                    alignment: Alignment.center,
+                    child: GestureDetector(
+                      onTap: () {},
+                      child: Text(
+                        '立即注册',
+                        style: TextStyle(
+                          fontSize: 38 * rpx,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          letterSpacing: 10 * rpx,
                         ),
                       ),
                     ),

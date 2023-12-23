@@ -34,32 +34,34 @@ class _BaseState extends State<Base> with SingleTickerProviderStateMixin {
         //   height: MediaQuery.of(context).size.height, //整个屏幕的高度
         // ),
         //模糊动画，暂时注释，损耗虚拟机资源
-        ClipRect(
-            child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 0.0, sigmaY: 0.0),
-          child: Opacity(
-            opacity: 1,
-            child: Container(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height,
-              decoration: const BoxDecoration(
-                color: Color.fromARGB(255, 245, 245, 245),
-                gradient: LinearGradient(
-                  begin: Alignment.centerLeft,
-                  end: Alignment.topRight,
-                  colors: [
-                    Color.fromARGB(255, 248, 204, 249),
-                    Color.fromARGB(255, 66, 115, 237),
-                  ],
-                ),
-              ),
-            ),
+        // ClipRect(
+        //     child: BackdropFilter(
+        //   filter: ImageFilter.blur(sigmaX: 0.0, sigmaY: 0.0),
+        //   child: Opacity(
+        //     opacity: 1,
+        //     child: Container(
+        //       width: MediaQuery.of(context).size.width,
+        //       height: MediaQuery.of(context).size.height,
+        //       decoration: const BoxDecoration(
+        //         color: Color.fromARGB(255, 245, 245, 245),
+        //         gradient: LinearGradient(
+        //           begin: Alignment.topCenter,
+        //           end: Alignment.bottomCenter,
+        //           colors: [
+        //             Color.fromARGB(255, 66, 115, 237),
+        //             Color.fromARGB(255, 255, 255, 255),
+        //           ],
+        //         ),
+        //       ),
+        //     ),
+        //   ),
+        // )),
+        SingleChildScrollView(
+          child: SizedBox(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+            child: widget.childs,
           ),
-        )),
-        Container(
-          constraints: const BoxConstraints.expand(),
-          padding: const EdgeInsets.all(0),
-          child: widget.childs,
         ),
       ],
     ));

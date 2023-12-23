@@ -28,91 +28,77 @@ class _LoginState extends State<Login> {
     double bp = MediaQuery.of(context).padding.bottom;
     return Base(
       childs: Center(
-        child: Padding(
-          padding: EdgeInsets.fromLTRB(
-              80 * rpx, tp + 50 * rpx, 80 * rpx, bp + 50 * rpx),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Container(
-                width: 290 * rpx,
-                height: 290 * rpx,
-                padding: EdgeInsets.all(30 * rpx),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(190 * rpx),
-                ),
-                child: Blur(
-                  rpx: rpx,
-                  radius: 290 * rpx,
-                  widget: Container(
-                    padding: EdgeInsets.all(30 * rpx),
-                    constraints: const BoxConstraints.expand(),
-                    width: 290 * rpx,
-                    height: 290 * rpx,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(
-                        290 * rpx,
-                      ),
-                      child: const Image(
-                        image: AssetImage('assets/images/8e3a09875693fb.png'),
+        child: Container(
+          child: Padding(
+            padding: EdgeInsets.fromLTRB(
+                80 * rpx, tp + 50 * rpx, 80 * rpx, bp + 50 * rpx),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                  width: 290 * rpx,
+                  height: 290 * rpx,
+                  padding: EdgeInsets.all(30 * rpx),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(190 * rpx),
+                  ),
+                  child: Blur(
+                    rpx: rpx,
+                    radius: 290 * rpx,
+                    widget: Container(
+                      padding: EdgeInsets.all(30 * rpx),
+                      constraints: const BoxConstraints.expand(),
+                      width: 290 * rpx,
+                      height: 290 * rpx,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(
+                          290 * rpx,
+                        ),
+                        child: const Image(
+                          image: AssetImage('assets/images/8e3a09875693fb.png'),
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
-              // CustomPaint(
-              //   painter: GradientBoundPainter(
-              //     colors: [
-              //       const Color.fromARGB(255, 119, 3, 130),
-              //       const Color.fromARGB(255, 6, 15, 174),
-              //     ],
-              //     width: 200 * rpx,
-              //     height: 200 * rpx,
-              //     strokeWidth: 8 * rpx,
-              //     radius: 200 * rpx,
-              //   ),
-              //   child:
-              // ),
-              Container(
-                padding: EdgeInsets.fromLTRB(0, 60 * rpx, 0, 10 * rpx),
-                alignment: Alignment.center,
-                child: Shimmer.fromColors(
-                  baseColor: const Color.fromARGB(255, 0, 72, 255),
-                  highlightColor: Color.fromARGB(255, 43, 255, 0),
-                  child: Text(
-                    '荧惑 Todo.',
-                    style: TextStyle(
-                      fontSize: 49 * rpx,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
+                Container(
+                  padding: EdgeInsets.fromLTRB(0, 20 * rpx, 0, 10 * rpx),
+                  alignment: Alignment.center,
+                  child: Shimmer.fromColors(
+                    baseColor: const Color.fromARGB(255, 0, 72, 255),
+                    highlightColor: const Color.fromARGB(255, 0, 255, 255),
+                    child: Text(
+                      '荧惑 Todo.',
+                      style: TextStyle(
+                        fontSize: 49 * rpx,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
                     ),
                   ),
                 ),
-              ),
-              Text(
-                '您专属的时间管理大师',
-                style: TextStyle(
-                  color: Colors.grey,
-                  fontSize: 24 * rpx,
-                ),
-              ),
-              Container(
-                height: 30 * rpx,
-              ),
-              Container(
-                width: ((MediaQuery.of(context).size.width + 200) * rpx) -
-                    (10 * rpx),
-                height: 95 * rpx,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(
-                    30 * rpx,
+                Text(
+                  '您专属的时间管理大师',
+                  style: TextStyle(
+                    color: Colors.grey,
+                    fontSize: 24 * rpx,
                   ),
                 ),
-                child: Blur(
-                  rpx: rpx,
-                  radius: 30,
-                  widget: Padding(
+                Container(
+                  height: 50 * rpx,
+                ),
+                Container(
+                  width: ((MediaQuery.of(context).size.width + 200) * rpx) -
+                      (10 * rpx),
+                  height: 95 * rpx,
+                  decoration: BoxDecoration(
+                    color: const Color.fromARGB(255, 236, 236, 236),
+                    borderRadius: BorderRadius.circular(
+                      30 * rpx,
+                    ),
+                  ),
+                  child: Padding(
                     padding: EdgeInsets.all(10 * rpx),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -167,23 +153,20 @@ class _LoginState extends State<Login> {
                     ),
                   ),
                 ),
-              ),
-              Container(
-                height: 60 * rpx,
-              ),
-              Container(
-                width: ((MediaQuery.of(context).size.width + 200) * rpx) -
-                    (10 * rpx),
-                height: 95 * rpx,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(
-                    30 * rpx,
-                  ),
+                Container(
+                  height: 60 * rpx,
                 ),
-                child: Blur(
-                  rpx: rpx,
-                  radius: 30,
-                  widget: Padding(
+                Container(
+                  width: ((MediaQuery.of(context).size.width + 200) * rpx) -
+                      (10 * rpx),
+                  height: 95 * rpx,
+                  decoration: BoxDecoration(
+                    color: const Color.fromARGB(255, 236, 236, 236),
+                    borderRadius: BorderRadius.circular(
+                      30 * rpx,
+                    ),
+                  ),
+                  child: Padding(
                     padding: EdgeInsets.all(10 * rpx),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -239,22 +222,20 @@ class _LoginState extends State<Login> {
                     ),
                   ),
                 ),
-              ),
-              Container(
-                margin: EdgeInsets.fromLTRB(0, 100 * rpx, 0, 0),
-                height: 200 * rpx,
-                alignment: Alignment.center,
-                child: Container(
-                  width: 300 * rpx,
-                  height: 100 * rpx,
+                Container(
+                  margin: EdgeInsets.fromLTRB(0, 100 * rpx, 0, 0),
+                  height: 200 * rpx,
                   alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(30 * rpx),
-                  ),
-                  child: Blur(
-                    rpx: rpx,
-                    radius: 30,
-                    widget: Container(
+                  child: Container(
+                    width: 300 * rpx,
+                    height: 100 * rpx,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      // color: const Color.fromARGB(255, 236, 236, 236),
+                      color: const Color.fromARGB(255, 0, 72, 255),
+                      borderRadius: BorderRadius.circular(30 * rpx),
+                    ),
+                    child: Container(
                       alignment: Alignment.center,
                       child: GestureDetector(
                         onTap: () {
@@ -270,7 +251,7 @@ class _LoginState extends State<Login> {
                           style: TextStyle(
                             fontSize: 38 * rpx,
                             fontWeight: FontWeight.bold,
-                            color: Colors.white54,
+                            color: Colors.white,
                             letterSpacing: 10 * rpx,
                           ),
                         ),
@@ -278,22 +259,22 @@ class _LoginState extends State<Login> {
                     ),
                   ),
                 ),
-              ),
-              Container(
-                padding: EdgeInsets.fromLTRB(0, 30 * rpx, 0, 0),
-                child: Ani(
-                  radius: 200 * rpx,
-                  pages: const Register(),
-                  child: Text(
-                    '没有账号,去注册',
-                    style: TextStyle(
-                      color: const Color.fromARGB(255, 45, 85, 245),
-                      fontSize: 26 * rpx,
+                Container(
+                  padding: EdgeInsets.fromLTRB(0, 30 * rpx, 0, 0),
+                  child: Ani(
+                    radius: 200 * rpx,
+                    pages: const Register(),
+                    child: Text(
+                      '没有账号,去注册',
+                      style: TextStyle(
+                        color: const Color.fromARGB(255, 45, 85, 245),
+                        fontSize: 26 * rpx,
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
