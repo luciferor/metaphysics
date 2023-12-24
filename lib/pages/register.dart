@@ -30,8 +30,7 @@ class _RegisterState extends State<Register> {
     return Base(
       childs: Center(
         child: Padding(
-          padding: EdgeInsets.fromLTRB(
-              80 * rpx, tp + 50 * rpx, 80 * rpx, bp + 50 * rpx),
+          padding: EdgeInsets.fromLTRB(80 * rpx, tp, 80 * rpx, bp + 50 * rpx),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -63,7 +62,7 @@ class _RegisterState extends State<Register> {
                 ),
               ),
               Container(
-                padding: EdgeInsets.fromLTRB(0, 20 * rpx, 0, 10 * rpx),
+                padding: EdgeInsets.fromLTRB(0, 0, 0, 10 * rpx),
                 alignment: Alignment.center,
                 child: Shimmer.fromColors(
                   baseColor: const Color.fromARGB(255, 0, 72, 255),
@@ -382,7 +381,7 @@ class _RegisterState extends State<Register> {
                 ),
               ),
               Container(
-                margin: EdgeInsets.fromLTRB(0, 100 * rpx, 0, 0),
+                margin: EdgeInsets.fromLTRB(0, 50 * rpx, 0, 0),
                 height: 200 * rpx,
                 alignment: Alignment.center,
                 child: Container(
