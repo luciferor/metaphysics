@@ -92,7 +92,7 @@ class _RegisterState extends State<Register> {
                     (10 * rpx),
                 height: 95 * rpx,
                 decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 236, 236, 236),
+                  color: const Color.fromARGB(255, 247, 247, 247),
                   borderRadius: BorderRadius.circular(
                     30 * rpx,
                   ),
@@ -160,7 +160,7 @@ class _RegisterState extends State<Register> {
                     (10 * rpx),
                 height: 95 * rpx,
                 decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 236, 236, 236),
+                  color: const Color.fromARGB(255, 247, 247, 247),
                   borderRadius: BorderRadius.circular(
                     30 * rpx,
                   ),
@@ -218,23 +218,28 @@ class _RegisterState extends State<Register> {
                         ),
                       ),
                       Container(
+                        width: 200 * rpx,
                         height: 95 * rpx,
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                          color: const Color.fromARGB(255, 255, 255, 255),
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(25 * rpx),
-                            topRight: Radius.circular(25 * rpx),
-                            bottomRight: Radius.circular(25 * rpx),
-                            bottomLeft: Radius.circular(25 * rpx),
+                        padding: EdgeInsets.fromLTRB(20 * rpx, 0, 0, 0),
+                        child: FloatingActionButton(
+                          onPressed: () {},
+                          // isExtended: true,
+                          backgroundColor:
+                              const Color.fromARGB(255, 255, 255, 255),
+                          elevation: 0,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(25 * rpx),
+                            side: const BorderSide(
+                              width: 2,
+                              color: Color.fromARGB(0, 235, 26, 26),
+                            ),
                           ),
-                        ),
-                        padding: EdgeInsets.fromLTRB(20 * rpx, 0, 20 * rpx, 0),
-                        child: Text(
-                          '获取验证码',
-                          style: TextStyle(
-                            fontSize: 26 * rpx,
-                            color: Color.fromARGB(255, 48, 39, 229),
+                          child: Text(
+                            '获取验证码',
+                            style: TextStyle(
+                              fontSize: 26 * rpx,
+                              color: const Color.fromARGB(255, 48, 39, 229),
+                            ),
                           ),
                         ),
                       ),
@@ -250,7 +255,7 @@ class _RegisterState extends State<Register> {
                     (10 * rpx),
                 height: 95 * rpx,
                 decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 236, 236, 236),
+                  color: const Color.fromARGB(255, 247, 247, 247),
                   borderRadius: BorderRadius.circular(
                     30 * rpx,
                   ),
@@ -319,7 +324,7 @@ class _RegisterState extends State<Register> {
                     (10 * rpx),
                 height: 95 * rpx,
                 decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 236, 236, 236),
+                  color: const Color.fromARGB(255, 247, 247, 247),
                   borderRadius: BorderRadius.circular(
                     30 * rpx,
                   ),
@@ -381,43 +386,49 @@ class _RegisterState extends State<Register> {
                 ),
               ),
               Container(
-                margin: EdgeInsets.fromLTRB(0, 50 * rpx, 0, 0),
+                margin: EdgeInsets.fromLTRB(0, 100 * rpx, 0, 0),
                 height: 200 * rpx,
                 alignment: Alignment.center,
                 child: Container(
                   width: 300 * rpx,
                   height: 100 * rpx,
-                  alignment: Alignment.center,
                   decoration: BoxDecoration(
                     // color: const Color.fromARGB(255, 236, 236, 236),
                     color: const Color.fromARGB(255, 0, 72, 255),
                     borderRadius: BorderRadius.circular(30 * rpx),
                   ),
-                  child: Container(
-                    alignment: Alignment.center,
-                    child: GestureDetector(
-                      onTap: () {},
-                      child: Text(
-                        '立即注册',
-                        style: TextStyle(
-                          fontSize: 38 * rpx,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                          letterSpacing: 10 * rpx,
-                        ),
+                  child: FloatingActionButton(
+                    backgroundColor: const Color.fromARGB(255, 0, 72, 255),
+                    onPressed: () {},
+                    child: Text(
+                      '立即注册',
+                      style: TextStyle(
+                        fontSize: 38 * rpx,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                        letterSpacing: 10 * rpx,
                       ),
                     ),
                   ),
                 ),
               ),
               Container(
-                padding: EdgeInsets.fromLTRB(0, 30 * rpx, 0, 0),
-                child: GestureDetector(
-                  onTap: () {
+                width: 300 * rpx,
+                padding: EdgeInsets.fromLTRB(0, 10 * rpx, 0, 0),
+                child: FloatingActionButton(
+                  backgroundColor: Colors.transparent,
+                  focusColor: Colors.transparent,
+                  hoverColor: Colors.transparent,
+                  splashColor: Colors.transparent,
+                  elevation: 0,
+                  focusElevation: 0,
+                  hoverElevation: 0,
+                  highlightElevation: 0,
+                  onPressed: () {
                     Navigator.pop(context);
                   },
                   child: Text(
-                    '已有账号，去登录',
+                    '已有账号,去登录',
                     style: TextStyle(
                       color: const Color.fromARGB(255, 45, 85, 245),
                       fontSize: 26 * rpx,

@@ -23,6 +23,7 @@ class _BaseState extends State<Base> with SingleTickerProviderStateMixin {
     // double rpx = MediaQuery.of(context).size.width / 750;
     // double tp = MediaQuery.of(context).padding.top;
     // double bp = MediaQuery.of(context).padding.bottom;
+
     return Scaffold(
         body: Stack(
       fit: StackFit.expand,
@@ -57,12 +58,19 @@ class _BaseState extends State<Base> with SingleTickerProviderStateMixin {
         //   ),
         // )),
         SingleChildScrollView(
-          child: SizedBox(
+          child: Container(
+            constraints: const BoxConstraints.expand(),
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
             child: widget.childs,
           ),
         ),
+        // Positioned(
+        //   child: Container(
+        //     height: MediaQuery.of(context).size.height,
+        //     child: Image.asset('assets/images/aia.gif'),
+        //   ),
+        // ),
       ],
     ));
   }

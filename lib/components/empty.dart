@@ -11,19 +11,14 @@ class Empty extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Container(
-            width: 400 * rpx,
-            height: 400 * rpx,
-            margin: EdgeInsets.fromLTRB(0, 0, 0, 100 * rpx),
-            child: Image.asset('assets/images/8e3a09875693fb.png'),
-          ),
+          Image.asset('assets/images/aia.gif'),
           Container(
             alignment: Alignment.center,
             child: Shimmer.fromColors(
-              baseColor: Colors.black87,
-              highlightColor: Colors.white,
+              baseColor: const Color.fromARGB(221, 9, 53, 247),
+              highlightColor: const Color.fromARGB(255, 0, 255, 213),
               child: Text(
-                'ChatGPT!',
+                'Ai小惑!',
                 style: TextStyle(
                   fontSize: 72 * rpx,
                   fontWeight: FontWeight.bold,
@@ -32,6 +27,7 @@ class Empty extends StatelessWidget {
               ),
             ),
           ),
+          const Text('您的专属智能助手~'),
         ],
       ),
     );

@@ -33,6 +33,7 @@ class _IndexState extends State<Index> {
                   padding: EdgeInsets.fromLTRB(20 * rpx, 0, 0, 0),
                   child: FloatingActionButton(
                     onPressed: () {},
+                    backgroundColor: const Color.fromARGB(255, 45, 85, 245),
                     child: const Icon(
                       Icons.add,
                     ),
@@ -141,6 +142,7 @@ class _IndexState extends State<Index> {
                       padding: EdgeInsets.fromLTRB(20 * rpx, 0, 20 * rpx, 0),
                       child: FloatingActionButton(
                         onPressed: () {},
+                        backgroundColor: const Color.fromARGB(255, 45, 85, 245),
                         child: Row(
                           children: [
                             Container(
@@ -149,7 +151,7 @@ class _IndexState extends State<Index> {
                               child: const Icon(Icons.date_range),
                             ),
                             Text(
-                              '2023-12-24',
+                              '2023年12月',
                               style: TextStyle(
                                 fontSize: 32 * rpx,
                                 color: Colors.white,
@@ -167,9 +169,9 @@ class _IndexState extends State<Index> {
                         onPressed: () {},
                         elevation: 0,
                         backgroundColor:
-                            const Color.fromARGB(255, 247, 249, 255),
+                            const Color.fromARGB(255, 247, 247, 247),
                         child: const Icon(
-                          Icons.arrow_forward_ios,
+                          Icons.format_list_bulleted_add,
                           color: Colors.black38,
                         ),
                       ),
@@ -191,7 +193,7 @@ class _IndexState extends State<Index> {
                       margin: EdgeInsets.fromLTRB(0, 0, 20 * rpx, 0),
                       decoration: BoxDecoration(
                         color: msg == '24'
-                            ? const Color.fromARGB(255, 145, 7, 209)
+                            ? const Color.fromARGB(255, 210, 2, 218)
                             : const Color.fromARGB(255, 232, 232, 232),
                         borderRadius: BorderRadius.circular(30 * rpx),
                       ),
@@ -276,6 +278,8 @@ class _IndexState extends State<Index> {
                           height: 80 * rpx,
                           child: FloatingActionButton(
                             onPressed: () {},
+                            backgroundColor:
+                                const Color.fromARGB(255, 45, 85, 245),
                             child: Text(
                               '去完成',
                               style: TextStyle(

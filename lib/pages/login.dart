@@ -93,7 +93,7 @@ class _LoginState extends State<Login> {
                       (10 * rpx),
                   height: 95 * rpx,
                   decoration: BoxDecoration(
-                    color: const Color.fromARGB(255, 236, 236, 236),
+                    color: const Color.fromARGB(255, 247, 247, 247),
                     borderRadius: BorderRadius.circular(
                       30 * rpx,
                     ),
@@ -161,7 +161,7 @@ class _LoginState extends State<Login> {
                       (10 * rpx),
                   height: 95 * rpx,
                   decoration: BoxDecoration(
-                    color: const Color.fromARGB(255, 236, 236, 236),
+                    color: const Color.fromARGB(255, 247, 247, 247),
                     borderRadius: BorderRadius.circular(
                       30 * rpx,
                     ),
@@ -229,41 +229,53 @@ class _LoginState extends State<Login> {
                   child: Container(
                     width: 300 * rpx,
                     height: 100 * rpx,
-                    alignment: Alignment.center,
                     decoration: BoxDecoration(
                       // color: const Color.fromARGB(255, 236, 236, 236),
                       color: const Color.fromARGB(255, 0, 72, 255),
                       borderRadius: BorderRadius.circular(30 * rpx),
                     ),
-                    child: Container(
-                      alignment: Alignment.center,
-                      child: GestureDetector(
-                        onTap: () {
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const Homie(),
-                            ),
-                          );
-                        },
-                        child: Text(
-                          '登录',
-                          style: TextStyle(
-                            fontSize: 38 * rpx,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                            letterSpacing: 10 * rpx,
+                    child: FloatingActionButton(
+                      backgroundColor: const Color.fromARGB(255, 0, 72, 255),
+                      onPressed: () {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const Homie(),
                           ),
+                        );
+                      },
+                      child: Text(
+                        '登录',
+                        style: TextStyle(
+                          fontSize: 38 * rpx,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          letterSpacing: 10 * rpx,
                         ),
                       ),
                     ),
                   ),
                 ),
                 Container(
-                  padding: EdgeInsets.fromLTRB(0, 30 * rpx, 0, 0),
-                  child: Ani(
-                    radius: 200 * rpx,
-                    pages: const Register(),
+                  width: 300 * rpx,
+                  padding: EdgeInsets.fromLTRB(0, 10 * rpx, 0, 0),
+                  child: FloatingActionButton(
+                    backgroundColor: Colors.transparent,
+                    focusColor: Colors.transparent,
+                    hoverColor: Colors.transparent,
+                    splashColor: Colors.transparent,
+                    elevation: 0,
+                    focusElevation: 0,
+                    hoverElevation: 0,
+                    highlightElevation: 0,
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const Register(),
+                        ),
+                      );
+                    },
                     child: Text(
                       '没有账号,去注册',
                       style: TextStyle(

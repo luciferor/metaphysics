@@ -20,10 +20,12 @@ class Ai extends StatefulWidget {
 class _AiState extends State<Ai> {
   final TextEditingController _textController = TextEditingController();
   final ScrollController _scrollController = ScrollController();
+  final FocusNode _focusnode = FocusNode();
   final dio = Dio();
   String? msg;
   String? sent;
   String? total;
+  bool? loading = false;
   List<Map<String, dynamic>> msgdata = [];
   bool showEmpty = false;
   @override
@@ -34,34 +36,72 @@ class _AiState extends State<Ai> {
   @override
   Widget build(BuildContext context) {
     double rpx = MediaQuery.of(context).size.width / 750;
+    double tp = MediaQuery.of(context).padding.top;
     return Base(
       childs: Padding(
         padding: EdgeInsets.all(30 * rpx),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
+            Container(
+              padding: EdgeInsets.fromLTRB(0, tp, 0, 20 * rpx),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    width: 60 * rpx,
+                    height: 60 * rpx,
+                    child: FloatingActionButton(
+                      elevation: 0,
+                      backgroundColor: const Color.fromARGB(255, 247, 247, 247),
+                      child: const Icon(
+                        Icons.keyboard_arrow_left,
+                        color: Colors.black26,
+                      ),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                    ),
+                  ),
+                  SizedBox(
+                    width: 60 * rpx,
+                    height: 60 * rpx,
+                    child: FloatingActionButton(
+                      backgroundColor: Colors.transparent,
+                      foregroundColor: Colors.black54,
+                      elevation: 0,
+                      focusElevation: 0,
+                      highlightElevation: 0,
+                      onPressed: () {},
+                      child: const Icon(Icons.history_toggle_off),
+                    ),
+                  ),
+                ],
+              ),
+            ),
             Expanded(
               child: Container(
-                color: Colors.transparent,
                 child: msgdata.isEmpty
                     ? const Empty()
                     : Container(
-                        alignment: Alignment.topLeft,
+                        alignment: Alignment.topCenter,
                         child: ListView(
-                            controller: _scrollController,
-                            children: msgdata.map((msg) {
-                              // 在此处处理数据
-                              return msg['role'] == 'user'
-                                  ? rendereRightMsg(rpx, msg['content'])
-                                  : rendereLeftMsg(rpx, msg['content']);
-                            }).toList()),
+                          controller: _scrollController,
+                          children: msgdata.map((msg) {
+                            // 在此处处理数据
+                            return msg['role'] == 'user'
+                                ? rendereRightMsg(rpx, msg['content'])
+                                : rendereLeftMsg(rpx, msg['content']);
+                          }).toList(),
+                        ),
                       ),
               ),
             ),
             Container(
               padding: EdgeInsets.all(10 * rpx),
               decoration: BoxDecoration(
-                color: const Color.fromARGB(255, 236, 236, 236),
+                color: const Color.fromARGB(255, 247, 247, 247),
                 borderRadius: BorderRadius.circular(30 * rpx),
               ),
               child: Row(
@@ -71,18 +111,9 @@ class _AiState extends State<Ai> {
                   SizedBox(
                     width: 80 * rpx,
                     height: 80 * rpx,
-                    child: FloatingActionButton(
-                      backgroundColor: const Color.fromARGB(255, 236, 242, 248),
-                      elevation: 0,
-                      highlightElevation: 0,
-                      child: SvgPicture.asset(
-                        'assets/images/icons/logs.svg',
-                        width: 50 * rpx,
-                        height: 50 * rpx,
-                      ),
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(30 * rpx),
+                      child: Image.asset('assets/images/aia.gif'),
                     ),
                   ),
                   Expanded(
@@ -93,12 +124,12 @@ class _AiState extends State<Ai> {
                         borderRadius: BorderRadius.circular(30 * rpx),
                       ),
                       child: TextField(
+                        focusNode: _focusnode,
                         controller: _textController,
                         minLines: 1,
                         maxLines: 5,
-                        textInputAction: TextInputAction.newline,
+                        textInputAction: TextInputAction.send,
                         textAlignVertical: TextAlignVertical.center,
-                        enabled: true,
                         cursorRadius: Radius.circular(10 * rpx),
                         decoration: InputDecoration(
                           focusedBorder: InputBorder.none,
@@ -120,41 +151,49 @@ class _AiState extends State<Ai> {
                             msg = value;
                           });
                         },
+                        onTapOutside: (event) {
+                          _focusnode.unfocus();
+                        },
+                        onSubmitted: (value) {
+                          if (_textController.text.isNotEmpty) {
+                            setState(
+                              () {
+                                msgdata.add({
+                                  'content': _textController.text,
+                                  'role': 'user',
+                                });
+                                loading = true;
+                                _focusnode.unfocus();
+                              },
+                            );
+                            Future.delayed(const Duration(milliseconds: 500),
+                                () {
+                              _scrollController.animateTo(
+                                  _scrollController.position.maxScrollExtent,
+                                  duration: const Duration(milliseconds: 1000),
+                                  curve: Curves.easeInCubic);
+                            });
+                            httpTest(_textController.text);
+                          }
+                        },
                       ),
                     ),
                   ),
                   SizedBox(
                     width: 80 * rpx,
                     height: 80 * rpx,
-                    // padding: EdgeInsets.all(10 * rpx),
                     child: FloatingActionButton(
-                      // backgroundColor: const Color.fromARGB(168, 236, 242, 248),
-                      backgroundColor: Colors.transparent,
+                      backgroundColor: const Color.fromARGB(255, 206, 206, 206),
+                      foregroundColor: Colors.white70,
+                      splashColor: const Color.fromARGB(255, 0, 72, 255),
                       elevation: 0,
                       highlightElevation: 0,
-                      child: SvgPicture.asset(
-                        'assets/images/icons/send.svg',
-                        width: 50 * rpx,
-                        height: 50 * rpx,
-                      ),
+                      child: const Icon(Icons.add),
                       onPressed: () {
-                        if (_textController.text.isNotEmpty) {
-                          setState(
-                            () {
-                              msgdata.add({
-                                'content': _textController.text,
-                                'role': 'user',
-                              });
-                            },
-                          );
-                          Future.delayed(const Duration(milliseconds: 500), () {
-                            _scrollController.animateTo(
-                                _scrollController.position.maxScrollExtent,
-                                duration: const Duration(milliseconds: 1000),
-                                curve: Curves.easeInCubic);
-                          });
-                          httpTest(_textController.text);
-                        }
+                        setState(() {
+                          msgdata = [];
+                        });
+                        _focusnode.requestFocus();
                       },
                     ),
                   ),
@@ -168,8 +207,10 @@ class _AiState extends State<Ai> {
   }
 
   httpTest(String keywords) async {
+    String keywords0 = keywords;
+    _textController.text = '';
     Https https = Https();
-    Map<String, dynamic> params = {"keywords": keywords};
+    Map<String, dynamic> params = {"keywords": keywords0};
     Response res = await https.post(Apis.openaiapi, params);
     Autogenerated ag = Autogenerated.fromJson(json.decode(res.data));
     if (ag.code == 200) {
@@ -178,8 +219,8 @@ class _AiState extends State<Ai> {
           'content': ag.message?.choices?[0].message?.content,
           'role': ag.message?.choices?[0].message?.role,
         });
+        loading = false;
       });
-      _textController.text = ''; //成功后清空输入框
       Future.delayed(const Duration(milliseconds: 500), () {
         _scrollController.animateTo(_scrollController.position.maxScrollExtent,
             duration: const Duration(milliseconds: 1000),

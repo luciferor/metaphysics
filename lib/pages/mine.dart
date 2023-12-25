@@ -29,23 +29,23 @@ class _MineState extends State<Mine> {
           children: [
             Container(
               padding: EdgeInsets.fromLTRB(
-                  40 * rpx, tp + 40 * rpx, 40 * rpx, 20 * rpx),
+                  40 * rpx, tp + 40 * rpx, 40 * rpx, 40 * rpx),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Container(
-                    width: 70 * rpx,
-                    height: 70 * rpx,
+                    width: 60 * rpx,
+                    height: 60 * rpx,
                     alignment: Alignment.center,
                     child: FloatingActionButton(
                       onPressed: () {
                         Navigator.pop(context);
                       },
-                      backgroundColor: const Color.fromARGB(255, 247, 249, 255),
+                      backgroundColor: const Color.fromARGB(255, 247, 247, 247),
                       elevation: 0,
                       child: const Icon(
-                        Icons.arrow_back_ios_new,
+                        Icons.keyboard_arrow_left,
                         color: Colors.black45,
                       ),
                     ),
@@ -63,7 +63,7 @@ class _MineState extends State<Mine> {
                           ),
                         );
                       },
-                      backgroundColor: const Color.fromARGB(255, 247, 249, 255),
+                      backgroundColor: const Color.fromARGB(255, 247, 247, 247),
                       elevation: 0,
                       child: const Icon(
                         Icons.settings,
