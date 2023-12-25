@@ -50,27 +50,6 @@ class _MineState extends State<Mine> {
                       ),
                     ),
                   ),
-                  Container(
-                    width: 70 * rpx,
-                    height: 70 * rpx,
-                    alignment: Alignment.center,
-                    child: FloatingActionButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const Setting(),
-                          ),
-                        );
-                      },
-                      backgroundColor: const Color.fromARGB(255, 247, 247, 247),
-                      elevation: 0,
-                      child: const Icon(
-                        Icons.settings,
-                        color: Colors.black45,
-                      ),
-                    ),
-                  ),
                 ],
               ),
             ),
@@ -82,8 +61,8 @@ class _MineState extends State<Mine> {
                   color: Colors.black,
                   borderRadius: BorderRadius.circular(40 * rpx),
                   gradient: const LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
+                    begin: Alignment.topRight,
+                    end: Alignment.bottomLeft,
                     colors: [
                       Colors.black45,
                       Colors.black87,
@@ -220,7 +199,7 @@ class _MineState extends State<Mine> {
               ),
             ),
             SizedBox(
-              height: 400 * rpx,
+              height: 380 * rpx,
               child: const Apps(),
             ),
             Padding(
@@ -471,17 +450,6 @@ class _MineState extends State<Mine> {
                           ),
                         ),
                       ],
-                    ),
-                  ),
-                  Container(
-                    alignment: Alignment.center,
-                    padding: EdgeInsets.fromLTRB(0, 30 * rpx, 0, 0),
-                    child: Text(
-                      '荧惑科技控股集团',
-                      style: TextStyle(
-                        fontSize: 24 * rpx,
-                        color: Colors.black38,
-                      ),
                     ),
                   ),
                 ],

@@ -57,14 +57,14 @@ class _BaseState extends State<Base> with SingleTickerProviderStateMixin {
         //     ),
         //   ),
         // )),
-        SingleChildScrollView(
-          child: Container(
-            constraints: const BoxConstraints.expand(),
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height,
-            child: widget.childs,
-          ),
+        // SingleChildScrollView(
+        Container(
+          constraints: const BoxConstraints.expand(),
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height,
+          child: widget.childs,
         ),
+        // ),
         // Positioned(
         //   child: Container(
         //     height: MediaQuery.of(context).size.height,

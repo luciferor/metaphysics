@@ -4,6 +4,9 @@ import 'package:first_flutter_app/pages/ai.dart';
 import 'package:first_flutter_app/pages/mine.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_advanced_segment/flutter_advanced_segment.dart';
+import 'package:syncfusion_flutter_sliders/sliders.dart';
+import 'package:action_slider/action_slider.dart';
 
 class Index extends StatefulWidget {
   const Index({Key? key}) : super(key: key);
@@ -13,6 +16,7 @@ class Index extends StatefulWidget {
 }
 
 class _IndexState extends State<Index> {
+  dynamic time = 30;
   @override
   Widget build(BuildContext context) {
     double rpx = MediaQuery.of(context).size.width / 750;
@@ -32,7 +36,9 @@ class _IndexState extends State<Index> {
                   height: 60 * rpx,
                   padding: EdgeInsets.fromLTRB(20 * rpx, 0, 0, 0),
                   child: FloatingActionButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      openBottomSheetHandler(context, rpx, bp);
+                    },
                     backgroundColor: const Color.fromARGB(255, 45, 85, 245),
                     child: const Icon(
                       Icons.add,
@@ -297,6 +303,107 @@ class _IndexState extends State<Index> {
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  void updateTime(value) {
+    setState(() {
+      time = value;
+    });
+  }
+
+  void openBottomSheetHandler(BuildContext context, double rpx, double bp) {
+    showBottomSheet(
+      context: context,
+      builder: (context) => StatefulBuilder(
+        // builder: (BuildContext context, void Function(void Function()) setState) {  },
+        builder: (BuildContext buildcontext,
+            void Function(void Function()) setState) {
+          return Container(
+            height: 655 * rpx,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(40 * rpx),
+                topRight: Radius.circular(40 * rpx),
+              ),
+              boxShadow: [
+                BoxShadow(
+                  offset: const Offset(0.0, 5.0),
+                  blurRadius: 30 * rpx,
+                  spreadRadius: 5 * rpx,
+                  color: const Color.fromARGB(100, 40, 31, 50),
+                )
+              ],
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  padding: EdgeInsets.fromLTRB(0, 20 * rpx, 0, 20 * rpx),
+                  alignment: Alignment.center,
+                  child: Container(
+                    width: 100 * rpx,
+                    height: 15 * rpx,
+                    decoration: BoxDecoration(
+                      color: Colors.black12,
+                      borderRadius: BorderRadius.circular(30 * rpx),
+                    ),
+                  ),
+                ),
+                Container(
+                  padding: EdgeInsets.fromLTRB(40 * rpx, 0, 40 * rpx, bp),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        child: Container(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                height: 100 * rpx,
+                                color: Colors.red,
+                                child: FloatingActionButton(onPressed: () {
+                                  Navigator.pop(context);
+                                }),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      Container(
+                        width: 150 * rpx,
+                        height: 600 * rpx,
+                        child: SfSlider.vertical(
+                          min: 0.0,
+                          max: 100.0,
+                          value: time,
+                          interval: 20,
+                          showTicks: true,
+                          showLabels: true,
+                          enableTooltip: true,
+                          minorTicksPerInterval: 1,
+                          inactiveColor: Colors.red,
+                          activeColor: Colors.amber,
+                          onChanged: (dynamic value) {
+                            setState(() {
+                              time = value;
+                            });
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          );
+        },
       ),
     );
   }
