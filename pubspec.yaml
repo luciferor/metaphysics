@@ -53,6 +53,7 @@ dependencies:
   flutter_advanced_segment: ^3.0.2
   action_slider: ^0.7.0
   syncfusion_flutter_sliders: ^24.1.41
+  flutter_chat_bubble: ^2.0.2
 
 dev_dependencies:
   flutter_test:

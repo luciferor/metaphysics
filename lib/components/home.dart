@@ -1,6 +1,7 @@
 import 'package:card_swiper/card_swiper.dart';
 import 'package:first_flutter_app/components/ani.dart';
 import 'package:first_flutter_app/pages/ai.dart';
+import 'package:first_flutter_app/pages/coming.dart';
 import 'package:first_flutter_app/pages/mine.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -16,6 +17,7 @@ class Index extends StatefulWidget {
 }
 
 class _IndexState extends State<Index> {
+  final _controller = ValueNotifier('all');
   dynamic time = 30;
   @override
   Widget build(BuildContext context) {
@@ -283,7 +285,14 @@ class _IndexState extends State<Index> {
                           width: 120 * rpx,
                           height: 80 * rpx,
                           child: FloatingActionButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const Coming(),
+                                ),
+                              );
+                            },
                             backgroundColor:
                                 const Color.fromARGB(255, 45, 85, 245),
                             child: Text(
@@ -307,12 +316,6 @@ class _IndexState extends State<Index> {
     );
   }
 
-  void updateTime(value) {
-    setState(() {
-      time = value;
-    });
-  }
-
   void openBottomSheetHandler(BuildContext context, double rpx, double bp) {
     showBottomSheet(
       context: context,
@@ -321,12 +324,12 @@ class _IndexState extends State<Index> {
         builder: (BuildContext buildcontext,
             void Function(void Function()) setState) {
           return Container(
-            height: 655 * rpx,
+            height: 855 * rpx,
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(40 * rpx),
-                topRight: Radius.circular(40 * rpx),
+                topLeft: Radius.circular(50 * rpx),
+                topRight: Radius.circular(50 * rpx),
               ),
               boxShadow: [
                 BoxShadow(
@@ -360,36 +363,53 @@ class _IndexState extends State<Index> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Expanded(
-                        child: Container(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Container(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            AdvancedSegment(
+                              controller:
+                                  _controller, // AdvancedSegmentController
+                              segments: const {
+                                // Map<String, String>
+                                'all': 'All',
+                                'starred': 'Starred',
+                              },
+                            ),
+                            Container(
+                              margin: EdgeInsets.fromLTRB(0, 50 * rpx, 0, 0),
+                              child: ActionSlider.standard(
                                 height: 100 * rpx,
-                                color: Colors.red,
-                                child: FloatingActionButton(onPressed: () {
-                                  Navigator.pop(context);
-                                }),
+                                child: const Text('滑动完成'),
+                                action: (controller) async {
+                                  controller
+                                      .loading(); //starts loading animation
+                                  await Future.delayed(
+                                    const Duration(seconds: 3),
+                                  );
+                                  controller
+                                      .success(); //starts success animation
+                                },
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                       ),
-                      Container(
+                      SizedBox(
                         width: 150 * rpx,
-                        height: 600 * rpx,
+                        height: 800 * rpx,
                         child: SfSlider.vertical(
                           min: 0.0,
-                          max: 100.0,
+                          max: 200.0,
                           value: time,
                           interval: 20,
                           showTicks: true,
                           showLabels: true,
                           enableTooltip: true,
                           minorTicksPerInterval: 1,
-                          inactiveColor: Colors.red,
-                          activeColor: Colors.amber,
+                          inactiveColor:
+                              const Color.fromARGB(255, 247, 247, 247),
+                          activeColor: const Color.fromARGB(255, 0, 72, 255),
                           onChanged: (dynamic value) {
                             setState(() {
                               time = value;

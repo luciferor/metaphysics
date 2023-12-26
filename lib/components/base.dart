@@ -25,53 +25,21 @@ class _BaseState extends State<Base> with SingleTickerProviderStateMixin {
     // double bp = MediaQuery.of(context).padding.bottom;
 
     return Scaffold(
-        body: Stack(
-      fit: StackFit.expand,
-      children: <Widget>[
-        // Image(
-        //   image: const AssetImage('assets/images/35127ad98a61.png'),
-        //   fit: BoxFit.cover,
-        //   width: MediaQuery.of(context).size.width, //整个屏幕的宽度
-        //   height: MediaQuery.of(context).size.height, //整个屏幕的高度
-        // ),
-        //模糊动画，暂时注释，损耗虚拟机资源
-        // ClipRect(
-        //     child: BackdropFilter(
-        //   filter: ImageFilter.blur(sigmaX: 0.0, sigmaY: 0.0),
-        //   child: Opacity(
-        //     opacity: 1,
-        //     child: Container(
-        //       width: MediaQuery.of(context).size.width,
-        //       height: MediaQuery.of(context).size.height,
-        //       decoration: const BoxDecoration(
-        //         color: Color.fromARGB(255, 245, 245, 245),
-        //         gradient: LinearGradient(
-        //           begin: Alignment.topCenter,
-        //           end: Alignment.bottomCenter,
-        //           colors: [
-        //             Color.fromARGB(255, 66, 115, 237),
-        //             Color.fromARGB(255, 255, 255, 255),
-        //           ],
-        //         ),
-        //       ),
-        //     ),
-        //   ),
-        // )),
-        // SingleChildScrollView(
-        Container(
-          constraints: const BoxConstraints.expand(),
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
-          child: widget.childs,
-        ),
-        // ),
-        // Positioned(
-        //   child: Container(
-        //     height: MediaQuery.of(context).size.height,
-        //     child: Image.asset('assets/images/aia.gif'),
-        //   ),
-        // ),
-      ],
-    ));
+      body: Stack(
+        fit: StackFit.expand,
+        children: <Widget>[
+          Container(
+            constraints: const BoxConstraints.expand(),
+            child: SingleChildScrollView(
+              child: SizedBox(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height,
+                child: widget.childs,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

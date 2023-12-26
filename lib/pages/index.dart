@@ -1,5 +1,4 @@
-
-import 'package:first_flutter_app/components/index.dart';
+import 'package:first_flutter_app/components/home.dart';
 import 'package:flutter/material.dart';
 import 'package:first_flutter_app/components/base.dart';
 
@@ -18,10 +17,6 @@ class _HomieState extends State<Homie> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    double rpx = MediaQuery.of(context).size.width / 750;
-    double tp = MediaQuery.of(context).padding.top;
-    double bp = MediaQuery.of(context).padding.bottom;
-
     return const Base(
       childs: Stack(
         children: <Widget>[Index()],
