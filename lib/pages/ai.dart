@@ -3,11 +3,10 @@ import 'package:first_flutter_app/classes/apis.dart';
 import 'package:first_flutter_app/classes/https.dart';
 import 'package:first_flutter_app/classes/aimsgres.dart';
 import 'package:first_flutter_app/components/base.dart';
+import 'package:first_flutter_app/components/blur.dart';
 import 'package:first_flutter_app/components/empty.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:dio/dio.dart';
-import 'package:chat_bubbles/chat_bubbles.dart';
 import 'package:flutter_chat_bubble/chat_bubble.dart';
 // import 'package:shimmer/shimmer.dart';
 

@@ -1,13 +1,10 @@
 import 'package:card_swiper/card_swiper.dart';
 import 'package:first_flutter_app/components/ani.dart';
 import 'package:first_flutter_app/pages/ai.dart';
-import 'package:first_flutter_app/pages/coming.dart';
 import 'package:first_flutter_app/pages/mine.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:flutter_advanced_segment/flutter_advanced_segment.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
-import 'package:action_slider/action_slider.dart';
 
 class Index extends StatefulWidget {
   const Index({Key? key}) : super(key: key);
@@ -17,9 +14,7 @@ class Index extends StatefulWidget {
 }
 
 class _IndexState extends State<Index> {
-  final _controller = ValueNotifier('all');
   dynamic time = 30;
-  bool isForce = false;
   @override
   Widget build(BuildContext context) {
     double rpx = MediaQuery.of(context).size.width / 750;
@@ -229,7 +224,7 @@ class _IndexState extends State<Index> {
                   // 在此处处理数据
                   return Container(
                     margin: EdgeInsets.fromLTRB(0, 0, 0, 30 * rpx),
-                    padding: EdgeInsets.fromLTRB(0, 0, 20 * rpx, 0),
+                    padding: EdgeInsets.fromLTRB(0, 0, 30 * rpx, 0),
                     decoration: BoxDecoration(
                       color: const Color.fromARGB(168, 236, 236, 236),
                       borderRadius: BorderRadius.circular(50 * rpx),
@@ -270,7 +265,7 @@ class _IndexState extends State<Index> {
                                   padding:
                                       EdgeInsets.fromLTRB(0, 10 * rpx, 0, 0),
                                   child: Text(
-                                    '2024-01-25 17:00:00',
+                                    '2024-01-25 / 25 分钟',
                                     style: TextStyle(
                                       fontSize: 20 * rpx,
                                       fontWeight: FontWeight.bold,
@@ -282,49 +277,17 @@ class _IndexState extends State<Index> {
                             ),
                           ),
                         ),
-                        Container(
-                          width: 100 * rpx,
-                          height: 40 * rpx,
-                          alignment: Alignment.center,
-                          margin: EdgeInsets.fromLTRB(20 * rpx, 0, 20 * rpx, 0),
-                          decoration: BoxDecoration(
-                            color: const Color.fromARGB(255, 197, 197, 197),
-                            borderRadius: BorderRadius.circular(30 * rpx),
-                          ),
-                          child: Text(
-                            '25 分钟',
-                            style: TextStyle(
-                              fontSize: 18 * rpx,
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
                         SizedBox(
-                          width: 100 * rpx,
-                          height: 60 * rpx,
+                          width: 120 * rpx,
+                          height: 80 * rpx,
                           child: FloatingActionButton(
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const Coming(),
-                                ),
-                              );
-                            },
+                            onPressed: () {},
                             backgroundColor:
                                 const Color.fromARGB(255, 45, 85, 245),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20 * rpx),
-                              side: const BorderSide(
-                                width: 2,
-                                color: Color.fromARGB(0, 235, 26, 26),
-                              ),
-                            ),
                             child: Text(
                               '去完成',
                               style: TextStyle(
-                                fontSize: 20 * rpx,
+                                fontSize: 24 * rpx,
                                 color: Colors.white,
                               ),
                             ),
@@ -342,19 +305,13 @@ class _IndexState extends State<Index> {
     );
   }
 
+  void updateTime(value) {
+    setState(() {
+      time = value;
+    });
+  }
+
   void openBottomSheetHandler(BuildContext context, double rpx, double bp) {
-    List<String> icons = [
-      'assets/images/icons/composition.svg',
-      'assets/images/icons/cook.svg',
-      'assets/images/icons/dance.svg',
-      'assets/images/icons/draw.svg',
-      'assets/images/icons/learn.svg',
-      'assets/images/icons/read.svg',
-      'assets/images/icons/sing.svg',
-      'assets/images/icons/sport.svg',
-      'assets/images/icons/walk.svg',
-      'assets/images/icons/yoga.svg'
-    ];
     showBottomSheet(
       context: context,
       builder: (context) => StatefulBuilder(
@@ -362,18 +319,18 @@ class _IndexState extends State<Index> {
         builder: (BuildContext buildcontext,
             void Function(void Function()) setState) {
           return Container(
-            height: 755 * rpx,
+            height: 655 * rpx,
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(50 * rpx),
-                topRight: Radius.circular(50 * rpx),
+                topLeft: Radius.circular(40 * rpx),
+                topRight: Radius.circular(40 * rpx),
               ),
               boxShadow: [
                 BoxShadow(
-                  offset: const Offset(0.2, 0.2),
+                  offset: const Offset(0.0, 5.0),
                   blurRadius: 30 * rpx,
-                  spreadRadius: 0,
+                  spreadRadius: 5 * rpx,
                   color: const Color.fromARGB(100, 40, 31, 50),
                 )
               ],
@@ -387,7 +344,7 @@ class _IndexState extends State<Index> {
                   alignment: Alignment.center,
                   child: Container(
                     width: 100 * rpx,
-                    height: 10 * rpx,
+                    height: 15 * rpx,
                     decoration: BoxDecoration(
                       color: Colors.black12,
                       borderRadius: BorderRadius.circular(30 * rpx),
@@ -401,183 +358,39 @@ class _IndexState extends State<Index> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Expanded(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            SizedBox(
-                              height: 210 * rpx,
-                              child: GridView.count(
-                                crossAxisCount: 5,
-                                children: icons
-                                    .map(
-                                      (item) => Container(
-                                        padding: EdgeInsets.all(10 * rpx),
-                                        child: FloatingActionButton(
-                                          onPressed: () {},
-                                          backgroundColor: const Color.fromARGB(
-                                              255, 247, 247, 247),
-                                          child: SvgPicture.asset(
-                                            item,
-                                            width: 50 * rpx,
-                                            height: 50 * rpx,
-                                          ),
-                                        ),
-                                      ),
-                                    )
-                                    .toList(),
-                              ),
-                            ),
-                            Container(
-                              height: 100 * rpx,
-                              padding: EdgeInsets.fromLTRB(
-                                  20 * rpx, 10 * rpx, 20 * rpx, 10 * rpx),
-                              margin:
-                                  EdgeInsets.fromLTRB(0, 30 * rpx, 0, 40 * rpx),
-                              decoration: BoxDecoration(
-                                color: const Color.fromARGB(255, 255, 255, 255),
-                                borderRadius: BorderRadius.circular(30 * rpx),
-                                boxShadow: [
-                                  BoxShadow(
-                                      color: const Color.fromARGB(
-                                          114, 162, 162, 162),
-                                      offset: const Offset(0.2, 0.5),
-                                      blurRadius: 10 * rpx,
-                                      spreadRadius: 0),
-                                ],
-                              ),
-                              child: TextField(
-                                minLines: 1,
-                                maxLines: 1,
-                                textInputAction: TextInputAction.none,
-                                textAlignVertical: TextAlignVertical.center,
-                                cursorRadius: Radius.circular(10 * rpx),
-                                decoration: InputDecoration(
-                                  focusedBorder: InputBorder.none,
-                                  enabledBorder: InputBorder.none,
-                                  hintText: '请输入事项标题',
-                                  hintStyle:
-                                      const TextStyle(color: Colors.grey),
-                                  border: const OutlineInputBorder(
-                                    borderSide: BorderSide.none,
-                                  ),
-                                  contentPadding:
-                                      EdgeInsets.fromLTRB(0, 0, 0, 20 * rpx),
-                                ),
-                                style: TextStyle(
-                                  color: Colors.black87,
-                                  fontSize: 32 * rpx,
-                                ),
-                              ),
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                // AdvancedSegment(
-                                //   controller: _controller,
-                                //   backgroundColor:
-                                //       const Color.fromARGB(255, 237, 237, 237),
-                                //   inactiveStyle: TextStyle(
-                                //     fontSize: 28 * rpx,
-                                //     fontWeight: FontWeight.bold,
-                                //   ),
-                                //   segments: const {
-                                //     // Map<String, String>
-                                //     'all': '可关闭',
-                                //     'starred': '不可关闭',
-                                //   },
-                                // ),
-                                Switch(
-                                  activeColor:
-                                      const Color.fromARGB(255, 0, 72, 255),
-                                  activeTrackColor:
-                                      const Color.fromARGB(255, 198, 234, 255),
-                                  inactiveThumbColor:
-                                      const Color.fromARGB(255, 152, 152, 152),
-                                  value: isForce,
-                                  onChanged: (value) {
-                                    setState(() {
-                                      isForce = value;
-                                    });
-                                  },
-                                ),
-                                Expanded(
-                                  child: Container(
-                                    padding:
-                                        EdgeInsets.fromLTRB(10 * rpx, 0, 0, 0),
-                                    child: Text(
-                                      '是否强制关闭',
-                                      style: TextStyle(
-                                        color: Colors.black38,
-                                        fontSize: 32 * rpx,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                Text(
-                                  '$time分钟',
-                                  style: TextStyle(
-                                    fontSize: 32 * rpx,
-                                    fontWeight: FontWeight.bold,
-                                    color:
-                                        const Color.fromARGB(255, 0, 72, 255),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Container(
-                              alignment: Alignment.center,
-                              margin: EdgeInsets.fromLTRB(0, 100 * rpx, 0, 0),
-                              child: ActionSlider.standard(
+                        child: Container(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
                                 height: 100 * rpx,
-                                backgroundColor:
-                                    const Color.fromARGB(255, 0, 72, 255),
-                                toggleColor:
-                                    const Color.fromARGB(255, 247, 247, 248),
-                                child: Text(
-                                  '滑动完成',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 32 * rpx,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                action: (controller) async {
-                                  controller
-                                      .loading(); //starts loading animation
-                                  await Future.delayed(
-                                    const Duration(seconds: 3),
-                                  );
-                                  controller
-                                      .success(); //starts success animation
-                                  // ignore: use_build_context_synchronously
+                                color: Colors.red,
+                                child: FloatingActionButton(onPressed: () {
                                   Navigator.pop(context);
-                                },
+                                }),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
-                      SizedBox(
+                      Container(
                         width: 150 * rpx,
-                        height: 700 * rpx,
+                        height: 600 * rpx,
                         child: SfSlider.vertical(
-                          min: 5.0,
-                          max: 200.0,
+                          min: 0.0,
+                          max: 100.0,
                           value: time,
                           interval: 20,
                           showTicks: true,
                           showLabels: true,
                           enableTooltip: true,
                           minorTicksPerInterval: 1,
-                          inactiveColor:
-                              const Color.fromARGB(255, 247, 247, 247),
-                          activeColor: const Color.fromARGB(255, 0, 72, 255),
+                          inactiveColor: Colors.red,
+                          activeColor: Colors.amber,
                           onChanged: (dynamic value) {
                             setState(() {
-                              time = value.floor();
+                              time = value;
                             });
                           },
                         ),

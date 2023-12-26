@@ -1,4 +1,5 @@
 import 'package:first_flutter_app/components/base.dart';
+import 'package:first_flutter_app/components/blur.dart';
 import 'package:flutter/material.dart';
 
 class Coming extends StatefulWidget {
@@ -12,13 +13,17 @@ class Coming extends StatefulWidget {
 class _ComingState extends State<Coming> {
   @override
   Widget build(BuildContext context) {
+    double rpx = MediaQuery.of(context).size.width / 750;
     return Base(
       childs: Container(
         constraints: const BoxConstraints.expand(),
         color: const Color.fromARGB(255, 0, 0, 0),
         child: Stack(
           children: [
-            Image.asset('assets/images/6e0d754.gif'),
+            Center(
+              child: Image.asset('assets/images/6e0d754.gif'),
+            ),
+            Container(),
           ],
         ),
       ),
