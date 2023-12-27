@@ -54,21 +54,9 @@ class _MineState extends State<Mine> {
               ),
             ),
             Container(
-              padding: EdgeInsets.fromLTRB(40 * rpx, 0, 40 * rpx, 20 * rpx),
+              padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
               child: Container(
                 padding: EdgeInsets.all(30 * rpx),
-                decoration: BoxDecoration(
-                  color: Colors.black,
-                  borderRadius: BorderRadius.circular(40 * rpx),
-                  gradient: const LinearGradient(
-                    begin: Alignment.topRight,
-                    end: Alignment.bottomLeft,
-                    colors: [
-                      Colors.black45,
-                      Colors.black87,
-                    ],
-                  ),
-                ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -123,7 +111,7 @@ class _MineState extends State<Mine> {
                                             style: TextStyle(
                                               fontSize: 32 * rpx,
                                               fontWeight: FontWeight.bold,
-                                              color: Colors.white,
+                                              color: Colors.black87,
                                             ),
                                           ),
                                           Container(
@@ -174,7 +162,7 @@ class _MineState extends State<Mine> {
                                   Text(
                                     '18岁',
                                     style: TextStyle(
-                                      color: Colors.blue,
+                                      color: Color.fromARGB(255, 9, 70, 255),
                                       fontSize: 28 * rpx,
                                     ),
                                   ),
@@ -185,7 +173,7 @@ class _MineState extends State<Mine> {
                               child: Text(
                                 '为天地立心，为生民立命，为往圣继绝学，为万世开太平。',
                                 style: TextStyle(
-                                  color: Colors.white60,
+                                  color: Colors.black54,
                                   fontSize: 24 * rpx,
                                 ),
                               ),
@@ -198,9 +186,25 @@ class _MineState extends State<Mine> {
                 ),
               ),
             ),
-            SizedBox(
+            Container(
               height: 380 * rpx,
-              child: const Apps(),
+              padding: EdgeInsets.fromLTRB(40 * rpx, 0, 40 * rpx, 30 * rpx),
+              child: Container(
+                padding: EdgeInsets.fromLTRB(5 * rpx, 10 * rpx, 5 * rpx, 0),
+                decoration: BoxDecoration(
+                  color: Colors.black,
+                  borderRadius: BorderRadius.circular(60 * rpx),
+                  gradient: const LinearGradient(
+                    begin: Alignment.topRight,
+                    end: Alignment.bottomLeft,
+                    colors: [
+                      Colors.black54,
+                      Colors.black87,
+                    ],
+                  ),
+                ),
+                child: const Apps(),
+              ),
             ),
             Padding(
               padding: EdgeInsets.fromLTRB(40 * rpx, 0, 40 * rpx, 40 * rpx),
@@ -211,7 +215,7 @@ class _MineState extends State<Mine> {
                   Container(
                     margin: EdgeInsets.fromLTRB(0, 0, 0, 30 * rpx),
                     decoration: BoxDecoration(
-                      color: const Color.fromARGB(255, 236, 236, 236),
+                      color: const Color.fromARGB(255, 247, 247, 247),
                       borderRadius: BorderRadius.circular(30 * rpx),
                     ),
                     child: Row(
@@ -219,14 +223,14 @@ class _MineState extends State<Mine> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Container(
-                          width: 100 * rpx,
-                          height: 100 * rpx,
+                          width: 90 * rpx,
+                          height: 90 * rpx,
                           padding: EdgeInsets.all(10 * rpx),
                           alignment: Alignment.center,
                           child: SvgPicture.asset(
                             'assets/images/icons/grade.svg',
-                            width: 80 * rpx,
-                            height: 80 * rpx,
+                            width: 70 * rpx,
+                            height: 70 * rpx,
                           ),
                         ),
                         Expanded(
@@ -236,17 +240,16 @@ class _MineState extends State<Mine> {
                               '会员中心',
                               style: TextStyle(
                                 fontSize: 30 * rpx,
-                                fontWeight: FontWeight.bold,
                                 color: Colors.black87,
                               ),
                             ),
                           ),
                         ),
                         Container(
-                          width: 100 * rpx,
-                          height: 100 * rpx,
+                          width: 90 * rpx,
+                          height: 90 * rpx,
                           padding: EdgeInsets.all(10 * rpx),
-                          alignment: Alignment.center,
+                          alignment: Alignment.centerRight,
                           child: SvgPicture.asset(
                             'assets/images/icons/arrow.svg',
                             width: 30 * rpx,
@@ -258,9 +261,8 @@ class _MineState extends State<Mine> {
                   ),
                   Container(
                     margin: EdgeInsets.fromLTRB(0, 0, 0, 30 * rpx),
-                    height: 100 * rpx,
                     decoration: BoxDecoration(
-                      color: const Color.fromARGB(255, 236, 236, 236),
+                      color: const Color.fromARGB(255, 247, 247, 247),
                       borderRadius: BorderRadius.circular(30 * rpx),
                     ),
                     child: Row(
@@ -268,14 +270,14 @@ class _MineState extends State<Mine> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Container(
-                          width: 100 * rpx,
-                          height: 100 * rpx,
+                          width: 90 * rpx,
+                          height: 90 * rpx,
                           padding: EdgeInsets.all(10 * rpx),
                           alignment: Alignment.center,
                           child: SvgPicture.asset(
                             'assets/images/icons/collect.svg',
-                            width: 80 * rpx,
-                            height: 80 * rpx,
+                            width: 70 * rpx,
+                            height: 70 * rpx,
                           ),
                         ),
                         Expanded(
@@ -285,17 +287,16 @@ class _MineState extends State<Mine> {
                               '权益',
                               style: TextStyle(
                                 fontSize: 30 * rpx,
-                                fontWeight: FontWeight.bold,
                                 color: Colors.black87,
                               ),
                             ),
                           ),
                         ),
                         Container(
-                          width: 100 * rpx,
-                          height: 100 * rpx,
+                          width: 90 * rpx,
+                          height: 90 * rpx,
                           padding: EdgeInsets.all(10 * rpx),
-                          alignment: Alignment.center,
+                          alignment: Alignment.centerRight,
                           child: SvgPicture.asset(
                             'assets/images/icons/arrow.svg',
                             width: 30 * rpx,
@@ -307,9 +308,8 @@ class _MineState extends State<Mine> {
                   ),
                   Container(
                     margin: EdgeInsets.fromLTRB(0, 0, 0, 30 * rpx),
-                    height: 100 * rpx,
                     decoration: BoxDecoration(
-                      color: const Color.fromARGB(255, 236, 236, 236),
+                      color: const Color.fromARGB(255, 247, 247, 247),
                       borderRadius: BorderRadius.circular(30 * rpx),
                     ),
                     child: Row(
@@ -317,14 +317,14 @@ class _MineState extends State<Mine> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Container(
-                          width: 100 * rpx,
-                          height: 100 * rpx,
+                          width: 90 * rpx,
+                          height: 90 * rpx,
                           padding: EdgeInsets.all(10 * rpx),
                           alignment: Alignment.center,
                           child: SvgPicture.asset(
                             'assets/images/icons/clould.svg',
-                            width: 80 * rpx,
-                            height: 80 * rpx,
+                            width: 70 * rpx,
+                            height: 70 * rpx,
                           ),
                         ),
                         Expanded(
@@ -334,17 +334,16 @@ class _MineState extends State<Mine> {
                               '云盘',
                               style: TextStyle(
                                 fontSize: 30 * rpx,
-                                fontWeight: FontWeight.bold,
                                 color: Colors.black87,
                               ),
                             ),
                           ),
                         ),
                         Container(
-                          width: 100 * rpx,
-                          height: 100 * rpx,
+                          width: 90 * rpx,
+                          height: 90 * rpx,
                           padding: EdgeInsets.all(10 * rpx),
-                          alignment: Alignment.center,
+                          alignment: Alignment.centerRight,
                           child: SvgPicture.asset(
                             'assets/images/icons/arrow.svg',
                             width: 30 * rpx,
@@ -356,9 +355,8 @@ class _MineState extends State<Mine> {
                   ),
                   Container(
                     margin: EdgeInsets.fromLTRB(0, 0, 0, 30 * rpx),
-                    height: 100 * rpx,
                     decoration: BoxDecoration(
-                      color: const Color.fromARGB(255, 236, 236, 236),
+                      color: const Color.fromARGB(255, 247, 247, 247),
                       borderRadius: BorderRadius.circular(30 * rpx),
                     ),
                     child: Row(
@@ -366,14 +364,14 @@ class _MineState extends State<Mine> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Container(
-                          width: 100 * rpx,
-                          height: 100 * rpx,
+                          width: 90 * rpx,
+                          height: 90 * rpx,
                           padding: EdgeInsets.all(10 * rpx),
                           alignment: Alignment.center,
                           child: SvgPicture.asset(
                             'assets/images/icons/notice.svg',
-                            width: 80 * rpx,
-                            height: 80 * rpx,
+                            width: 70 * rpx,
+                            height: 70 * rpx,
                           ),
                         ),
                         Expanded(
@@ -383,17 +381,16 @@ class _MineState extends State<Mine> {
                               '消息',
                               style: TextStyle(
                                 fontSize: 30 * rpx,
-                                fontWeight: FontWeight.bold,
                                 color: Colors.black87,
                               ),
                             ),
                           ),
                         ),
                         Container(
-                          width: 100 * rpx,
-                          height: 100 * rpx,
+                          width: 90 * rpx,
+                          height: 90 * rpx,
                           padding: EdgeInsets.all(10 * rpx),
-                          alignment: Alignment.center,
+                          alignment: Alignment.centerRight,
                           child: SvgPicture.asset(
                             'assets/images/icons/arrow.svg',
                             width: 30 * rpx,
@@ -405,9 +402,8 @@ class _MineState extends State<Mine> {
                   ),
                   Container(
                     margin: EdgeInsets.fromLTRB(0, 0, 0, 30 * rpx),
-                    height: 100 * rpx,
                     decoration: BoxDecoration(
-                      color: const Color.fromARGB(255, 236, 236, 236),
+                      color: const Color.fromARGB(255, 247, 247, 247),
                       borderRadius: BorderRadius.circular(30 * rpx),
                     ),
                     child: Row(
@@ -415,14 +411,14 @@ class _MineState extends State<Mine> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Container(
-                          width: 100 * rpx,
-                          height: 100 * rpx,
+                          width: 90 * rpx,
+                          height: 90 * rpx,
                           padding: EdgeInsets.all(10 * rpx),
                           alignment: Alignment.center,
                           child: SvgPicture.asset(
                             'assets/images/icons/setting.svg',
-                            width: 80 * rpx,
-                            height: 80 * rpx,
+                            width: 70 * rpx,
+                            height: 70 * rpx,
                           ),
                         ),
                         Expanded(
@@ -432,17 +428,16 @@ class _MineState extends State<Mine> {
                               '设置',
                               style: TextStyle(
                                 fontSize: 30 * rpx,
-                                fontWeight: FontWeight.bold,
                                 color: Colors.black87,
                               ),
                             ),
                           ),
                         ),
                         Container(
-                          width: 100 * rpx,
-                          height: 100 * rpx,
+                          width: 90 * rpx,
+                          height: 90 * rpx,
                           padding: EdgeInsets.all(10 * rpx),
-                          alignment: Alignment.center,
+                          alignment: Alignment.centerRight,
                           child: SvgPicture.asset(
                             'assets/images/icons/arrow.svg',
                             width: 30 * rpx,

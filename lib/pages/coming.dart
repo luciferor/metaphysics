@@ -1,6 +1,6 @@
 import 'package:first_flutter_app/components/base.dart';
-import 'package:first_flutter_app/components/blur.dart';
 import 'package:flutter/material.dart';
+import 'package:zhi_starry_sky/starry_sky.dart';
 
 class Coming extends StatefulWidget {
   const Coming({Key? key}) : super(key: key);
@@ -23,7 +23,7 @@ class _ComingState extends State<Coming> {
             Center(
               child: Image.asset('assets/images/6e0d754.gif'),
             ),
-            Container(),
+            const StarrySkyView(),
           ],
         ),
       ),

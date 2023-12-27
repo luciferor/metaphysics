@@ -8,6 +8,7 @@ import 'package:first_flutter_app/pages/register.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);

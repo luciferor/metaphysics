@@ -4,15 +4,14 @@ import 'package:first_flutter_app/pages/ai.dart';
 import 'package:first_flutter_app/pages/coming.dart';
 import 'package:first_flutter_app/pages/cominglogs.dart';
 import 'package:first_flutter_app/pages/mine.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
 import 'package:action_slider/action_slider.dart';
 import 'package:date_format/date_format.dart';
 import 'package:easy_date_timeline/easy_date_timeline.dart';
-import 'package:time_picker_spinner_pop_up/time_picker_spinner_pop_up.dart';
-import 'package:animated_toggle_switch/animated_toggle_switch.dart';
+import 'package:flutter_switch/flutter_switch.dart';
+import 'package:time_duration_picker/time_duration_picker.dart';
 
 class Index extends StatefulWidget {
   const Index({Key? key}) : super(key: key);
@@ -23,9 +22,22 @@ class Index extends StatefulWidget {
 
 class _IndexState extends State<Index> with SingleTickerProviderStateMixin {
   final _controller = ValueNotifier('all');
-
+  List<String> icons = [
+    'assets/images/icons/composition.svg',
+    'assets/images/icons/cook.svg',
+    'assets/images/icons/dance.svg',
+    'assets/images/icons/draw.svg',
+    'assets/images/icons/learn.svg',
+    'assets/images/icons/read.svg',
+    'assets/images/icons/sing.svg',
+    'assets/images/icons/sport.svg',
+    'assets/images/icons/walk.svg',
+    'assets/images/icons/yoga.svg'
+  ];
+  String st = '';
+  String et = '';
   dynamic time = 30;
-  bool isForce = false;
+  bool isForce = true;
   DateTime selectDate = DateTime.now();
 
   @override
@@ -67,7 +79,8 @@ class _IndexState extends State<Index> with SingleTickerProviderStateMixin {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Container(
-                            padding: EdgeInsets.fromLTRB(0, 0, 10 * rpx, 0),
+                            padding:
+                                EdgeInsets.fromLTRB(0, 0, 10 * rpx, 20 * rpx),
                             alignment: Alignment.center,
                             child: SvgPicture.asset(
                               'assets/images/icons/vip.svg',
@@ -75,14 +88,28 @@ class _IndexState extends State<Index> with SingleTickerProviderStateMixin {
                               height: 40 * rpx,
                             ),
                           ),
-                          Text(
-                            '凝固壳',
-                            textAlign: TextAlign.start,
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 32 * rpx,
-                              color: Colors.black87,
-                            ),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Text(
+                                '凝固壳',
+                                textAlign: TextAlign.start,
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 32 * rpx,
+                                  color: Colors.black87,
+                                ),
+                              ),
+                              Text(
+                                'Lv25',
+                                style: TextStyle(
+                                  color:
+                                      const Color.fromARGB(255, 255, 215, 39),
+                                  fontSize: 18 * rpx,
+                                ),
+                              ),
+                            ],
                           ),
                         ],
                       ),
@@ -162,7 +189,7 @@ class _IndexState extends State<Index> with SingleTickerProviderStateMixin {
                                 EdgeInsets.fromLTRB(20 * rpx, 0, 10 * rpx, 0),
                             child: const Icon(
                               Icons.date_range,
-                              color: Color.fromARGB(255, 45, 85, 245),
+                              color: Color.fromARGB(100, 0, 0, 0),
                             ),
                           ),
                           Text(
@@ -171,9 +198,8 @@ class _IndexState extends State<Index> with SingleTickerProviderStateMixin {
                               [yyyy, '年', 'mm', '月', dd, '日'],
                             ).toString(),
                             style: TextStyle(
-                              fontSize: 38 * rpx,
-                              color: const Color.fromARGB(255, 45, 85, 245),
-                              fontWeight: FontWeight.bold,
+                              fontSize: 32 * rpx,
+                              color: const Color.fromARGB(100, 0, 0, 0),
                             ),
                           ),
                         ],
@@ -216,11 +242,11 @@ class _IndexState extends State<Index> with SingleTickerProviderStateMixin {
                   lastDate: DateTime.now().add(
                     const Duration(days: 365),
                   ),
-                  activeColor: const Color.fromARGB(255, 193, 191, 207),
+                  activeColor: const Color.fromARGB(100, 193, 191, 207),
                   dayProps: EasyDayProps(
                     width: 100 * rpx,
                     height: 120 * rpx,
-                    dayStructure: DayStructure.monthDayNumDayStr,
+                    dayStructure: DayStructure.dayStrDayNum,
                     activeDayStyle: DayStyle(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.all(
@@ -230,15 +256,15 @@ class _IndexState extends State<Index> with SingleTickerProviderStateMixin {
                           begin: Alignment.bottomLeft,
                           end: Alignment.topRight,
                           colors: [
-                            Color.fromARGB(255, 45, 85, 245),
-                            Color.fromARGB(255, 130, 167, 255),
+                            Color.fromARGB(200, 45, 85, 245),
+                            Color.fromARGB(200, 45, 85, 245),
                           ],
                         ),
                       ),
                       dayNumStyle: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.w900,
-                        fontSize: 49 * rpx,
+                        fontSize: 40 * rpx,
                       ),
                       dayStrStyle: const TextStyle(
                         color: Colors.white54,
@@ -249,6 +275,13 @@ class _IndexState extends State<Index> with SingleTickerProviderStateMixin {
                     ),
                     inactiveDayStyle: DayStyle(
                       borderRadius: 30 * rpx,
+                    ),
+                    // ignore: deprecated_member_use
+                    inactiveDayDecoration: BoxDecoration(
+                      color: const Color.fromARGB(255, 247, 247, 247),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(30 * rpx),
+                      ),
                     ),
                   ),
                   onDateChange: (date) {
@@ -264,8 +297,8 @@ class _IndexState extends State<Index> with SingleTickerProviderStateMixin {
             child: Container(
               padding: EdgeInsets.fromLTRB(40 * rpx, 0, 40 * rpx, bp),
               child: ListView(
-                children: ['24', '25', '26', '27', '28', '29', '30', '31'].map(
-                  (msg) {
+                children: icons.map(
+                  (icon) {
                     // 在此处处理数据
                     return Container(
                       margin: EdgeInsets.fromLTRB(0, 0, 0, 30 * rpx),
@@ -281,12 +314,13 @@ class _IndexState extends State<Index> with SingleTickerProviderStateMixin {
                           Container(
                             width: 140 * rpx,
                             height: 140 * rpx,
-                            padding: EdgeInsets.all(20 * rpx),
+                            padding: EdgeInsets.all(30 * rpx),
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(40 * rpx),
-                              child: const Image(
-                                image: NetworkImage(
-                                    'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fsafe-img.xhscdn.com%2Fbw1%2Fdf434177-70d9-4db6-9f82-7b4650ae415c%3FimageView2%2F2%2Fw%2F1080%2Fformat%2Fjpg&refer=http%3A%2F%2Fsafe-img.xhscdn.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1706019044&t=b354b5b9307c51bceca2174b63a7ac53'),
+                              child: SvgPicture.asset(
+                                icon,
+                                width: 40 * rpx,
+                                height: 40 * rpx,
                               ),
                             ),
                           ),
@@ -329,7 +363,7 @@ class _IndexState extends State<Index> with SingleTickerProviderStateMixin {
                             margin:
                                 EdgeInsets.fromLTRB(20 * rpx, 0, 20 * rpx, 0),
                             decoration: BoxDecoration(
-                              color: const Color.fromARGB(255, 197, 197, 197),
+                              color: const Color.fromARGB(100, 197, 197, 197),
                               borderRadius: BorderRadius.circular(30 * rpx),
                             ),
                             child: Text(
@@ -353,8 +387,7 @@ class _IndexState extends State<Index> with SingleTickerProviderStateMixin {
                                   ),
                                 );
                               },
-                              backgroundColor:
-                                  const Color.fromARGB(255, 45, 85, 245),
+                              backgroundColor: Color.fromARGB(151, 45, 85, 245),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(20 * rpx),
                                 side: const BorderSide(
@@ -385,18 +418,6 @@ class _IndexState extends State<Index> with SingleTickerProviderStateMixin {
   }
 
   void openBottomSheetHandler(BuildContext context, double rpx, double bp) {
-    List<String> icons = [
-      'assets/images/icons/composition.svg',
-      'assets/images/icons/cook.svg',
-      'assets/images/icons/dance.svg',
-      'assets/images/icons/draw.svg',
-      'assets/images/icons/learn.svg',
-      'assets/images/icons/read.svg',
-      'assets/images/icons/sing.svg',
-      'assets/images/icons/sport.svg',
-      'assets/images/icons/walk.svg',
-      'assets/images/icons/yoga.svg'
-    ];
     showBottomSheet(
       context: context,
       builder: (context) => StatefulBuilder(
@@ -404,7 +425,7 @@ class _IndexState extends State<Index> with SingleTickerProviderStateMixin {
         builder: (BuildContext buildcontext,
             void Function(void Function()) setState) {
           return Container(
-            height: 755 * rpx,
+            // height: 895 * rpx,
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.only(
@@ -425,7 +446,7 @@ class _IndexState extends State<Index> with SingleTickerProviderStateMixin {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  padding: EdgeInsets.fromLTRB(0, 20 * rpx, 0, 20 * rpx),
+                  padding: EdgeInsets.fromLTRB(0, 40 * rpx, 0, 40 * rpx),
                   alignment: Alignment.center,
                   child: Container(
                     width: 100 * rpx,
@@ -448,7 +469,7 @@ class _IndexState extends State<Index> with SingleTickerProviderStateMixin {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             SizedBox(
-                              height: 210 * rpx,
+                              height: 280 * rpx,
                               child: GridView.count(
                                 crossAxisCount: 5,
                                 children: icons
@@ -456,7 +477,9 @@ class _IndexState extends State<Index> with SingleTickerProviderStateMixin {
                                       (item) => Container(
                                         padding: EdgeInsets.all(10 * rpx),
                                         child: FloatingActionButton(
-                                          onPressed: () {},
+                                          elevation: 0,
+                                          focusElevation: 0,
+                                          highlightElevation: 0,
                                           backgroundColor: const Color.fromARGB(
                                               255, 247, 247, 247),
                                           child: SvgPicture.asset(
@@ -464,6 +487,7 @@ class _IndexState extends State<Index> with SingleTickerProviderStateMixin {
                                             width: 50 * rpx,
                                             height: 50 * rpx,
                                           ),
+                                          onPressed: () {},
                                         ),
                                       ),
                                     )
@@ -471,22 +495,13 @@ class _IndexState extends State<Index> with SingleTickerProviderStateMixin {
                               ),
                             ),
                             Container(
-                              height: 100 * rpx,
                               padding: EdgeInsets.fromLTRB(
                                   20 * rpx, 10 * rpx, 20 * rpx, 10 * rpx),
                               margin:
                                   EdgeInsets.fromLTRB(0, 30 * rpx, 0, 40 * rpx),
                               decoration: BoxDecoration(
-                                color: const Color.fromARGB(255, 255, 255, 255),
+                                color: const Color.fromARGB(255, 247, 247, 247),
                                 borderRadius: BorderRadius.circular(30 * rpx),
-                                boxShadow: [
-                                  BoxShadow(
-                                      color: const Color.fromARGB(
-                                          114, 162, 162, 162),
-                                      offset: const Offset(0.2, 0.5),
-                                      blurRadius: 10 * rpx,
-                                      spreadRadius: 0),
-                                ],
                               ),
                               child: TextField(
                                 minLines: 1,
@@ -512,85 +527,107 @@ class _IndexState extends State<Index> with SingleTickerProviderStateMixin {
                                 ),
                               ),
                             ),
+                            Container(
+                              height: 540 * rpx,
+                              alignment: Alignment.center,
+                              margin:
+                                  EdgeInsets.fromLTRB(0, 20 * rpx, 0, 20 * rpx),
+                              child: TimeDurationPicker(
+                                diameter: 500 * rpx,
+                                icon1Data: Icons.directions_car_outlined,
+                                icon2Data: Icons.local_gas_station_outlined,
+                                knobDecoration: const BoxDecoration(
+                                  gradient: LinearGradient(
+                                    begin: Alignment.bottomLeft,
+                                    end: Alignment.topRight,
+                                    colors: [
+                                      Color.fromRGBO(6, 18, 255, 1),
+                                      Color.fromRGBO(206, 58, 255, 1),
+                                    ],
+                                  ),
+                                ),
+                                clockTextStyle: const TextStyle(
+                                    color: Color.fromARGB(255, 26, 26, 26),
+                                    fontWeight: FontWeight.bold),
+                                onIcon1RotatedCallback: (value) {
+                                  setState(() {
+                                    st = value;
+                                  });
+                                },
+                                onIcon2RotatedCallback: (value) {
+                                  setState(() {
+                                    et = value;
+                                  });
+                                },
+                              ),
+                            ),
+                            Row(
+                              children: [Text(st), Text(et)],
+                            ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                AnimatedToggleSwitch.dual(
-                                  current: isForce,
-                                  first: false,
-                                  second: true,
-                                  spacing: 50 * rpx,
-                                  height: 80 * rpx,
-                                  style: const ToggleStyle(
-                                    borderColor: Colors.transparent,
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.black26,
-                                        spreadRadius: 1,
-                                        blurRadius: 2,
-                                        offset: Offset(0, 1.5),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    FlutterSwitch(
+                                      width: 100 * rpx,
+                                      height: 60 * rpx,
+                                      valueFontSize: 10 * rpx,
+                                      toggleSize: 50 * rpx,
+                                      value: isForce,
+                                      borderRadius: 60 * rpx,
+                                      padding: 10 * rpx,
+                                      showOnOff: false,
+                                      inactiveColor: const Color.fromARGB(
+                                          255, 220, 220, 220),
+                                      activeColor:
+                                          const Color.fromARGB(200, 0, 72, 255),
+                                      onToggle: (val) {
+                                        setState(() {
+                                          isForce = val;
+                                        });
+                                      },
+                                    ),
+                                    Container(
+                                      padding: EdgeInsets.fromLTRB(
+                                          20 * rpx, 0, 0, 0),
+                                      child: Text(
+                                        '强制结束',
+                                        style: TextStyle(
+                                          color: Colors.black54,
+                                          fontSize: 28 * rpx,
+                                        ),
                                       ),
-                                    ],
-                                  ),
-                                  borderWidth: 10 * rpx,
-                                  onChanged: (b) => setState(() => isForce = b),
-                                  styleBuilder: (b) => ToggleStyle(
-                                    indicatorColor: b
-                                        ? const Color.fromARGB(
-                                            255, 201, 201, 201)
-                                        : const Color.fromARGB(255, 0, 72, 255),
-                                  ),
-                                  iconBuilder: (value) => value
-                                      ? const Icon(
-                                          Icons.close,
-                                          color: Colors.white,
-                                        )
-                                      : const Icon(
-                                          Icons.done,
-                                          color: Colors.white,
-                                        ),
-                                  textBuilder: (value) => value
-                                      ? Center(
-                                          child: Text(
-                                            '不能结束',
-                                            style: TextStyle(
-                                              fontSize: 32 * rpx,
-                                              color: Colors.black45,
-                                            ),
-                                          ),
-                                        )
-                                      : Center(
-                                          child: Text(
-                                            '强制结束',
-                                            style: TextStyle(
-                                              fontSize: 32 * rpx,
-                                              color: const Color.fromARGB(
-                                                  255, 0, 72, 255),
-                                            ),
-                                          ),
-                                        ),
+                                    ),
+                                  ],
                                 ),
-                                TimePickerSpinnerPopUp(
-                                  mode: CupertinoDatePickerMode.time,
-                                  initTime: DateTime.now(),
-                                  timeFormat: 'HH:MM',
-                                  cancelText: '取消',
-                                  confirmText: '确定',
-                                  textStyle: TextStyle(
-                                    color: Colors.black54,
-                                    fontSize: 32 * rpx,
-                                    fontWeight: FontWeight.bold,
+                                Container(
+                                  padding: EdgeInsets.fromLTRB(
+                                      20 * rpx, 10 * rpx, 20 * rpx, 10 * rpx),
+                                  margin:
+                                      EdgeInsets.fromLTRB(20 * rpx, 0, 0, 0),
+                                  decoration: BoxDecoration(
+                                    color: const Color.fromARGB(
+                                        255, 247, 247, 247),
+                                    borderRadius:
+                                        BorderRadius.circular(30 * rpx),
                                   ),
-                                  onChange: (dateTime) {
-                                    // Implement your logic with select dateTime
-                                  },
+                                  child: Text(
+                                    '$time分钟',
+                                    style: TextStyle(
+                                      fontSize: 28 * rpx,
+                                      color: Colors.black87,
+                                    ),
+                                  ),
                                 ),
                               ],
                             ),
                             Container(
                               alignment: Alignment.center,
-                              margin: EdgeInsets.fromLTRB(0, 100 * rpx, 0, 0),
+                              margin: EdgeInsets.fromLTRB(0, 60 * rpx, 0, 0),
                               child: ActionSlider.standard(
                                 height: 100 * rpx,
                                 backgroundColor:
@@ -601,7 +638,7 @@ class _IndexState extends State<Index> with SingleTickerProviderStateMixin {
                                   Icons.arrow_forward_ios,
                                   color: Colors.white,
                                 ),
-                                loadingIcon: Icon(
+                                loadingIcon: const Icon(
                                   Icons.hive,
                                   color: Colors.white,
                                 ),
@@ -627,28 +664,6 @@ class _IndexState extends State<Index> with SingleTickerProviderStateMixin {
                               ),
                             ),
                           ],
-                        ),
-                      ),
-                      SizedBox(
-                        width: 150 * rpx,
-                        height: 700 * rpx,
-                        child: SfSlider.vertical(
-                          min: 5.0,
-                          max: 200.0,
-                          value: time,
-                          interval: 20,
-                          showTicks: true,
-                          showLabels: true,
-                          enableTooltip: true,
-                          minorTicksPerInterval: 1,
-                          inactiveColor:
-                              const Color.fromARGB(255, 247, 247, 247),
-                          activeColor: const Color.fromARGB(255, 74, 101, 255),
-                          onChanged: (dynamic value) {
-                            setState(() {
-                              time = value.floor();
-                            });
-                          },
                         ),
                       ),
                     ],

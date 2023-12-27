@@ -7,7 +7,7 @@ class Apps extends StatelessWidget {
   Widget build(BuildContext context) {
     double rpx = MediaQuery.of(context).size.width / 750;
     return Padding(
-      padding: EdgeInsets.fromLTRB(40 * rpx, 0, 40 * rpx, 40 * rpx),
+      padding: EdgeInsets.fromLTRB(20 * rpx, 0, 20 * rpx, 10 * rpx),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
