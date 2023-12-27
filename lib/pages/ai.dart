@@ -8,7 +8,7 @@ import 'package:first_flutter_app/components/empty.dart';
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_chat_bubble/chat_bubble.dart';
-// import 'package:shimmer/shimmer.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class Ai extends StatefulWidget {
   const Ai({Key? key}) : super(key: key);
@@ -64,19 +64,6 @@ class _AiState extends State<Ai> {
                       },
                     ),
                   ),
-                  SizedBox(
-                    width: 60 * rpx,
-                    height: 60 * rpx,
-                    child: FloatingActionButton(
-                      backgroundColor: Colors.transparent,
-                      foregroundColor: Colors.black54,
-                      elevation: 0,
-                      focusElevation: 0,
-                      highlightElevation: 0,
-                      onPressed: () {},
-                      child: const Icon(Icons.history_toggle_off),
-                    ),
-                  ),
                 ],
               ),
             ),
@@ -113,7 +100,15 @@ class _AiState extends State<Ai> {
                     height: 80 * rpx,
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(30 * rpx),
-                      child: Image.asset('assets/images/8e3a09875693fb.png'),
+                      child: FloatingActionButton(
+                        backgroundColor: Colors.transparent,
+                        foregroundColor: Colors.black54,
+                        elevation: 0,
+                        focusElevation: 0,
+                        highlightElevation: 0,
+                        onPressed: () {},
+                        child: const Icon(Icons.history_toggle_off),
+                      ),
                     ),
                   ),
                   Expanded(
@@ -190,10 +185,22 @@ class _AiState extends State<Ai> {
                       highlightElevation: 0,
                       child: const Icon(Icons.add),
                       onPressed: () {
-                        setState(() {
-                          msgdata = [];
-                        });
-                        _focusnode.requestFocus();
+                        if (_textController.text.isEmpty &&
+                            !loading! &&
+                            msgdata.isNotEmpty) {
+                          setState(() {
+                            msgdata = [];
+                          });
+                          _focusnode.requestFocus();
+                        }
+                        Fluttertoast.showToast(
+                            msg: "不能开始新话题",
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.CENTER,
+                            timeInSecForIosWeb: 1,
+                            backgroundColor: Colors.red,
+                            textColor: Colors.white,
+                            fontSize: 16.0);
                       },
                     ),
                   ),
@@ -214,7 +221,6 @@ class _AiState extends State<Ai> {
         'content': '小惑正在思考中...',
         'role': 'assistant',
       });
-      loading = false;
     });
     Https https = Https();
     Map<String, dynamic> params = {"keywords": keywords0};
@@ -224,10 +230,6 @@ class _AiState extends State<Ai> {
       setState(() {
         msgdata[msgdata.length - 1]['content'] =
             ag.message?.choices?[0].message?.content;
-        // msgdata.add({
-        //   'content': ag.message?.choices?[0].message?.content,
-        //   'role': ag.message?.choices?[0].message?.role,
-        // });
         loading = false;
       });
       Future.delayed(const Duration(milliseconds: 500), () {

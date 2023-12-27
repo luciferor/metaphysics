@@ -2,12 +2,17 @@ import 'package:card_swiper/card_swiper.dart';
 import 'package:first_flutter_app/components/ani.dart';
 import 'package:first_flutter_app/pages/ai.dart';
 import 'package:first_flutter_app/pages/coming.dart';
+import 'package:first_flutter_app/pages/cominglogs.dart';
 import 'package:first_flutter_app/pages/mine.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:flutter_advanced_segment/flutter_advanced_segment.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
 import 'package:action_slider/action_slider.dart';
+import 'package:date_format/date_format.dart';
+import 'package:easy_date_timeline/easy_date_timeline.dart';
+import 'package:time_picker_spinner_pop_up/time_picker_spinner_pop_up.dart';
+import 'package:animated_toggle_switch/animated_toggle_switch.dart';
 
 class Index extends StatefulWidget {
   const Index({Key? key}) : super(key: key);
@@ -16,10 +21,13 @@ class Index extends StatefulWidget {
   _IndexState createState() => _IndexState();
 }
 
-class _IndexState extends State<Index> {
+class _IndexState extends State<Index> with SingleTickerProviderStateMixin {
   final _controller = ValueNotifier('all');
+
   dynamic time = 30;
   bool isForce = false;
+  DateTime selectDate = DateTime.now();
+
   @override
   Widget build(BuildContext context) {
     double rpx = MediaQuery.of(context).size.width / 750;
@@ -140,42 +148,49 @@ class _IndexState extends State<Index> {
           Column(
             children: [
               Container(
-                height: 80 * rpx,
                 padding: EdgeInsets.fromLTRB(20 * rpx, 0, 40 * rpx, 0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Container(
-                      width: 300 * rpx,
-                      padding: EdgeInsets.fromLTRB(20 * rpx, 0, 20 * rpx, 0),
-                      child: FloatingActionButton(
-                        onPressed: () {},
-                        backgroundColor: const Color.fromARGB(255, 45, 85, 245),
-                        child: Row(
-                          children: [
-                            Container(
-                              padding:
-                                  EdgeInsets.fromLTRB(20 * rpx, 0, 10 * rpx, 0),
-                              child: const Icon(Icons.date_range),
+                      padding: EdgeInsets.fromLTRB(0, 0, 20 * rpx, 0),
+                      child: Row(
+                        children: [
+                          Container(
+                            padding:
+                                EdgeInsets.fromLTRB(20 * rpx, 0, 10 * rpx, 0),
+                            child: const Icon(
+                              Icons.date_range,
+                              color: Color.fromARGB(255, 45, 85, 245),
                             ),
-                            Text(
-                              '2023年12月',
-                              style: TextStyle(
-                                fontSize: 32 * rpx,
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                              ),
+                          ),
+                          Text(
+                            formatDate(
+                              selectDate,
+                              [yyyy, '年', 'mm', '月', dd, '日'],
+                            ).toString(),
+                            style: TextStyle(
+                              fontSize: 38 * rpx,
+                              color: const Color.fromARGB(255, 45, 85, 245),
+                              fontWeight: FontWeight.bold,
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ),
                     SizedBox(
                       width: 80 * rpx,
                       height: 80 * rpx,
                       child: FloatingActionButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const Cominglogs(),
+                            ),
+                          );
+                        },
                         elevation: 0,
                         backgroundColor:
                             const Color.fromARGB(255, 247, 247, 247),
@@ -189,33 +204,58 @@ class _IndexState extends State<Index> {
                 ),
               ),
               Container(
-                height: 220 * rpx,
-                padding: EdgeInsets.all(40 * rpx),
-                child: ListView(
-                  scrollDirection: Axis.horizontal,
-                  children: ['24', '25', '26', '27', '28', '29', '30', '31']
-                      .map((msg) {
-                    // 在此处处理数据
-                    return Container(
-                      width: 100 * rpx,
-                      alignment: Alignment.center,
-                      margin: EdgeInsets.fromLTRB(0, 0, 20 * rpx, 0),
+                // height: 160 * rpx,
+                padding:
+                    EdgeInsets.fromLTRB(40 * rpx, 20 * rpx, 40 * rpx, 20 * rpx),
+                child: EasyInfiniteDateTimeLine(
+                  // controller: _controller,
+                  firstDate: DateTime.now(),
+                  focusDate: selectDate,
+                  // locale: 'zh-CN', //目前报错
+                  showTimelineHeader: false,
+                  lastDate: DateTime.now().add(
+                    const Duration(days: 365),
+                  ),
+                  activeColor: const Color.fromARGB(255, 193, 191, 207),
+                  dayProps: EasyDayProps(
+                    width: 100 * rpx,
+                    height: 120 * rpx,
+                    dayStructure: DayStructure.monthDayNumDayStr,
+                    activeDayStyle: DayStyle(
                       decoration: BoxDecoration(
-                        color: msg == '24'
-                            ? const Color.fromARGB(255, 210, 2, 218)
-                            : const Color.fromARGB(255, 232, 232, 232),
-                        borderRadius: BorderRadius.circular(30 * rpx),
-                      ),
-                      child: Text(
-                        msg,
-                        style: TextStyle(
-                          fontSize: 32 * rpx,
-                          fontWeight: FontWeight.bold,
-                          color: msg == '24' ? Colors.white : Colors.black,
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(30 * rpx),
+                        ),
+                        gradient: const LinearGradient(
+                          begin: Alignment.bottomLeft,
+                          end: Alignment.topRight,
+                          colors: [
+                            Color.fromARGB(255, 45, 85, 245),
+                            Color.fromARGB(255, 130, 167, 255),
+                          ],
                         ),
                       ),
-                    );
-                  }).toList(),
+                      dayNumStyle: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w900,
+                        fontSize: 49 * rpx,
+                      ),
+                      dayStrStyle: const TextStyle(
+                        color: Colors.white54,
+                      ),
+                      monthStrStyle: const TextStyle(
+                        color: Colors.white30,
+                      ),
+                    ),
+                    inactiveDayStyle: DayStyle(
+                      borderRadius: 30 * rpx,
+                    ),
+                  ),
+                  onDateChange: (date) {
+                    setState(() {
+                      selectDate = date;
+                    });
+                  },
                 ),
               ),
             ],
@@ -224,116 +264,118 @@ class _IndexState extends State<Index> {
             child: Container(
               padding: EdgeInsets.fromLTRB(40 * rpx, 0, 40 * rpx, bp),
               child: ListView(
-                children:
-                    ['24', '25', '26', '27', '28', '29', '30', '31'].map((msg) {
-                  // 在此处处理数据
-                  return Container(
-                    margin: EdgeInsets.fromLTRB(0, 0, 0, 30 * rpx),
-                    padding: EdgeInsets.fromLTRB(0, 0, 20 * rpx, 0),
-                    decoration: BoxDecoration(
-                      color: const Color.fromARGB(168, 236, 236, 236),
-                      borderRadius: BorderRadius.circular(50 * rpx),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Container(
-                          width: 140 * rpx,
-                          height: 140 * rpx,
-                          padding: EdgeInsets.all(20 * rpx),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(40 * rpx),
-                            child: const Image(
-                              image: NetworkImage(
-                                  'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fsafe-img.xhscdn.com%2Fbw1%2Fdf434177-70d9-4db6-9f82-7b4650ae415c%3FimageView2%2F2%2Fw%2F1080%2Fformat%2Fjpg&refer=http%3A%2F%2Fsafe-img.xhscdn.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1706019044&t=b354b5b9307c51bceca2174b63a7ac53'),
+                children: ['24', '25', '26', '27', '28', '29', '30', '31'].map(
+                  (msg) {
+                    // 在此处处理数据
+                    return Container(
+                      margin: EdgeInsets.fromLTRB(0, 0, 0, 30 * rpx),
+                      padding: EdgeInsets.fromLTRB(0, 0, 20 * rpx, 0),
+                      decoration: BoxDecoration(
+                        color: const Color.fromARGB(168, 236, 236, 236),
+                        borderRadius: BorderRadius.circular(50 * rpx),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Container(
+                            width: 140 * rpx,
+                            height: 140 * rpx,
+                            padding: EdgeInsets.all(20 * rpx),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(40 * rpx),
+                              child: const Image(
+                                image: NetworkImage(
+                                    'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fsafe-img.xhscdn.com%2Fbw1%2Fdf434177-70d9-4db6-9f82-7b4650ae415c%3FimageView2%2F2%2Fw%2F1080%2Fformat%2Fjpg&refer=http%3A%2F%2Fsafe-img.xhscdn.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1706019044&t=b354b5b9307c51bceca2174b63a7ac53'),
+                              ),
                             ),
                           ),
-                        ),
-                        Expanded(
-                          child: Container(
-                            padding: EdgeInsets.fromLTRB(
-                                0, 30 * rpx, 10 * rpx, 30 * rpx),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  '学习易学经典',
-                                  style: TextStyle(
-                                    fontSize: 28 * rpx,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.black,
-                                  ),
-                                ),
-                                Container(
-                                  padding:
-                                      EdgeInsets.fromLTRB(0, 10 * rpx, 0, 0),
-                                  child: Text(
-                                    '2024-01-25 17:00:00',
+                          Expanded(
+                            child: Container(
+                              padding: EdgeInsets.fromLTRB(
+                                  0, 30 * rpx, 10 * rpx, 30 * rpx),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    '学习易学经典',
                                     style: TextStyle(
-                                      fontSize: 20 * rpx,
+                                      fontSize: 28 * rpx,
                                       fontWeight: FontWeight.bold,
-                                      color: Colors.black38,
+                                      color: Colors.black,
                                     ),
                                   ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        Container(
-                          width: 100 * rpx,
-                          height: 40 * rpx,
-                          alignment: Alignment.center,
-                          margin: EdgeInsets.fromLTRB(20 * rpx, 0, 20 * rpx, 0),
-                          decoration: BoxDecoration(
-                            color: const Color.fromARGB(255, 197, 197, 197),
-                            borderRadius: BorderRadius.circular(30 * rpx),
-                          ),
-                          child: Text(
-                            '25 分钟',
-                            style: TextStyle(
-                              fontSize: 18 * rpx,
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          width: 100 * rpx,
-                          height: 60 * rpx,
-                          child: FloatingActionButton(
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const Coming(),
-                                ),
-                              );
-                            },
-                            backgroundColor:
-                                const Color.fromARGB(255, 45, 85, 245),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20 * rpx),
-                              side: const BorderSide(
-                                width: 2,
-                                color: Color.fromARGB(0, 235, 26, 26),
+                                  Container(
+                                    padding:
+                                        EdgeInsets.fromLTRB(0, 10 * rpx, 0, 0),
+                                    child: Text(
+                                      '2024-01-25 17:00:00',
+                                      style: TextStyle(
+                                        fontSize: 20 * rpx,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.black38,
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
+                            ),
+                          ),
+                          Container(
+                            width: 100 * rpx,
+                            height: 40 * rpx,
+                            alignment: Alignment.center,
+                            margin:
+                                EdgeInsets.fromLTRB(20 * rpx, 0, 20 * rpx, 0),
+                            decoration: BoxDecoration(
+                              color: const Color.fromARGB(255, 197, 197, 197),
+                              borderRadius: BorderRadius.circular(30 * rpx),
                             ),
                             child: Text(
-                              '去完成',
+                              '25 分钟',
                               style: TextStyle(
-                                fontSize: 20 * rpx,
-                                color: Colors.white,
+                                fontSize: 18 * rpx,
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
                               ),
                             ),
                           ),
-                        ),
-                      ],
-                    ),
-                  );
-                }).toList(),
+                          SizedBox(
+                            width: 100 * rpx,
+                            height: 60 * rpx,
+                            child: FloatingActionButton(
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const Coming(),
+                                  ),
+                                );
+                              },
+                              backgroundColor:
+                                  const Color.fromARGB(255, 45, 85, 245),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20 * rpx),
+                                side: const BorderSide(
+                                  width: 2,
+                                  color: Color.fromARGB(0, 235, 26, 26),
+                                ),
+                              ),
+                              child: Text(
+                                '去完成',
+                                style: TextStyle(
+                                  fontSize: 20 * rpx,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                ).toList(),
               ),
             ),
           ),
@@ -471,59 +513,78 @@ class _IndexState extends State<Index> {
                               ),
                             ),
                             Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                // AdvancedSegment(
-                                //   controller: _controller,
-                                //   backgroundColor:
-                                //       const Color.fromARGB(255, 237, 237, 237),
-                                //   inactiveStyle: TextStyle(
-                                //     fontSize: 28 * rpx,
-                                //     fontWeight: FontWeight.bold,
-                                //   ),
-                                //   segments: const {
-                                //     // Map<String, String>
-                                //     'all': '可关闭',
-                                //     'starred': '不可关闭',
-                                //   },
-                                // ),
-                                Switch(
-                                  activeColor:
-                                      const Color.fromARGB(255, 0, 72, 255),
-                                  activeTrackColor:
-                                      const Color.fromARGB(255, 198, 234, 255),
-                                  inactiveThumbColor:
-                                      const Color.fromARGB(255, 152, 152, 152),
-                                  value: isForce,
-                                  onChanged: (value) {
-                                    setState(() {
-                                      isForce = value;
-                                    });
-                                  },
-                                ),
-                                Expanded(
-                                  child: Container(
-                                    padding:
-                                        EdgeInsets.fromLTRB(10 * rpx, 0, 0, 0),
-                                    child: Text(
-                                      '是否强制关闭',
-                                      style: TextStyle(
-                                        color: Colors.black38,
-                                        fontSize: 32 * rpx,
-                                        fontWeight: FontWeight.bold,
+                                AnimatedToggleSwitch.dual(
+                                  current: isForce,
+                                  first: false,
+                                  second: true,
+                                  spacing: 50 * rpx,
+                                  height: 80 * rpx,
+                                  style: const ToggleStyle(
+                                    borderColor: Colors.transparent,
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.black26,
+                                        spreadRadius: 1,
+                                        blurRadius: 2,
+                                        offset: Offset(0, 1.5),
                                       ),
-                                    ),
+                                    ],
                                   ),
+                                  borderWidth: 10 * rpx,
+                                  onChanged: (b) => setState(() => isForce = b),
+                                  styleBuilder: (b) => ToggleStyle(
+                                    indicatorColor: b
+                                        ? const Color.fromARGB(
+                                            255, 201, 201, 201)
+                                        : const Color.fromARGB(255, 0, 72, 255),
+                                  ),
+                                  iconBuilder: (value) => value
+                                      ? const Icon(
+                                          Icons.close,
+                                          color: Colors.white,
+                                        )
+                                      : const Icon(
+                                          Icons.done,
+                                          color: Colors.white,
+                                        ),
+                                  textBuilder: (value) => value
+                                      ? Center(
+                                          child: Text(
+                                            '不能结束',
+                                            style: TextStyle(
+                                              fontSize: 32 * rpx,
+                                              color: Colors.black45,
+                                            ),
+                                          ),
+                                        )
+                                      : Center(
+                                          child: Text(
+                                            '强制结束',
+                                            style: TextStyle(
+                                              fontSize: 32 * rpx,
+                                              color: const Color.fromARGB(
+                                                  255, 0, 72, 255),
+                                            ),
+                                          ),
+                                        ),
                                 ),
-                                Text(
-                                  '$time分钟',
-                                  style: TextStyle(
+                                TimePickerSpinnerPopUp(
+                                  mode: CupertinoDatePickerMode.time,
+                                  initTime: DateTime.now(),
+                                  timeFormat: 'HH:MM',
+                                  cancelText: '取消',
+                                  confirmText: '确定',
+                                  textStyle: TextStyle(
+                                    color: Colors.black54,
                                     fontSize: 32 * rpx,
                                     fontWeight: FontWeight.bold,
-                                    color:
-                                        const Color.fromARGB(255, 0, 72, 255),
                                   ),
+                                  onChange: (dateTime) {
+                                    // Implement your logic with select dateTime
+                                  },
                                 ),
                               ],
                             ),
@@ -533,13 +594,21 @@ class _IndexState extends State<Index> {
                               child: ActionSlider.standard(
                                 height: 100 * rpx,
                                 backgroundColor:
-                                    const Color.fromARGB(255, 0, 72, 255),
+                                    const Color.fromARGB(255, 247, 247, 247),
                                 toggleColor:
-                                    const Color.fromARGB(255, 247, 247, 248),
+                                    const Color.fromARGB(255, 0, 72, 255),
+                                icon: const Icon(
+                                  Icons.arrow_forward_ios,
+                                  color: Colors.white,
+                                ),
+                                loadingIcon: Icon(
+                                  Icons.hive,
+                                  color: Colors.white,
+                                ),
                                 child: Text(
-                                  '滑动完成',
+                                  '向右滑动完成',
                                   style: TextStyle(
-                                    color: Colors.white,
+                                    color: Colors.black87,
                                     fontSize: 32 * rpx,
                                     fontWeight: FontWeight.bold,
                                   ),
@@ -574,7 +643,7 @@ class _IndexState extends State<Index> {
                           minorTicksPerInterval: 1,
                           inactiveColor:
                               const Color.fromARGB(255, 247, 247, 247),
-                          activeColor: const Color.fromARGB(255, 0, 72, 255),
+                          activeColor: const Color.fromARGB(255, 74, 101, 255),
                           onChanged: (dynamic value) {
                             setState(() {
                               time = value.floor();
