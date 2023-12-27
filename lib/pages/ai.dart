@@ -3,12 +3,10 @@ import 'package:first_flutter_app/classes/apis.dart';
 import 'package:first_flutter_app/classes/https.dart';
 import 'package:first_flutter_app/classes/aimsgres.dart';
 import 'package:first_flutter_app/components/base.dart';
-import 'package:first_flutter_app/components/blur.dart';
 import 'package:first_flutter_app/components/empty.dart';
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_chat_bubble/chat_bubble.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 class Ai extends StatefulWidget {
   const Ai({Key? key}) : super(key: key);
@@ -193,14 +191,6 @@ class _AiState extends State<Ai> {
                           });
                           _focusnode.requestFocus();
                         }
-                        Fluttertoast.showToast(
-                            msg: "不能开始新话题",
-                            toastLength: Toast.LENGTH_SHORT,
-                            gravity: ToastGravity.CENTER,
-                            timeInSecForIosWeb: 1,
-                            backgroundColor: Colors.red,
-                            textColor: Colors.white,
-                            fontSize: 16.0);
                       },
                     ),
                   ),
