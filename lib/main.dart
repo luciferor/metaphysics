@@ -1,3 +1,4 @@
+import 'package:first_flutter_app/pages/coming.dart';
 import 'package:flutter/material.dart';
 import 'package:first_flutter_app/pages/ai.dart';
 import 'package:first_flutter_app/pages/login.dart';
@@ -25,6 +26,7 @@ void main() => runApp(
           '/ai': (context) => const Ai(),
           '/login': (context) => const Login(),
           '/reg': (context) => const Register(),
+          '/coming': (context) => const Coming(),
         },
       ),
     );

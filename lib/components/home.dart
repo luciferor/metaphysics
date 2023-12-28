@@ -12,6 +12,7 @@ import 'package:date_format/date_format.dart';
 import 'package:easy_date_timeline/easy_date_timeline.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:time_range_picker/time_range_picker.dart';
+import 'package:simple_progress_indicators/simple_progress_indicators.dart';
 
 class Index extends StatefulWidget {
   const Index({Key? key}) : super(key: key);
@@ -35,7 +36,7 @@ class _IndexState extends State<Index> with SingleTickerProviderStateMixin {
     'assets/images/icons/yoga.svg'
   ];
   TimeOfDay st = const TimeOfDay(hour: 06, minute: 0);
-  TimeOfDay et = const TimeOfDay(hour: 06, minute: 30);
+  TimeOfDay et = const TimeOfDay(hour: 09, minute: 0);
   dynamic time = 30;
   bool isForce = true;
   DateTime selectDate = DateTime.now();
@@ -299,6 +300,7 @@ class _IndexState extends State<Index> with SingleTickerProviderStateMixin {
               child: ListView(
                 children: icons.map(
                   (icon) {
+                    var index = icons.indexOf(icon);
                     // 在此处处理数据
                     return Container(
                       margin: EdgeInsets.fromLTRB(0, 0, 0, 30 * rpx),
@@ -352,6 +354,19 @@ class _IndexState extends State<Index> with SingleTickerProviderStateMixin {
                                       ),
                                     ),
                                   ),
+                                  ProgressBar(
+                                    value: 0.1,
+                                    width: 190 * rpx,
+                                    height: 10 * rpx,
+                                    gradient: const LinearGradient(
+                                      colors: [
+                                        Colors.blue,
+                                        Colors.purple,
+                                      ],
+                                    ),
+                                    backgroundColor:
+                                        Colors.grey.withOpacity(0.4),
+                                  ),
                                 ],
                               ),
                             ),
@@ -379,6 +394,7 @@ class _IndexState extends State<Index> with SingleTickerProviderStateMixin {
                             width: 100 * rpx,
                             height: 60 * rpx,
                             child: FloatingActionButton(
+                              heroTag: index,
                               onPressed: () {
                                 Navigator.push(
                                   context,

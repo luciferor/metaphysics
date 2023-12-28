@@ -28,8 +28,8 @@ class _MineState extends State<Mine> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
-              padding: EdgeInsets.fromLTRB(
-                  40 * rpx, tp + 40 * rpx, 40 * rpx, 40 * rpx),
+              padding:
+                  EdgeInsets.fromLTRB(40 * rpx, tp + 20 * rpx, 40 * rpx, 0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -54,7 +54,7 @@ class _MineState extends State<Mine> {
               ),
             ),
             Container(
-              padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+              padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
               child: Container(
                 padding: EdgeInsets.all(30 * rpx),
                 child: Row(

@@ -65,6 +65,7 @@ dependencies:
   launcher_icon_switcher: ^0.0.2
   flutter_switch: ^0.3.2
   time_range_picker: ^2.2.0
+  simple_progress_indicators: ^0.2.0
 
 dev_dependencies:
   flutter_test:
