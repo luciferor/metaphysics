@@ -11,7 +11,7 @@ import 'package:action_slider/action_slider.dart';
 import 'package:date_format/date_format.dart';
 import 'package:easy_date_timeline/easy_date_timeline.dart';
 import 'package:flutter_switch/flutter_switch.dart';
-import 'package:time_duration_picker/time_duration_picker.dart';
+import 'package:time_range_picker/time_range_picker.dart';
 
 class Index extends StatefulWidget {
   const Index({Key? key}) : super(key: key);
@@ -34,8 +34,8 @@ class _IndexState extends State<Index> with SingleTickerProviderStateMixin {
     'assets/images/icons/walk.svg',
     'assets/images/icons/yoga.svg'
   ];
-  String st = '';
-  String et = '';
+  TimeOfDay st = const TimeOfDay(hour: 06, minute: 0);
+  TimeOfDay et = const TimeOfDay(hour: 06, minute: 30);
   dynamic time = 30;
   bool isForce = true;
   DateTime selectDate = DateTime.now();
@@ -387,7 +387,8 @@ class _IndexState extends State<Index> with SingleTickerProviderStateMixin {
                                   ),
                                 );
                               },
-                              backgroundColor: Color.fromARGB(151, 45, 85, 245),
+                              backgroundColor:
+                                  const Color.fromARGB(151, 45, 85, 245),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(20 * rpx),
                                 side: const BorderSide(
@@ -425,7 +426,7 @@ class _IndexState extends State<Index> with SingleTickerProviderStateMixin {
         builder: (BuildContext buildcontext,
             void Function(void Function()) setState) {
           return Container(
-            // height: 895 * rpx,
+            height: 1295 * rpx,
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.only(
@@ -441,235 +442,269 @@ class _IndexState extends State<Index> with SingleTickerProviderStateMixin {
                 )
               ],
             ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  padding: EdgeInsets.fromLTRB(0, 40 * rpx, 0, 40 * rpx),
-                  alignment: Alignment.center,
-                  child: Container(
-                    width: 100 * rpx,
-                    height: 10 * rpx,
-                    decoration: BoxDecoration(
-                      color: Colors.black12,
-                      borderRadius: BorderRadius.circular(30 * rpx),
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    padding: EdgeInsets.fromLTRB(0, 40 * rpx, 0, 40 * rpx),
+                    alignment: Alignment.center,
+                    child: Container(
+                      width: 100 * rpx,
+                      height: 10 * rpx,
+                      decoration: BoxDecoration(
+                        color: Colors.black12,
+                        borderRadius: BorderRadius.circular(30 * rpx),
+                      ),
                     ),
                   ),
-                ),
-                Container(
-                  padding: EdgeInsets.fromLTRB(40 * rpx, 0, 40 * rpx, bp),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Expanded(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            SizedBox(
-                              height: 280 * rpx,
-                              child: GridView.count(
-                                crossAxisCount: 5,
-                                children: icons
-                                    .map(
-                                      (item) => Container(
-                                        padding: EdgeInsets.all(10 * rpx),
-                                        child: FloatingActionButton(
-                                          elevation: 0,
-                                          focusElevation: 0,
-                                          highlightElevation: 0,
-                                          backgroundColor: const Color.fromARGB(
-                                              255, 247, 247, 247),
-                                          child: SvgPicture.asset(
-                                            item,
-                                            width: 50 * rpx,
-                                            height: 50 * rpx,
+                  Container(
+                    padding: EdgeInsets.fromLTRB(40 * rpx, 0, 40 * rpx, bp),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Expanded(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(
+                                height: 280 * rpx,
+                                child: GridView.count(
+                                  crossAxisCount: 5,
+                                  children: icons
+                                      .map(
+                                        (item) => Container(
+                                          padding: EdgeInsets.all(10 * rpx),
+                                          child: FloatingActionButton(
+                                            elevation: 0,
+                                            focusElevation: 0,
+                                            highlightElevation: 0,
+                                            backgroundColor:
+                                                const Color.fromARGB(
+                                                    255, 247, 247, 247),
+                                            child: SvgPicture.asset(
+                                              item,
+                                              width: 50 * rpx,
+                                              height: 50 * rpx,
+                                            ),
+                                            onPressed: () {},
                                           ),
-                                          onPressed: () {},
                                         ),
-                                      ),
-                                    )
-                                    .toList(),
-                              ),
-                            ),
-                            Container(
-                              padding: EdgeInsets.fromLTRB(
-                                  20 * rpx, 10 * rpx, 20 * rpx, 10 * rpx),
-                              margin:
-                                  EdgeInsets.fromLTRB(0, 30 * rpx, 0, 40 * rpx),
-                              decoration: BoxDecoration(
-                                color: const Color.fromARGB(255, 247, 247, 247),
-                                borderRadius: BorderRadius.circular(30 * rpx),
-                              ),
-                              child: TextField(
-                                minLines: 1,
-                                maxLines: 1,
-                                textInputAction: TextInputAction.none,
-                                textAlignVertical: TextAlignVertical.center,
-                                cursorRadius: Radius.circular(10 * rpx),
-                                decoration: InputDecoration(
-                                  focusedBorder: InputBorder.none,
-                                  enabledBorder: InputBorder.none,
-                                  hintText: '请输入事项标题',
-                                  hintStyle:
-                                      const TextStyle(color: Colors.grey),
-                                  border: const OutlineInputBorder(
-                                    borderSide: BorderSide.none,
-                                  ),
-                                  contentPadding:
-                                      EdgeInsets.fromLTRB(0, 0, 0, 20 * rpx),
-                                ),
-                                style: TextStyle(
-                                  color: Colors.black87,
-                                  fontSize: 32 * rpx,
+                                      )
+                                      .toList(),
                                 ),
                               ),
-                            ),
-                            Container(
-                              height: 540 * rpx,
-                              alignment: Alignment.center,
-                              margin:
-                                  EdgeInsets.fromLTRB(0, 20 * rpx, 0, 20 * rpx),
-                              child: TimeDurationPicker(
-                                diameter: 500 * rpx,
-                                icon1Data: Icons.directions_car_outlined,
-                                icon2Data: Icons.local_gas_station_outlined,
-                                knobDecoration: const BoxDecoration(
-                                  gradient: LinearGradient(
-                                    begin: Alignment.bottomLeft,
-                                    end: Alignment.topRight,
-                                    colors: [
-                                      Color.fromRGBO(6, 18, 255, 1),
-                                      Color.fromRGBO(206, 58, 255, 1),
-                                    ],
-                                  ),
+                              Container(
+                                padding: EdgeInsets.fromLTRB(
+                                    20 * rpx, 10 * rpx, 20 * rpx, 10 * rpx),
+                                margin: EdgeInsets.fromLTRB(
+                                    0, 30 * rpx, 0, 40 * rpx),
+                                decoration: BoxDecoration(
+                                  color:
+                                      const Color.fromARGB(255, 247, 247, 247),
+                                  borderRadius: BorderRadius.circular(30 * rpx),
                                 ),
-                                clockTextStyle: const TextStyle(
-                                    color: Color.fromARGB(255, 26, 26, 26),
-                                    fontWeight: FontWeight.bold),
-                                onIcon1RotatedCallback: (value) {
-                                  setState(() {
-                                    st = value;
-                                  });
-                                },
-                                onIcon2RotatedCallback: (value) {
-                                  setState(() {
-                                    et = value;
-                                  });
-                                },
-                              ),
-                            ),
-                            Row(
-                              children: [Text(st), Text(et)],
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    FlutterSwitch(
-                                      width: 100 * rpx,
-                                      height: 60 * rpx,
-                                      valueFontSize: 10 * rpx,
-                                      toggleSize: 50 * rpx,
-                                      value: isForce,
-                                      borderRadius: 60 * rpx,
-                                      padding: 10 * rpx,
-                                      showOnOff: false,
-                                      inactiveColor: const Color.fromARGB(
-                                          255, 220, 220, 220),
-                                      activeColor:
-                                          const Color.fromARGB(200, 0, 72, 255),
-                                      onToggle: (val) {
-                                        setState(() {
-                                          isForce = val;
-                                        });
-                                      },
+                                child: TextField(
+                                  minLines: 1,
+                                  maxLines: 1,
+                                  textInputAction: TextInputAction.none,
+                                  textAlignVertical: TextAlignVertical.center,
+                                  cursorRadius: Radius.circular(10 * rpx),
+                                  decoration: InputDecoration(
+                                    focusedBorder: InputBorder.none,
+                                    enabledBorder: InputBorder.none,
+                                    hintText: '请输入事项标题',
+                                    hintStyle:
+                                        const TextStyle(color: Colors.grey),
+                                    border: const OutlineInputBorder(
+                                      borderSide: BorderSide.none,
                                     ),
-                                    Container(
-                                      padding: EdgeInsets.fromLTRB(
-                                          20 * rpx, 0, 0, 0),
-                                      child: Text(
-                                        '强制结束',
-                                        style: TextStyle(
-                                          color: Colors.black54,
-                                          fontSize: 28 * rpx,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                Container(
-                                  padding: EdgeInsets.fromLTRB(
-                                      20 * rpx, 10 * rpx, 20 * rpx, 10 * rpx),
-                                  margin:
-                                      EdgeInsets.fromLTRB(20 * rpx, 0, 0, 0),
-                                  decoration: BoxDecoration(
-                                    color: const Color.fromARGB(
-                                        255, 247, 247, 247),
-                                    borderRadius:
-                                        BorderRadius.circular(30 * rpx),
+                                    contentPadding:
+                                        EdgeInsets.fromLTRB(0, 0, 0, 20 * rpx),
                                   ),
-                                  child: Text(
-                                    '$time分钟',
-                                    style: TextStyle(
-                                      fontSize: 28 * rpx,
-                                      color: Colors.black87,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Container(
-                              alignment: Alignment.center,
-                              margin: EdgeInsets.fromLTRB(0, 60 * rpx, 0, 0),
-                              child: ActionSlider.standard(
-                                height: 100 * rpx,
-                                backgroundColor:
-                                    const Color.fromARGB(255, 247, 247, 247),
-                                toggleColor:
-                                    const Color.fromARGB(255, 0, 72, 255),
-                                icon: const Icon(
-                                  Icons.arrow_forward_ios,
-                                  color: Colors.white,
-                                ),
-                                loadingIcon: const Icon(
-                                  Icons.hive,
-                                  color: Colors.white,
-                                ),
-                                child: Text(
-                                  '向右滑动完成',
                                   style: TextStyle(
                                     color: Colors.black87,
                                     fontSize: 32 * rpx,
-                                    fontWeight: FontWeight.bold,
                                   ),
                                 ),
-                                action: (controller) async {
-                                  controller
-                                      .loading(); //starts loading animation
-                                  await Future.delayed(
-                                    const Duration(seconds: 3),
-                                  );
-                                  controller
-                                      .success(); //starts success animation
-                                  // ignore: use_build_context_synchronously
-                                  Navigator.pop(context);
-                                },
                               ),
-                            ),
-                          ],
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      FlutterSwitch(
+                                        width: 100 * rpx,
+                                        height: 60 * rpx,
+                                        valueFontSize: 10 * rpx,
+                                        toggleSize: 30 * rpx,
+                                        value: isForce,
+                                        borderRadius: 40 * rpx,
+                                        padding: 10 * rpx,
+                                        showOnOff: false,
+                                        inactiveColor: const Color.fromARGB(
+                                            255, 220, 220, 220),
+                                        activeColor: const Color.fromARGB(
+                                            200, 0, 72, 255),
+                                        onToggle: (val) {
+                                          setState(() {
+                                            isForce = val;
+                                          });
+                                        },
+                                      ),
+                                      Container(
+                                        padding: EdgeInsets.fromLTRB(
+                                            20 * rpx, 0, 0, 0),
+                                        child: Text(
+                                          '强制结束',
+                                          style: TextStyle(
+                                            color: Colors.black54,
+                                            fontSize: 28 * rpx,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Container(
+                                    padding: EdgeInsets.fromLTRB(
+                                        20 * rpx, 10 * rpx, 20 * rpx, 10 * rpx),
+                                    margin:
+                                        EdgeInsets.fromLTRB(20 * rpx, 0, 0, 0),
+                                    decoration: BoxDecoration(
+                                      color: const Color.fromARGB(
+                                          255, 247, 247, 247),
+                                      borderRadius:
+                                          BorderRadius.circular(30 * rpx),
+                                    ),
+                                    child: Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        Text(
+                                            '${st.hour}:${st.minute} - ${et.hour}:${et.minute}'),
+                                        SizedBox(width: 100 * rpx),
+                                        Text(
+                                          '${((DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day, et.hour, et.minute).difference(DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day, st.hour, st.minute))).inMinutes).abs() > 360 ? 1440 - ((DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day, et.hour, et.minute).difference(DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day, st.hour, st.minute))).inMinutes).abs() : ((DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day, et.hour, et.minute).difference(DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day, st.hour, st.minute))).inMinutes).abs()}分钟',
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 28 * rpx,
+                                            color: const Color.fromARGB(
+                                                255, 0, 72, 255),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Container(
+                                height: 440 * rpx,
+                                alignment: Alignment.center,
+                                margin: EdgeInsets.fromLTRB(
+                                    0, 20 * rpx, 0, 20 * rpx),
+                                child: TimeRangePicker(
+                                  hideTimes: true,
+                                  hideButtons: true,
+                                  autoAdjustLabels: true,
+                                  strokeWidth: 10 * rpx,
+                                  ticks: 48,
+                                  ticksOffset: 5 * rpx,
+                                  ticksLength: 20 * rpx,
+                                  handlerRadius: 20 * rpx,
+                                  ticksColor: Colors.grey,
+                                  rotateLabels: false,
+                                  labels: [
+                                    "24 h",
+                                    "3 h",
+                                    "6 h",
+                                    "9 h",
+                                    "12 h",
+                                    "15 h",
+                                    "18 h",
+                                    "21 h"
+                                  ].asMap().entries.map((e) {
+                                    return ClockLabel.fromIndex(
+                                        idx: e.key, length: 8, text: e.value);
+                                  }).toList(),
+                                  labelOffset: 50 * rpx,
+                                  padding: 100 * rpx,
+                                  labelStyle: TextStyle(
+                                    fontSize: 24 * rpx,
+                                    color: Colors.black,
+                                  ),
+                                  interval: const Duration(minutes: 5),
+                                  maxDuration: const Duration(minutes: 360),
+                                  start: st,
+                                  end: et,
+                                  clockRotation: 360.0,
+                                  onStartChange: (start) {
+                                    setState(() {
+                                      st = start;
+                                    });
+                                  },
+                                  onEndChange: (end) {
+                                    setState(() {
+                                      et = end;
+                                    });
+                                  },
+                                ),
+                              ),
+                              Container(
+                                alignment: Alignment.center,
+                                margin: EdgeInsets.fromLTRB(0, 60 * rpx, 0, 0),
+                                child: ActionSlider.standard(
+                                  boxShadow: const [
+                                    BoxShadow(
+                                      color: Colors.transparent,
+                                    ),
+                                  ],
+                                  height: 100 * rpx,
+                                  backgroundColor:
+                                      const Color.fromARGB(255, 247, 247, 247),
+                                  toggleColor:
+                                      const Color.fromARGB(255, 190, 190, 190),
+                                  icon: const Icon(
+                                    Icons.arrow_forward_ios,
+                                    color: Colors.white,
+                                  ),
+                                  child: Text(
+                                    '向右滑动完成',
+                                    style: TextStyle(
+                                      color: Colors.black87,
+                                      fontSize: 32 * rpx,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  action: (controller) async {
+                                    controller
+                                        .loading(); //starts loading animation
+                                    await Future.delayed(
+                                      const Duration(seconds: 3),
+                                    );
+                                    controller
+                                        .success(); //starts success animation
+                                    // ignore: use_build_context_synchronously
+                                    Navigator.pop(context);
+                                  },
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           );
         },

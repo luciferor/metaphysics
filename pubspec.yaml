@@ -60,12 +60,11 @@ dependencies:
   horizontal_card_pager: ^1.1.1
   timeline_list: ^0.0.6
   progressive_time_picker: ^1.0.0
-  fluttertoast: ^8.2.4
   zhi_starry_sky: ^0.0.2
   flutter_animate: ^4.3.0
   launcher_icon_switcher: ^0.0.2
   flutter_switch: ^0.3.2
-  time_duration_picker: ^0.0.1
+  time_range_picker: ^2.2.0
 
 dev_dependencies:
   flutter_test:

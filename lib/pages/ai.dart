@@ -176,7 +176,7 @@ class _AiState extends State<Ai> {
                     width: 80 * rpx,
                     height: 80 * rpx,
                     child: FloatingActionButton(
-                      backgroundColor: const Color.fromARGB(255, 206, 206, 206),
+                      backgroundColor: const Color.fromARGB(100, 206, 206, 206),
                       foregroundColor: Colors.white70,
                       splashColor: const Color.fromARGB(255, 0, 72, 255),
                       elevation: 0,
