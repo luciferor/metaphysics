@@ -6,7 +6,9 @@ import 'package:first_flutter_app/components/base.dart';
 import 'package:first_flutter_app/components/empty.dart';
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_chat_bubble/chat_bubble.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class Ai extends StatefulWidget {
   const Ai({Key? key}) : super(key: key);
@@ -254,16 +256,35 @@ class _AiState extends State<Ai> {
           Expanded(
             child: Padding(
               padding: EdgeInsets.fromLTRB(0, 0, 120 * rpx, 0),
-              child: ChatBubble(
-                clipper: ChatBubbleClipper3(type: BubbleType.receiverBubble),
-                alignment: Alignment.bottomLeft,
-                backGroundColor: const Color.fromARGB(255, 247, 247, 247),
-                shadowColor: const Color.fromARGB(255, 236, 236, 236),
-                child: Text(
-                  msg,
-                  style: TextStyle(
-                    color: Colors.black,
+              child: GestureDetector(
+                onLongPress: () {
+                  Clipboard.setData(
+                    ClipboardData(text: msg),
+                  );
+                  Fluttertoast.showToast(
+                    msg: "你今天真好看",
+                    toastLength: Toast.LENGTH_SHORT,
+                    gravity: ToastGravity.TOP,
+                    timeInSecForIosWeb: 1,
+                    backgroundColor: const Color.fromARGB(115, 111, 1, 255),
+                    textColor: Colors.white,
                     fontSize: 32 * rpx,
+                    webShowClose: true,
+                    webBgColor: "#3300CC",
+                    webPosition: "center",
+                  );
+                },
+                child: ChatBubble(
+                  clipper: ChatBubbleClipper3(type: BubbleType.receiverBubble),
+                  alignment: Alignment.bottomLeft,
+                  backGroundColor: const Color.fromARGB(255, 247, 247, 247),
+                  shadowColor: const Color.fromARGB(255, 236, 236, 236),
+                  child: Text(
+                    msg,
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 32 * rpx,
+                    ),
                   ),
                 ),
               ),
