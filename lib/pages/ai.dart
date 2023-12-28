@@ -262,7 +262,7 @@ class _AiState extends State<Ai> {
                     ClipboardData(text: msg),
                   );
                   Fluttertoast.showToast(
-                    msg: "你今天真好看",
+                    msg: "内容复制成功～",
                     toastLength: Toast.LENGTH_SHORT,
                     gravity: ToastGravity.TOP,
                     timeInSecForIosWeb: 1,
