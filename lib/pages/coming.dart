@@ -3,7 +3,6 @@ import 'package:first_flutter_app/components/base.dart';
 import 'package:flutter/material.dart';
 import 'package:simple_progress_indicators/simple_progress_indicators.dart';
 import 'package:zhi_starry_sky/starry_sky.dart';
-import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 
 class Coming extends StatefulWidget {
   const Coming({Key? key}) : super(key: key);
@@ -15,13 +14,12 @@ class Coming extends StatefulWidget {
 
 class _ComingState extends State<Coming> {
   late Timer? timers;
-  int total = 3000;
+  int total = 300;
   int progress = 0;
   late Duration duration;
   String hms = '';
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     timerHandler();
   }
@@ -57,17 +55,17 @@ class _ComingState extends State<Coming> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(hms),
-                      Text('${(progress / total) * 100} %'),
+                      Text('${((progress / (total * 60)) * 100).round()} %'),
                     ],
                   ),
                   ProgressBar(
-                    value: progress / total,
+                    value: progress / (total * 60),
                     width: MediaQuery.of(context).size.width - (80 * rpx),
-                    height: 30 * rpx,
+                    height: 10 * rpx,
                     gradient: const LinearGradient(
                       colors: [
-                        Colors.blue,
-                        Colors.purple,
+                        Color.fromARGB(200, 53, 66, 255),
+                        Color.fromARGB(200, 217, 0, 255),
                       ],
                     ),
                     backgroundColor: Colors.grey.withOpacity(0.4),
@@ -82,13 +80,18 @@ class _ComingState extends State<Coming> {
   }
 
   void timerHandler() {
-    duration = Duration(minutes: progress);
-    timers = Timer.periodic(const Duration(seconds: 300), (timer) {
-      if (progress < total) {
-        print(progress--);
+    Duration duration = Duration(minutes: total);
+    timers = Timer.periodic(const Duration(milliseconds: 1000), (timer) {
+      if (progress < total * 60) {
+        setState(() {
+          progress++;
+        });
+      }
+      if (duration.inSeconds > 0) {
+        duration -= const Duration(seconds: 1);
         setState(() {
           hms =
-              '${duration.inHours} : ${duration.inMinutes.remainder(60)} : ${duration.inSeconds.remainder(60)}';
+              '${duration.inHours} 时 ${duration.inMinutes.remainder(60)} 分 ${duration.inSeconds.remainder(60)} 秒';
         });
       } else {
         timer.cancel();
@@ -98,7 +101,6 @@ class _ComingState extends State<Coming> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     timers?.cancel();
     timers = null;

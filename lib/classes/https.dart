@@ -9,30 +9,19 @@ class Https {
   int timestamp = DateTime.now().millisecondsSinceEpoch;
   Https() {
     _dio = Dio(BaseOptions(
-      baseUrl: 'https://api.dsnbc.com/',
+      baseUrl: 'http://local.todo.dsnbc.com/',
       connectTimeout: const Duration(seconds: 60),
       receiveTimeout: const Duration(seconds: 60),
-      // headers: {
-      //   "Authorzation-Code:": getStorage('access'),
-      //   "Encrypted-Code": encryptedCode(params, timestamp),
-      //   "Time-Rubbing": timestamp,
-      // },
     ));
 
     // 添加请求拦截器
     _dio.interceptors.add(InterceptorsWrapper(
-      // onRequest: (RequestOptions options) {
-      //   // 在请求中加入自定义 headers
-      //   options.headers['Authorization'] = 'Bearer your_token';
-      //   options.headers['Custom-Header'] = 'custom_value';
-      //   return options;
-      // },
       onRequest: (RequestOptions options, RequestInterceptorHandler handler) {
         // 创建新的 RequestOptions 对象，并对其进行修改
         RequestOptions newOptions = options.copyWith(
           headers: {
             ...options.headers,
-            'Authorzation-Code': getStorage('access'), // 添加自定义 headers
+            'Authorization': getStorage('access'), // 添加自定义 headers
             'Encrypted-Code': encryptedCode(options.data, timestamp),
             'Time-Rubbing': timestamp,
           },
@@ -54,7 +43,6 @@ class Https {
     List<String> keys = params!.keys.toList()..sort();
     String formattedKeys =
         keys.map((key) => key[0].toUpperCase() + key.substring(1)).join('');
-    print(generateMD5("$ts$formattedKeys${ts}Dias Software Inc."));
     return generateMD5("$ts$formattedKeys${ts}Dias Software Inc.");
   }
 

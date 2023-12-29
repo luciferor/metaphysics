@@ -6,7 +6,6 @@ import 'package:first_flutter_app/pages/cominglogs.dart';
 import 'package:first_flutter_app/pages/mine.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:syncfusion_flutter_sliders/sliders.dart';
 import 'package:action_slider/action_slider.dart';
 import 'package:date_format/date_format.dart';
 import 'package:easy_date_timeline/easy_date_timeline.dart';

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:cherry_toast/resources/arrays.dart';
 import 'package:first_flutter_app/classes/apis.dart';
 import 'package:first_flutter_app/classes/https.dart';
 import 'package:first_flutter_app/classes/aimsgres.dart';
@@ -8,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_chat_bubble/chat_bubble.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+import 'package:cherry_toast/cherry_toast.dart';
 
 class Ai extends StatefulWidget {
   const Ai({Key? key}) : super(key: key);
@@ -192,6 +193,19 @@ class _AiState extends State<Ai> {
                             msgdata = [];
                           });
                           _focusnode.requestFocus();
+                        } else {
+                          CherryToast.error(
+                            title: const Text(
+                              "当前无法创建新话题~",
+                              style: TextStyle(
+                                color: Colors.black,
+                              ),
+                            ),
+                            animationDuration:
+                                const Duration(milliseconds: 500),
+                            toastDuration: const Duration(milliseconds: 1000),
+                            animationType: AnimationType.fromTop,
+                          ).show(context);
                         }
                       },
                     ),
@@ -229,6 +243,19 @@ class _AiState extends State<Ai> {
             duration: const Duration(milliseconds: 1000),
             curve: Curves.easeInCubic);
       });
+    } else {
+      // ignore: use_build_context_synchronously
+      CherryToast.error(
+        title: const Text(
+          '请求错误~',
+          style: TextStyle(
+            color: Colors.black,
+          ),
+        ),
+        animationDuration: const Duration(milliseconds: 500),
+        toastDuration: const Duration(milliseconds: 1000),
+        animationType: AnimationType.fromTop,
+      ).show(context);
     }
   }
 
@@ -261,18 +288,18 @@ class _AiState extends State<Ai> {
                   Clipboard.setData(
                     ClipboardData(text: msg),
                   );
-                  Fluttertoast.showToast(
-                    msg: "内容复制成功～",
-                    toastLength: Toast.LENGTH_SHORT,
-                    gravity: ToastGravity.TOP,
-                    timeInSecForIosWeb: 1,
-                    backgroundColor: const Color.fromARGB(115, 111, 1, 255),
-                    textColor: Colors.white,
-                    fontSize: 32 * rpx,
-                    webShowClose: true,
-                    webBgColor: "#3300CC",
-                    webPosition: "center",
-                  );
+                  CherryToast.success(
+                    title: const Text(
+                      "内容复制成功~",
+                      style: TextStyle(
+                        color: Colors.black,
+                      ),
+                    ),
+                    animationDuration: const Duration(milliseconds: 500),
+                    toastDuration: const Duration(milliseconds: 1000),
+                    animationType: AnimationType.fromTop,
+                    autoDismiss: true,
+                  ).show(context);
                 },
                 child: ChatBubble(
                   clipper: ChatBubbleClipper3(type: BubbleType.receiverBubble),

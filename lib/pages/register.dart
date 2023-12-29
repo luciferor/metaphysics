@@ -1,3 +1,9 @@
+import 'dart:convert';
+
+import 'package:dio/dio.dart';
+import 'package:first_flutter_app/classes/apis.dart';
+import 'package:first_flutter_app/classes/https.dart';
+import 'package:first_flutter_app/classes/singleres.dart';
 import 'package:first_flutter_app/components/base.dart';
 import 'package:first_flutter_app/components/blur.dart';
 import 'package:first_flutter_app/components/border.dart';
@@ -138,7 +144,7 @@ class _RegisterState extends State<Register> {
                             ),
                           ),
                           style: TextStyle(
-                            color: const Color.fromARGB(255, 255, 255, 255),
+                            color: const Color.fromARGB(255, 0, 0, 0),
                             fontSize: 32 * rpx,
                           ),
                           onChanged: (value) {
@@ -190,13 +196,12 @@ class _RegisterState extends State<Register> {
                       ),
                       Expanded(
                         child: TextField(
-                          controller: _pwdController,
-                          obscureText: true,
+                          controller: _codeController,
                           textInputAction: TextInputAction.unspecified,
                           textAlignVertical: TextAlignVertical.center,
                           enabled: true,
                           cursorRadius: Radius.circular(10 * rpx),
-                          keyboardType: TextInputType.emailAddress,
+                          keyboardType: TextInputType.number,
                           decoration: const InputDecoration(
                             focusedBorder: InputBorder.none,
                             enabledBorder: InputBorder.none,
@@ -207,12 +212,12 @@ class _RegisterState extends State<Register> {
                             ),
                           ),
                           style: TextStyle(
-                            color: const Color.fromARGB(255, 255, 255, 255),
+                            color: const Color.fromARGB(255, 0, 0, 0),
                             fontSize: 32 * rpx,
                           ),
                           onChanged: (value) {
                             setState(() {
-                              pwd = value;
+                              code = value;
                             });
                           },
                         ),
@@ -222,7 +227,9 @@ class _RegisterState extends State<Register> {
                         height: 95 * rpx,
                         padding: EdgeInsets.fromLTRB(20 * rpx, 0, 0, 0),
                         child: FloatingActionButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            getCheckCode();
+                          },
                           // isExtended: true,
                           backgroundColor:
                               const Color.fromARGB(255, 255, 255, 255),
@@ -291,7 +298,7 @@ class _RegisterState extends State<Register> {
                           textAlignVertical: TextAlignVertical.center,
                           enabled: true,
                           cursorRadius: Radius.circular(10 * rpx),
-                          keyboardType: TextInputType.emailAddress,
+                          keyboardType: TextInputType.text,
                           decoration: const InputDecoration(
                             focusedBorder: InputBorder.none,
                             enabledBorder: InputBorder.none,
@@ -302,7 +309,7 @@ class _RegisterState extends State<Register> {
                             ),
                           ),
                           style: TextStyle(
-                            color: const Color.fromARGB(255, 255, 255, 255),
+                            color: const Color.fromARGB(255, 0, 0, 0),
                             fontSize: 32 * rpx,
                           ),
                           onChanged: (value) {
@@ -354,13 +361,13 @@ class _RegisterState extends State<Register> {
                       ),
                       Expanded(
                         child: TextField(
-                          controller: _pwdController,
+                          controller: _repwdController,
                           obscureText: true,
                           textInputAction: TextInputAction.unspecified,
                           textAlignVertical: TextAlignVertical.center,
                           enabled: true,
                           cursorRadius: Radius.circular(10 * rpx),
-                          keyboardType: TextInputType.emailAddress,
+                          keyboardType: TextInputType.text,
                           decoration: const InputDecoration(
                             focusedBorder: InputBorder.none,
                             enabledBorder: InputBorder.none,
@@ -371,12 +378,12 @@ class _RegisterState extends State<Register> {
                             ),
                           ),
                           style: TextStyle(
-                            color: const Color.fromARGB(255, 255, 255, 255),
+                            color: const Color.fromARGB(255, 0, 0, 0),
                             fontSize: 32 * rpx,
                           ),
                           onChanged: (value) {
                             setState(() {
-                              pwd = value;
+                              repwd = value;
                             });
                           },
                         ),
@@ -441,5 +448,14 @@ class _RegisterState extends State<Register> {
         ),
       ),
     );
+  }
+
+  //获取验证码
+  void getCheckCode() async {
+    Https https = Https();
+    Map<String, dynamic> params = {"email": email};
+    Response res = await https.post(Apis.registerapi, params);
+    Singleres sr = Singleres.fromJson(json.decode(res.data));
+    print(sr.message);
   }
 }
