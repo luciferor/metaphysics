@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:cherry_toast/cherry_toast.dart';
+import 'package:cherry_toast/resources/arrays.dart';
 import 'package:dio/dio.dart';
 import 'package:first_flutter_app/classes/apis.dart';
 import 'package:first_flutter_app/classes/https.dart';
@@ -452,6 +454,21 @@ class _RegisterState extends State<Register> {
 
   //获取验证码
   void getCheckCode() async {
+    if (_emailController.text.isEmpty) {
+      CherryToast.success(
+        title: const Text(
+          "请输入邮箱~",
+          style: TextStyle(
+            color: Colors.black,
+          ),
+        ),
+        animationDuration: const Duration(milliseconds: 500),
+        toastDuration: const Duration(milliseconds: 1000),
+        animationType: AnimationType.fromTop,
+        autoDismiss: true,
+      ).show(context);
+      return;
+    }
     Https https = Https();
     Map<String, dynamic> params = {"email": email};
     Response res = await https.post(Apis.registerapi, params);

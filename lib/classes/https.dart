@@ -38,6 +38,13 @@ class Https {
     );
   }
 
+  Future<Response> get(String path, Map<String, dynamic> params) async {
+    return await _dio.post(
+      path,
+      data: params,
+    );
+  }
+
   String encryptedCode(Map<String, dynamic>? params, int timestamp) {
     String ts = timestamp.toString();
     List<String> keys = params!.keys.toList()..sort();
