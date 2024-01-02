@@ -230,7 +230,7 @@ class _RegisterState extends State<Register> {
                         padding: EdgeInsets.fromLTRB(20 * rpx, 0, 0, 0),
                         child: FloatingActionButton(
                           onPressed: () {
-                            getCheckCode();
+                            getCheckCode(context);
                           },
                           // isExtended: true,
                           backgroundColor:
@@ -453,26 +453,43 @@ class _RegisterState extends State<Register> {
   }
 
   //获取验证码
-  void getCheckCode() async {
+  void getCheckCode(BuildContext context) async {
     if (_emailController.text.isEmpty) {
-      CherryToast.success(
-        title: const Text(
-          "请输入邮箱~",
-          style: TextStyle(
-            color: Colors.black,
-          ),
-        ),
-        animationDuration: const Duration(milliseconds: 500),
-        toastDuration: const Duration(milliseconds: 1000),
-        animationType: AnimationType.fromTop,
-        autoDismiss: true,
-      ).show(context);
+      showMsg('请输入邮箱~');
+      // CherryToast.success(
+      //   title: const Text(
+      //     "请输入邮箱~",
+      //     style: TextStyle(
+      //       color: Colors.black,
+      //     ),
+      //   ),
+      //   animationDuration: const Duration(milliseconds: 500),
+      //   toastDuration: const Duration(milliseconds: 1000),
+      //   animationType: AnimationType.fromTop,
+      //   autoDismiss: true,
+      // ).show(context);
       return;
     }
     Https https = Https();
     Map<String, dynamic> params = {"email": email};
+    // Response res = await https.post(Apis.registerapi, params);
     Response res = await https.post(Apis.registerapi, params);
     Singleres sr = Singleres.fromJson(json.decode(res.data));
-    print(sr.message);
+    showMsg(sr.message!);
+  }
+
+  void showMsg(String msg) {
+    CherryToast.success(
+      title: Text(
+        msg,
+        style: const TextStyle(
+          color: Colors.black,
+        ),
+      ),
+      animationDuration: const Duration(milliseconds: 500),
+      toastDuration: const Duration(milliseconds: 1000),
+      animationType: AnimationType.fromTop,
+      autoDismiss: true,
+    ).show(context);
   }
 }

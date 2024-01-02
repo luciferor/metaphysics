@@ -9,7 +9,7 @@ class Https {
   int timestamp = DateTime.now().millisecondsSinceEpoch;
   Https() {
     _dio = Dio(BaseOptions(
-      baseUrl: 'http://local.todo.dsnbc.com/',
+      baseUrl: 'https://api.todo.dsnbc.com/',
       connectTimeout: const Duration(seconds: 60),
       receiveTimeout: const Duration(seconds: 60),
     ));
