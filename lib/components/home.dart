@@ -2,6 +2,7 @@ import 'package:card_swiper/card_swiper.dart';
 import 'package:dio/dio.dart';
 import 'package:first_flutter_app/classes/apis.dart';
 import 'package:first_flutter_app/classes/https.dart';
+import 'package:first_flutter_app/classes/userinfos.dart';
 import 'package:first_flutter_app/components/ani.dart';
 import 'package:first_flutter_app/pages/ai.dart';
 import 'package:first_flutter_app/pages/coming.dart';
@@ -742,6 +743,6 @@ class _IndexState extends State<Index> with SingleTickerProviderStateMixin {
     Https https = Https();
     Map<String, dynamic> params = {};
     Response res = await https.post(Apis.getuserinfoapi, params);
-    // Singleres sr = Singleres.fromJson(res.data);
+    Userinfos sr = Userinfos.fromJson(res.data);
   }
 }

@@ -8,6 +8,7 @@ import 'package:first_flutter_app/components/blur.dart';
 import 'package:first_flutter_app/pages/index.dart';
 import 'package:first_flutter_app/pages/register.dart';
 import 'package:flutter/material.dart';
+import 'package:localstorage/localstorage.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -23,6 +24,7 @@ class _LoginState extends State<Login> {
   final TextEditingController _pwdController = TextEditingController();
   String? email;
   String? pwd;
+  final LocalStorage storage = LocalStorage('some_key');
   @override
   Widget build(BuildContext context) {
     double rpx = MediaQuery.of(context).size.width / 750;
@@ -308,7 +310,8 @@ class _LoginState extends State<Login> {
     Response res = await https.post(Apis.loginapi, params);
     Singleres sr = Singleres.fromJson(res.data);
     if (sr.status!) {
-      pubMsg.setStorage('authorzation', sr.message!);
+      // pubMsg.setStorage('authorzation', sr.message!);
+      storage.setItem('authorzation', sr.message!);
       // ignore: use_build_context_synchronously
       pubMsg.showError('登录成功～', context);
       // ignore: use_build_context_synchronously
