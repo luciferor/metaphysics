@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:cherry_toast/cherry_toast.dart';
 import 'package:cherry_toast/resources/arrays.dart';
 import 'package:dio/dio.dart';
@@ -8,10 +6,10 @@ import 'package:first_flutter_app/classes/https.dart';
 import 'package:first_flutter_app/classes/singleres.dart';
 import 'package:first_flutter_app/components/base.dart';
 import 'package:first_flutter_app/components/blur.dart';
-import 'package:first_flutter_app/components/border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:first_flutter_app/classes/showmsg.dart';
 
 class Register extends StatefulWidget {
   const Register({Key? key}) : super(key: key);
@@ -457,32 +455,33 @@ class _RegisterState extends State<Register> {
   //获取验证码
   void getCheckCode(BuildContext context) async {
     if (_emailController.text.isEmpty) {
-      showMsg('请输入邮箱~');
+      pubMsg.showError('请输入邮箱~', context);
       return;
     }
     Https https = Https();
     Map<String, dynamic> params = {"email": email};
     Response res = await https.post(Apis.codeapi, params);
     Singleres sr = Singleres.fromJson(res.data);
-    showMsg(sr.message!);
+    // ignore: use_build_context_synchronously
+    pubMsg.showInfo(sr.message!, context);
   }
 
   //注册
   void handleRegister(BuildContext context) async {
     if (_emailController.text.isEmpty) {
-      showMsg('请输入邮箱~');
+      pubMsg.showError('请输入邮箱~', context);
       return;
     }
     if (_codeController.text.isEmpty) {
-      showMsg('请输入验证码~');
+      pubMsg.showError('请输入验证码~', context);
       return;
     }
     if (_pwdController.text.isEmpty) {
-      showMsg('请输入密码~');
+      pubMsg.showError('请输入密码~', context);
       return;
     }
     if (_repwdController.text.isEmpty) {
-      showMsg('请重复输入密码~');
+      pubMsg.showError('请重复输入密码~', context);
       return;
     }
     Https https = Https();
@@ -494,25 +493,14 @@ class _RegisterState extends State<Register> {
     };
     Response res = await https.post(Apis.registerapi, params);
     Singleres sr = Singleres.fromJson(res.data);
-    showMsg(sr.message!);
     if (sr.status!) {
       // ignore: use_build_context_synchronously
+      pubMsg.showSuccess(sr.message!, context);
+      // ignore: use_build_context_synchronously
       Navigator.pop(context);
+    } else {
+      // ignore: use_build_context_synchronously
+      pubMsg.showError('请输入邮箱~', context);
     }
-  }
-
-  void showMsg(String msg) {
-    CherryToast.success(
-      title: Text(
-        msg,
-        style: const TextStyle(
-          color: Colors.black,
-        ),
-      ),
-      animationDuration: const Duration(milliseconds: 500),
-      toastDuration: const Duration(milliseconds: 1000),
-      animationType: AnimationType.fromTop,
-      autoDismiss: true,
-    ).show(context);
   }
 }

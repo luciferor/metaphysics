@@ -1,21 +1,15 @@
-import 'package:cherry_toast/cherry_toast.dart';
-import 'package:cherry_toast/resources/arrays.dart';
 import 'package:dio/dio.dart';
 import 'package:first_flutter_app/classes/apis.dart';
 import 'package:first_flutter_app/classes/https.dart';
-import 'package:first_flutter_app/classes/logindata.dart';
+import 'package:first_flutter_app/classes/showmsg.dart';
 import 'package:first_flutter_app/classes/singleres.dart';
-import 'package:first_flutter_app/components/ani.dart';
 import 'package:first_flutter_app/components/base.dart';
 import 'package:first_flutter_app/components/blur.dart';
-import 'package:first_flutter_app/components/border.dart';
-import 'package:first_flutter_app/pages/ai.dart';
 import 'package:first_flutter_app/pages/index.dart';
 import 'package:first_flutter_app/pages/register.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -299,11 +293,11 @@ class _LoginState extends State<Login> {
   //登录
   void handleLogin(BuildContext context) async {
     if (_emailController.text.isEmpty) {
-      showMsg('请输入邮箱~');
+      pubMsg.showError('请输入邮箱～', context);
       return;
     }
     if (_pwdController.text.isEmpty) {
-      showMsg('请输入密码~');
+      pubMsg.showError('请输入密码', context);
       return;
     }
     Https https = Https();
@@ -312,9 +306,11 @@ class _LoginState extends State<Login> {
       'password': pwd,
     };
     Response res = await https.post(Apis.loginapi, params);
-    Logindata sr = Logindata.fromJson(res.data);
+    Singleres sr = Singleres.fromJson(res.data);
     if (sr.status!) {
-      showMsg('登录成功~');
+      pubMsg.setStorage('authorzation', sr.message!);
+      // ignore: use_build_context_synchronously
+      pubMsg.showError('登录成功～', context);
       // ignore: use_build_context_synchronously
       Navigator.pushReplacement(
         context,
@@ -323,22 +319,8 @@ class _LoginState extends State<Login> {
         ),
       );
     } else {
-      showMsg('登录失败~');
+      // ignore: use_build_context_synchronously
+      pubMsg.showError(sr.message!, context);
     }
-  }
-
-  void showMsg(String msg) {
-    CherryToast.success(
-      title: Text(
-        msg,
-        style: const TextStyle(
-          color: Colors.black,
-        ),
-      ),
-      animationDuration: const Duration(milliseconds: 500),
-      toastDuration: const Duration(milliseconds: 1000),
-      animationType: AnimationType.fromTop,
-      autoDismiss: true,
-    ).show(context);
   }
 }

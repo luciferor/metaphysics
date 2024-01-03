@@ -2,7 +2,7 @@ import 'dart:convert';
 import "package:hex/hex.dart";
 import 'package:dio/dio.dart';
 import 'package:crypto/crypto.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:first_flutter_app/classes/showmsg.dart';
 
 class Https {
   late Dio _dio;
@@ -13,7 +13,6 @@ class Https {
       connectTimeout: const Duration(seconds: 60),
       receiveTimeout: const Duration(seconds: 60),
     ));
-
     // 添加请求拦截器
     _dio.interceptors.add(InterceptorsWrapper(
       onRequest: (RequestOptions options, RequestInterceptorHandler handler) {
@@ -21,7 +20,7 @@ class Https {
         RequestOptions newOptions = options.copyWith(
           headers: {
             ...options.headers,
-            'Authorization': getStorage('access'), // 添加自定义 headers
+            'Authorization': pubMsg.getStorage('authorzation'), // 添加自定义 headers
             'Encrypted-Code': encryptedCode(options.data, timestamp),
             'Time-Rubbing': timestamp,
           },
@@ -57,15 +56,5 @@ class Https {
     var content = const Utf8Encoder().convert(data);
     var digest = md5.convert(content);
     return HEX.encode(digest.bytes);
-  }
-
-  Future<void> setStorage(String value) async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString('access', value);
-  }
-
-  Future<String?> getStorage(String key) async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getString(key);
   }
 }

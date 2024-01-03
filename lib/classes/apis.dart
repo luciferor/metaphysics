@@ -3,4 +3,5 @@ class Apis {
   static const String codeapi = 'app/code';
   static const String registerapi = 'app/register';
   static const String loginapi = 'app/login';
+  static const String getuserinfoapi = 'app/getuserinfo';
 }
