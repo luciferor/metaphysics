@@ -1,3 +1,10 @@
+import 'package:cherry_toast/cherry_toast.dart';
+import 'package:cherry_toast/resources/arrays.dart';
+import 'package:dio/dio.dart';
+import 'package:first_flutter_app/classes/apis.dart';
+import 'package:first_flutter_app/classes/https.dart';
+import 'package:first_flutter_app/classes/logindata.dart';
+import 'package:first_flutter_app/classes/singleres.dart';
 import 'package:first_flutter_app/components/ani.dart';
 import 'package:first_flutter_app/components/base.dart';
 import 'package:first_flutter_app/components/blur.dart';
@@ -238,12 +245,7 @@ class _LoginState extends State<Login> {
                     child: FloatingActionButton(
                       backgroundColor: const Color.fromARGB(255, 0, 72, 255),
                       onPressed: () {
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const Homie(),
-                          ),
-                        );
+                        handleLogin(context);
                       },
                       child: Text(
                         '登录',
@@ -292,5 +294,51 @@ class _LoginState extends State<Login> {
         ),
       ),
     );
+  }
+
+  //登录
+  void handleLogin(BuildContext context) async {
+    if (_emailController.text.isEmpty) {
+      showMsg('请输入邮箱~');
+      return;
+    }
+    if (_pwdController.text.isEmpty) {
+      showMsg('请输入密码~');
+      return;
+    }
+    Https https = Https();
+    Map<String, dynamic> params = {
+      "email": email,
+      'password': pwd,
+    };
+    Response res = await https.post(Apis.loginapi, params);
+    Logindata sr = Logindata.fromJson(res.data);
+    if (sr.status!) {
+      showMsg('登录成功~');
+      // ignore: use_build_context_synchronously
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const Homie(),
+        ),
+      );
+    } else {
+      showMsg('登录失败~');
+    }
+  }
+
+  void showMsg(String msg) {
+    CherryToast.success(
+      title: Text(
+        msg,
+        style: const TextStyle(
+          color: Colors.black,
+        ),
+      ),
+      animationDuration: const Duration(milliseconds: 500),
+      toastDuration: const Duration(milliseconds: 1000),
+      animationType: AnimationType.fromTop,
+      autoDismiss: true,
+    ).show(context);
   }
 }

@@ -408,7 +408,9 @@ class _RegisterState extends State<Register> {
                   ),
                   child: FloatingActionButton(
                     backgroundColor: const Color.fromARGB(255, 0, 72, 255),
-                    onPressed: () {},
+                    onPressed: () {
+                      handleRegister(context);
+                    },
                     child: Text(
                       '立即注册',
                       style: TextStyle(
@@ -456,26 +458,47 @@ class _RegisterState extends State<Register> {
   void getCheckCode(BuildContext context) async {
     if (_emailController.text.isEmpty) {
       showMsg('请输入邮箱~');
-      // CherryToast.success(
-      //   title: const Text(
-      //     "请输入邮箱~",
-      //     style: TextStyle(
-      //       color: Colors.black,
-      //     ),
-      //   ),
-      //   animationDuration: const Duration(milliseconds: 500),
-      //   toastDuration: const Duration(milliseconds: 1000),
-      //   animationType: AnimationType.fromTop,
-      //   autoDismiss: true,
-      // ).show(context);
       return;
     }
     Https https = Https();
     Map<String, dynamic> params = {"email": email};
-    // Response res = await https.post(Apis.registerapi, params);
-    Response res = await https.post(Apis.registerapi, params);
-    Singleres sr = Singleres.fromJson(json.decode(res.data));
+    Response res = await https.post(Apis.codeapi, params);
+    Singleres sr = Singleres.fromJson(res.data);
     showMsg(sr.message!);
+  }
+
+  //注册
+  void handleRegister(BuildContext context) async {
+    if (_emailController.text.isEmpty) {
+      showMsg('请输入邮箱~');
+      return;
+    }
+    if (_codeController.text.isEmpty) {
+      showMsg('请输入验证码~');
+      return;
+    }
+    if (_pwdController.text.isEmpty) {
+      showMsg('请输入密码~');
+      return;
+    }
+    if (_repwdController.text.isEmpty) {
+      showMsg('请重复输入密码~');
+      return;
+    }
+    Https https = Https();
+    Map<String, dynamic> params = {
+      "email": email,
+      "code": code,
+      'password': pwd,
+      'repassword': repwd
+    };
+    Response res = await https.post(Apis.registerapi, params);
+    Singleres sr = Singleres.fromJson(res.data);
+    showMsg(sr.message!);
+    if (sr.status!) {
+      // ignore: use_build_context_synchronously
+      Navigator.pop(context);
+    }
   }
 
   void showMsg(String msg) {
