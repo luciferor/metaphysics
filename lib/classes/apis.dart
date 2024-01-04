@@ -4,4 +4,5 @@ class Apis {
   static const String registerapi = 'app/register';
   static const String loginapi = 'app/login';
   static const String getuserinfoapi = 'app/getuserinfo';
+  static const String openapi = 'app/openaisingle';
 }
