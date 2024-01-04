@@ -25,6 +25,7 @@ class _LoginState extends State<Login> {
   String? email;
   String? pwd;
   final LocalStorage storage = LocalStorage('some_key');
+
   @override
   Widget build(BuildContext context) {
     double rpx = MediaQuery.of(context).size.width / 750;
@@ -310,10 +311,10 @@ class _LoginState extends State<Login> {
     Response res = await https.post(Apis.loginapi, params);
     Singleres sr = Singleres.fromJson(res.data);
     if (sr.status!) {
-      // pubMsg.setStorage('authorzation', sr.message!);
+      // 存储token到本地
       storage.setItem('authorzation', sr.message!);
       // ignore: use_build_context_synchronously
-      pubMsg.showError('登录成功～', context);
+      pubMsg.showSuccess('登录成功～', context);
       // ignore: use_build_context_synchronously
       Navigator.pushReplacement(
         context,
