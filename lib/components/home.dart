@@ -1,8 +1,4 @@
 import 'package:card_swiper/card_swiper.dart';
-import 'package:dio/dio.dart';
-import 'package:first_flutter_app/classes/apis.dart';
-import 'package:first_flutter_app/classes/https.dart';
-import 'package:first_flutter_app/classes/userinfos.dart';
 import 'package:first_flutter_app/components/ani.dart';
 import 'package:first_flutter_app/pages/ai.dart';
 import 'package:first_flutter_app/pages/coming.dart';
@@ -14,6 +10,7 @@ import 'package:action_slider/action_slider.dart';
 import 'package:date_format/date_format.dart';
 import 'package:easy_date_timeline/easy_date_timeline.dart';
 import 'package:flutter_switch/flutter_switch.dart';
+import 'package:localstorage/localstorage.dart';
 import 'package:time_range_picker/time_range_picker.dart';
 import 'package:simple_progress_indicators/simple_progress_indicators.dart';
 
@@ -25,6 +22,7 @@ class Index extends StatefulWidget {
 }
 
 class _IndexState extends State<Index> with SingleTickerProviderStateMixin {
+  final LocalStorage storage = LocalStorage('app');
   final _controller = ValueNotifier('all');
   List<String> icons = [
     'assets/images/icons/composition.svg',
@@ -43,12 +41,12 @@ class _IndexState extends State<Index> with SingleTickerProviderStateMixin {
   dynamic time = 30;
   bool isForce = true;
   DateTime selectDate = DateTime.now();
+  Map<String, dynamic> userInfo = {};
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    handleUserinfo();
   }
 
   @override
@@ -736,13 +734,5 @@ class _IndexState extends State<Index> with SingleTickerProviderStateMixin {
         },
       ),
     );
-  }
-
-  //获取用户信息
-  void handleUserinfo() async {
-    Https https = Https();
-    Map<String, dynamic> params = {};
-    Response res = await https.post(Apis.getuserinfoapi, params);
-    Userinfos sr = Userinfos.fromJson(res.data);
   }
 }

@@ -1,8 +1,11 @@
+import 'dart:async';
+
 import 'package:dio/dio.dart';
 import 'package:first_flutter_app/classes/apis.dart';
 import 'package:first_flutter_app/classes/https.dart';
 import 'package:first_flutter_app/classes/showmsg.dart';
 import 'package:first_flutter_app/classes/singleres.dart';
+import 'package:first_flutter_app/classes/userinfos.dart';
 import 'package:first_flutter_app/components/base.dart';
 import 'package:first_flutter_app/components/blur.dart';
 import 'package:first_flutter_app/pages/index.dart';
@@ -24,13 +27,22 @@ class _LoginState extends State<Login> {
   final TextEditingController _pwdController = TextEditingController();
   String? email;
   String? pwd;
-  final LocalStorage storage = LocalStorage('some_key');
+  final LocalStorage storage = LocalStorage('app');
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    // Timer timer = Timer(const Duration(milliseconds: 1000), () => checkLogin());
+    // timer.cancel();
+  }
 
   @override
   Widget build(BuildContext context) {
     double rpx = MediaQuery.of(context).size.width / 750;
     double tp = MediaQuery.of(context).padding.top;
     double bp = MediaQuery.of(context).padding.bottom;
+    checkLogin();
     return Base(
       childs: Center(
         child: Container(
@@ -316,6 +328,10 @@ class _LoginState extends State<Login> {
       // ignore: use_build_context_synchronously
       pubMsg.showSuccess('登录成功～', context);
       // ignore: use_build_context_synchronously
+      Response res = await https.post(Apis.getuserinfoapi, {});
+      Userinfos ur = Userinfos.fromJson(res.data);
+      storage.setItem('userinfo', ur.message);
+      // ignore: use_build_context_synchronously
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
@@ -325,6 +341,26 @@ class _LoginState extends State<Login> {
     } else {
       // ignore: use_build_context_synchronously
       pubMsg.showError(sr.message!, context);
+    }
+  }
+
+  void checkLogin() async {
+    print('之星了吗');
+    String token = storage.getItem('authorzation') ?? '';
+    print(storage.getItem('authorzation'));
+    if (token.isNotEmpty) {
+      Https https = Https();
+      Map<String, dynamic> params = {};
+      Response res = await https.post(Apis.getuserinfoapi, params);
+      Userinfos sr = Userinfos.fromJson(res.data);
+      storage.setItem('userinfo', sr.message);
+      // ignore: use_build_context_synchronously
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const Homie(),
+        ),
+      );
     }
   }
 }

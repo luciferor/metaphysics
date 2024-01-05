@@ -8,7 +8,7 @@ import 'package:localstorage/localstorage.dart';
 class Https {
   late Dio _dio;
   int timestamp = DateTime.now().millisecondsSinceEpoch;
-  final LocalStorage storage = LocalStorage('some_key');
+  final LocalStorage storage = LocalStorage('app');
   Https() {
     _dio = Dio(BaseOptions(
       baseUrl: 'https://api.todo.dsnbc.com/',
