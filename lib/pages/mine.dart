@@ -1,9 +1,14 @@
+import 'package:dio/dio.dart';
+import 'package:first_flutter_app/classes/apis.dart';
+import 'package:first_flutter_app/classes/https.dart';
+import 'package:first_flutter_app/classes/userinfos.dart';
 import 'package:first_flutter_app/components/ani.dart';
 import 'package:first_flutter_app/components/apps.dart';
 import 'package:first_flutter_app/pages/Setting.dart';
 import 'package:flutter/material.dart';
 import 'package:first_flutter_app/components/base.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get_storage/get_storage.dart';
 
 class Mine extends StatefulWidget {
   const Mine({Key? key}) : super(key: key);
@@ -14,6 +19,16 @@ class Mine extends StatefulWidget {
 }
 
 class _MineState extends State<Mine> {
+  final storage = GetStorage();
+  Message userInfo = Message();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    handleUserinfo();
+  }
+
   @override
   Widget build(BuildContext context) {
     double rpx = MediaQuery.of(context).size.width / 750;
@@ -76,10 +91,10 @@ class _MineState extends State<Mine> {
                         radius: 30 * rpx,
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(150 * rpx),
-                          child: const Image(
+                          child: Image(
                             fit: BoxFit.cover,
-                            image: NetworkImage(
-                                'https://img0.baidu.com/it/u=2699322616,853950993&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500'),
+                            image: NetworkImage(userInfo.avator ??
+                                'https://pic2.zhimg.com/80/v2-86116449634292f991d2b38eaf7f7509_1440w.webp'),
                           ),
                         ),
                       ),
@@ -107,7 +122,7 @@ class _MineState extends State<Mine> {
                                             CrossAxisAlignment.center,
                                         children: [
                                           Text(
-                                            '宁顾客',
+                                            userInfo.nickname ?? '暂无昵称',
                                             style: TextStyle(
                                               fontSize: 32 * rpx,
                                               fontWeight: FontWeight.bold,
@@ -454,5 +469,18 @@ class _MineState extends State<Mine> {
         ),
       ),
     );
+  }
+
+  void handleUserinfo() async {
+    String token = storage.read('authorzation') ?? '';
+    if (token.isNotEmpty) {
+      Https https = Https();
+      Map<String, dynamic> params = {};
+      Response res = await https.post(Apis.getuserinfoapi, params);
+      Userinfos sr = Userinfos.fromJson(res.data);
+      setState(() {
+        userInfo = sr.message!;
+      });
+    }
   }
 }

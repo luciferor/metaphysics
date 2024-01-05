@@ -1,14 +1,14 @@
 import 'dart:convert';
+import 'package:get_storage/get_storage.dart';
 import "package:hex/hex.dart";
 import 'package:dio/dio.dart';
 import 'package:crypto/crypto.dart';
 import 'package:first_flutter_app/classes/showmsg.dart';
-import 'package:localstorage/localstorage.dart';
 
 class Https {
   late Dio _dio;
   int timestamp = DateTime.now().millisecondsSinceEpoch;
-  final LocalStorage storage = LocalStorage('app');
+  final storage = GetStorage();
   Https() {
     _dio = Dio(BaseOptions(
       baseUrl: 'https://api.todo.dsnbc.com/',
@@ -22,7 +22,7 @@ class Https {
         RequestOptions newOptions = options.copyWith(
           headers: {
             ...options.headers,
-            'Authorization': storage.getItem('authorzation'), // 添加自定义 headers
+            'Authorization': storage.read('authorzation'), // 添加自定义 headers
             'Encrypted-Code': encryptedCode(options.data, timestamp),
             'Time-Rubbing': timestamp,
           },

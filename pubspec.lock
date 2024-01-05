@@ -256,6 +256,22 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  get:
+    dependency: transitive
+    description:
+      name: get
+      sha256: e4e7335ede17452b391ed3b2ede016545706c01a02292a6c97619705e7d2a85e
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "4.6.6"
+  get_storage:
+    dependency: "direct main"
+    description:
+      name: get_storage
+      sha256: "39db1fffe779d0c22b3a744376e86febe4ade43bf65e06eab5af707dc84185a2"
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "2.1.1"
   hex:
     dependency: "direct main"
     description:
@@ -328,14 +344,6 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.2.0+4"
-  localstorage:
-    dependency: "direct main"
-    description:
-      name: localstorage
-      sha256: fdff4f717114e992acfd4045dc4a9ab9b987ca57f020965d63e3eb34089c60d8
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "4.0.1+4"
   lunar:
     dependency: "direct main"
     description:

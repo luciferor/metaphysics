@@ -1,8 +1,16 @@
 import 'package:card_swiper/card_swiper.dart';
+import 'package:dio/dio.dart';
+import 'package:first_flutter_app/classes/apis.dart';
+import 'package:first_flutter_app/classes/https.dart';
+import 'package:first_flutter_app/classes/showmsg.dart';
+import 'package:first_flutter_app/classes/singleres.dart';
+import 'package:first_flutter_app/classes/todos.dart';
+import 'package:first_flutter_app/classes/userinfos.dart';
 import 'package:first_flutter_app/components/ani.dart';
 import 'package:first_flutter_app/pages/ai.dart';
 import 'package:first_flutter_app/pages/coming.dart';
 import 'package:first_flutter_app/pages/cominglogs.dart';
+import 'package:first_flutter_app/pages/login.dart';
 import 'package:first_flutter_app/pages/mine.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -10,7 +18,7 @@ import 'package:action_slider/action_slider.dart';
 import 'package:date_format/date_format.dart';
 import 'package:easy_date_timeline/easy_date_timeline.dart';
 import 'package:flutter_switch/flutter_switch.dart';
-import 'package:localstorage/localstorage.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:time_range_picker/time_range_picker.dart';
 import 'package:simple_progress_indicators/simple_progress_indicators.dart';
 
@@ -22,7 +30,7 @@ class Index extends StatefulWidget {
 }
 
 class _IndexState extends State<Index> with SingleTickerProviderStateMixin {
-  final LocalStorage storage = LocalStorage('app');
+  final storage = GetStorage();
   final _controller = ValueNotifier('all');
   List<String> icons = [
     'assets/images/icons/composition.svg',
@@ -39,14 +47,24 @@ class _IndexState extends State<Index> with SingleTickerProviderStateMixin {
   TimeOfDay st = const TimeOfDay(hour: 06, minute: 0);
   TimeOfDay et = const TimeOfDay(hour: 09, minute: 0);
   dynamic time = 30;
-  bool isForce = true;
+  Message userInfo = Message();
+
   DateTime selectDate = DateTime.now();
-  Map<String, dynamic> userInfo = {};
+  String? icon;
+  String? title;
+  bool isForce = true;
+  String? startTime;
+  String? endTime;
+  int? minutes;
+
+  List<Tmessage> todoList = [];
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    handleUserinfo();
+    handleTodo();
   }
 
   @override
@@ -54,391 +72,385 @@ class _IndexState extends State<Index> with SingleTickerProviderStateMixin {
     double rpx = MediaQuery.of(context).size.width / 750;
     double tp = MediaQuery.of(context).padding.top;
     double bp = MediaQuery.of(context).padding.bottom;
-    return Container(
-      child: Column(
-        children: [
-          Padding(
-            padding: EdgeInsets.fromLTRB(20 * rpx, tp + 20 * rpx, 20 * rpx, 0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Container(
-                  width: 80 * rpx,
-                  height: 60 * rpx,
-                  padding: EdgeInsets.fromLTRB(20 * rpx, 0, 0, 0),
-                  child: FloatingActionButton(
-                    onPressed: () {
-                      openBottomSheetHandler(context, rpx, bp);
-                    },
-                    backgroundColor: const Color.fromARGB(255, 45, 85, 245),
-                    child: const Icon(
-                      Icons.add,
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: Padding(
-                    padding: EdgeInsets.fromLTRB(15 * rpx, 0, 15 * rpx, 0),
-                    child: Container(
-                      alignment: Alignment.centerRight,
-                      height: 120 * rpx,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Container(
-                            padding:
-                                EdgeInsets.fromLTRB(0, 0, 10 * rpx, 20 * rpx),
-                            alignment: Alignment.center,
-                            child: SvgPicture.asset(
-                              'assets/images/icons/vip.svg',
-                              width: 40 * rpx,
-                              height: 40 * rpx,
-                            ),
-                          ),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              Text(
-                                '凝固壳',
-                                textAlign: TextAlign.start,
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 32 * rpx,
-                                  color: Colors.black87,
-                                ),
-                              ),
-                              Text(
-                                'Lv25',
-                                style: TextStyle(
-                                  color:
-                                      const Color.fromARGB(255, 255, 215, 39),
-                                  fontSize: 18 * rpx,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.fromLTRB(0, 0, 15 * rpx, 0),
-                  child: Ani(
-                    radius: 30,
-                    pages: const Mine(),
-                    child: Container(
-                      width: 100 * rpx,
-                      height: 100 * rpx,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(100 * rpx),
-                        border: Border.all(
-                            color: const Color.fromARGB(10, 0, 72, 255),
-                            width: 5 * rpx),
-                      ),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(100 * rpx),
-                        child: const Image(
-                          image: NetworkImage(
-                              'https://img0.baidu.com/it/u=2699322616,853950993&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500'),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.fromLTRB(0, 30 * rpx, 0, 30 * rpx),
-            child: Container(
-              alignment: Alignment.centerRight,
-              height: 300 * rpx,
-              child: Swiper(
-                itemCount: 10,
-                itemBuilder: (context, index) {
-                  return ClipRRect(
-                    borderRadius: BorderRadius.circular(30 * rpx),
-                    child: Container(
-                        alignment: Alignment.centerRight,
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(30 * rpx),
-                          child: const Ani(
-                            radius: 30,
-                            pages: Ai(),
-                            child: Image(
-                              image: AssetImage('assets/images/4ce8324fe.jpg'),
-                            ),
-                          ),
-                        )),
-                  );
-                },
-                itemWidth: MediaQuery.of(context).size.width - 80 * rpx,
-                layout: SwiperLayout.STACK,
-              ),
-            ),
-          ),
-          Column(
+    return Column(
+      children: [
+        Padding(
+          padding: EdgeInsets.fromLTRB(20 * rpx, tp + 20 * rpx, 20 * rpx, 0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Container(
-                padding: EdgeInsets.fromLTRB(20 * rpx, 0, 40 * rpx, 0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Container(
-                      padding: EdgeInsets.fromLTRB(0, 0, 20 * rpx, 0),
-                      child: Row(
-                        children: [
-                          Container(
-                            padding:
-                                EdgeInsets.fromLTRB(20 * rpx, 0, 10 * rpx, 0),
-                            child: const Icon(
-                              Icons.date_range,
-                              color: Color.fromARGB(100, 0, 0, 0),
-                            ),
-                          ),
-                          Text(
-                            formatDate(
-                              selectDate,
-                              [yyyy, '年', 'mm', '月', dd, '日'],
-                            ).toString(),
-                            style: TextStyle(
-                              fontSize: 32 * rpx,
-                              color: const Color.fromARGB(100, 0, 0, 0),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      width: 80 * rpx,
-                      height: 80 * rpx,
-                      child: FloatingActionButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const Cominglogs(),
-                            ),
-                          );
-                        },
-                        elevation: 0,
-                        backgroundColor:
-                            const Color.fromARGB(255, 247, 247, 247),
-                        child: const Icon(
-                          Icons.format_list_bulleted_add,
-                          color: Colors.black38,
-                        ),
-                      ),
-                    ),
-                  ],
+                width: 80 * rpx,
+                height: 60 * rpx,
+                padding: EdgeInsets.fromLTRB(20 * rpx, 0, 0, 0),
+                child: FloatingActionButton(
+                  onPressed: () {
+                    openBottomSheetHandler(context, rpx, bp);
+                  },
+                  backgroundColor: const Color.fromARGB(255, 45, 85, 245),
+                  child: const Icon(
+                    Icons.add,
+                  ),
                 ),
               ),
-              Container(
-                // height: 160 * rpx,
-                padding:
-                    EdgeInsets.fromLTRB(40 * rpx, 20 * rpx, 40 * rpx, 20 * rpx),
-                child: EasyInfiniteDateTimeLine(
-                  // controller: _controller,
-                  firstDate: DateTime.now(),
-                  focusDate: selectDate,
-                  // locale: 'zh-CN', //目前报错
-                  showTimelineHeader: false,
-                  lastDate: DateTime.now().add(
-                    const Duration(days: 365),
-                  ),
-                  activeColor: const Color.fromARGB(100, 193, 191, 207),
-                  dayProps: EasyDayProps(
-                    width: 100 * rpx,
+              Expanded(
+                child: Padding(
+                  padding: EdgeInsets.fromLTRB(15 * rpx, 0, 15 * rpx, 0),
+                  child: Container(
+                    alignment: Alignment.centerRight,
                     height: 120 * rpx,
-                    dayStructure: DayStructure.dayStrDayNum,
-                    activeDayStyle: DayStyle(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(30 * rpx),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Container(
+                          padding:
+                              EdgeInsets.fromLTRB(0, 0, 10 * rpx, 20 * rpx),
+                          alignment: Alignment.center,
+                          child: SvgPicture.asset(
+                            'assets/images/icons/vip.svg',
+                            width: 40 * rpx,
+                            height: 40 * rpx,
+                          ),
                         ),
-                        gradient: const LinearGradient(
-                          begin: Alignment.bottomLeft,
-                          end: Alignment.topRight,
-                          colors: [
-                            Color.fromARGB(200, 45, 85, 245),
-                            Color.fromARGB(200, 45, 85, 245),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            Text(
+                              userInfo.nickname ?? '暂无昵称',
+                              textAlign: TextAlign.start,
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 32 * rpx,
+                                color: Colors.black87,
+                              ),
+                            ),
+                            Text(
+                              'Lv25',
+                              style: TextStyle(
+                                color: const Color.fromARGB(255, 255, 215, 39),
+                                fontSize: 18 * rpx,
+                              ),
+                            ),
                           ],
                         ),
-                      ),
-                      dayNumStyle: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w900,
-                        fontSize: 40 * rpx,
-                      ),
-                      dayStrStyle: const TextStyle(
-                        color: Colors.white54,
-                      ),
-                      monthStrStyle: const TextStyle(
-                        color: Colors.white30,
-                      ),
+                      ],
                     ),
-                    inactiveDayStyle: DayStyle(
-                      borderRadius: 30 * rpx,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.fromLTRB(0, 0, 15 * rpx, 0),
+                child: Ani(
+                  radius: 30,
+                  pages: const Mine(),
+                  child: Container(
+                    width: 100 * rpx,
+                    height: 100 * rpx,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(100 * rpx),
+                      border: Border.all(
+                          color: const Color.fromARGB(10, 0, 72, 255),
+                          width: 5 * rpx),
                     ),
-                    // ignore: deprecated_member_use
-                    inactiveDayDecoration: BoxDecoration(
-                      color: const Color.fromARGB(255, 247, 247, 247),
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(30 * rpx),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(100 * rpx),
+                      child: Image(
+                        image: NetworkImage(userInfo.avator ??
+                            'https://pic2.zhimg.com/80/v2-86116449634292f991d2b38eaf7f7509_1440w.webp'),
                       ),
                     ),
                   ),
-                  onDateChange: (date) {
-                    setState(() {
-                      selectDate = date;
-                    });
-                  },
                 ),
               ),
             ],
           ),
-          Expanded(
-            child: Container(
-              padding: EdgeInsets.fromLTRB(40 * rpx, 0, 40 * rpx, bp),
-              child: ListView(
-                children: icons.map(
-                  (icon) {
-                    var index = icons.indexOf(icon);
-                    // 在此处处理数据
-                    return Container(
-                      margin: EdgeInsets.fromLTRB(0, 0, 0, 30 * rpx),
-                      padding: EdgeInsets.fromLTRB(0, 0, 20 * rpx, 0),
-                      decoration: BoxDecoration(
-                        color: const Color.fromARGB(168, 236, 236, 236),
-                        borderRadius: BorderRadius.circular(50 * rpx),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Container(
-                            width: 140 * rpx,
-                            height: 140 * rpx,
-                            padding: EdgeInsets.all(30 * rpx),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(40 * rpx),
-                              child: SvgPicture.asset(
-                                icon,
-                                width: 40 * rpx,
-                                height: 40 * rpx,
-                              ),
-                            ),
+        ),
+        Padding(
+          padding: EdgeInsets.fromLTRB(0, 30 * rpx, 0, 30 * rpx),
+          child: Container(
+            alignment: Alignment.centerRight,
+            height: 300 * rpx,
+            child: Swiper(
+              itemCount: 10,
+              itemBuilder: (context, index) {
+                return ClipRRect(
+                  borderRadius: BorderRadius.circular(30 * rpx),
+                  child: Container(
+                      alignment: Alignment.centerRight,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(30 * rpx),
+                        child: const Ani(
+                          radius: 30,
+                          pages: Ai(),
+                          child: Image(
+                            image: AssetImage('assets/images/4ce8324fe.jpg'),
                           ),
-                          Expanded(
-                            child: Container(
-                              padding: EdgeInsets.fromLTRB(
-                                  0, 30 * rpx, 10 * rpx, 30 * rpx),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    '学习易学经典',
-                                    style: TextStyle(
-                                      fontSize: 28 * rpx,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.black,
-                                    ),
-                                  ),
-                                  Container(
-                                    padding:
-                                        EdgeInsets.fromLTRB(0, 10 * rpx, 0, 0),
-                                    child: Text(
-                                      '2024-01-25 17:00:00',
-                                      style: TextStyle(
-                                        fontSize: 20 * rpx,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.black38,
-                                      ),
-                                    ),
-                                  ),
-                                  ProgressBar(
-                                    value: 0.1,
-                                    width: 190 * rpx,
-                                    height: 10 * rpx,
-                                    gradient: const LinearGradient(
-                                      colors: [
-                                        Colors.blue,
-                                        Colors.purple,
-                                      ],
-                                    ),
-                                    backgroundColor:
-                                        Colors.grey.withOpacity(0.4),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          Container(
-                            width: 100 * rpx,
-                            height: 40 * rpx,
-                            alignment: Alignment.center,
-                            margin:
-                                EdgeInsets.fromLTRB(20 * rpx, 0, 20 * rpx, 0),
-                            decoration: BoxDecoration(
-                              color: const Color.fromARGB(100, 197, 197, 197),
-                              borderRadius: BorderRadius.circular(30 * rpx),
-                            ),
-                            child: Text(
-                              '25 分钟',
-                              style: TextStyle(
-                                fontSize: 18 * rpx,
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 100 * rpx,
-                            height: 60 * rpx,
-                            child: FloatingActionButton(
-                              heroTag: index,
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => const Coming(),
-                                  ),
-                                );
-                              },
-                              backgroundColor:
-                                  const Color.fromARGB(151, 45, 85, 245),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20 * rpx),
-                                side: const BorderSide(
-                                  width: 2,
-                                  color: Color.fromARGB(0, 235, 26, 26),
-                                ),
-                              ),
-                              child: Text(
-                                '去完成',
-                                style: TextStyle(
-                                  fontSize: 20 * rpx,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    );
-                  },
-                ).toList(),
-              ),
+                        ),
+                      )),
+                );
+              },
+              itemWidth: MediaQuery.of(context).size.width - 80 * rpx,
+              layout: SwiperLayout.STACK,
             ),
           ),
-        ],
-      ),
+        ),
+        Column(
+          children: [
+            Container(
+              padding: EdgeInsets.fromLTRB(20 * rpx, 0, 40 * rpx, 0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Container(
+                    padding: EdgeInsets.fromLTRB(0, 0, 20 * rpx, 0),
+                    child: Row(
+                      children: [
+                        Container(
+                          padding:
+                              EdgeInsets.fromLTRB(20 * rpx, 0, 10 * rpx, 0),
+                          child: const Icon(
+                            Icons.date_range,
+                            color: Color.fromARGB(100, 0, 0, 0),
+                          ),
+                        ),
+                        Text(
+                          formatDate(
+                            selectDate,
+                            [yyyy, '年', 'mm', '月', dd, '日'],
+                          ).toString(),
+                          style: TextStyle(
+                            fontSize: 32 * rpx,
+                            color: const Color.fromARGB(100, 0, 0, 0),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    width: 80 * rpx,
+                    height: 80 * rpx,
+                    child: FloatingActionButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const Cominglogs(),
+                          ),
+                        );
+                      },
+                      elevation: 0,
+                      backgroundColor: const Color.fromARGB(255, 247, 247, 247),
+                      child: const Icon(
+                        Icons.format_list_bulleted_add,
+                        color: Colors.black38,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              // height: 160 * rpx,
+              padding:
+                  EdgeInsets.fromLTRB(40 * rpx, 20 * rpx, 40 * rpx, 20 * rpx),
+              child: EasyInfiniteDateTimeLine(
+                // controller: _controller,
+                firstDate: DateTime.now(),
+                focusDate: selectDate,
+                // locale: 'zh-CN', //目前报错
+                showTimelineHeader: false,
+                lastDate: DateTime.now().add(
+                  const Duration(days: 365),
+                ),
+                activeColor: const Color.fromARGB(100, 193, 191, 207),
+                dayProps: EasyDayProps(
+                  width: 100 * rpx,
+                  height: 120 * rpx,
+                  dayStructure: DayStructure.dayStrDayNum,
+                  activeDayStyle: DayStyle(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(30 * rpx),
+                      ),
+                      gradient: const LinearGradient(
+                        begin: Alignment.bottomLeft,
+                        end: Alignment.topRight,
+                        colors: [
+                          Color.fromARGB(200, 45, 85, 245),
+                          Color.fromARGB(200, 45, 85, 245),
+                        ],
+                      ),
+                    ),
+                    dayNumStyle: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w900,
+                      fontSize: 40 * rpx,
+                    ),
+                    dayStrStyle: const TextStyle(
+                      color: Colors.white54,
+                    ),
+                    monthStrStyle: const TextStyle(
+                      color: Colors.white30,
+                    ),
+                  ),
+                  inactiveDayStyle: DayStyle(
+                    borderRadius: 30 * rpx,
+                  ),
+                  // ignore: deprecated_member_use
+                  inactiveDayDecoration: BoxDecoration(
+                    color: const Color.fromARGB(255, 247, 247, 247),
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(30 * rpx),
+                    ),
+                  ),
+                ),
+                onDateChange: (date) {
+                  setState(() {
+                    selectDate = date;
+                  });
+                },
+              ),
+            ),
+          ],
+        ),
+        Expanded(
+          child: Container(
+            padding: EdgeInsets.fromLTRB(40 * rpx, 0, 40 * rpx, bp),
+            child: ListView(
+              children: todoList.map(
+                (todo) {
+                  var index = icons.indexOf(todo.title!);
+                  // 在此处处理数据
+                  return Container(
+                    margin: EdgeInsets.fromLTRB(0, 0, 0, 30 * rpx),
+                    padding: EdgeInsets.fromLTRB(0, 0, 20 * rpx, 0),
+                    decoration: BoxDecoration(
+                      color: const Color.fromARGB(168, 236, 236, 236),
+                      borderRadius: BorderRadius.circular(50 * rpx),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Container(
+                          width: 140 * rpx,
+                          height: 140 * rpx,
+                          padding: EdgeInsets.all(30 * rpx),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(40 * rpx),
+                            child: SvgPicture.asset(
+                              todo.icon!,
+                              width: 40 * rpx,
+                              height: 40 * rpx,
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: Container(
+                            padding: EdgeInsets.fromLTRB(
+                                0, 30 * rpx, 10 * rpx, 30 * rpx),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  todo.title!,
+                                  style: TextStyle(
+                                    fontSize: 28 * rpx,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                                Container(
+                                  padding:
+                                      EdgeInsets.fromLTRB(0, 10 * rpx, 0, 0),
+                                  child: Text(
+                                    todo.startTime!,
+                                    style: TextStyle(
+                                      fontSize: 20 * rpx,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black38,
+                                    ),
+                                  ),
+                                ),
+                                ProgressBar(
+                                  value: todo.progress!.toDouble(),
+                                  width: 190 * rpx,
+                                  height: 10 * rpx,
+                                  gradient: const LinearGradient(
+                                    colors: [
+                                      Colors.blue,
+                                      Colors.purple,
+                                    ],
+                                  ),
+                                  backgroundColor: Colors.grey.withOpacity(0.4),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        Container(
+                          width: 100 * rpx,
+                          height: 40 * rpx,
+                          alignment: Alignment.center,
+                          margin: EdgeInsets.fromLTRB(20 * rpx, 0, 20 * rpx, 0),
+                          decoration: BoxDecoration(
+                            color: const Color.fromARGB(100, 197, 197, 197),
+                            borderRadius: BorderRadius.circular(30 * rpx),
+                          ),
+                          child: Text(
+                            '${todo.minutes!} 分钟',
+                            style: TextStyle(
+                              fontSize: 18 * rpx,
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 100 * rpx,
+                          height: 60 * rpx,
+                          child: FloatingActionButton(
+                            heroTag: index,
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const Coming(),
+                                ),
+                              );
+                            },
+                            backgroundColor:
+                                const Color.fromARGB(151, 45, 85, 245),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20 * rpx),
+                              side: const BorderSide(
+                                width: 2,
+                                color: Color.fromARGB(0, 235, 26, 26),
+                              ),
+                            ),
+                            child: Text(
+                              '去完成',
+                              style: TextStyle(
+                                fontSize: 20 * rpx,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              ).toList(),
+            ),
+          ),
+        ),
+      ],
     );
   }
 
@@ -506,15 +518,21 @@ class _IndexState extends State<Index> with SingleTickerProviderStateMixin {
                                             elevation: 0,
                                             focusElevation: 0,
                                             highlightElevation: 0,
-                                            backgroundColor:
-                                                const Color.fromARGB(
+                                            backgroundColor: icon == item
+                                                ? const Color.fromARGB(
+                                                    255, 217, 217, 255)
+                                                : const Color.fromARGB(
                                                     255, 247, 247, 247),
                                             child: SvgPicture.asset(
                                               item,
                                               width: 50 * rpx,
                                               height: 50 * rpx,
                                             ),
-                                            onPressed: () {},
+                                            onPressed: () {
+                                              setState(() {
+                                                icon = item;
+                                              });
+                                            },
                                           ),
                                         ),
                                       )
@@ -553,6 +571,11 @@ class _IndexState extends State<Index> with SingleTickerProviderStateMixin {
                                     color: Colors.black87,
                                     fontSize: 32 * rpx,
                                   ),
+                                  onChanged: (value) {
+                                    setState(() {
+                                      title = value;
+                                    });
+                                  },
                                 ),
                               ),
                               Row(
@@ -673,11 +696,69 @@ class _IndexState extends State<Index> with SingleTickerProviderStateMixin {
                                   onStartChange: (start) {
                                     setState(() {
                                       st = start;
+                                      startTime =
+                                          '${selectDate.year}-${selectDate.month}-${selectDate.day} ${st.hour}:${st.minute}:00';
+                                      minutes = ((DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day, et.hour, et.minute).difference(DateTime(
+                                                          DateTime.now().year,
+                                                          DateTime.now().month,
+                                                          DateTime.now().day,
+                                                          st.hour,
+                                                          st.minute)))
+                                                      .inMinutes)
+                                                  .abs() >
+                                              360
+                                          ? 1440 -
+                                              ((DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day, et.hour, et.minute).difference(DateTime(
+                                                          DateTime.now().year,
+                                                          DateTime.now().month,
+                                                          DateTime.now().day,
+                                                          st.hour,
+                                                          st.minute)))
+                                                      .inMinutes)
+                                                  .abs()
+                                          : ((DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day, et.hour, et.minute)
+                                                      .difference(DateTime(
+                                                          DateTime.now().year,
+                                                          DateTime.now().month,
+                                                          DateTime.now().day,
+                                                          st.hour,
+                                                          st.minute)))
+                                                  .inMinutes)
+                                              .abs();
                                     });
                                   },
                                   onEndChange: (end) {
                                     setState(() {
                                       et = end;
+                                      endTime =
+                                          '${selectDate.year}-${selectDate.month}-${selectDate.day} ${et.hour}:${et.minute}:00';
+                                      minutes = ((DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day, et.hour, et.minute).difference(DateTime(
+                                                          DateTime.now().year,
+                                                          DateTime.now().month,
+                                                          DateTime.now().day,
+                                                          st.hour,
+                                                          st.minute)))
+                                                      .inMinutes)
+                                                  .abs() >
+                                              360
+                                          ? 1440 -
+                                              ((DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day, et.hour, et.minute).difference(DateTime(
+                                                          DateTime.now().year,
+                                                          DateTime.now().month,
+                                                          DateTime.now().day,
+                                                          st.hour,
+                                                          st.minute)))
+                                                      .inMinutes)
+                                                  .abs()
+                                          : ((DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day, et.hour, et.minute)
+                                                      .difference(DateTime(
+                                                          DateTime.now().year,
+                                                          DateTime.now().month,
+                                                          DateTime.now().day,
+                                                          st.hour,
+                                                          st.minute)))
+                                                  .inMinutes)
+                                              .abs();
                                     });
                                   },
                                 ),
@@ -709,6 +790,19 @@ class _IndexState extends State<Index> with SingleTickerProviderStateMixin {
                                     ),
                                   ),
                                   action: (controller) async {
+                                    if (icon!.isEmpty) {
+                                      pubMsg.showError('请选择一个专注事项图标～', context);
+                                      return;
+                                    }
+                                    if (title!.isEmpty) {
+                                      pubMsg.showError('请输入一个专注事项标题～', context);
+                                      return;
+                                    }
+                                    if (title!.isEmpty) {
+                                      pubMsg.showError(
+                                          '请选择一个专注事项时间段～', context);
+                                      return;
+                                    }
                                     controller
                                         .loading(); //starts loading animation
                                     await Future.delayed(
@@ -717,7 +811,28 @@ class _IndexState extends State<Index> with SingleTickerProviderStateMixin {
                                     controller
                                         .success(); //starts success animation
                                     // ignore: use_build_context_synchronously
-                                    Navigator.pop(context);
+
+                                    Https https = Https();
+                                    Map<String, dynamic> params = {
+                                      "icon": icon,
+                                      "title": title,
+                                      "start": startTime,
+                                      "end": endTime,
+                                      "isforce": isForce ? 1 : 0,
+                                      "minutes": minutes,
+                                    };
+                                    Response res = await https.post(
+                                        Apis.addtodoapi, params);
+                                    Singleres st = Singleres.fromJson(res.data);
+                                    if (st.status!) {
+                                      // ignore: use_build_context_synchronously
+                                      pubMsg.showSuccess(st.message!, context);
+                                      // ignore: use_build_context_synchronously
+                                      Navigator.pop(context);
+                                    } else {
+                                      // ignore: use_build_context_synchronously
+                                      pubMsg.showError(st.message!, context);
+                                    }
                                   },
                                 ),
                               ),
@@ -734,5 +849,35 @@ class _IndexState extends State<Index> with SingleTickerProviderStateMixin {
         },
       ),
     );
+  }
+
+  void handleUserinfo() async {
+    String token = storage.read('authorzation') ?? '';
+    if (token.isNotEmpty) {
+      Https https = Https();
+      Map<String, dynamic> params = {};
+      Response res = await https.post(Apis.getuserinfoapi, params);
+      Userinfos sr = Userinfos.fromJson(res.data);
+      setState(() {
+        userInfo = sr.message!;
+      });
+    } else {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const Login(),
+        ),
+      );
+    }
+  }
+
+  void handleTodo() async {
+    Https https = Https();
+    Response res = await https.post(Apis.gettodolistapi, {});
+    print(res.data);
+    Todos sr = Todos.fromJson(res.data);
+    setState(() {
+      todoList = sr.message!;
+    });
   }
 }
