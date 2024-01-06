@@ -12,6 +12,7 @@ import 'package:first_flutter_app/pages/coming.dart';
 import 'package:first_flutter_app/pages/cominglogs.dart';
 import 'package:first_flutter_app/pages/login.dart';
 import 'package:first_flutter_app/pages/mine.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:date_format/date_format.dart';
@@ -419,7 +420,7 @@ class _IndexState extends State<Index> with SingleTickerProviderStateMixin {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => const Coming(),
+                                  builder: (context) => Coming(id: todo.id),
                                 ),
                               );
                             },
@@ -653,7 +654,7 @@ class _IndexState extends State<Index> with SingleTickerProviderStateMixin {
                                 ],
                               ),
                               Container(
-                                height: 440 * rpx,
+                                height: 480 * rpx,
                                 alignment: Alignment.center,
                                 margin: EdgeInsets.fromLTRB(
                                     0, 20 * rpx, 0, 20 * rpx),
@@ -761,10 +762,10 @@ class _IndexState extends State<Index> with SingleTickerProviderStateMixin {
                                 ),
                               ),
                               Container(
+                                width: 400,
                                 alignment: Alignment.center,
-                                margin: EdgeInsets.fromLTRB(0, 60 * rpx, 0, 0),
+                                margin: EdgeInsets.fromLTRB(0, 20 * rpx, 0, 0),
                                 child: FloatingActionButton(
-                                  child: const Text('保存事项'),
                                   onPressed: () async {
                                     if (icon!.isEmpty) {
                                       pubMsg.showError('请选择一个专注事项图标～', context);
@@ -808,6 +809,8 @@ class _IndexState extends State<Index> with SingleTickerProviderStateMixin {
                                       pubMsg.showError(st.message!, context);
                                     }
                                   },
+                                  isExtended: true,
+                                  child: const Icon(Icons.save),
                                 ),
                               ),
                             ],

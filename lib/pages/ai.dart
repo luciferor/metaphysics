@@ -1,10 +1,11 @@
-import 'dart:convert';
 import 'package:cherry_toast/resources/arrays.dart';
 import 'package:first_flutter_app/classes/apis.dart';
 import 'package:first_flutter_app/classes/https.dart';
 import 'package:first_flutter_app/classes/aimsgres.dart';
+import 'package:first_flutter_app/classes/showmsg.dart';
 import 'package:first_flutter_app/components/base.dart';
 import 'package:first_flutter_app/components/empty.dart';
+import 'package:first_flutter_app/pages/ailogs.dart';
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/services.dart';
@@ -107,7 +108,14 @@ class _AiState extends State<Ai> {
                         elevation: 0,
                         focusElevation: 0,
                         highlightElevation: 0,
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const Ailogs(),
+                            ),
+                          );
+                        },
                         child: const Icon(Icons.history_toggle_off),
                       ),
                     ),
@@ -151,6 +159,10 @@ class _AiState extends State<Ai> {
                           _focusnode.unfocus();
                         },
                         onSubmitted: (value) {
+                          if (_textController.text.isEmpty) {
+                            pubMsg.showError('请输入内容～', context);
+                            return;
+                          }
                           if (_textController.text.isNotEmpty) {
                             setState(
                               () {
@@ -186,6 +198,10 @@ class _AiState extends State<Ai> {
                       highlightElevation: 0,
                       child: const Icon(Icons.arrow_upward),
                       onPressed: () {
+                        if (_textController.text.isEmpty) {
+                          pubMsg.showError('请输入内容～', context);
+                          return;
+                        }
                         if (_textController.text.isNotEmpty) {
                           setState(
                             () {

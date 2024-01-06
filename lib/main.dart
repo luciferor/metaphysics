@@ -44,7 +44,7 @@ class _AppState extends State<App> {
         '/ai': (context) => const Ai(),
         '/login': (context) => const Login(),
         '/reg': (context) => const Register(),
-        '/coming': (context) => const Coming(),
+        '/coming': (context) => Coming(id: null),
       },
     );
   }

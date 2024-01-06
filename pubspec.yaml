@@ -67,6 +67,9 @@ dependencies:
   cherry_toast: ^1.6.4
   get_storage: ^2.1.1
   sleek_circular_slider: ^2.0.1
+  animated_text_kit: ^4.2.2
+  percent_indicator: ^4.2.3
+  audioplayers: ^5.2.1
 
 dev_dependencies:
   flutter_test:
