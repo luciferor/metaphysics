@@ -51,14 +51,12 @@ dependencies:
   chat_bubbles: ^1.5.0
   lunar: ^1.6.1
   flutter_advanced_segment: ^3.0.2
-  action_slider: ^0.7.0
   syncfusion_flutter_sliders: ^24.1.41
   flutter_chat_bubble: ^2.0.2
   date_format: ^2.0.5
   easy_date_timeline: ^1.0.2
   card_loading: ^0.3.0
   horizontal_card_pager: ^1.1.1
-  timeline_list: ^0.0.6
   progressive_time_picker: ^1.0.0
   zhi_starry_sky: ^0.0.2
   flutter_animate: ^4.3.0
@@ -68,6 +66,7 @@ dependencies:
   simple_progress_indicators: ^0.2.0
   cherry_toast: ^1.6.4
   get_storage: ^2.1.1
+  sleek_circular_slider: ^2.0.1
 
 dev_dependencies:
   flutter_test:

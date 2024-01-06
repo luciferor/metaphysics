@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:dio/dio.dart';
 import 'package:first_flutter_app/classes/apis.dart';
 import 'package:first_flutter_app/classes/https.dart';
@@ -320,7 +318,12 @@ class _LoginState extends State<Login> {
       // ignore: use_build_context_synchronously
       pubMsg.showSuccess('登录成功～', context);
       // ignore: use_build_context_synchronously
-      Navigator.pop(context);
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const Homie(),
+        ),
+      );
     } else {
       // ignore: use_build_context_synchronously
       pubMsg.showError(sr.message!, context);

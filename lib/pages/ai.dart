@@ -179,33 +179,31 @@ class _AiState extends State<Ai> {
                     width: 80 * rpx,
                     height: 80 * rpx,
                     child: FloatingActionButton(
-                      backgroundColor: const Color.fromARGB(100, 206, 206, 206),
+                      backgroundColor: const Color.fromARGB(100, 0, 72, 255),
                       foregroundColor: Colors.white70,
                       splashColor: const Color.fromARGB(255, 0, 72, 255),
                       elevation: 0,
                       highlightElevation: 0,
-                      child: const Icon(Icons.add),
+                      child: const Icon(Icons.arrow_upward),
                       onPressed: () {
-                        if (_textController.text.isEmpty &&
-                            !loading! &&
-                            msgdata.isNotEmpty) {
-                          setState(() {
-                            msgdata = [];
+                        if (_textController.text.isNotEmpty) {
+                          setState(
+                            () {
+                              msgdata.add({
+                                'content': _textController.text,
+                                'role': 'user',
+                              });
+                              loading = true;
+                              _focusnode.unfocus();
+                            },
+                          );
+                          Future.delayed(const Duration(milliseconds: 500), () {
+                            _scrollController.animateTo(
+                                _scrollController.position.maxScrollExtent,
+                                duration: const Duration(milliseconds: 1000),
+                                curve: Curves.easeInCubic);
                           });
-                          _focusnode.requestFocus();
-                        } else {
-                          CherryToast.error(
-                            title: const Text(
-                              "当前无法创建新话题~",
-                              style: TextStyle(
-                                color: Colors.black,
-                              ),
-                            ),
-                            animationDuration:
-                                const Duration(milliseconds: 500),
-                            toastDuration: const Duration(milliseconds: 1000),
-                            animationType: AnimationType.fromTop,
-                          ).show(context);
+                          httpTest(_textController.text);
                         }
                       },
                     ),

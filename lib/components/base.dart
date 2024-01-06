@@ -11,8 +11,6 @@ class Base extends StatefulWidget {
 }
 
 class _BaseState extends State<Base> with SingleTickerProviderStateMixin {
-  //logo旋转动画控制器
-  // late AnimationController _logoRotateController;
   @override
   void initState() {
     super.initState();

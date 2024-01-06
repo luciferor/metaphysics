@@ -14,7 +14,6 @@ import 'package:first_flutter_app/pages/login.dart';
 import 'package:first_flutter_app/pages/mine.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:action_slider/action_slider.dart';
 import 'package:date_format/date_format.dart';
 import 'package:easy_date_timeline/easy_date_timeline.dart';
 import 'package:flutter_switch/flutter_switch.dart';
@@ -31,7 +30,6 @@ class Index extends StatefulWidget {
 
 class _IndexState extends State<Index> with SingleTickerProviderStateMixin {
   final storage = GetStorage();
-  final _controller = ValueNotifier('all');
   List<String> icons = [
     'assets/images/icons/composition.svg',
     'assets/images/icons/cook.svg',
@@ -63,6 +61,7 @@ class _IndexState extends State<Index> with SingleTickerProviderStateMixin {
   void initState() {
     // TODO: implement initState
     super.initState();
+    // storage.remove('authorzation');
     handleUserinfo();
     handleTodo();
   }
@@ -119,7 +118,7 @@ class _IndexState extends State<Index> with SingleTickerProviderStateMixin {
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
                             Text(
-                              userInfo.nickname ?? '暂无昵称',
+                              userInfo.nickname ?? '无昵称',
                               textAlign: TextAlign.start,
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
@@ -258,7 +257,6 @@ class _IndexState extends State<Index> with SingleTickerProviderStateMixin {
               padding:
                   EdgeInsets.fromLTRB(40 * rpx, 20 * rpx, 40 * rpx, 20 * rpx),
               child: EasyInfiniteDateTimeLine(
-                // controller: _controller,
                 firstDate: DateTime.now(),
                 focusDate: selectDate,
                 // locale: 'zh-CN', //目前报错
@@ -312,6 +310,7 @@ class _IndexState extends State<Index> with SingleTickerProviderStateMixin {
                   setState(() {
                     selectDate = date;
                   });
+                  handleTodo();
                 },
               ),
             ),
@@ -696,8 +695,7 @@ class _IndexState extends State<Index> with SingleTickerProviderStateMixin {
                                   onStartChange: (start) {
                                     setState(() {
                                       st = start;
-                                      startTime =
-                                          '${selectDate.year}-${selectDate.month}-${selectDate.day} ${st.hour}:${st.minute}:00';
+                                      startTime = '${st.hour}:${st.minute}:00';
                                       minutes = ((DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day, et.hour, et.minute).difference(DateTime(
                                                           DateTime.now().year,
                                                           DateTime.now().month,
@@ -730,8 +728,7 @@ class _IndexState extends State<Index> with SingleTickerProviderStateMixin {
                                   onEndChange: (end) {
                                     setState(() {
                                       et = end;
-                                      endTime =
-                                          '${selectDate.year}-${selectDate.month}-${selectDate.day} ${et.hour}:${et.minute}:00';
+                                      endTime = '${et.hour}:${et.minute}:00';
                                       minutes = ((DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day, et.hour, et.minute).difference(DateTime(
                                                           DateTime.now().year,
                                                           DateTime.now().month,
@@ -766,30 +763,9 @@ class _IndexState extends State<Index> with SingleTickerProviderStateMixin {
                               Container(
                                 alignment: Alignment.center,
                                 margin: EdgeInsets.fromLTRB(0, 60 * rpx, 0, 0),
-                                child: ActionSlider.standard(
-                                  boxShadow: const [
-                                    BoxShadow(
-                                      color: Colors.transparent,
-                                    ),
-                                  ],
-                                  height: 100 * rpx,
-                                  backgroundColor:
-                                      const Color.fromARGB(255, 247, 247, 247),
-                                  toggleColor:
-                                      const Color.fromARGB(255, 190, 190, 190),
-                                  icon: const Icon(
-                                    Icons.arrow_forward_ios,
-                                    color: Colors.white,
-                                  ),
-                                  child: Text(
-                                    '向右滑动完成',
-                                    style: TextStyle(
-                                      color: Colors.black87,
-                                      fontSize: 32 * rpx,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  action: (controller) async {
+                                child: FloatingActionButton(
+                                  child: const Text('保存事项'),
+                                  onPressed: () async {
                                     if (icon!.isEmpty) {
                                       pubMsg.showError('请选择一个专注事项图标～', context);
                                       return;
@@ -803,14 +779,9 @@ class _IndexState extends State<Index> with SingleTickerProviderStateMixin {
                                           '请选择一个专注事项时间段～', context);
                                       return;
                                     }
-                                    controller
-                                        .loading(); //starts loading animation
                                     await Future.delayed(
                                       const Duration(seconds: 3),
                                     );
-                                    controller
-                                        .success(); //starts success animation
-                                    // ignore: use_build_context_synchronously
 
                                     Https https = Https();
                                     Map<String, dynamic> params = {
@@ -820,6 +791,8 @@ class _IndexState extends State<Index> with SingleTickerProviderStateMixin {
                                       "end": endTime,
                                       "isforce": isForce ? 1 : 0,
                                       "minutes": minutes,
+                                      "date":
+                                          '${selectDate.year}-${selectDate.month}-${selectDate.day}',
                                     };
                                     Response res = await https.post(
                                         Apis.addtodoapi, params);
@@ -827,6 +800,7 @@ class _IndexState extends State<Index> with SingleTickerProviderStateMixin {
                                     if (st.status!) {
                                       // ignore: use_build_context_synchronously
                                       pubMsg.showSuccess(st.message!, context);
+                                      handleTodo();
                                       // ignore: use_build_context_synchronously
                                       Navigator.pop(context);
                                     } else {
@@ -873,8 +847,10 @@ class _IndexState extends State<Index> with SingleTickerProviderStateMixin {
 
   void handleTodo() async {
     Https https = Https();
-    Response res = await https.post(Apis.gettodolistapi, {});
-    print(res.data);
+    Map<String, dynamic> params = {
+      "date": '${selectDate.year}-${selectDate.month}-${selectDate.day}',
+    };
+    Response res = await https.post(Apis.gettodolistapi, params);
     Todos sr = Todos.fromJson(res.data);
     setState(() {
       todoList = sr.message!;

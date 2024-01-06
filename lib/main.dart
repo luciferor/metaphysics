@@ -10,10 +10,20 @@ import 'package:get_storage/get_storage.dart';
 
 void main() async {
   await GetStorage.init();
-  runApp(App());
+  // 确保在应用程序启动前初始化 WidgetsFlutterBinding
+  WidgetsFlutterBinding.ensureInitialized();
+  runApp(const App());
 }
 
-class App extends StatelessWidget {
+class App extends StatefulWidget {
+  const App({Key? key}) : super(key: key);
+
+  @override
+  // ignore: library_private_types_in_public_api
+  _AppState createState() => _AppState();
+}
+
+class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -22,7 +32,7 @@ class App extends StatelessWidget {
       theme: ThemeData.from(colorScheme: const ColorScheme.light()).copyWith(
         pageTransitionsTheme: const PageTransitionsTheme(
           builders: <TargetPlatform, PageTransitionsBuilder>{
-            TargetPlatform.android: ZoomPageTransitionsBuilder(),
+            TargetPlatform.iOS: ZoomPageTransitionsBuilder(),
           },
         ),
       ),

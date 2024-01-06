@@ -1,6 +1,6 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
-import 'package:timeline_list/timeline.dart';
-import 'package:timeline_list/timeline_model.dart';
 
 class Cominglogs extends StatefulWidget {
   const Cominglogs({Key? key}) : super(key: key);
@@ -11,18 +11,29 @@ class Cominglogs extends StatefulWidget {
 }
 
 class _CominglogsState extends State<Cominglogs> {
-  List<TimelineModel> items = [
-    TimelineModel(const Placeholder(),
-        position: TimelineItemPosition.random,
-        iconBackground: Colors.blue,
-        icon: const Icon(Icons.blur_circular)),
-    TimelineModel(const Placeholder(),
-        position: TimelineItemPosition.random,
-        iconBackground: Colors.redAccent,
-        icon: const Icon(Icons.blur_circular)),
-  ];
   @override
   Widget build(BuildContext context) {
-    return Timeline(children: items, position: TimelinePosition.Center);
+    return Stack(
+      children: [
+        Image(
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height,
+          fit: BoxFit.cover,
+          image: const AssetImage(
+              'assets/images/59aaf55f7919585b29ff6a4cccd80770.jpg'),
+        ),
+        Container(
+          width: 100,
+          height: 100,
+          padding: const EdgeInsets.all(100),
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+            child: const DecoratedBox(
+              decoration: BoxDecoration(color: Colors.red),
+            ),
+          ),
+        ),
+      ],
+    );
   }
 }

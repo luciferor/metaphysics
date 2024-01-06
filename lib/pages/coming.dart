@@ -1,8 +1,13 @@
 import 'dart:async';
+import 'package:dio/dio.dart';
+import 'package:first_flutter_app/classes/apis.dart';
+import 'package:first_flutter_app/classes/detailtodo.dart';
+import 'package:first_flutter_app/classes/https.dart';
 import 'package:first_flutter_app/components/base.dart';
 import 'package:flutter/material.dart';
 import 'package:simple_progress_indicators/simple_progress_indicators.dart';
 import 'package:zhi_starry_sky/starry_sky.dart';
+import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 
 class Coming extends StatefulWidget {
   const Coming({Key? key}) : super(key: key);
@@ -21,7 +26,7 @@ class _ComingState extends State<Coming> {
   @override
   void initState() {
     super.initState();
-    timerHandler();
+    handlerTodoDetail();
   }
 
   @override
@@ -48,7 +53,14 @@ class _ComingState extends State<Coming> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Expanded(
-                    child: Container(),
+                    child: SleekCircularSlider(
+                      min: 0,
+                      max: 100,
+                      initialValue: progress / (total * 60),
+                      appearance: const CircularSliderAppearance(
+                        angleRange: 50,
+                      ),
+                    ),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -77,6 +89,19 @@ class _ComingState extends State<Coming> {
         ),
       ),
     );
+  }
+
+  void handlerTodoDetail() async {
+    Https https = Https();
+    Map<String, dynamic> params = {
+      'id': 1,
+    };
+    Response res = await https.post(Apis.gettododetailapi, params);
+    Detailtodo ts = Detailtodo.fromJson(res.data);
+    setState(() {
+      total = ts.message?.minutes as int;
+    });
+    timerHandler();
   }
 
   void timerHandler() {
