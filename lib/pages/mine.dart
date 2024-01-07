@@ -213,256 +213,283 @@ class _MineState extends State<Mine> {
                     begin: Alignment.topRight,
                     end: Alignment.bottomLeft,
                     colors: [
-                      Colors.black54,
-                      Colors.black87,
+                      Color.fromARGB(255, 247, 247, 247),
+                      Color.fromARGB(255, 247, 247, 247),
                     ],
                   ),
                 ),
                 child: const Apps(),
               ),
             ),
+            Container(
+              padding: EdgeInsets.fromLTRB(40 * rpx, 0, 0, 20 * rpx),
+              alignment: Alignment.centerLeft,
+              child: Text(
+                '其它功能',
+                style: TextStyle(
+                  fontSize: 40 * rpx,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
             Padding(
-              padding: EdgeInsets.fromLTRB(40 * rpx, 0, 40 * rpx, 40 * rpx),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    margin: EdgeInsets.fromLTRB(0, 0, 0, 30 * rpx),
-                    decoration: BoxDecoration(
-                      color: const Color.fromARGB(255, 247, 247, 247),
-                      borderRadius: BorderRadius.circular(30 * rpx),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Container(
-                          width: 90 * rpx,
-                          height: 90 * rpx,
-                          padding: EdgeInsets.all(10 * rpx),
-                          alignment: Alignment.center,
-                          child: SvgPicture.asset(
-                            'assets/images/icons/grade.svg',
-                            width: 70 * rpx,
-                            height: 70 * rpx,
+              padding: EdgeInsets.fromLTRB(40 * rpx, 0, 40 * rpx, 20 * rpx),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: const Color.fromARGB(255, 247, 247, 247),
+                  borderRadius: BorderRadius.circular(30 * rpx),
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                        color: const Color.fromARGB(255, 247, 247, 247),
+                        borderRadius: BorderRadius.circular(30 * rpx),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Container(
+                            width: 90 * rpx,
+                            height: 90 * rpx,
+                            padding: EdgeInsets.all(10 * rpx),
+                            alignment: Alignment.center,
+                            child: SvgPicture.asset(
+                              'assets/images/icons/grade.svg',
+                              width: 70 * rpx,
+                              height: 70 * rpx,
+                            ),
                           ),
-                        ),
-                        Expanded(
-                          child: Container(
-                            alignment: Alignment.centerLeft,
-                            child: Text(
-                              '会员中心',
-                              style: TextStyle(
-                                fontSize: 30 * rpx,
-                                color: Colors.black87,
+                          Expanded(
+                            child: Container(
+                              alignment: Alignment.centerLeft,
+                              child: Text(
+                                '会员中心',
+                                style: TextStyle(
+                                  fontSize: 30 * rpx,
+                                  color: Colors.black87,
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                        Container(
-                          width: 90 * rpx,
-                          height: 90 * rpx,
-                          padding: EdgeInsets.all(10 * rpx),
-                          alignment: Alignment.centerRight,
-                          child: SvgPicture.asset(
-                            'assets/images/icons/arrow.svg',
-                            width: 30 * rpx,
-                            height: 30 * rpx,
+                          Container(
+                            width: 90 * rpx,
+                            height: 90 * rpx,
+                            padding: EdgeInsets.all(10 * rpx),
+                            alignment: Alignment.centerRight,
+                            child: SvgPicture.asset(
+                              'assets/images/icons/arrow.svg',
+                              width: 30 * rpx,
+                              height: 30 * rpx,
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.fromLTRB(0, 0, 0, 30 * rpx),
-                    decoration: BoxDecoration(
-                      color: const Color.fromARGB(255, 247, 247, 247),
-                      borderRadius: BorderRadius.circular(30 * rpx),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Container(
-                          width: 90 * rpx,
-                          height: 90 * rpx,
-                          padding: EdgeInsets.all(10 * rpx),
-                          alignment: Alignment.center,
-                          child: SvgPicture.asset(
-                            'assets/images/icons/collect.svg',
-                            width: 70 * rpx,
-                            height: 70 * rpx,
+                    Container(
+                      decoration: BoxDecoration(
+                        color: const Color.fromARGB(255, 247, 247, 247),
+                        borderRadius: BorderRadius.circular(30 * rpx),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Container(
+                            width: 90 * rpx,
+                            height: 90 * rpx,
+                            padding: EdgeInsets.all(10 * rpx),
+                            alignment: Alignment.center,
+                            child: SvgPicture.asset(
+                              'assets/images/icons/collect.svg',
+                              width: 70 * rpx,
+                              height: 70 * rpx,
+                            ),
                           ),
-                        ),
-                        Expanded(
-                          child: Container(
-                            alignment: Alignment.centerLeft,
-                            child: Text(
-                              '权益',
-                              style: TextStyle(
-                                fontSize: 30 * rpx,
-                                color: Colors.black87,
+                          Expanded(
+                            child: Container(
+                              alignment: Alignment.centerLeft,
+                              child: Text(
+                                '权益',
+                                style: TextStyle(
+                                  fontSize: 30 * rpx,
+                                  color: Colors.black87,
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                        Container(
-                          width: 90 * rpx,
-                          height: 90 * rpx,
-                          padding: EdgeInsets.all(10 * rpx),
-                          alignment: Alignment.centerRight,
-                          child: SvgPicture.asset(
-                            'assets/images/icons/arrow.svg',
-                            width: 30 * rpx,
-                            height: 30 * rpx,
+                          Container(
+                            width: 90 * rpx,
+                            height: 90 * rpx,
+                            padding: EdgeInsets.all(10 * rpx),
+                            alignment: Alignment.centerRight,
+                            child: SvgPicture.asset(
+                              'assets/images/icons/arrow.svg',
+                              width: 30 * rpx,
+                              height: 30 * rpx,
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.fromLTRB(0, 0, 0, 30 * rpx),
-                    decoration: BoxDecoration(
-                      color: const Color.fromARGB(255, 247, 247, 247),
-                      borderRadius: BorderRadius.circular(30 * rpx),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Container(
-                          width: 90 * rpx,
-                          height: 90 * rpx,
-                          padding: EdgeInsets.all(10 * rpx),
-                          alignment: Alignment.center,
-                          child: SvgPicture.asset(
-                            'assets/images/icons/clould.svg',
-                            width: 70 * rpx,
-                            height: 70 * rpx,
+                  ],
+                ),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.fromLTRB(40 * rpx, 0, 40 * rpx, 20 * rpx),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: const Color.fromARGB(255, 247, 247, 247),
+                  borderRadius: BorderRadius.circular(30 * rpx),
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                        color: const Color.fromARGB(255, 247, 247, 247),
+                        borderRadius: BorderRadius.circular(30 * rpx),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Container(
+                            width: 90 * rpx,
+                            height: 90 * rpx,
+                            padding: EdgeInsets.all(10 * rpx),
+                            alignment: Alignment.center,
+                            child: SvgPicture.asset(
+                              'assets/images/icons/clould.svg',
+                              width: 70 * rpx,
+                              height: 70 * rpx,
+                            ),
                           ),
-                        ),
-                        Expanded(
-                          child: Container(
-                            alignment: Alignment.centerLeft,
-                            child: Text(
-                              '云盘',
-                              style: TextStyle(
-                                fontSize: 30 * rpx,
-                                color: Colors.black87,
+                          Expanded(
+                            child: Container(
+                              alignment: Alignment.centerLeft,
+                              child: Text(
+                                '云盘',
+                                style: TextStyle(
+                                  fontSize: 30 * rpx,
+                                  color: Colors.black87,
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                        Container(
-                          width: 90 * rpx,
-                          height: 90 * rpx,
-                          padding: EdgeInsets.all(10 * rpx),
-                          alignment: Alignment.centerRight,
-                          child: SvgPicture.asset(
-                            'assets/images/icons/arrow.svg',
-                            width: 30 * rpx,
-                            height: 30 * rpx,
+                          Container(
+                            width: 90 * rpx,
+                            height: 90 * rpx,
+                            padding: EdgeInsets.all(10 * rpx),
+                            alignment: Alignment.centerRight,
+                            child: SvgPicture.asset(
+                              'assets/images/icons/arrow.svg',
+                              width: 30 * rpx,
+                              height: 30 * rpx,
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.fromLTRB(0, 0, 0, 30 * rpx),
-                    decoration: BoxDecoration(
-                      color: const Color.fromARGB(255, 247, 247, 247),
-                      borderRadius: BorderRadius.circular(30 * rpx),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Container(
-                          width: 90 * rpx,
-                          height: 90 * rpx,
-                          padding: EdgeInsets.all(10 * rpx),
-                          alignment: Alignment.center,
-                          child: SvgPicture.asset(
-                            'assets/images/icons/notice.svg',
-                            width: 70 * rpx,
-                            height: 70 * rpx,
+                    Container(
+                      decoration: BoxDecoration(
+                        color: const Color.fromARGB(255, 247, 247, 247),
+                        borderRadius: BorderRadius.circular(30 * rpx),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Container(
+                            width: 90 * rpx,
+                            height: 90 * rpx,
+                            padding: EdgeInsets.all(10 * rpx),
+                            alignment: Alignment.center,
+                            child: SvgPicture.asset(
+                              'assets/images/icons/notice.svg',
+                              width: 70 * rpx,
+                              height: 70 * rpx,
+                            ),
                           ),
-                        ),
-                        Expanded(
-                          child: Container(
-                            alignment: Alignment.centerLeft,
-                            child: Text(
-                              '消息',
-                              style: TextStyle(
-                                fontSize: 30 * rpx,
-                                color: Colors.black87,
+                          Expanded(
+                            child: Container(
+                              alignment: Alignment.centerLeft,
+                              child: Text(
+                                '消息',
+                                style: TextStyle(
+                                  fontSize: 30 * rpx,
+                                  color: Colors.black87,
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                        Container(
-                          width: 90 * rpx,
-                          height: 90 * rpx,
-                          padding: EdgeInsets.all(10 * rpx),
-                          alignment: Alignment.centerRight,
-                          child: SvgPicture.asset(
-                            'assets/images/icons/arrow.svg',
-                            width: 30 * rpx,
-                            height: 30 * rpx,
+                          Container(
+                            width: 90 * rpx,
+                            height: 90 * rpx,
+                            padding: EdgeInsets.all(10 * rpx),
+                            alignment: Alignment.centerRight,
+                            child: SvgPicture.asset(
+                              'assets/images/icons/arrow.svg',
+                              width: 30 * rpx,
+                              height: 30 * rpx,
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.fromLTRB(0, 0, 0, 30 * rpx),
-                    decoration: BoxDecoration(
-                      color: const Color.fromARGB(255, 247, 247, 247),
-                      borderRadius: BorderRadius.circular(30 * rpx),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Container(
-                          width: 90 * rpx,
-                          height: 90 * rpx,
-                          padding: EdgeInsets.all(10 * rpx),
-                          alignment: Alignment.center,
-                          child: SvgPicture.asset(
-                            'assets/images/icons/setting.svg',
-                            width: 70 * rpx,
-                            height: 70 * rpx,
+                    Container(
+                      decoration: BoxDecoration(
+                        color: const Color.fromARGB(255, 247, 247, 247),
+                        borderRadius: BorderRadius.circular(30 * rpx),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Container(
+                            width: 90 * rpx,
+                            height: 90 * rpx,
+                            padding: EdgeInsets.all(10 * rpx),
+                            alignment: Alignment.center,
+                            child: SvgPicture.asset(
+                              'assets/images/icons/setting.svg',
+                              width: 70 * rpx,
+                              height: 70 * rpx,
+                            ),
                           ),
-                        ),
-                        Expanded(
-                          child: Container(
-                            alignment: Alignment.centerLeft,
-                            child: Text(
-                              '设置',
-                              style: TextStyle(
-                                fontSize: 30 * rpx,
-                                color: Colors.black87,
+                          Expanded(
+                            child: Container(
+                              alignment: Alignment.centerLeft,
+                              child: Text(
+                                '设置',
+                                style: TextStyle(
+                                  fontSize: 30 * rpx,
+                                  color: Colors.black87,
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                        Container(
-                          width: 90 * rpx,
-                          height: 90 * rpx,
-                          padding: EdgeInsets.all(10 * rpx),
-                          alignment: Alignment.centerRight,
-                          child: SvgPicture.asset(
-                            'assets/images/icons/arrow.svg',
-                            width: 30 * rpx,
-                            height: 30 * rpx,
+                          Container(
+                            width: 90 * rpx,
+                            height: 90 * rpx,
+                            padding: EdgeInsets.all(10 * rpx),
+                            alignment: Alignment.centerRight,
+                            child: SvgPicture.asset(
+                              'assets/images/icons/arrow.svg',
+                              width: 30 * rpx,
+                              height: 30 * rpx,
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ],

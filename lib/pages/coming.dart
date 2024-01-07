@@ -9,6 +9,7 @@ import 'package:percent_indicator/percent_indicator.dart';
 import 'package:zhi_starry_sky/starry_sky.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:audioplayers/audioplayers.dart';
+import 'package:circular_menu/circular_menu.dart';
 
 // ignore: must_be_immutable
 class Coming extends StatefulWidget {
@@ -26,6 +27,8 @@ class _ComingState extends State<Coming> {
   int progress = 0;
   late Duration duration;
   String hms = '00:00:00';
+  int isforce = 0;
+  bool isPlay = false;
   @override
   void initState() {
     super.initState();
@@ -94,18 +97,61 @@ class _ComingState extends State<Coming> {
                         Container(
                           width: 80 * rpx,
                           height: 80 * rpx,
-                          margin: EdgeInsets.fromLTRB(10 * rpx, 0, 10 * rpx, 0),
-                          child: FloatingActionButton(
-                            onPressed: () {},
-                            backgroundColor:
-                                const Color.fromARGB(82, 55, 0, 255),
-                            elevation: 0,
-                            hoverElevation: 0,
-                            focusElevation: 0,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(100 * rpx),
+                          margin: EdgeInsets.fromLTRB(20 * rpx, 0, 0, 0),
+                          child: CircularMenu(
+                            radius: 120 * rpx,
+                            toggleButtonMargin: 0,
+                            toggleButtonPadding: 0,
+                            toggleButtonColor: Colors.transparent,
+                            toggleButtonIconColor: Colors.transparent,
+                            alignment: Alignment.bottomRight,
+                            toggleButtonSize: 80 * rpx,
+                            backgroundWidget: Center(
+                              child: FloatingActionButton(
+                                onPressed: () {},
+                                backgroundColor:
+                                    const Color.fromARGB(82, 55, 0, 255),
+                                elevation: 0,
+                                hoverElevation: 0,
+                                focusElevation: 0,
+                                child: Icon(
+                                  Icons.apps,
+                                  size: 50 * rpx,
+                                ),
+                              ),
                             ),
-                            child: const Icon(Icons.share),
+                            items: [
+                              CircularMenuItem(
+                                margin: 10 * rpx,
+                                padding: 10 * rpx,
+                                iconSize: 40 * rpx,
+                                icon: Icons.power_settings_new,
+                                color: const Color.fromARGB(82, 55, 0, 255),
+                                onTap: () {
+                                  // callback
+                                },
+                              ),
+                              CircularMenuItem(
+                                margin: 10 * rpx,
+                                padding: 10 * rpx,
+                                iconSize: 40 * rpx,
+                                icon: Icons.audiotrack,
+                                color: const Color.fromARGB(82, 55, 0, 255),
+                                onTap: () {
+                                  // callback
+                                },
+                              ),
+                              CircularMenuItem(
+                                margin: 10 * rpx,
+                                padding: 10 * rpx,
+                                iconSize: 40 * rpx,
+                                icon: Icons.share,
+                                color: const Color.fromARGB(82, 55, 0, 255),
+                                onTap: () {
+                                  // callback
+                                },
+                              ),
+                            ],
                           ),
                         ),
                         Container(
@@ -113,7 +159,16 @@ class _ComingState extends State<Coming> {
                           height: 80 * rpx,
                           margin: EdgeInsets.fromLTRB(10 * rpx, 0, 10 * rpx, 0),
                           child: FloatingActionButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              if (isPlay) {
+                                setState(() {
+                                  isPlay = false;
+                                  player.pause();
+                                });
+                              } else {
+                                handlerPlayer();
+                              }
+                            },
                             backgroundColor:
                                 const Color.fromARGB(82, 55, 0, 255),
                             elevation: 0,
@@ -122,41 +177,11 @@ class _ComingState extends State<Coming> {
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(100 * rpx),
                             ),
-                            child: const Icon(Icons.audiotrack),
-                          ),
-                        ),
-                        Container(
-                          width: 80 * rpx,
-                          height: 80 * rpx,
-                          margin: EdgeInsets.fromLTRB(10 * rpx, 0, 10 * rpx, 0),
-                          child: FloatingActionButton(
-                            onPressed: () {},
-                            backgroundColor:
-                                const Color.fromARGB(82, 55, 0, 255),
-                            elevation: 0,
-                            hoverElevation: 0,
-                            focusElevation: 0,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(100 * rpx),
-                            ),
-                            child: const Icon(Icons.pause_circle_outline),
-                          ),
-                        ),
-                        Container(
-                          width: 80 * rpx,
-                          height: 80 * rpx,
-                          margin: EdgeInsets.fromLTRB(10 * rpx, 0, 20 * rpx, 0),
-                          child: FloatingActionButton(
-                            onPressed: () {},
-                            backgroundColor:
-                                const Color.fromARGB(82, 55, 0, 255),
-                            elevation: 0,
-                            hoverElevation: 0,
-                            focusElevation: 0,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(100 * rpx),
-                            ),
-                            child: const Icon(Icons.power_settings_new),
+                            child: isPlay
+                                ? Icon(Icons.pause_circle_outline,
+                                    size: 50 * rpx)
+                                : Icon(Icons.play_arrow_outlined,
+                                    size: 50 * rpx),
                           ),
                         ),
                         Container(
@@ -210,7 +235,26 @@ class _ComingState extends State<Coming> {
                   ),
                 ],
               ),
-            )
+            ),
+            Positioned(
+              bottom: 150 * rpx,
+              right: 20 * rpx,
+              child: Container(
+                width: 60 * rpx,
+                height: 300 * rpx,
+                decoration: BoxDecoration(
+                    color: const Color.fromARGB(99, 255, 255, 255),
+                    borderRadius: BorderRadius.circular(50 * rpx),
+                    boxShadow: [
+                      BoxShadow(
+                        color: const Color.fromARGB(30, 108, 108, 108),
+                        blurRadius: 20 * rpx,
+                        spreadRadius: 10 * rpx,
+                        offset: const Offset(0, 0),
+                      ),
+                    ]),
+              ),
+            ),
           ],
         ),
       ),
@@ -225,6 +269,7 @@ class _ComingState extends State<Coming> {
     Response res = await https.post(Apis.gettododetailapi, params);
     Detailtodo ts = Detailtodo.fromJson(res.data);
     setState(() {
+      isforce = ts.message?.isforce as int;
       total = ts.message?.minutes as int;
       progress = ts.message?.progress as int;
       total = total - progress;
@@ -254,7 +299,10 @@ class _ComingState extends State<Coming> {
   }
 
   void handlerPlayer() async {
-    await player.play(UrlSource('https://api.dsnbc.com/public/media/mm.mp3'));
+    await player.play(UrlSource('assets/audio/mm.mp3'));
+    setState(() {
+      isPlay = true;
+    });
   }
 
   @override
@@ -262,5 +310,6 @@ class _ComingState extends State<Coming> {
     super.dispose();
     timers?.cancel();
     timers = null;
+    player.stop();
   }
 }

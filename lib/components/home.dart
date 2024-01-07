@@ -12,7 +12,6 @@ import 'package:first_flutter_app/pages/coming.dart';
 import 'package:first_flutter_app/pages/cominglogs.dart';
 import 'package:first_flutter_app/pages/login.dart';
 import 'package:first_flutter_app/pages/mine.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:date_format/date_format.dart';
@@ -21,6 +20,7 @@ import 'package:flutter_switch/flutter_switch.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:time_range_picker/time_range_picker.dart';
 import 'package:simple_progress_indicators/simple_progress_indicators.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
 class Index extends StatefulWidget {
   const Index({Key? key}) : super(key: key);
@@ -289,15 +289,17 @@ class _IndexState extends State<Index> with SingleTickerProviderStateMixin {
                       fontWeight: FontWeight.w900,
                       fontSize: 40 * rpx,
                     ),
-                    dayStrStyle: const TextStyle(
+                    dayStrStyle: TextStyle(
                       color: Colors.white54,
+                      fontSize: 20 * rpx,
                     ),
-                    monthStrStyle: const TextStyle(
+                    monthStrStyle: TextStyle(
                       color: Colors.white30,
+                      fontSize: 20 * rpx,
                     ),
                   ),
                   inactiveDayStyle: DayStyle(
-                    borderRadius: 30 * rpx,
+                    borderRadius: 20 * rpx,
                   ),
                   // ignore: deprecated_member_use
                   inactiveDayDecoration: BoxDecoration(
@@ -320,133 +322,137 @@ class _IndexState extends State<Index> with SingleTickerProviderStateMixin {
         Expanded(
           child: Container(
             padding: EdgeInsets.fromLTRB(40 * rpx, 0, 40 * rpx, bp),
-            child: ListView(
-              children: todoList.map(
-                (todo) {
-                  var index = icons.indexOf(todo.title!);
-                  // 在此处处理数据
-                  return Container(
-                    margin: EdgeInsets.fromLTRB(0, 0, 0, 30 * rpx),
-                    padding: EdgeInsets.fromLTRB(0, 0, 20 * rpx, 0),
-                    decoration: BoxDecoration(
-                      color: const Color.fromARGB(168, 236, 236, 236),
-                      borderRadius: BorderRadius.circular(50 * rpx),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Container(
-                          width: 140 * rpx,
-                          height: 140 * rpx,
-                          padding: EdgeInsets.all(30 * rpx),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(40 * rpx),
-                            child: SvgPicture.asset(
-                              todo.icon!,
-                              width: 40 * rpx,
-                              height: 40 * rpx,
+            child: AnimationLimiter(
+              child: ListView(
+                children: todoList.map(
+                  (todo) {
+                    var index = icons.indexOf(todo.title!);
+                    // 在此处处理数据
+                    return Container(
+                      margin: EdgeInsets.fromLTRB(0, 0, 0, 30 * rpx),
+                      padding: EdgeInsets.fromLTRB(0, 0, 20 * rpx, 0),
+                      decoration: BoxDecoration(
+                        color: const Color.fromARGB(168, 236, 236, 236),
+                        borderRadius: BorderRadius.circular(50 * rpx),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Container(
+                            width: 140 * rpx,
+                            height: 140 * rpx,
+                            padding: EdgeInsets.all(30 * rpx),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(40 * rpx),
+                              child: SvgPicture.asset(
+                                todo.icon!,
+                                width: 40 * rpx,
+                                height: 40 * rpx,
+                              ),
                             ),
                           ),
-                        ),
-                        Expanded(
-                          child: Container(
-                            padding: EdgeInsets.fromLTRB(
-                                0, 30 * rpx, 10 * rpx, 30 * rpx),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  todo.title!,
-                                  style: TextStyle(
-                                    fontSize: 28 * rpx,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.black,
-                                  ),
-                                ),
-                                Container(
-                                  padding:
-                                      EdgeInsets.fromLTRB(0, 10 * rpx, 0, 0),
-                                  child: Text(
-                                    todo.startTime!,
+                          Expanded(
+                            child: Container(
+                              padding: EdgeInsets.fromLTRB(
+                                  0, 30 * rpx, 10 * rpx, 30 * rpx),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    todo.title!,
                                     style: TextStyle(
-                                      fontSize: 20 * rpx,
+                                      fontSize: 28 * rpx,
                                       fontWeight: FontWeight.bold,
-                                      color: Colors.black38,
+                                      color: Colors.black,
                                     ),
                                   ),
-                                ),
-                                ProgressBar(
-                                  value: todo.progress!.toDouble(),
-                                  width: 190 * rpx,
-                                  height: 10 * rpx,
-                                  gradient: const LinearGradient(
-                                    colors: [
-                                      Colors.blue,
-                                      Colors.purple,
-                                    ],
+                                  Container(
+                                    padding:
+                                        EdgeInsets.fromLTRB(0, 10 * rpx, 0, 0),
+                                    child: Text(
+                                      todo.startTime!,
+                                      style: TextStyle(
+                                        fontSize: 20 * rpx,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.black38,
+                                      ),
+                                    ),
                                   ),
-                                  backgroundColor: Colors.grey.withOpacity(0.4),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        Container(
-                          width: 100 * rpx,
-                          height: 40 * rpx,
-                          alignment: Alignment.center,
-                          margin: EdgeInsets.fromLTRB(20 * rpx, 0, 20 * rpx, 0),
-                          decoration: BoxDecoration(
-                            color: const Color.fromARGB(100, 197, 197, 197),
-                            borderRadius: BorderRadius.circular(30 * rpx),
-                          ),
-                          child: Text(
-                            '${todo.minutes!} 分钟',
-                            style: TextStyle(
-                              fontSize: 18 * rpx,
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          width: 100 * rpx,
-                          height: 60 * rpx,
-                          child: FloatingActionButton(
-                            heroTag: index,
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => Coming(id: todo.id),
-                                ),
-                              );
-                            },
-                            backgroundColor:
-                                const Color.fromARGB(151, 45, 85, 245),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20 * rpx),
-                              side: const BorderSide(
-                                width: 2,
-                                color: Color.fromARGB(0, 235, 26, 26),
+                                  ProgressBar(
+                                    value: todo.progress!.toDouble(),
+                                    width: 190 * rpx,
+                                    height: 10 * rpx,
+                                    gradient: const LinearGradient(
+                                      colors: [
+                                        Colors.blue,
+                                        Colors.purple,
+                                      ],
+                                    ),
+                                    backgroundColor:
+                                        Colors.grey.withOpacity(0.4),
+                                  ),
+                                ],
                               ),
+                            ),
+                          ),
+                          Container(
+                            width: 100 * rpx,
+                            height: 40 * rpx,
+                            alignment: Alignment.center,
+                            margin:
+                                EdgeInsets.fromLTRB(20 * rpx, 0, 20 * rpx, 0),
+                            decoration: BoxDecoration(
+                              color: const Color.fromARGB(100, 197, 197, 197),
+                              borderRadius: BorderRadius.circular(30 * rpx),
                             ),
                             child: Text(
-                              '去完成',
+                              '${todo.minutes!} 分钟',
                               style: TextStyle(
-                                fontSize: 20 * rpx,
-                                color: Colors.white,
+                                fontSize: 18 * rpx,
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
                               ),
                             ),
                           ),
-                        ),
-                      ],
-                    ),
-                  );
-                },
-              ).toList(),
+                          SizedBox(
+                            width: 100 * rpx,
+                            height: 60 * rpx,
+                            child: FloatingActionButton(
+                              heroTag: index,
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => Coming(id: todo.id),
+                                  ),
+                                );
+                              },
+                              backgroundColor:
+                                  const Color.fromARGB(151, 45, 85, 245),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20 * rpx),
+                                side: const BorderSide(
+                                  width: 2,
+                                  color: Color.fromARGB(0, 235, 26, 26),
+                                ),
+                              ),
+                              child: Text(
+                                '去完成',
+                                style: TextStyle(
+                                  fontSize: 20 * rpx,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                ).toList(),
+              ),
             ),
           ),
         ),
