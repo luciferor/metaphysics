@@ -4,6 +4,7 @@ import 'package:first_flutter_app/classes/apis.dart';
 import 'package:first_flutter_app/classes/detailtodo.dart';
 import 'package:first_flutter_app/classes/https.dart';
 import 'package:first_flutter_app/components/base.dart';
+import 'package:first_flutter_app/pages/index.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:interactive_slider/interactive_slider.dart';
@@ -13,6 +14,7 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:circular_menu/circular_menu.dart';
 import 'package:wakelock_plus/wakelock_plus.dart';
+import 'package:volume_controller/volume_controller.dart';
 
 // ignore: must_be_immutable
 class Coming extends StatefulWidget {
@@ -33,10 +35,18 @@ class _ComingState extends State<Coming> {
   int isforce = 0;
   bool isPlay = false;
   bool isWakelock = false;
+  double _volumeListenerValue = 0;
+  double _getVolume = 0;
+  double _setVolumeValue = 0;
+
   @override
   void initState() {
     super.initState();
     handlerTodoDetail();
+    VolumeController().listener((volume) {
+      setState(() => _volumeListenerValue = volume);
+    });
+    VolumeController().getVolume().then((volume) => _setVolumeValue = volume);
   }
 
   @override
@@ -69,6 +79,115 @@ class _ComingState extends State<Coming> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
+                  Container(
+                    padding: EdgeInsets.fromLTRB(
+                        20 * rpx, tp + 20 * rpx, 20 * rpx, 0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Container(
+                          width: 80 * rpx,
+                          height: 80 * rpx,
+                          margin: EdgeInsets.fromLTRB(10 * rpx, 0, 0, 0),
+                          child: FloatingActionButton(
+                            onPressed: () {
+                              if (isWakelock) {
+                                setState(() {
+                                  WakelockPlus.disable();
+                                  isWakelock = false;
+                                });
+                              } else {
+                                setState(() {
+                                  WakelockPlus.enable();
+                                  isWakelock = true;
+                                });
+                              }
+                            },
+                            backgroundColor: const Color.fromARGB(82, 0, 0, 0),
+                            elevation: 0,
+                            hoverElevation: 0,
+                            focusElevation: 0,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(100 * rpx),
+                            ),
+                            child: Icon(Icons.share, size: 50 * rpx),
+                          ),
+                        ),
+                        Container(
+                          width: 80 * rpx,
+                          height: 80 * rpx,
+                          margin: EdgeInsets.fromLTRB(10 * rpx, 0, 0, 0),
+                          child: FloatingActionButton(
+                            onPressed: () {
+                              if (isWakelock) {
+                                setState(() {
+                                  WakelockPlus.disable();
+                                  isWakelock = false;
+                                });
+                              } else {
+                                setState(() {
+                                  WakelockPlus.enable();
+                                  isWakelock = true;
+                                });
+                              }
+                            },
+                            backgroundColor: const Color.fromARGB(82, 0, 0, 0),
+                            elevation: 0,
+                            hoverElevation: 0,
+                            focusElevation: 0,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(100 * rpx),
+                            ),
+                            child: Icon(Icons.audiotrack, size: 50 * rpx),
+                          ),
+                        ),
+                        Container(
+                          width: 80 * rpx,
+                          height: 80 * rpx,
+                          margin: EdgeInsets.fromLTRB(10 * rpx, 0, 0, 0),
+                          child: FloatingActionButton(
+                            onPressed: () {
+                              showCupertinoDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return CupertinoAlertDialog(
+                                    title: const Text('Dialog Title'),
+                                    content: const Text(
+                                        'This is the content of the dialog.'),
+                                    actions: <Widget>[
+                                      CupertinoDialogAction(
+                                        child: const Text('取消'),
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                      ),
+                                      CupertinoDialogAction(
+                                        child: const Text('确定'),
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                          Navigator.pop(context);
+                                        },
+                                      ),
+                                    ],
+                                  );
+                                },
+                              );
+                            },
+                            backgroundColor: const Color.fromARGB(82, 0, 0, 0),
+                            elevation: 0,
+                            hoverElevation: 0,
+                            focusElevation: 0,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(100 * rpx),
+                            ),
+                            child:
+                                Icon(Icons.power_settings_new, size: 50 * rpx),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                   Expanded(
                     child: Center(
                       child: Padding(
@@ -117,6 +236,12 @@ class _ComingState extends State<Coming> {
                               unfocusedHeight: 80 * rpx,
                               focusedHeight: 80 * rpx,
                               iconGap: 16,
+                              onProgressUpdated: (e) {
+                                setState(() {
+                                  _setVolumeValue = e;
+                                  VolumeController().setVolume(_setVolumeValue);
+                                });
+                              },
                             ),
                           ),
                         ),
@@ -138,8 +263,7 @@ class _ComingState extends State<Coming> {
                                 });
                               }
                             },
-                            backgroundColor:
-                                const Color.fromARGB(82, 55, 0, 255),
+                            backgroundColor: const Color.fromARGB(82, 0, 0, 0),
                             elevation: 0,
                             hoverElevation: 0,
                             focusElevation: 0,
@@ -149,70 +273,6 @@ class _ComingState extends State<Coming> {
                             child: isWakelock
                                 ? Icon(Icons.light_mode, size: 50 * rpx)
                                 : Icon(Icons.dark_mode, size: 50 * rpx),
-                          ),
-                        ),
-                        Container(
-                          width: 80 * rpx,
-                          height: 80 * rpx,
-                          margin: EdgeInsets.fromLTRB(10 * rpx, 0, 0, 0),
-                          child: CircularMenu(
-                            radius: 120 * rpx,
-                            toggleButtonMargin: 0,
-                            toggleButtonPadding: 0,
-                            toggleButtonColor: Colors.transparent,
-                            toggleButtonIconColor: Colors.transparent,
-                            alignment: Alignment.bottomRight,
-                            toggleButtonSize: 80 * rpx,
-                            backgroundWidget: Center(
-                              child: FloatingActionButton(
-                                onPressed: () {},
-                                backgroundColor:
-                                    const Color.fromARGB(82, 55, 0, 255),
-                                elevation: 0,
-                                hoverElevation: 0,
-                                focusElevation: 0,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius:
-                                      BorderRadius.circular(100 * rpx),
-                                ),
-                                child: Icon(
-                                  Icons.apps,
-                                  size: 50 * rpx,
-                                ),
-                              ),
-                            ),
-                            items: [
-                              CircularMenuItem(
-                                margin: 10 * rpx,
-                                padding: 10 * rpx,
-                                iconSize: 40 * rpx,
-                                icon: Icons.power_settings_new,
-                                color: const Color.fromARGB(82, 55, 0, 255),
-                                onTap: () {
-                                  // callback
-                                },
-                              ),
-                              CircularMenuItem(
-                                margin: 10 * rpx,
-                                padding: 10 * rpx,
-                                iconSize: 40 * rpx,
-                                icon: Icons.audiotrack,
-                                color: const Color.fromARGB(82, 55, 0, 255),
-                                onTap: () {
-                                  // callback
-                                },
-                              ),
-                              CircularMenuItem(
-                                margin: 10 * rpx,
-                                padding: 10 * rpx,
-                                iconSize: 40 * rpx,
-                                icon: Icons.share,
-                                color: const Color.fromARGB(82, 55, 0, 255),
-                                onTap: () {
-                                  // callback
-                                },
-                              ),
-                            ],
                           ),
                         ),
                         Container(
@@ -230,8 +290,7 @@ class _ComingState extends State<Coming> {
                                 handlerPlayer();
                               }
                             },
-                            backgroundColor:
-                                const Color.fromARGB(82, 55, 0, 255),
+                            backgroundColor: const Color.fromARGB(82, 0, 0, 0),
                             elevation: 0,
                             hoverElevation: 0,
                             focusElevation: 0,
@@ -248,7 +307,7 @@ class _ComingState extends State<Coming> {
                         Container(
                           padding: EdgeInsets.all(10 * rpx),
                           decoration: BoxDecoration(
-                            color: const Color.fromARGB(82, 55, 0, 255),
+                            color: const Color.fromARGB(82, 0, 0, 0),
                             borderRadius: BorderRadius.circular(100 * rpx),
                           ),
                           child: Row(
@@ -349,9 +408,10 @@ class _ComingState extends State<Coming> {
 
   @override
   void dispose() {
-    super.dispose();
     timers?.cancel();
     timers = null;
     player.stop();
+    VolumeController().removeListener();
+    super.dispose();
   }
 }

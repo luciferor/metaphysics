@@ -80,6 +80,7 @@ dependencies:
   circular_menu: ^2.0.1
   interactive_slider: ^0.2.1
   wakelock_plus: ^1.1.4
+  volume_controller: ^2.0.7
 
 dev_dependencies:
   flutter_test:

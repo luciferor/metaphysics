@@ -8,4 +8,6 @@ class Apis {
   static const String addtodoapi = 'app/addtodo';
   static const String gettodolistapi = 'app/gettodolist';
   static const String gettododetailapi = 'app/gettododetail';
+  static const String getsessionaapi = 'app/getsession';
+  static const String newsessionapi = 'app/newsession';
 }
