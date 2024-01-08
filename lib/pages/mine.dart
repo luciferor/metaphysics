@@ -129,18 +129,6 @@ class _MineState extends State<Mine> {
                                               color: Colors.black87,
                                             ),
                                           ),
-                                          Container(
-                                            padding: EdgeInsets.fromLTRB(
-                                                10 * rpx, 0, 0, 0),
-                                            child: Text(
-                                              'Lv25',
-                                              style: TextStyle(
-                                                fontSize: 28 * rpx,
-                                                color: const Color.fromARGB(
-                                                    255, 255, 182, 35),
-                                              ),
-                                            ),
-                                          ),
                                         ],
                                       ),
                                     ),
@@ -177,20 +165,24 @@ class _MineState extends State<Mine> {
                                   Text(
                                     '18岁',
                                     style: TextStyle(
-                                      color: Color.fromARGB(255, 9, 70, 255),
-                                      fontSize: 28 * rpx,
+                                      color:
+                                          const Color.fromARGB(255, 9, 70, 255),
+                                      fontSize: 30 * rpx,
+                                    ),
+                                  ),
+                                  Container(
+                                    padding:
+                                        EdgeInsets.fromLTRB(10 * rpx, 0, 0, 0),
+                                    child: Text(
+                                      'Lv25',
+                                      style: TextStyle(
+                                        fontSize: 28 * rpx,
+                                        color: const Color.fromARGB(
+                                            255, 255, 182, 35),
+                                      ),
                                     ),
                                   ),
                                 ],
-                              ),
-                            ),
-                            SizedBox(
-                              child: Text(
-                                '为天地立心，为生民立命，为往圣继绝学，为万世开太平。',
-                                style: TextStyle(
-                                  color: Colors.black54,
-                                  fontSize: 24 * rpx,
-                                ),
                               ),
                             ),
                           ],
@@ -202,7 +194,7 @@ class _MineState extends State<Mine> {
               ),
             ),
             Container(
-              height: 380 * rpx,
+              height: 360 * rpx,
               padding: EdgeInsets.fromLTRB(40 * rpx, 0, 40 * rpx, 30 * rpx),
               child: Container(
                 padding: EdgeInsets.fromLTRB(5 * rpx, 10 * rpx, 5 * rpx, 0),
@@ -235,6 +227,7 @@ class _MineState extends State<Mine> {
             Padding(
               padding: EdgeInsets.fromLTRB(40 * rpx, 0, 40 * rpx, 20 * rpx),
               child: Container(
+                padding: EdgeInsets.all(10 * rpx),
                 decoration: BoxDecoration(
                   color: const Color.fromARGB(255, 247, 247, 247),
                   borderRadius: BorderRadius.circular(30 * rpx),
@@ -342,6 +335,7 @@ class _MineState extends State<Mine> {
             Padding(
               padding: EdgeInsets.fromLTRB(40 * rpx, 0, 40 * rpx, 20 * rpx),
               child: Container(
+                padding: EdgeInsets.all(10 * rpx),
                 decoration: BoxDecoration(
                   color: const Color.fromARGB(255, 247, 247, 247),
                   borderRadius: BorderRadius.circular(30 * rpx),

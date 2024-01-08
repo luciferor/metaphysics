@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get_storage/get_storage.dart';
 import "package:hex/hex.dart";
 import 'package:dio/dio.dart';
@@ -18,6 +19,7 @@ class Https {
     // 添加请求拦截器
     _dio.interceptors.add(InterceptorsWrapper(
       onRequest: (RequestOptions options, RequestInterceptorHandler handler) {
+        EasyLoading.show();
         // 创建新的 RequestOptions 对象，并对其进行修改
         RequestOptions newOptions = options.copyWith(
           headers: {
@@ -28,6 +30,16 @@ class Https {
           },
         );
         return handler.next(newOptions);
+      },
+      onResponse: (Response response, ResponseInterceptorHandler handler) {
+        EasyLoading.dismiss();
+        return handler.next(response);
+      },
+      onError: (DioError e, ErrorInterceptorHandler handler) {
+        // 处理错误的逻辑
+        EasyLoading.dismiss();
+        // 继续处理错误
+        handler.next(e);
       },
     ));
   }

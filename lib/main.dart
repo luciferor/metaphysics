@@ -6,6 +6,7 @@ import 'package:first_flutter_app/pages/register.dart';
 import 'package:first_flutter_app/pages/index.dart';
 import 'package:first_flutter_app/pages/detail.dart';
 import 'package:first_flutter_app/pages/mine.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get_storage/get_storage.dart';
 
 void main() async {
@@ -13,6 +14,19 @@ void main() async {
   // 确保在应用程序启动前初始化 WidgetsFlutterBinding
   WidgetsFlutterBinding.ensureInitialized();
   runApp(const App());
+  configLoading();
+}
+
+void configLoading() {
+  EasyLoading.instance
+    ..displayDuration = const Duration(milliseconds: 2000) // 加载时间
+    ..indicatorType = EasyLoadingIndicatorType.fadingCircle // 加载类型
+    ..loadingStyle = EasyLoadingStyle.light // 加载样式
+    ..indicatorSize = 45.0 // 大小
+    ..radius = 20
+    ..maskType = EasyLoadingMaskType.black // 遮罩
+    ..userInteractions = true // 使用单例模式
+    ..dismissOnTap = false; // 指示器结束的点击时间
 }
 
 class App extends StatefulWidget {
@@ -46,6 +60,7 @@ class _AppState extends State<App> {
         '/reg': (context) => const Register(),
         '/coming': (context) => Coming(id: null),
       },
+      builder: EasyLoading.init(),
     );
   }
 }

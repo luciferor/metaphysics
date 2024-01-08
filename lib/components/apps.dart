@@ -16,8 +16,12 @@ class Apps extends StatelessWidget {
             child: Padding(
               padding: EdgeInsets.fromLTRB(0, 15 * rpx, 15 * rpx, 15 * rpx),
               child: Stack(
+                clipBehavior: Clip.none,
                 children: [
                   Container(
+                    alignment: Alignment.topRight,
+                    padding: EdgeInsets.fromLTRB(
+                        20 * rpx, 40 * rpx, 40 * rpx, 20 * rpx),
                     constraints: const BoxConstraints.expand(),
                     decoration: BoxDecoration(
                       color: Colors.white,
@@ -38,6 +42,30 @@ class Apps extends StatelessWidget {
                           Color.fromARGB(255, 177, 106, 255),
                         ],
                       ),
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          '智能助手',
+                          style: TextStyle(
+                            fontSize: 32 * rpx,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Positioned(
+                    bottom: 20 * rpx,
+                    left: 0,
+                    width: 150 * rpx,
+                    height: 150 * rpx,
+                    child: Image.asset(
+                      'assets/images/ai.png',
+                      fit: BoxFit.cover,
                     ),
                   ),
                 ],
@@ -83,74 +111,36 @@ class Apps extends StatelessWidget {
                     ),
                   ),
                   Expanded(
-                      child: Row(
-                    children: [
-                      Expanded(
-                        child: Padding(
-                          padding:
-                              EdgeInsets.fromLTRB(0, 15 * rpx, 15 * rpx, 0),
-                          child: Stack(
-                            children: [
-                              Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(40 * rpx),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      offset: const Offset(0.0, 0.0),
-                                      blurRadius: 15 * rpx,
-                                      spreadRadius: 10 * rpx,
-                                      color: const Color.fromARGB(
-                                          50, 77, 206, 255),
-                                    )
-                                  ],
-                                  gradient: const LinearGradient(
-                                    begin: Alignment.bottomLeft,
-                                    end: Alignment.topRight,
-                                    colors: [
-                                      Color.fromARGB(255, 49, 133, 255),
-                                      Color.fromARGB(255, 77, 206, 255),
-                                    ],
-                                  ),
-                                ),
+                    child: Padding(
+                      padding: EdgeInsets.fromLTRB(0, 15 * rpx, 0, 0),
+                      child: Stack(
+                        children: [
+                          Container(
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(40 * rpx),
+                              boxShadow: [
+                                BoxShadow(
+                                  offset: const Offset(0.0, 0.0),
+                                  blurRadius: 15 * rpx,
+                                  spreadRadius: 10 * rpx,
+                                  color: const Color.fromARGB(50, 255, 94, 214),
+                                )
+                              ],
+                              gradient: const LinearGradient(
+                                begin: Alignment.bottomLeft,
+                                end: Alignment.topRight,
+                                colors: [
+                                  Color.fromARGB(255, 49, 133, 255),
+                                  Color.fromARGB(255, 77, 206, 255),
+                                ],
                               ),
-                            ],
+                            ),
                           ),
-                        ),
+                        ],
                       ),
-                      Expanded(
-                        child: Padding(
-                          padding:
-                              EdgeInsets.fromLTRB(15 * rpx, 15 * rpx, 0, 0),
-                          child: Stack(
-                            children: [
-                              Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(40 * rpx),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      offset: const Offset(0.0, 0.0),
-                                      blurRadius: 15 * rpx,
-                                      spreadRadius: 10 * rpx,
-                                      color: const Color.fromARGB(
-                                          50, 244, 253, 221),
-                                    )
-                                  ],
-                                  gradient: const LinearGradient(
-                                    begin: Alignment.bottomLeft,
-                                    end: Alignment.topRight,
-                                    colors: [
-                                      Color.fromARGB(255, 154, 251, 254),
-                                      Color.fromARGB(255, 244, 253, 221),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      )
-                    ],
-                  ))
+                    ),
+                  ),
                 ]),
               ),
             ),

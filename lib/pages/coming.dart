@@ -4,12 +4,15 @@ import 'package:first_flutter_app/classes/apis.dart';
 import 'package:first_flutter_app/classes/detailtodo.dart';
 import 'package:first_flutter_app/classes/https.dart';
 import 'package:first_flutter_app/components/base.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:interactive_slider/interactive_slider.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:zhi_starry_sky/starry_sky.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:circular_menu/circular_menu.dart';
+import 'package:wakelock_plus/wakelock_plus.dart';
 
 // ignore: must_be_immutable
 class Coming extends StatefulWidget {
@@ -29,6 +32,7 @@ class _ComingState extends State<Coming> {
   String hms = '00:00:00';
   int isforce = 0;
   bool isPlay = false;
+  bool isWakelock = false;
   @override
   void initState() {
     super.initState();
@@ -94,10 +98,63 @@ class _ComingState extends State<Coming> {
                       mainAxisAlignment: MainAxisAlignment.end,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
+                        Expanded(
+                          child: Container(
+                            alignment: Alignment.center,
+                            height: 80 * rpx,
+                            child: InteractiveSlider(
+                              // backgroundColor:
+                              //     const Color.fromARGB(82, 55, 0, 255),
+                              transitionCurvePeriod:
+                                  InteractiveSlider.easeTransitionPeriod,
+                              padding: const EdgeInsets.all(0),
+                              unfocusedMargin:
+                                  const EdgeInsets.symmetric(horizontal: 0),
+                              iconPosition: IconPosition.inside,
+                              startIcon: const Icon(CupertinoIcons.volume_down),
+                              endIcon: const Icon(CupertinoIcons.volume_up),
+                              centerIcon: const Text('音量'),
+                              unfocusedHeight: 80 * rpx,
+                              focusedHeight: 80 * rpx,
+                              iconGap: 16,
+                            ),
+                          ),
+                        ),
                         Container(
                           width: 80 * rpx,
                           height: 80 * rpx,
-                          margin: EdgeInsets.fromLTRB(20 * rpx, 0, 0, 0),
+                          margin: EdgeInsets.fromLTRB(10 * rpx, 0, 0, 0),
+                          child: FloatingActionButton(
+                            onPressed: () {
+                              if (isWakelock) {
+                                setState(() {
+                                  WakelockPlus.disable();
+                                  isWakelock = false;
+                                });
+                              } else {
+                                setState(() {
+                                  WakelockPlus.enable();
+                                  isWakelock = true;
+                                });
+                              }
+                            },
+                            backgroundColor:
+                                const Color.fromARGB(82, 55, 0, 255),
+                            elevation: 0,
+                            hoverElevation: 0,
+                            focusElevation: 0,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(100 * rpx),
+                            ),
+                            child: isWakelock
+                                ? Icon(Icons.light_mode, size: 50 * rpx)
+                                : Icon(Icons.dark_mode, size: 50 * rpx),
+                          ),
+                        ),
+                        Container(
+                          width: 80 * rpx,
+                          height: 80 * rpx,
+                          margin: EdgeInsets.fromLTRB(10 * rpx, 0, 0, 0),
                           child: CircularMenu(
                             radius: 120 * rpx,
                             toggleButtonMargin: 0,
@@ -114,6 +171,10 @@ class _ComingState extends State<Coming> {
                                 elevation: 0,
                                 hoverElevation: 0,
                                 focusElevation: 0,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadius.circular(100 * rpx),
+                                ),
                                 child: Icon(
                                   Icons.apps,
                                   size: 50 * rpx,
@@ -234,25 +295,6 @@ class _ComingState extends State<Coming> {
                     ),
                   ),
                 ],
-              ),
-            ),
-            Positioned(
-              bottom: 150 * rpx,
-              right: 20 * rpx,
-              child: Container(
-                width: 60 * rpx,
-                height: 300 * rpx,
-                decoration: BoxDecoration(
-                    color: const Color.fromARGB(99, 255, 255, 255),
-                    borderRadius: BorderRadius.circular(50 * rpx),
-                    boxShadow: [
-                      BoxShadow(
-                        color: const Color.fromARGB(30, 108, 108, 108),
-                        blurRadius: 20 * rpx,
-                        spreadRadius: 10 * rpx,
-                        offset: const Offset(0, 0),
-                      ),
-                    ]),
               ),
             ),
           ],

@@ -2,12 +2,14 @@ import 'package:cherry_toast/cherry_toast.dart';
 import 'package:cherry_toast/resources/arrays.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 
+// ignore: camel_case_types
 class pubMsg {
-  static void showSuccess(String _msg, BuildContext context) {
+  static void showSuccess(String msg, BuildContext context) {
     CherryToast.success(
       title: Text(
-        _msg,
+        msg,
         style: const TextStyle(
           color: Colors.black,
         ),
@@ -19,10 +21,10 @@ class pubMsg {
     ).show(context);
   }
 
-  static void showError(String _msg, BuildContext context) {
+  static void showError(String msg, BuildContext context) {
     CherryToast.error(
       title: Text(
-        _msg,
+        msg,
         style: const TextStyle(
           color: Colors.black,
         ),
@@ -34,10 +36,10 @@ class pubMsg {
     ).show(context);
   }
 
-  static void showWarn(String _msg, BuildContext context) {
+  static void showWarn(String msg, BuildContext context) {
     CherryToast.warning(
       title: Text(
-        _msg,
+        msg,
         style: const TextStyle(
           color: Colors.black,
         ),
@@ -49,10 +51,10 @@ class pubMsg {
     ).show(context);
   }
 
-  static void showInfo(String _msg, BuildContext context) {
+  static void showInfo(String msg, BuildContext context) {
     CherryToast.info(
       title: Text(
-        _msg,
+        msg,
         style: const TextStyle(
           color: Colors.black,
         ),
@@ -62,6 +64,10 @@ class pubMsg {
       animationType: AnimationType.fromTop,
       autoDismiss: true,
     ).show(context);
+  }
+
+  static void showLoading(String msg) {
+    EasyLoading.show(status: msg);
   }
 
   static Future<void> setStorage(String key, String value) async {

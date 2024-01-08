@@ -70,7 +70,6 @@ dependencies:
   animated_text_kit: ^4.2.2
   percent_indicator: ^4.2.3
   audioplayers: ^5.2.1
-  orbitmenu: ^0.0.7
   flutter_sliding_panel: ^0.0.5
   circular_motion: ^0.0.6
   flutter_launcher_icons: ^0.13.1
@@ -79,6 +78,8 @@ dependencies:
   flutter_audio_waveforms: ^1.2.1+8
   we_slide: ^2.4.0
   circular_menu: ^2.0.1
+  interactive_slider: ^0.2.1
+  wakelock_plus: ^1.1.4
 
 dev_dependencies:
   flutter_test:
