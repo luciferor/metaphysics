@@ -81,6 +81,8 @@ dependencies:
   interactive_slider: ^0.2.1
   wakelock_plus: ^1.1.4
   volume_controller: ^2.0.7
+  fancy_shimmer_image: ^2.0.2
+  markdown_widget: ^2.3.2+3
 
 dev_dependencies:
   flutter_test:

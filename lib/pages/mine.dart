@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:first_flutter_app/components/base.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 
 class Mine extends StatefulWidget {
   const Mine({Key? key}) : super(key: key);
@@ -54,14 +55,19 @@ class _MineState extends State<Mine> {
                     height: 60 * rpx,
                     alignment: Alignment.center,
                     child: FloatingActionButton(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(50 * rpx),
+                      ),
                       onPressed: () {
                         Navigator.pop(context);
                       },
                       backgroundColor: const Color.fromARGB(255, 247, 247, 247),
                       elevation: 0,
-                      child: const Icon(
+                      child: Icon(
                         Icons.keyboard_arrow_left,
                         color: Colors.black45,
+                        size: 40 * rpx,
+                        weight: 800,
                       ),
                     ),
                   ),
@@ -91,10 +97,16 @@ class _MineState extends State<Mine> {
                         radius: 30 * rpx,
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(150 * rpx),
-                          child: Image(
-                            fit: BoxFit.cover,
-                            image: NetworkImage(userInfo.avator ??
-                                'https://pic2.zhimg.com/80/v2-86116449634292f991d2b38eaf7f7509_1440w.webp'),
+                          child: FancyShimmerImage(
+                            width: 150 * rpx,
+                            height: 150 * rpx,
+                            imageUrl: userInfo.avator.toString(),
+                            shimmerBaseColor:
+                                const Color.fromARGB(255, 202, 202, 202),
+                            shimmerHighlightColor:
+                                const Color.fromARGB(255, 182, 205, 255),
+                            shimmerBackColor:
+                                const Color.fromARGB(255, 80, 210, 243),
                           ),
                         ),
                       ),

@@ -50,8 +50,10 @@ class _DetailState extends State<Detail> {
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: const Icon(
+              child: Icon(
                 Icons.abc,
+                size: 40 * rpx,
+                weight: 800,
               )),
           LoadingAnimationWidget.fourRotatingDots(
             color: Colors.lightBlue,

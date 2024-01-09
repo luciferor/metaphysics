@@ -14,6 +14,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_chat_bubble/chat_bubble.dart';
 import 'package:cherry_toast/cherry_toast.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:markdown_widget/markdown_widget.dart';
 
 class Ai extends StatefulWidget {
   const Ai({Key? key}) : super(key: key);
@@ -68,9 +69,14 @@ class _AiState extends State<Ai> {
                     child: FloatingActionButton(
                       elevation: 0,
                       backgroundColor: const Color.fromARGB(255, 247, 247, 247),
-                      child: const Icon(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(50 * rpx),
+                      ),
+                      child: Icon(
                         Icons.keyboard_arrow_left,
                         color: Colors.black26,
+                        size: 40 * rpx,
+                        weight: 800,
                       ),
                       onPressed: () {
                         Navigator.pop(context);
@@ -119,6 +125,9 @@ class _AiState extends State<Ai> {
                         elevation: 0,
                         focusElevation: 0,
                         highlightElevation: 0,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(25 * rpx),
+                        ),
                         onPressed: () {
                           Navigator.push(
                             context,
@@ -127,7 +136,11 @@ class _AiState extends State<Ai> {
                             ),
                           );
                         },
-                        child: const Icon(Icons.history_toggle_off),
+                        child: Icon(
+                          Icons.history_toggle_off,
+                          size: 40 * rpx,
+                          weight: 800,
+                        ),
                       ),
                     ),
                   ),
@@ -210,7 +223,14 @@ class _AiState extends State<Ai> {
                       splashColor: const Color.fromARGB(255, 0, 72, 255),
                       elevation: 0,
                       highlightElevation: 0,
-                      child: const Icon(Icons.arrow_upward),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(25 * rpx),
+                      ),
+                      child: Icon(
+                        Icons.arrow_upward,
+                        size: 40 * rpx,
+                        weight: 800,
+                      ),
                       onPressed: () {
                         if (_textController.text.isEmpty) {
                           // pubMsg.showError('请输入内容～', context);
@@ -355,6 +375,7 @@ class _AiState extends State<Ai> {
                       fontSize: 32 * rpx,
                     ),
                   ),
+                  // MarkdownWidget(data: msg, shrinkWrap: false),
                 ),
               ),
             ),

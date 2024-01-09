@@ -111,7 +111,11 @@ class _ComingState extends State<Coming> {
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(100 * rpx),
                             ),
-                            child: Icon(Icons.share, size: 50 * rpx),
+                            child: Icon(
+                              Icons.share,
+                              size: 50 * rpx,
+                              weight: 800,
+                            ),
                           ),
                         ),
                         Container(
@@ -139,7 +143,11 @@ class _ComingState extends State<Coming> {
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(100 * rpx),
                             ),
-                            child: Icon(Icons.audiotrack, size: 50 * rpx),
+                            child: Icon(
+                              Icons.audiotrack,
+                              size: 50 * rpx,
+                              weight: 800,
+                            ),
                           ),
                         ),
                         Container(
@@ -181,8 +189,11 @@ class _ComingState extends State<Coming> {
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(100 * rpx),
                             ),
-                            child:
-                                Icon(Icons.power_settings_new, size: 50 * rpx),
+                            child: Icon(
+                              Icons.power_settings_new,
+                              size: 50 * rpx,
+                              weight: 800,
+                            ),
                           ),
                         ),
                       ],

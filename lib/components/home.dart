@@ -85,12 +85,17 @@ class _IndexState extends State<Index> with SingleTickerProviderStateMixin {
                 height: 60 * rpx,
                 padding: EdgeInsets.fromLTRB(20 * rpx, 0, 0, 0),
                 child: FloatingActionButton(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(50 * rpx),
+                  ),
                   onPressed: () {
                     openBottomSheetHandler(context, rpx, bp);
                   },
                   backgroundColor: const Color.fromARGB(255, 45, 85, 245),
-                  child: const Icon(
+                  child: Icon(
                     Icons.add,
+                    size: 40 * rpx,
+                    weight: 800,
                   ),
                 ),
               ),
@@ -234,6 +239,9 @@ class _IndexState extends State<Index> with SingleTickerProviderStateMixin {
                     width: 80 * rpx,
                     height: 80 * rpx,
                     child: FloatingActionButton(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(25 * rpx),
+                      ),
                       onPressed: () {
                         Navigator.push(
                           context,
@@ -244,9 +252,11 @@ class _IndexState extends State<Index> with SingleTickerProviderStateMixin {
                       },
                       elevation: 0,
                       backgroundColor: const Color.fromARGB(255, 247, 247, 247),
-                      child: const Icon(
+                      child: Icon(
                         Icons.format_list_bulleted_add,
                         color: Colors.black38,
+                        size: 40 * rpx,
+                        weight: 800,
                       ),
                     ),
                   ),
@@ -816,7 +826,11 @@ class _IndexState extends State<Index> with SingleTickerProviderStateMixin {
                                     }
                                   },
                                   isExtended: true,
-                                  child: const Icon(Icons.save),
+                                  child: Icon(
+                                    Icons.save,
+                                    size: 40 * rpx,
+                                    weight: 800,
+                                  ),
                                 ),
                               ),
                             ],

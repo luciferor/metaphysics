@@ -38,8 +38,10 @@ class _IndexState extends State<Index> {
                       openBottomSheetHandler(context, rpx, bp);
                     },
                     backgroundColor: const Color.fromARGB(255, 45, 85, 245),
-                    child: const Icon(
+                    child: Icon(
                       Icons.add,
+                      size: 40 * rpx,
+                      weight: 800,
                     ),
                   ),
                 ),
@@ -174,9 +176,11 @@ class _IndexState extends State<Index> {
                         elevation: 0,
                         backgroundColor:
                             const Color.fromARGB(255, 247, 247, 247),
-                        child: const Icon(
+                        child: Icon(
                           Icons.format_list_bulleted_add,
                           color: Colors.black38,
+                          size: 40 * rpx,
+                          weight: 800,
                         ),
                       ),
                     ),

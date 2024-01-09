@@ -56,7 +56,7 @@ class Apps extends StatelessWidget {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(40 * rpx),
                         child: Image.asset(
-                          'assets/images/2b1d92.gif',
+                          'assets/images/aia.gif',
                           fit: BoxFit.fill,
                         ),
                       ),
@@ -83,7 +83,7 @@ class Apps extends StatelessWidget {
                           fontSize: 24 * rpx,
                           fontFamily: 'Horizon',
                           fontWeight: FontWeight.bold,
-                          color: const Color.fromARGB(255, 9, 255, 0),
+                          color: const Color.fromARGB(255, 0, 0, 0),
                         ),
                         child: AnimatedTextKit(
                           pause: const Duration(seconds: 3),
